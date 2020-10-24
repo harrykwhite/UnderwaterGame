@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "ywUWikDPxqQ3BrcbizJQbMlPNn2depeVhW4jy6FZij7Qi7xwIbW8yLjCPW4BpaJ+mik5qwj/Jp4r5I5Vva8JUg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Harry White\\Documents\\GitHub\\UnderwaterGameSolution\\UnderwaterGame\\UnderwaterGame.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Harry White\\.nuget\\packages\\monogame.content.builder.task\\3.8.0.1641\\monogame.content.builder.task.3.8.0.1641.nupkg.sha512",
+    "C:\\Users\\Harry White\\.nuget\\packages\\monogame.framework.desktopgl\\3.8.0.1641\\monogame.framework.desktopgl.3.8.0.1641.nupkg.sha512"
+  ],
+  "logs": []
+}
