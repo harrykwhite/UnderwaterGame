@@ -216,7 +216,7 @@ namespace UnderwaterGame
         {
             GraphicsDevice.Clear(new Color(114, 201, 255));
 
-            SpriteBatch.Begin(sortMode: SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend, transformMatrix: Camera.Transform * Matrix.CreateScale(Camera.Scale, Camera.Scale, 0f));
+            SpriteBatch.Begin(sortMode: SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend, transformMatrix: Matrix.CreateTranslation(-Camera.position.X + (Camera.Width / 2f), -Camera.position.Y + (Camera.Height / 2f), 0f) * Matrix.CreateScale(Camera.Scale, Camera.Scale, 0f));
 
             if (loading == null || UIManager.FadeElements[2].Alpha != UIManager.FadeElements[2].alphaMax)
             {

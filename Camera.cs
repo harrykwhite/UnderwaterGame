@@ -19,8 +19,6 @@ namespace UnderwaterGame
         public static Vector2 position;
         public static Vector2 positionTo;
 
-        public static Matrix Transform { get; private set; }
-
         public static int Width => Main.BufferWidth / (int)Scale;
         public static int Height => Main.BufferHeight / (int)Scale;
         public static float Scale => 4f;
@@ -68,11 +66,6 @@ namespace UnderwaterGame
 
             position.X = MathUtilities.Clamp(position.X, Width / 2f, mapWidth - (Width / 2f));
             position.Y = MathUtilities.Clamp(position.Y, Height / 2f, mapHeight - (Height / 2f));
-
-            Matrix screenCentre = Matrix.CreateTranslation(Width / 2f, Height / 2f, 0f);
-            Matrix screenFocal = Matrix.CreateTranslation(-position.X, -position.Y, 0f);
-
-            Transform = screenCentre * screenFocal;
         }
 
         public static void Shake(float amount, float direction)
