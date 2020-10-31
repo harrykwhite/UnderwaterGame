@@ -2,17 +2,17 @@
 {
     public class CleaningGeneration : WorldGeneration
     {
-        public override void Generate(World world)
+        public override void Generate()
         {
-            for (int y = 0; y < world.Height; y++)
+            for(int y = 0; y < World.height; y++)
             {
-                for (int x = 0; x < world.Width; x++)
+                for(int x = 0; x < World.width; x++)
                 {
-                    if (world.GetTileAt(x, y, World.TilemapType.Solids) != null)
+                    if(World.GetTileAt(x, y, World.Tilemap.Solids) != null)
                     {
-                        if (world.GetTileAt(x - 1, y, World.TilemapType.Solids) == null && world.GetTileAt(x + 1, y, World.TilemapType.Solids) == null && world.GetTileAt(x, y - 1, World.TilemapType.Solids) == null && world.GetTileAt(x, y + 1, World.TilemapType.Solids) == null)
+                        if(World.GetTileAt(x - 1, y, World.Tilemap.Solids) == null && World.GetTileAt(x + 1, y, World.Tilemap.Solids) == null && World.GetTileAt(x, y - 1, World.Tilemap.Solids) == null && World.GetTileAt(x, y + 1, World.Tilemap.Solids) == null)
                         {
-                            world.RemoveTileAt(x, y, World.TilemapType.Solids);
+                            World.RemoveTileAt(x, y, World.Tilemap.Solids);
                         }
                     }
                 }

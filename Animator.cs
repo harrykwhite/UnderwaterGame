@@ -1,13 +1,14 @@
-﻿using System;
-using UnderwaterGame.Sprites;
-
-namespace UnderwaterGame
+﻿namespace UnderwaterGame
 {
+    using System;
+    using UnderwaterGame.Sprites;
+
     public class Animator
     {
         public Sprite sprite;
 
         public float index;
+
         public float speed;
 
         public bool hidden;
@@ -21,22 +22,19 @@ namespace UnderwaterGame
 
         public void Update()
         {
-            if (hidden)
+            if(hidden)
             {
                 return;
             }
-
             index += speed;
-
-            if (index >= sprite.Textures.Length)
+            if(index >= sprite.textures.Length)
             {
-                index -= sprite.Textures.Length;
+                index -= sprite.textures.Length;
                 loopAction?.Invoke();
             }
-
-            if (index < 0f)
+            if(index < 0f)
             {
-                index += sprite.Textures.Length;
+                index += sprite.textures.Length;
                 loopAction?.Invoke();
             }
         }

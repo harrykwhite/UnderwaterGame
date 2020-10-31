@@ -1,8 +1,8 @@
-﻿using Microsoft.Xna.Framework;
-using UnderwaterGame.Sprites;
-
-namespace UnderwaterGame.Entities.Characters.Enemies.Jellyfish
+﻿namespace UnderwaterGame.Entities.Characters.Enemies.Jellyfish
 {
+    using Microsoft.Xna.Framework;
+    using UnderwaterGame.Sprites;
+
     public class TallJellyfish : JellyfishEnemy
     {
         public override void Draw()
@@ -12,18 +12,14 @@ namespace UnderwaterGame.Entities.Characters.Enemies.Jellyfish
 
         public override void Init()
         {
-            SetSprite(Sprite.TallJellyfish);
-            Animator = new Animator(Sprite);
-
-            HealthMax = 30f;
-            Health = HealthMax;
-
-            TouchDamage = 6f;
-            TouchDamagePlayer = true;
-
-            bloodParticleColor = new Color(214, 85, 85);
+            SetSprite(Sprite.tallJellyfish);
+            animator = new Animator(sprite);
+            healthMax = 30f;
+            health = healthMax;
+            touchDamage = 6f;
+            touchDamagePlayer = true;
+            bloodParticleColor = new Color(164, 132, 183);
             swimPositionToTime = swimPositionToTimeMax;
-
             swimPositionToTimeMax = 60;
             swimTargeted = true;
         }
@@ -31,23 +27,16 @@ namespace UnderwaterGame.Entities.Characters.Enemies.Jellyfish
         public override void Update()
         {
             JellyfishUpdate();
-
-            CheckForDamage(Collider);
+            CheckForDamage(collider);
             UpdateStatus();
-
             UpdateGravity();
             velocity.Y += gravity;
-
             TileCollisions(Vector2.Zero);
-
             position += velocity;
             LockInWorld();
-
-            Animator.speed = 0.1f;
-            Animator.Update();
-
+            animator.speed = 0.1f;
+            animator.Update();
             UpdateWater();
-
             velocity = Vector2.Zero;
         }
     }

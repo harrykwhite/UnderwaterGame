@@ -1,16 +1,15 @@
-﻿using UnderwaterGame.Sprites;
-
-namespace UnderwaterGame.Items.Armours.Heads
+﻿namespace UnderwaterGame.Items.Armours.Heads
 {
+    using UnderwaterGame.Sprites;
+
     public class WoodenHelmet : HeadArmour
     {
         protected override void Init()
         {
-            Name = "Wooden Helmet";
-            Sprite = Sprite.WoodenHelmet;
-
-            WearSprite = Sprite.WoodenHelmetWear;
-            WearDefense = 4f;
+            name = "Wooden Helmet";
+            sprite = Sprite.woodenHelmet;
+            wearSprite = Sprite.woodenHelmetWear;
+            wearDefense = 3f;
         }
     }
 }

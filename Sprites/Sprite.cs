@@ -1,47 +1,47 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using UnderwaterGame.Assets;
-using UnderwaterGame.Utilities;
-
-namespace UnderwaterGame.Sprites
+﻿namespace UnderwaterGame.Sprites
 {
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using UnderwaterGame.Assets;
+    using UnderwaterGame.Utilities;
+
     public partial class Sprite
     {
         private TextureLibrary.LibraryAsset libraryAsset;
 
-        public Texture2D[] Textures { get; private set; } = new Texture2D[1];
-        public Texture2D[] TexturesFilled { get; private set; } = new Texture2D[1];
-        public Texture2D[] TexturesOutlined { get; private set; } = new Texture2D[1];
+        public Texture2D[] textures = new Texture2D[1];
 
-        public Rectangle Bound { get; private set; }
-        public Vector2 Origin { get; private set; }
-        public Shape Shape { get; private set; }
+        public Texture2D[] texturesFilled = new Texture2D[1];
 
-        public int Width => Textures[0].Width;
-        public int Height => Textures[0].Height;
+        public Texture2D[] texturesOutlined = new Texture2D[1];
+
+        public Rectangle bound;
+
+        public Vector2 origin;
+
+        public Shape shape;
 
         public Sprite()
         {
-            Sprites.Add(this);
+            sprites.Add(this);
         }
 
         private void SetTexture(Texture2D texture, int index = 0)
         {
-            Textures[index] = texture;
-            TexturesFilled[index] = TextureUtilities.CreateFilled(texture, Color.White, true);
-            TexturesOutlined[index] = TextureUtilities.CreateOutlined(texture, Color.White, true);
+            textures[index] = texture;
+            texturesFilled[index] = TextureUtilities.CreateFilled(texture, Color.White, true);
+            texturesOutlined[index] = TextureUtilities.CreateOutlined(texture, Color.White, true);
         }
 
         private void SetTextureSheet(Texture2D textureSheet, int frameWidth)
         {
-            Textures = TextureUtilities.CreateSplit(textureSheet, frameWidth, textureSheet.Height);
-            TexturesFilled = new Texture2D[Textures.Length];
-            TexturesOutlined = new Texture2D[Textures.Length];
-
-            for (int i = 0; i < Textures.Length; i++)
+            textures = TextureUtilities.CreateSplit(textureSheet, frameWidth, textureSheet.Height);
+            texturesFilled = new Texture2D[textures.Length];
+            texturesOutlined = new Texture2D[textures.Length];
+            for(int i = 0; i < textures.Length; i++)
             {
-                TexturesFilled[i] = TextureUtilities.CreateFilled(Textures[i], Color.White, true);
-                TexturesOutlined[i] = TextureUtilities.CreateOutlined(Textures[i], Color.White, true);
+                texturesFilled[i] = TextureUtilities.CreateFilled(textures[i], Color.White, true);
+                texturesOutlined[i] = TextureUtilities.CreateOutlined(textures[i], Color.White, true);
             }
         }
     }

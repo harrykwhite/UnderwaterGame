@@ -4,21 +4,20 @@
     {
         public static T Choose<T>(params T[] items)
         {
-            return items[Main.Random.Next(items.Length)];
+            return items[Main.random.Next(items.Length)];
         }
 
         public static bool Chance(float chance)
         {
             int realChance = (int)(chance * 100f);
-            return Main.Random.Next(100) <= realChance;
+            return Main.random.Next(100) <= realChance;
         }
 
         public static float Range(float min, float max)
         {
             int mn = (int)(min * 10000f);
             int mx = (int)(max * 10000f);
-
-            float rand = (float)Main.Random.Next(mn, mx);
+            float rand = Main.random.Next(mn, mx);
             return rand / 10000f;
         }
     }

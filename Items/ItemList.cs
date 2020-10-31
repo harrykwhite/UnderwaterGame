@@ -1,46 +1,56 @@
-﻿using System.Collections.Generic;
-using UnderwaterGame.Items.Armours.Chests;
-using UnderwaterGame.Items.Armours.Feet;
-using UnderwaterGame.Items.Armours.Heads;
-using UnderwaterGame.Items.Armours.Legs;
-using UnderwaterGame.Items.Edibles.Healing;
-using UnderwaterGame.Items.Weapons.Magic.Wands;
-using UnderwaterGame.Items.Weapons.Melee.Swords;
-using UnderwaterGame.Items.Weapons.Melee.Tridents;
-using UnderwaterGame.Items.Weapons.Ranged.Bows;
-using UnderwaterGame.Items.Weapons.Ranged.Throwables;
-
-namespace UnderwaterGame.Items
+﻿namespace UnderwaterGame.Items
 {
+    using System.Collections.Generic;
+    using UnderwaterGame.Items.Armours.Chests;
+    using UnderwaterGame.Items.Armours.Feet;
+    using UnderwaterGame.Items.Armours.Heads;
+    using UnderwaterGame.Items.Armours.Legs;
+    using UnderwaterGame.Items.Edibles.Healing;
+    using UnderwaterGame.Items.Weapons.Magic.Wands;
+    using UnderwaterGame.Items.Weapons.Melee.Swords;
+    using UnderwaterGame.Items.Weapons.Melee.Tridents;
+    using UnderwaterGame.Items.Weapons.Ranged.Bows;
+    using UnderwaterGame.Items.Weapons.Ranged.Throwables;
+
     public abstract partial class Item
     {
-        public static List<Item> Items { get; private set; } = new List<Item>();
+        public static List<Item> items = new List<Item>();
 
-        public static WoodenTrident WoodenTrident { get; private set; }
-        public static WoodenBow WoodenBow { get; private set; }
-        public static CrabGrenade CrabGrenade { get; private set; }
-        public static WoodenSword WoodenSword { get; private set; }
-        public static WoodenHelmet SteelHelmet { get; private set; }
-        public static WoodenChestplate SteelChestplate { get; private set; }
-        public static WoodenLeggings SteelLeggings { get; private set; }
-        public static WoodenBoots SteelBoots { get; private set; }
-        public static CrabShuriken CrabShuriken { get; private set; }
-        public static HealingKelp HealingKelp { get; private set; }
-        public static WoodenWand WoodenWand { get; private set; }
+        public static WoodenTrident woodenTrident;
+
+        public static WoodenBow woodenBow;
+
+        public static CrabGrenade crabGrenade;
+
+        public static WoodenSword woodenSword;
+
+        public static WoodenHelmet steelHelmet;
+
+        public static WoodenChestplate steelChestplate;
+
+        public static WoodenLeggings steelLeggings;
+
+        public static WoodenBoots steelBoots;
+
+        public static CrabShuriken crabShuriken;
+
+        public static HealingKelp healingKelp;
+
+        public static WoodenWand woodenWand;
 
         public static void LoadAll()
         {
-            WoodenTrident = Load<WoodenTrident>(1);
-            WoodenBow = Load<WoodenBow>(2);
-            CrabGrenade = Load<CrabGrenade>(3);
-            WoodenSword = Load<WoodenSword>(4);
-            SteelHelmet = Load<WoodenHelmet>(5);
-            SteelChestplate = Load<WoodenChestplate>(6);
-            SteelLeggings = Load<WoodenLeggings>(7);
-            SteelBoots = Load<WoodenBoots>(8);
-            CrabShuriken = Load<CrabShuriken>(9);
-            HealingKelp = Load<HealingKelp>(10);
-            WoodenWand = Load<WoodenWand>(11);
+            woodenTrident = Load<WoodenTrident>(1);
+            woodenBow = Load<WoodenBow>(2);
+            crabGrenade = Load<CrabGrenade>(3);
+            woodenSword = Load<WoodenSword>(4);
+            steelHelmet = Load<WoodenHelmet>(5);
+            steelChestplate = Load<WoodenChestplate>(6);
+            steelLeggings = Load<WoodenLeggings>(7);
+            steelBoots = Load<WoodenBoots>(8);
+            crabShuriken = Load<CrabShuriken>(9);
+            healingKelp = Load<HealingKelp>(10);
+            woodenWand = Load<WoodenWand>(11);
         }
     }
 }

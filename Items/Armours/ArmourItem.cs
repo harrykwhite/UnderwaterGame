@@ -1,10 +1,11 @@
-﻿using UnderwaterGame.Sprites;
-
-namespace UnderwaterGame.Items.Armours
+﻿namespace UnderwaterGame.Items.Armours
 {
+    using UnderwaterGame.Sprites;
+
     public abstract class ArmourItem : Item
     {
-        public Sprite WearSprite { get; protected set; }
-        public float WearDefense { get; protected set; }
+        public Sprite wearSprite;
+
+        public float wearDefense;
     }
 }

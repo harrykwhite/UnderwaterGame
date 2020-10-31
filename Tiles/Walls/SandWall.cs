@@ -4,13 +4,13 @@
     {
         protected override void Init()
         {
-            Texture = Sand.Texture;
-            TextureBorder = Sand.TextureBorder;
+            texture = sand.texture;
+            textureBorder = sand.textureBorder;
         }
 
         public override void SetTextures()
         {
-            Textures = Sand.Textures;
+            textures = sand.textures;
         }
     }
 }

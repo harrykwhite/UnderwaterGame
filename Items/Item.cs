@@ -1,32 +1,37 @@
-﻿using System;
-using System.Collections.Generic;
-using UnderwaterGame.Entities;
-using UnderwaterGame.Sprites;
-
-namespace UnderwaterGame.Items
+﻿namespace UnderwaterGame.Items
 {
+    using System;
+    using System.Collections.Generic;
+    using UnderwaterGame.Entities;
+    using UnderwaterGame.Sprites;
+
     public abstract partial class Item
     {
         public byte id;
 
-        public Sprite Sprite { get; protected set; }
+        public Sprite sprite;
 
-        public string Name { get; protected set; }
-        public string Description { get; protected set; }
+        public string name;
 
-        public bool Stack { get; protected set; }
+        public string description;
 
-        public int UseTime { get; protected set; }
-        public float UseOffset { get; protected set; }
-        public bool UseAngleUpdate { get; protected set; }
-        public bool UseHide { get; protected set; }
-        public bool UsePress { get; protected set; }
+        public bool stack;
 
-        public List<Item> Ingredients { get; protected set; } = new List<Item>();
+        public int useTime;
+
+        public float useOffset;
+
+        public bool useAngleUpdate;
+
+        public bool useHide;
+
+        public bool usePress;
+
+        public List<Item> ingredients = new List<Item>();
 
         public Item()
         {
-            Items.Add(this);
+            items.Add(this);
             Init();
         }
 
@@ -34,32 +39,31 @@ namespace UnderwaterGame.Items
         {
             T item = Activator.CreateInstance<T>();
             item.id = id;
-
             return item;
         }
 
-        public static Item GetItemByID(byte id)
+        public static Item GetItemById(byte id)
         {
-            return Items.Find((Item item) => item.id == id);
+            return items.Find((Item item) => item.id == id);
         }
 
         protected abstract void Init();
 
         public virtual void OnUse(ItemEntity entity)
         {
-
         }
 
         public virtual void WhileUse(ItemEntity entity)
         {
-
         }
 
         public virtual void EndUse(ItemEntity entity)
         {
-
         }
 
-        public virtual bool CanUse(ItemEntity entity) => true;
+        public virtual bool CanUse(ItemEntity entity)
+        {
+            return true;
+        }
     }
 }

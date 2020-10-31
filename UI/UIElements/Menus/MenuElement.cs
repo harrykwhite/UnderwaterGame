@@ -1,58 +1,59 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using UnderwaterGame.UI.UIComponents;
-using UnderwaterGame.UI.UIComponents.Buttons;
-
-namespace UnderwaterGame.UI.UIElements.Menus
+﻿namespace UnderwaterGame.Ui.UiElements.Menus
 {
-    public abstract class MenuElement : UIElement
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using System;
+    using System.Collections.Generic;
+    using UnderwaterGame.Ui.UiComponents;
+    using UnderwaterGame.Ui.UiComponents.Buttons;
+
+    public abstract class MenuElement : UiElement
     {
         protected List<IconButton>[] iconButtons;
 
         protected bool waitUntilLoaded;
+
         protected Action waitUntilLoadedAction;
 
-        protected float Alpha { get; private set; }
-        protected virtual float AlphaTo => Open ? 1f : 0f;
+        protected float alpha;
+
+        protected virtual float AlphaTo => open ? 1f : 0f;
+
         protected virtual float AlphaSpeed => 0.1f;
 
-        public bool Open { get; private set; }
+        public bool open;
 
         public void ToggleOpen()
         {
-            Open = !Open;
+            open = !open;
         }
 
         public void ToggleOpen(bool open)
         {
-            Open = open;
+            this.open = open;
         }
 
         protected void UpdateAlpha()
         {
-            if (Alpha < AlphaTo)
+            if(alpha < AlphaTo)
             {
-                Alpha += Math.Min(AlphaTo - Alpha, AlphaSpeed);
+                alpha += Math.Min(AlphaTo - alpha, AlphaSpeed);
             }
-            else if (Alpha > AlphaTo)
+            else if(alpha > AlphaTo)
             {
-                Alpha -= Math.Min(Alpha - AlphaTo, AlphaSpeed);
+                alpha -= Math.Min(alpha - AlphaTo, AlphaSpeed);
             }
         }
 
         protected void UpdateLoadingWaitComplete()
         {
-            if (waitUntilLoaded)
+            if(waitUntilLoaded)
             {
-                if (Main.loading == null)
+                if(Main.loading == null)
                 {
                     ToggleOpen(false);
-                    Alpha = 0f;
-
+                    alpha = 0f;
                     waitUntilLoadedAction?.Invoke();
-
                     waitUntilLoaded = false;
                     waitUntilLoadedAction = null;
                 }
@@ -63,8 +64,7 @@ namespace UnderwaterGame.UI.UIElements.Menus
         {
             int buttonCount = 4;
             iconButtons = new List<IconButton>[buttonCount];
-
-            for (int i = 0; i < buttonCount; i++)
+            for(int i = 0; i < buttonCount; i++)
             {
                 iconButtons[i] = new List<IconButton>();
             }
@@ -73,48 +73,40 @@ namespace UnderwaterGame.UI.UIElements.Menus
         protected IconButton AddIconButton(int corner, Texture2D icon, Func<bool> getActive)
         {
             int count = iconButtons[corner].Count;
-
             IconButton iconButton = (IconButton)AddComponent<IconButton>();
             iconButtons[corner].Add(iconButton);
-
             iconButton.menuElement = this;
             iconButton.icon = icon;
-
-            iconButton.getAlpha = () => Alpha;
+            iconButton.getAlpha = () => alpha;
             iconButton.getActive = getActive;
-
             iconButton.getPosition = delegate ()
             {
-                switch (corner)
+                switch(corner)
                 {
                     case 0:
-                        return new Vector2(UIComponent.Gap * (count + 1), UIComponent.Gap);
+                        return new Vector2(UiComponent.gap * (count + 1), UiComponent.gap);
 
                     case 1:
-                        return new Vector2(UIManager.Size.X - (UIComponent.Gap * (count + 1)), UIComponent.Gap);
+                        return new Vector2(UiManager.Size.X - (UiComponent.gap * (count + 1)), UiComponent.gap);
 
                     case 2:
-                        return new Vector2(UIComponent.Gap * (count + 1), UIManager.Size.Y - UIComponent.Gap);
+                        return new Vector2(UiComponent.gap * (count + 1), UiManager.Size.Y - UiComponent.gap);
 
                     case 3:
-                        return new Vector2(UIManager.Size.X - (UIComponent.Gap * (count + 1)), UIManager.Size.Y - UIComponent.Gap);
+                        return new Vector2(UiManager.Size.X - (UiComponent.gap * (count + 1)), UiManager.Size.Y - UiComponent.gap);
                 }
-
                 return Vector2.Zero;
             };
-
             return iconButton;
         }
 
         protected IconButton AddBackIconButton(Func<bool> getActive)
         {
-            IconButton returnButton = AddIconButton(2, Main.TextureLibrary.UI_BUTTONS_ICONS_OTHER_BACKICON.Asset, getActive);
-
+            IconButton returnButton = AddIconButton(2, Main.textureLibrary.UI_BUTTONS_ICONS_OTHER_BACKICON.asset, getActive);
             returnButton.selectedInteractAction = delegate ()
             {
                 ToggleOpen(false);
             };
-
             return returnButton;
         }
     }

@@ -1,13 +1,13 @@
-﻿using UnderwaterGame.Entities;
-
-namespace UnderwaterGame.Items.Weapons.Ranged.Bows
+﻿namespace UnderwaterGame.Items.Weapons.Ranged.Bows
 {
+    using UnderwaterGame.Entities;
+
     public abstract class BowRanged : RangedWeapon
     {
         public override void OnUse(ItemEntity entity)
         {
-            entity.Animator.index = 0f;
-            entity.Animator.speed = (float)entity.Animator.sprite.Textures.Length / (float)UseTime;
+            entity.animator.index = 0f;
+            entity.animator.speed = entity.animator.sprite.textures.Length / (float)useTime;
         }
     }
 }

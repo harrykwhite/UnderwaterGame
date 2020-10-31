@@ -1,13 +1,13 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace UnderwaterGame.Tiles.Solids
+﻿namespace UnderwaterGame.Tiles.Solids
 {
+    using Microsoft.Xna.Framework;
+
     public class Sand : SolidTile
     {
         protected override void Init()
         {
-            Texture = Main.TextureLibrary.TILES_SOLIDS_SAND.Asset;
-            TextureBorder = new Color(142, 89, 89);
+            texture = Main.textureLibrary.TILES_SOLIDS_SAND.asset;
+            textureBorder = new Color(142, 89, 89);
         }
     }
 }

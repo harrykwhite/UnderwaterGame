@@ -1,19 +1,17 @@
-﻿using UnderwaterGame.Entities;
-using UnderwaterGame.Sprites;
-
-namespace UnderwaterGame.Items.Weapons.Ranged.Throwables
+﻿namespace UnderwaterGame.Items.Weapons.Ranged.Throwables
 {
+    using UnderwaterGame.Entities;
+    using UnderwaterGame.Sprites;
+
     public class CrabGrenade : ThrowableRanged
     {
         protected override void Init()
         {
-            Name = "Crab Grenade";
-            Sprite = Sprite.CrabGrenade;
-
-            UseTime = 45;
-            UseHide = true;
-
-            Damage = 8f;
+            name = "Crab Grenade";
+            sprite = Sprite.crabGrenade;
+            useTime = 45;
+            useHide = true;
+            damage = 8f;
         }
 
         public override void OnUse(ItemEntity entity)

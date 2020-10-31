@@ -4,8 +4,8 @@
     {
         protected override void Init()
         {
-            Texture = Main.TextureLibrary.TILES_LIQUIDS_WATER.Asset;
-            Alpha = 0.4f;
+            texture = Main.textureLibrary.TILES_LIQUIDS_WATER.asset;
+            alpha = 0.3f;
         }
     }
 }

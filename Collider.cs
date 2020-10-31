@@ -1,13 +1,14 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using UnderwaterGame.Entities;
-using UnderwaterGame.Utilities;
-
-namespace UnderwaterGame
+﻿namespace UnderwaterGame
 {
+    using Microsoft.Xna.Framework;
+    using System;
+    using UnderwaterGame.Entities;
+    using UnderwaterGame.Utilities;
+
     public class Collider
     {
         public Shape shape;
+
         public Entity entity;
 
         public Collider(Shape shape, Entity entity)
@@ -18,25 +19,17 @@ namespace UnderwaterGame
 
         public Shape GetRelative(Vector2? at = null, float? angle = null)
         {
-            Shape real = new Shape(Shape.Fill.Rectangle, shape.width, shape.height)
-            {
-                position = (at ?? entity.position) - (new Vector2(shape.width, shape.height) / 2f)
-            };
-
-            if (shape.width != shape.height)
+            Shape real = new Shape(Shape.Fill.Rectangle, shape.width, shape.height) { position = (at ?? entity.position) - (new Vector2(shape.width, shape.height) / 2f) };
+            if(shape.width != shape.height)
             {
                 int width = (int)Math.Abs(MathUtilities.Merge(shape.width, shape.height, 1f - (float)Math.Abs(Math.Cos(angle ?? (entity.angle + entity.angleOffset)))));
                 int height = (int)Math.Abs(MathUtilities.Merge(shape.width, shape.height, 1f - (float)Math.Abs(Math.Sin(angle ?? (entity.angle + entity.angleOffset)))));
-
                 real.position.X += (shape.width - width) / 2f;
                 real.position.Y += (shape.height - height) / 2f;
-
                 real.width = width;
                 real.height = height;
-
                 real.Clear();
             }
-
             return real;
         }
 
@@ -48,28 +41,24 @@ namespace UnderwaterGame
         public Entity GetTouchingEntity(Vector2 at, Predicate<Entity> predicate = null)
         {
             Shape real = GetRelative(at);
-
-            foreach (Entity entity in EntityManager.Entities)
+            foreach(Entity entity in EntityManager.entities)
             {
-                if (entity.Collider == this)
+                if(entity.collider == this)
                 {
                     continue;
                 }
-
-                if (predicate != null)
+                if(predicate != null)
                 {
-                    if (!predicate.Invoke(entity))
+                    if(!predicate(entity))
                     {
                         continue;
                     }
                 }
-
-                if (real.Intersects(entity.Collider.GetRelative()))
+                if(real.Intersects(entity.collider.GetRelative()))
                 {
                     return entity;
                 }
             }
-
             return null;
         }
     }

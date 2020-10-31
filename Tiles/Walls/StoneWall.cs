@@ -4,13 +4,13 @@
     {
         protected override void Init()
         {
-            Texture = Stone.Texture;
-            TextureBorder = Stone.TextureBorder;
+            texture = stone.texture;
+            textureBorder = stone.textureBorder;
         }
 
         public override void SetTextures()
         {
-            Textures = Stone.Textures;
+            textures = stone.textures;
         }
     }
 }

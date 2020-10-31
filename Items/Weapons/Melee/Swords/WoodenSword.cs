@@ -1,20 +1,17 @@
-﻿using UnderwaterGame.Sprites;
-
-namespace UnderwaterGame.Items.Weapons.Melee.Swords
+﻿namespace UnderwaterGame.Items.Weapons.Melee.Swords
 {
+    using UnderwaterGame.Sprites;
+
     public class WoodenSword : SwordMelee
     {
         protected override void Init()
         {
-            Name = "Wooden Sword";
-            Sprite = Sprite.WoodenSword;
-
-            UseTime = 24;
-
-            Damage = 7f;
-
+            name = "Wooden Sword";
+            sprite = Sprite.woodenSword;
+            useTime = 24;
+            damage = 7f;
             hitboxOffset = 24f;
-            swingSprite = Sprite.WideSwing;
+            swingSprite = Sprite.wideSwing;
         }
     }
 }

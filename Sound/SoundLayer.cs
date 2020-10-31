@@ -1,85 +1,78 @@
-﻿using Microsoft.Xna.Framework.Audio;
-using System;
-
-namespace UnderwaterGame.Sound
+﻿namespace UnderwaterGame.Sound
 {
+    using Microsoft.Xna.Framework.Audio;
+    using System;
+
     public class SoundLayer
     {
         public Func<int> getSoundEffect;
 
-        public int SoundEffect { get; private set; }
-        public int SoundEffectTo { get; private set; }
+        public int soundEffect;
 
-        public SoundEffect[] SoundEffects { get; private set; }
-        public SoundEffectInstance[] SoundEffectInstances { get; private set; }
-        public float[] SoundEffectVolumes { get; private set; }
+        public int soundEffectTo;
+
+        public SoundEffect[] soundEffects;
+
+        public SoundEffectInstance[] soundEffectInstances;
+
+        public float[] soundEffectVolumes;
 
         public SoundLayer(int count)
         {
-            if (!SoundManager.SoundLayers.Contains(this))
+            if(!SoundManager.soundLayers.Contains(this))
             {
-                SoundManager.SoundLayers.Add(this);
+                SoundManager.soundLayers.Add(this);
             }
-
-            SoundEffects = new SoundEffect[count];
-            SoundEffectInstances = new SoundEffectInstance[count];
-            SoundEffectVolumes = new float[count];
+            soundEffects = new SoundEffect[count];
+            soundEffectInstances = new SoundEffectInstance[count];
+            soundEffectVolumes = new float[count];
         }
 
         public void Update()
         {
-            SoundEffectTo = getSoundEffect.Invoke();
-
-            for (int i = 0; i < SoundEffects.Length; i++)
+            soundEffectTo = getSoundEffect();
+            for(int i = 0; i < soundEffects.Length; i++)
             {
-                if (SoundEffectInstances[i] == null)
+                if(soundEffectInstances[i] == null)
                 {
-                    SoundEffectInstances[i] = SoundEffects[i].CreateInstance();
-
-                    SoundEffectInstances[i].IsLooped = true;
-                    SoundEffectInstances[i].Volume = 0f;
-
-                    SoundEffectInstances[i].Play();
+                    soundEffectInstances[i] = soundEffects[i].CreateInstance();
+                    soundEffectInstances[i].IsLooped = true;
+                    soundEffectInstances[i].Volume = 0f;
+                    soundEffectInstances[i].Play();
                 }
-
                 float destination = 0f;
-
-                if ((i == SoundEffect && SoundEffect == SoundEffectTo) || i == SoundEffectTo)
+                if((i == soundEffect && soundEffect == soundEffectTo) || i == soundEffectTo)
                 {
                     destination = 1f;
                 }
-
-                if (SoundEffectVolumes[i] < destination)
+                if(soundEffectVolumes[i] < destination)
                 {
-                    SoundEffectVolumes[i] += Math.Min(0.05f, destination - SoundEffectVolumes[i]);
+                    soundEffectVolumes[i] += Math.Min(0.05f, destination - soundEffectVolumes[i]);
                 }
-                else if (SoundEffectVolumes[i] > destination)
+                else if(soundEffectVolumes[i] > destination)
                 {
-                    SoundEffectVolumes[i] -= Math.Min(0.05f, SoundEffectVolumes[i] - destination);
+                    soundEffectVolumes[i] -= Math.Min(0.05f, soundEffectVolumes[i] - destination);
                 }
-
-                SoundEffectInstances[i].Volume = SoundManager.FilterVolume(SoundEffectVolumes[i], SoundManager.Category.Music);
+                soundEffectInstances[i].Volume = SoundManager.FilterVolume(soundEffectVolumes[i], SoundManager.Category.Music);
             }
-
-            if (SoundEffect != SoundEffectTo)
+            if(soundEffect != soundEffectTo)
             {
-                if (SoundEffectVolumes[SoundEffect] == 0f)
+                if(soundEffectVolumes[soundEffect] == 0f)
                 {
-                    SoundEffect = SoundEffectTo;
+                    soundEffect = soundEffectTo;
                 }
             }
         }
 
         public void Stop()
         {
-            for (int i = 0; i < SoundEffects.Length; i++)
+            for(int i = 0; i < soundEffects.Length; i++)
             {
-                if (SoundEffectVolumes[i] > 0f)
+                if(soundEffectVolumes[i] > 0f)
                 {
-                    SoundEffectVolumes[i] -= Math.Min(0.05f, SoundEffectVolumes[i]);
+                    soundEffectVolumes[i] -= Math.Min(0.05f, soundEffectVolumes[i]);
                 }
-
-                SoundEffectInstances[i].Volume = SoundManager.FilterVolume(SoundEffectVolumes[i], SoundManager.Category.Music);
+                soundEffectInstances[i].Volume = SoundManager.FilterVolume(soundEffectVolumes[i], SoundManager.Category.Music);
             }
         }
     }

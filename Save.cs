@@ -1,40 +1,38 @@
-﻿using System;
-using UnderwaterGame.UI;
-using UnderwaterGame.UI.UIElements;
-using UnderwaterGame.Worlds;
-
-namespace UnderwaterGame
+﻿namespace UnderwaterGame
 {
+    using System;
+    using UnderwaterGame.Ui;
+    using UnderwaterGame.Ui.UiElements;
+    using UnderwaterGame.Worlds;
+
     [Serializable]
     public class Save
     {
         public WorldTile[][,] tilemaps;
+
         public WorldEnvironmental[] environmentals;
 
-        public byte gameCursorDragItemID;
+        public byte gameCursorDragItemId;
+
         public int gameCursorDragQuantity;
 
         public Save()
         {
-            tilemaps = new WorldTile[Main.World.Tilemaps.Length][,];
-
-            for (byte m = 0; m < Main.World.Tilemaps.Length; m++)
+            tilemaps = new WorldTile[World.tilemaps.Length][,];
+            for(byte m = 0; m < World.tilemaps.Length; m++)
             {
-                tilemaps[m] = new WorldTile[Main.World.Width, Main.World.Height];
-
-                for (int y = 0; y < Main.World.Height; y++)
+                tilemaps[m] = new WorldTile[World.width, World.height];
+                for(int y = 0; y < World.height; y++)
                 {
-                    for (int x = 0; x < Main.World.Width; x++)
+                    for(int x = 0; x < World.width; x++)
                     {
-                        tilemaps[m][x, y] = Main.World.Tilemaps[m][x, y];
+                        tilemaps[m][x, y] = World.tilemaps[m][x, y];
                     }
                 }
             }
-
-            environmentals = Main.World.Environmentals.ToArray();
-
-            GameCursorElement gameCursor = (GameCursorElement)UIManager.GetElement<GameCursorElement>();
-            gameCursorDragItemID = gameCursor.dragItem?.id ?? 0;
+            environmentals = World.environmentals.ToArray();
+            GameCursorElement gameCursor = (GameCursorElement)UiManager.GetElement<GameCursorElement>();
+            gameCursorDragItemId = gameCursor.dragItem?.id ?? 0;
             gameCursorDragQuantity = gameCursor.dragQuantity;
         }
     }

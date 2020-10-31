@@ -1,50 +1,44 @@
-﻿using UnderwaterGame.Environmentals;
-using UnderwaterGame.Tiles;
-
-namespace UnderwaterGame.Worlds.Generation
+﻿namespace UnderwaterGame.Worlds.Generation
 {
+    using UnderwaterGame.Environmentals;
+    using UnderwaterGame.Tiles;
+
     public class SurfaceEnvironmentalGeneration : WorldGeneration
     {
-        public override void Generate(World world)
+        public override void Generate()
         {
             int interval = 0;
             int intervalMax = 2;
-
-            for (int x = 0; x < world.Width; x++)
+            for(int x = 0; x < World.width; x++)
             {
-                if (interval < intervalMax)
+                if(interval < intervalMax)
                 {
                     interval++;
                 }
                 else
                 {
-                    for (int y = 0; y < world.Height; y++)
+                    for(int y = 0; y < World.height; y++)
                     {
-                        WorldTile worldTile = world.GetTileAt(x, y, World.TilemapType.Solids);
-
-                        if (worldTile?.TileType == Tile.Sand)
+                        WorldTile worldTile = World.GetTileAt(x, y, World.Tilemap.Solids);
+                        if(Tile.GetTileById(worldTile.id) == Tile.sand)
                         {
                             Environmental environmental = null;
-
-                            if (Main.Random.Next(6) == 0)
+                            if(Main.random.Next(6) == 0)
                             {
-                                environmental = Environmental.SmallSeaweed;
+                                environmental = Environmental.smallSeaweed;
                             }
-
-                            if (Main.Random.Next(18) == 0)
+                            if(Main.random.Next(18) == 0)
                             {
-                                environmental = Environmental.BigSeaweed;
+                                environmental = Environmental.bigSeaweed;
                             }
-
-                            if (environmental != null)
+                            if(environmental != null)
                             {
-                                if (world.AddEnvironmentalAt(x, y, environmental))
+                                if(World.AddEnvironmentalAt(x, y, environmental))
                                 {
-                                    x += (environmental.Sprite.Width / Tile.Size) - 1;
+                                    x += (environmental.sprite.textures[0].Width / Tile.size) - 1;
                                     interval = 0;
                                 }
                             }
-
                             break;
                         }
                     }

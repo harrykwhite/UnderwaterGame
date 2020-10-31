@@ -1,9 +1,13 @@
-﻿using UnderwaterGame.Entities;
-
-namespace UnderwaterGame.Items.Weapons.Magic
+﻿namespace UnderwaterGame.Items.Weapons.Magic
 {
+    using UnderwaterGame.Entities;
+    using UnderwaterGame.Worlds;
+
     public abstract class MagicWeapon : WeaponItem
     {
-        public override bool CanUse(ItemEntity entity) => Main.World.player.Magic > 0f;
+        public override bool CanUse(ItemEntity entity)
+        {
+            return World.player.magic > 0f;
+        }
     }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Projectiles/Magic/FlareMagic.png</SourceFile>
-  <SourceTime>2020-10-18T17:31:17.9033086+10:00</SourceTime>
+  <SourceTime>2020-10-31T16:52:57.3990332+10:00</SourceTime>
   <DestFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/bin/DesktopGL/Content/Textures/Projectiles/Magic/FlareMagic.xnb</DestFile>
-  <DestTime>2020-10-24T19:01:29.300833+10:00</DestTime>
+  <DestTime>2020-10-31T16:57:07.221164+10:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+10:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

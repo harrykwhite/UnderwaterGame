@@ -1,38 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using UnderwaterGame.UI.UIComponents;
-
-namespace UnderwaterGame.UI.UIElements
+﻿namespace UnderwaterGame.Ui.UiElements
 {
-    public abstract class UIElement
+    using System;
+    using System.Collections.Generic;
+    using UnderwaterGame.Ui.UiComponents;
+
+    public abstract class UiElement
     {
         public bool loadingUpdate;
 
-        public List<UIComponent> Components { get; private set; } = new List<UIComponent>();
+        public List<UiComponent> components = new List<UiComponent>();
 
         public abstract void Init();
+
         public abstract void Update();
+
         public abstract void Draw();
 
-        protected UIComponent AddComponent<T>() where T : UIComponent
+        protected UiComponent AddComponent<T>() where T : UiComponent
         {
-            UIComponent component = Activator.CreateInstance<T>();
+            UiComponent component = Activator.CreateInstance<T>();
             component.Init();
-
-            Components.Add(component);
+            components.Add(component);
             return component;
         }
 
-        protected T GetComponent<T>() where T : UIComponent
+        protected T GetComponent<T>() where T : UiComponent
         {
-            foreach (UIComponent component in Components)
+            foreach(UiComponent component in components)
             {
-                if (component is T)
+                if(component is T)
                 {
                     return (T)component;
                 }
             }
-
             return null;
         }
     }

@@ -1,13 +1,13 @@
-﻿using Microsoft.Xna.Framework;
-
-namespace UnderwaterGame.Tiles.Solids
+﻿namespace UnderwaterGame.Tiles.Solids
 {
+    using Microsoft.Xna.Framework;
+
     public class Brick : SolidTile
     {
         protected override void Init()
         {
-            Texture = Main.TextureLibrary.TILES_SOLIDS_BRICK.Asset;
-            TextureBorder = new Color(72, 96, 122);
+            texture = Main.textureLibrary.TILES_SOLIDS_BRICK.asset;
+            textureBorder = new Color(126, 110, 79);
         }
     }
 }

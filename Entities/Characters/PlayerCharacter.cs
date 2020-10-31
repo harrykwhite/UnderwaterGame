@@ -1,239 +1,207 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Input;
-using System;
-using System.Threading;
-using UnderwaterGame.Entities.Particles;
-using UnderwaterGame.Input;
-using UnderwaterGame.Items;
-using UnderwaterGame.Items.Armours;
-using UnderwaterGame.Items.Armours.Chests;
-using UnderwaterGame.Items.Armours.Feet;
-using UnderwaterGame.Items.Armours.Heads;
-using UnderwaterGame.Items.Armours.Legs;
-using UnderwaterGame.Items.Weapons;
-using UnderwaterGame.Sound;
-using UnderwaterGame.Sprites;
-using UnderwaterGame.UI;
-using UnderwaterGame.UI.UIElements;
-using UnderwaterGame.UI.UIElements.Menus;
-using UnderwaterGame.Utilities;
-
-namespace UnderwaterGame.Entities.Characters
+﻿namespace UnderwaterGame.Entities.Characters
 {
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Input;
+    using System;
+    using System.Threading;
+    using UnderwaterGame.Entities.Particles;
+    using UnderwaterGame.Items;
+    using UnderwaterGame.Items.Armours;
+    using UnderwaterGame.Items.Armours.Chests;
+    using UnderwaterGame.Items.Armours.Feet;
+    using UnderwaterGame.Items.Armours.Heads;
+    using UnderwaterGame.Items.Armours.Legs;
+    using UnderwaterGame.Items.Weapons;
+    using UnderwaterGame.Sound;
+    using UnderwaterGame.Sprites;
+    using UnderwaterGame.Tiles;
+    using UnderwaterGame.Ui;
+    using UnderwaterGame.Ui.UiElements;
+    using UnderwaterGame.Ui.UiElements.Menus;
+    using UnderwaterGame.Utilities;
+    using UnderwaterGame.Worlds;
+
     public class PlayerCharacter : CharacterEntity
     {
         public enum InventoryType
         {
-            Wield,
-            Hotbar,
-            ArmourHead,
-            ArmourChest,
-            ArmourLegs,
-            ArmourFeet,
-            Crafting,
-            Other
+            Wield, Hotbar, ArmourHead, ArmourChest, ArmourLegs, ArmourFeet, Crafting, Other
         }
 
         private int bubbleTime;
+
         private int bubbleTimeMax = 4;
 
         private float swimAngleTo;
+
         private float swimAngleToMult = 0.2f;
 
         private float swimSpeedHor;
+
         private float swimSpeedVer;
 
         private float swimSpeedAcc = 0.1f;
+
         private float swimSpeedMax = 2.5f;
 
         private float swimSpeedWaterMult;
+
         private float swimSpeedWaterMultAcc = 0.01f;
 
         private float swimSpeedThreshold = 1f;
 
-        public float Magic { get; protected set; }
-        public float MagicMax { get; protected set; }
+        public float magic;
 
-        public ArmourItem ArmourHead { get; private set; }
-        public ArmourItem ArmourChest { get; private set; }
-        public ArmourItem ArmourLegs { get; private set; }
-        public ArmourItem ArmourFeet { get; private set; }
+        public float magicMax;
 
-        public Inventory Inventory { get; private set; }
+        public ArmourItem armourHead;
 
-        public Inventory.InventoryGroup InventoryWield => Inventory.Groups[(int)InventoryType.Wield];
-        public Inventory.InventoryGroup InventoryHotbar => Inventory.Groups[(int)InventoryType.Hotbar];
-        public Inventory.InventoryGroup InventoryArmourHead => Inventory.Groups[(int)InventoryType.ArmourHead];
-        public Inventory.InventoryGroup InventoryArmourChest => Inventory.Groups[(int)InventoryType.ArmourChest];
-        public Inventory.InventoryGroup InventoryArmourLegs => Inventory.Groups[(int)InventoryType.ArmourLegs];
-        public Inventory.InventoryGroup InventoryArmourFeet => Inventory.Groups[(int)InventoryType.ArmourFeet];
-        public Inventory.InventoryGroup InventoryCrafting => Inventory.Groups[(int)InventoryType.Crafting];
-        public Inventory.InventoryGroup InventoryOther => Inventory.Groups[(int)InventoryType.Other];
+        public ArmourItem armourChest;
 
-        public ItemEntity HeldItem { get; private set; }
-        public bool Wielding { get; private set; }
+        public ArmourItem armourLegs;
 
-        public float AngleToMouse => MathUtilities.PointDirection(position, InputManager.GetMousePositionWorld());
+        public ArmourItem armourFeet;
+
+        public Inventory inventory;
+
+        public ItemEntity heldItem;
+
+        public bool wielding;
 
         public override void Draw()
         {
             DrawSelf();
-
-            int armourIndex = Animator.sprite == Sprite.PlayerIdle ? Sprite.PlayerSwim.Textures.Length - 1 : (int)Animator.index;
-            Color armourColor = Flash ? Color.White : blend;
+            int armourIndex = animator.sprite == Sprite.playerIdle ? Sprite.playerSwim.textures.Length - 1 : (int)animator.index;
+            Color armourColor = flashTime > 0 ? Color.White : blend;
             float armourDepth = depth + 0.0005f;
-
-            if (ArmourHead != null)
+            if(armourHead != null)
             {
-                DrawSelf(Flash ? ArmourHead.WearSprite.TexturesFilled[armourIndex] : ArmourHead.WearSprite.Textures[armourIndex], color: armourColor, depth: armourDepth);
+                DrawSelf(flashTime > 0 ? armourHead.wearSprite.texturesFilled[armourIndex] : armourHead.wearSprite.textures[armourIndex], color: armourColor, depth: armourDepth);
             }
-
-            if (ArmourChest != null)
+            if(armourChest != null)
             {
-                DrawSelf(Flash ? ArmourChest.WearSprite.TexturesFilled[armourIndex] : ArmourChest.WearSprite.Textures[armourIndex], color: armourColor, depth: armourDepth);
+                DrawSelf(flashTime > 0 ? armourChest.wearSprite.texturesFilled[armourIndex] : armourChest.wearSprite.textures[armourIndex], color: armourColor, depth: armourDepth);
             }
-
-            if (ArmourLegs != null)
+            if(armourLegs != null)
             {
-                DrawSelf(Flash ? ArmourLegs.WearSprite.TexturesFilled[armourIndex] : ArmourLegs.WearSprite.Textures[armourIndex], color: armourColor, depth: armourDepth);
+                DrawSelf(flashTime > 0 ? armourLegs.wearSprite.texturesFilled[armourIndex] : armourLegs.wearSprite.textures[armourIndex], color: armourColor, depth: armourDepth);
             }
-
-            if (ArmourFeet != null)
+            if(armourFeet != null)
             {
-                DrawSelf(Flash ? ArmourFeet.WearSprite.TexturesFilled[armourIndex] : ArmourFeet.WearSprite.Textures[armourIndex], color: armourColor, depth: armourDepth);
+                DrawSelf(flashTime > 0 ? armourFeet.wearSprite.texturesFilled[armourIndex] : armourFeet.wearSprite.textures[armourIndex], color: armourColor, depth: armourDepth);
             }
         }
 
         public override void Init()
         {
-            SetSprite(Sprite.PlayerSwim);
-            Animator = new Animator(Sprite);
-
+            SetSprite(Sprite.playerSwim);
+            animator = new Animator(sprite);
             depth = 0.55f;
-
-            Inventory = new Inventory(Enum.GetNames(typeof(InventoryType)).Length);
-
-            Inventory.Groups[(int)InventoryType.Wield] = new Inventory.InventoryGroup(2, 1, true);
-            Inventory.Groups[(int)InventoryType.Hotbar] = new Inventory.InventoryGroup(3, 1, true);
-            Inventory.Groups[(int)InventoryType.ArmourHead] = new Inventory.InventoryGroup(1, 1, false);
-            Inventory.Groups[(int)InventoryType.ArmourChest] = new Inventory.InventoryGroup(1, 1, false);
-            Inventory.Groups[(int)InventoryType.ArmourLegs] = new Inventory.InventoryGroup(1, 1, false);
-            Inventory.Groups[(int)InventoryType.ArmourFeet] = new Inventory.InventoryGroup(1, 1, false);
-            Inventory.Groups[(int)InventoryType.Crafting] = new Inventory.InventoryGroup(5, 1, false);
-            Inventory.Groups[(int)InventoryType.Other] = new Inventory.InventoryGroup(5, 4, true);
-
-            Inventory.Groups[(int)InventoryType.Wield].predicate = (Item item) => item is WeaponItem;
-            Inventory.Groups[(int)InventoryType.Hotbar].predicate = (Item item) => !Inventory.Groups[(int)InventoryType.Wield].predicate.Invoke(item);
-            Inventory.Groups[(int)InventoryType.ArmourHead].predicate = (Item item) => item is HeadArmour;
-            Inventory.Groups[(int)InventoryType.ArmourChest].predicate = (Item item) => item is ChestArmour;
-            Inventory.Groups[(int)InventoryType.ArmourLegs].predicate = (Item item) => item is LegArmour;
-            Inventory.Groups[(int)InventoryType.ArmourFeet].predicate = (Item item) => item is FeetArmour;
-
-            HeldItem = (ItemEntity)EntityManager.AddEntity<ItemEntity>(position);
-
-            HealthMax = 100f;
-            Health = HealthMax;
-
-            MagicMax = 100f;
-            Magic = MagicMax;
+            inventory = new Inventory(Enum.GetNames(typeof(InventoryType)).Length);
+            inventory.groups[(int)InventoryType.Wield] = new Inventory.InventoryGroup(2, 1, true);
+            inventory.groups[(int)InventoryType.Hotbar] = new Inventory.InventoryGroup(3, 1, true);
+            inventory.groups[(int)InventoryType.ArmourHead] = new Inventory.InventoryGroup(1, 1, false);
+            inventory.groups[(int)InventoryType.ArmourChest] = new Inventory.InventoryGroup(1, 1, false);
+            inventory.groups[(int)InventoryType.ArmourLegs] = new Inventory.InventoryGroup(1, 1, false);
+            inventory.groups[(int)InventoryType.ArmourFeet] = new Inventory.InventoryGroup(1, 1, false);
+            inventory.groups[(int)InventoryType.Crafting] = new Inventory.InventoryGroup(5, 1, false);
+            inventory.groups[(int)InventoryType.Other] = new Inventory.InventoryGroup(5, 4, true);
+            inventory.groups[(int)InventoryType.Wield].predicate = (Item item) => item is WeaponItem;
+            inventory.groups[(int)InventoryType.Hotbar].predicate = (Item item) => !inventory.groups[(int)InventoryType.Wield].predicate(item);
+            inventory.groups[(int)InventoryType.ArmourHead].predicate = (Item item) => item is HeadArmour;
+            inventory.groups[(int)InventoryType.ArmourChest].predicate = (Item item) => item is ChestArmour;
+            inventory.groups[(int)InventoryType.ArmourLegs].predicate = (Item item) => item is LegArmour;
+            inventory.groups[(int)InventoryType.ArmourFeet].predicate = (Item item) => item is FeetArmour;
+            heldItem = (ItemEntity)EntityManager.AddEntity<ItemEntity>(position);
+            healthMax = 100f;
+            health = healthMax;
+            magicMax = 100f;
+            magic = magicMax;
         }
 
         public override void Update()
         {
-            bool keyRight = InputManager.KeyHeld(Keys.D);
-            bool keyLeft = InputManager.KeyHeld(Keys.A);
-
-            bool keyDown = InputManager.KeyHeld(Keys.S);
-            bool keyUp = InputManager.KeyHeld(Keys.W);
-
-            bool keyWield = InputManager.KeyPressed(Keys.F);
-
+            bool keyRight = Control.KeyHeld(Keys.D);
+            bool keyLeft = Control.KeyHeld(Keys.A);
+            bool keyDown = Control.KeyHeld(Keys.S);
+            bool keyUp = Control.KeyHeld(Keys.W);
+            bool keyWield = Control.KeyPressed(Keys.F);
             Vector2 swimVector = Vector2.Zero;
-
-            if (keyRight)
+            if(keyRight)
             {
                 swimVector.X += 1f;
             }
-
-            if (keyLeft)
+            if(keyLeft)
             {
                 swimVector.X += -1f;
             }
-
-            if (keyDown)
+            if(keyDown)
             {
                 swimVector.Y += 1f;
             }
-
-            if (keyUp)
+            if(keyUp)
             {
                 swimVector.Y += -1f;
             }
-
-            if (InWater)
+            if(inWater)
             {
-                if (swimVector.X == 1f)
+                if(swimVector.X == 1f)
                 {
-                    if (swimSpeedHor < swimSpeedMax)
+                    if(swimSpeedHor < swimSpeedMax)
                     {
                         swimSpeedHor += Math.Min(swimSpeedAcc, swimSpeedMax - swimSpeedHor);
                     }
                 }
-                else if (swimVector.X == -1f)
+                else if(swimVector.X == -1f)
                 {
-                    if (swimSpeedHor > -swimSpeedMax)
+                    if(swimSpeedHor > -swimSpeedMax)
                     {
                         swimSpeedHor -= Math.Min(swimSpeedAcc, swimSpeedHor + swimSpeedMax);
                     }
                 }
-                else if (swimVector.X == 0f)
+                else if(swimVector.X == 0f)
                 {
-                    if (swimSpeedHor != 0f)
+                    if(swimSpeedHor != 0f)
                     {
                         swimSpeedHor -= Math.Sign(swimSpeedHor) * Math.Min(Math.Abs(swimSpeedHor), swimSpeedAcc);
                     }
                 }
-
-                if (swimVector.Y == 1f)
+                if(swimVector.Y == 1f)
                 {
-                    if (swimSpeedVer < swimSpeedMax)
+                    if(swimSpeedVer < swimSpeedMax)
                     {
                         swimSpeedVer += Math.Min(swimSpeedAcc, swimSpeedMax - swimSpeedVer);
                     }
                 }
-                else if (swimVector.Y == -1f)
+                else if(swimVector.Y == -1f)
                 {
-                    if (swimSpeedVer > -swimSpeedMax)
+                    if(swimSpeedVer > -swimSpeedMax)
                     {
                         swimSpeedVer -= Math.Min(swimSpeedAcc, swimSpeedVer + swimSpeedMax);
                     }
                 }
-                else if (swimVector.Y == 0f)
+                else if(swimVector.Y == 0f)
                 {
-                    if (swimSpeedVer != 0f)
+                    if(swimSpeedVer != 0f)
                     {
                         swimSpeedVer -= Math.Sign(swimSpeedVer) * Math.Min(Math.Abs(swimSpeedVer), swimSpeedAcc);
                     }
                 }
-
-                if (swimSpeedWaterMult < 1f)
+                if(swimSpeedWaterMult < 1f)
                 {
                     swimSpeedWaterMult += Math.Min(swimSpeedWaterMultAcc, 1f - swimSpeedWaterMult);
                 }
             }
             else
             {
-                if (swimSpeedWaterMult > 0f)
+                if(swimSpeedWaterMult > 0f)
                 {
                     swimSpeedWaterMult -= Math.Min(swimSpeedWaterMultAcc, swimSpeedWaterMult);
                 }
             }
-
             velocity = new Vector2(swimSpeedHor, swimSpeedVer) * swimSpeedWaterMult;
-
             angleOffset = MathHelper.Pi / 2f;
-
-            if (new Vector2(swimSpeedHor, swimSpeedVer).Length() * swimSpeedWaterMult >= swimSpeedThreshold)
+            if(new Vector2(swimSpeedHor, swimSpeedVer).Length() * swimSpeedWaterMult >= swimSpeedThreshold)
             {
                 swimAngleTo = MathUtilities.PointDirection(Vector2.Zero, velocity);
                 swimAngleTo += angleOffset;
@@ -242,40 +210,32 @@ namespace UnderwaterGame.Entities.Characters
             {
                 swimAngleTo = 0f;
             }
-
             float angleDifference = MathUtilities.AngleDifference(angle, swimAngleTo);
             angle += Math.Abs(angleDifference * swimAngleToMult) * Math.Sign(angleDifference);
-
-            CheckForDamage(Collider);
+            CheckForDamage(collider);
             UpdateStatus();
-
             UpdateGravity();
             velocity.Y += gravity;
-
             TileCollisions(Vector2.Zero);
-
-            if (HeldItem.Using)
+            if(heldItem.useTimeCurrent < heldItem.useTimeMax)
             {
-                flipHor = MathUtilities.AngleLeftHalf(HeldItem.angleBase - angle);
+                flipHor = MathUtilities.AngleLeftHalf(heldItem.angleBase - angle);
             }
             else
             {
-                if (swimSpeedHor != 0f)
+                if(swimSpeedHor != 0f)
                 {
                     flipHor = Math.Sign(swimSpeedHor) == -1f;
                 }
             }
-
             position += velocity;
             LockInWorld();
-
             bool idle = true;
-
-            if (InWater)
+            if(inWater)
             {
-                if (new Vector2(swimSpeedHor, swimSpeedVer).Length() * swimSpeedWaterMult >= swimSpeedThreshold)
+                if(new Vector2(swimSpeedHor, swimSpeedVer).Length() * swimSpeedWaterMult >= swimSpeedThreshold)
                 {
-                    if (bubbleTime > 0)
+                    if(bubbleTime > 0)
                     {
                         bubbleTime--;
                     }
@@ -284,63 +244,51 @@ namespace UnderwaterGame.Entities.Characters
                         Bubble bubble = (Bubble)EntityManager.AddEntity<Bubble>(position);
                         bubble.position += MathUtilities.LengthDirection(10f, angle + angleOffset);
                         bubble.direction = angle + angleOffset;
-
                         bubbleTime = bubbleTimeMax;
                     }
-
-                    Animator.sprite = Sprite.PlayerSwim;
-                    Animator.speed = 0.25f;
-
+                    animator.sprite = Sprite.playerSwim;
+                    animator.speed = 0.25f;
                     idle = false;
                 }
             }
-
-            if (idle)
+            if(idle)
             {
-                Animator.sprite = Sprite.PlayerIdle;
-                Animator.index = 0f;
-                Animator.speed = 0f;
+                animator.sprite = Sprite.playerIdle;
+                animator.index = 0f;
+                animator.speed = 0f;
             }
-
-            Animator.Update();
-
+            animator.Update();
             UpdateWater();
-
-            if (!HeldItem?.Using ?? true)
+            if(heldItem.useTimeCurrent >= heldItem.useTimeMax)
             {
-                if (keyWield)
+                if(keyWield)
                 {
-                    PlayerMenu playerMenu = (PlayerMenu)UIManager.GetElement<PlayerMenu>();
+                    PlayerMenu playerMenu = (PlayerMenu)UiManager.GetElement<PlayerMenu>();
                     playerMenu.selectedSlotX = 0;
                     playerMenu.selectedSlotY = 0;
-
-                    Wielding = !Wielding;
+                    wielding = !wielding;
                 }
             }
-
             RefreshDefense();
             RefreshArmour();
             RefreshHeldItem();
-
             velocity = Vector2.Zero;
         }
 
         public override void Destroy()
         {
             base.Destroy();
-            HeldItem.Destroy();
+            heldItem.Destroy();
         }
 
         public override bool Hurt(HitInfo hitInfo)
         {
             bool damaged = base.Hurt(hitInfo);
-
-            if (damaged)
+            if(damaged)
             {
-                ScreenFlashElement screenFlash = (ScreenFlashElement)UIManager.GetElement<ScreenFlashElement>();
+                ScreenFlashElement screenFlash = (ScreenFlashElement)UiManager.GetElement<ScreenFlashElement>();
                 screenFlash.SetFlash(bloodParticleColor, 0.2f);
             }
-
             return damaged;
         }
 
@@ -352,112 +300,94 @@ namespace UnderwaterGame.Entities.Characters
         public override void Kill()
         {
             base.Kill();
-
-            SoundManager.PlaySound(Main.SoundLibrary.CHARACTERS_PLAYER_DEATH.Asset, SoundManager.Category.Sound);
-
+            SoundManager.PlaySound(Main.soundLibrary.CHARACTERS_PLAYER_DEATH.asset, SoundManager.Category.Sound);
             Main.loading = new Thread(delegate ()
             {
                 Respawn();
                 Main.loading = null;
             });
-
             Main.loading.Start();
         }
 
         public void Respawn()
         {
-            while (UIManager.FadeElements[2].Alpha < UIManager.FadeElements[2].alphaMax)
+            while(UiManager.fadeElements[2].alpha < UiManager.fadeElements[2].alphaMax)
             {
                 continue;
             }
-
-            Main.World.player = (PlayerCharacter)EntityManager.AddEntity<PlayerCharacter>(Main.World.playerSpawn);
-
-            Camera.positionTo = Main.World.player.position;
+            World.player = (PlayerCharacter)EntityManager.AddEntity<PlayerCharacter>(new Vector2((World.width * Tile.size) / 2f, 0f));
+            Camera.positionTo = World.player.position;
             Camera.position = Camera.positionTo;
         }
 
         public void RefreshDefense()
         {
-            Defense = 0f;
+            defense = 0f;
         }
 
         public void RefreshArmour()
         {
-            ArmourHead = (ArmourItem)InventoryArmourHead.contents[0, 0].item;
-            ArmourChest = (ArmourItem)InventoryArmourChest.contents[0, 0].item;
-            ArmourLegs = (ArmourItem)InventoryArmourLegs.contents[0, 0].item;
-            ArmourFeet = (ArmourItem)InventoryArmourFeet.contents[0, 0].item;
-
-            if (ArmourHead != null)
+            armourHead = (ArmourItem)inventory.groups[(int)InventoryType.ArmourHead].contents[0, 0].item;
+            armourChest = (ArmourItem)inventory.groups[(int)InventoryType.ArmourChest].contents[0, 0].item;
+            armourLegs = (ArmourItem)inventory.groups[(int)InventoryType.ArmourLegs].contents[0, 0].item;
+            armourFeet = (ArmourItem)inventory.groups[(int)InventoryType.ArmourFeet].contents[0, 0].item;
+            if(armourHead != null)
             {
-                Defense += ArmourHead.WearDefense;
+                defense += armourHead.wearDefense;
             }
-
-            if (ArmourChest != null)
+            if(armourChest != null)
             {
-                Defense += ArmourChest.WearDefense;
+                defense += armourChest.wearDefense;
             }
-
-            if (ArmourLegs != null)
+            if(armourLegs != null)
             {
-                Defense += ArmourLegs.WearDefense;
+                defense += armourLegs.wearDefense;
             }
-
-            if (ArmourFeet != null)
+            if(armourFeet != null)
             {
-                Defense += ArmourFeet.WearDefense;
+                defense += armourFeet.wearDefense;
             }
         }
 
         public void RefreshHeldItem()
         {
-            PlayerMenu playerInventory = (PlayerMenu)UIManager.GetElement<PlayerMenu>();
+            PlayerMenu playerInventory = (PlayerMenu)UiManager.GetElement<PlayerMenu>();
             Item item = null;
-
-            if (playerInventory.Open)
+            if(playerInventory.open)
             {
                 return;
             }
-
-            if (playerInventory.Selected)
+            if(playerInventory.Selected)
             {
-                item = Inventory.Groups[playerInventory.selectedGroup].contents[playerInventory.selectedSlotX, playerInventory.selectedSlotY].item;
+                item = inventory.groups[playerInventory.selectedGroup].contents[playerInventory.selectedSlotX, playerInventory.selectedSlotY].item;
             }
-
-            if (HeldItem.ItemType != item)
+            if(heldItem.itemType != item)
             {
-                HeldItem.SetItem(item);
+                heldItem.SetItem(item);
             }
         }
 
         public bool HealMagic(float amount)
         {
             amount = Math.Max(amount, 0f);
-
-            if (Magic >= MagicMax)
+            if(magic >= magicMax)
             {
                 return false;
             }
-
-            Magic += amount;
-            Magic = MathUtilities.Clamp(Magic, 0f, MagicMax);
-
+            magic += amount;
+            magic = MathUtilities.Clamp(magic, 0f, magicMax);
             return true;
         }
 
         public bool HurtMagic(float damage)
         {
             damage = Math.Max(damage, 0f);
-
-            if (Magic <= 0f)
+            if(magic <= 0f)
             {
                 return false;
             }
-
-            Magic -= damage;
-            Magic = MathUtilities.Clamp(Magic, 0f, MagicMax);
-
+            magic -= damage;
+            magic = MathUtilities.Clamp(magic, 0f, magicMax);
             return true;
         }
     }

@@ -2,6 +2,5 @@
 {
     public abstract class LiquidTile : Tile
     {
-
     }
 }

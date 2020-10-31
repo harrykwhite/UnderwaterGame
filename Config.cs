@@ -1,8 +1,8 @@
-﻿using System;
-using UnderwaterGame.Options;
-
-namespace UnderwaterGame
+﻿namespace UnderwaterGame
 {
+    using System;
+    using UnderwaterGame.Options;
+
     [Serializable]
     public class Config
     {
@@ -10,11 +10,10 @@ namespace UnderwaterGame
 
         public Config()
         {
-            values = new float[Option.Options.Count];
-
-            for (int i = 0; i < values.Length; i++)
+            values = new float[Option.options.Count];
+            for(int i = 0; i < values.Length; i++)
             {
-                values[i] = Option.GetOptionByID((byte)(i + 1)).value;
+                values[i] = Option.GetOptionById((byte)(i + 1)).value;
             }
         }
     }

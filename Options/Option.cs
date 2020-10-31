@@ -1,30 +1,31 @@
-﻿using System;
-
-namespace UnderwaterGame.Options
+﻿namespace UnderwaterGame.Options
 {
+    using System;
+
     public abstract partial class Option
     {
         public enum Format
         {
-            Percent,
-            Toggle
+            Percent, Toggle
         }
 
         public byte id;
+
         public float value;
 
-        public string Name { get; protected set; }
+        public string name;
 
-        public float ValueMin { get; protected set; }
-        public float ValueMax { get; protected set; }
-        public bool ValueRounded { get; protected set; }
-        public Format ValueFormat { get; protected set; }
+        public float valueMin;
 
-        public bool Toggle => value == 1f;
+        public float valueMax;
+
+        public bool valueRounded;
+
+        public Format valueFormat;
 
         public Option()
         {
-            Options.Add(this);
+            options.Add(this);
             Init();
         }
 
@@ -32,13 +33,12 @@ namespace UnderwaterGame.Options
         {
             T option = Activator.CreateInstance<T>();
             option.id = id;
-
             return option;
         }
 
-        public static Option GetOptionByID(byte id)
+        public static Option GetOptionById(byte id)
         {
-            return Options.Find((Option option) => option.id == id);
+            return options.Find((Option option) => option.id == id);
         }
 
         protected abstract void Init();

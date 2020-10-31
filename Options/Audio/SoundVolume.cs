@@ -4,10 +4,9 @@
     {
         protected override void Init()
         {
-            Name = "Sound Volume";
-
+            name = "Sound Volume";
             value = 1f;
-            ValueMax = 1f;
+            valueMax = 1f;
         }
     }
 }

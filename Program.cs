@@ -1,13 +1,13 @@
-﻿using System;
-
-namespace UnderwaterGame
+﻿namespace UnderwaterGame
 {
+    using System;
+
     public static class Program
     {
         [STAThread]
-        static void Main()
+        private static void Main()
         {
-            using (Main main = new Main())
+            using(Main main = new Main())
             {
                 main.Run();
             }

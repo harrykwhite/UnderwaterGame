@@ -4,13 +4,13 @@
     {
         protected override void Init()
         {
-            Texture = Brick.Texture;
-            TextureBorder = Brick.TextureBorder;
+            texture = brick.texture;
+            textureBorder = brick.textureBorder;
         }
 
         public override void SetTextures()
         {
-            Textures = Brick.Textures;
+            textures = brick.textures;
         }
     }
 }

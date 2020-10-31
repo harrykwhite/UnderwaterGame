@@ -186,23 +186,23 @@
 /processorParam:Quality=Best
 /build:Sounds/Music/Layer0/Track5.wav
 
-#begin Sounds/UI/Click.wav
+#begin Sounds/Ui/Click.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/UI/Click.wav
+/build:Sounds/Ui/Click.wav
 
-#begin Sounds/UI/Hover.wav
+#begin Sounds/Ui/Hover.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/UI/Hover.wav
+/build:Sounds/Ui/Hover.wav
 
-#begin Sounds/UI/Scroll.wav
+#begin Sounds/Ui/Scroll.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/UI/Scroll.wav
+/build:Sounds/Ui/Scroll.wav
 
 #begin Textures/Characters/Enemies/Jellyfish/Jellyfish.png
 /importer:TextureImporter
@@ -672,7 +672,7 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Tiles/Solids/Stone.png
 
-#begin Textures/UI/Buttons/Icons/Inventory/ArmourIcon.png
+#begin Textures/Ui/Buttons/Icons/Inventory/ArmourIcon.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -682,9 +682,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/UI/Buttons/Icons/Inventory/ArmourIcon.png
+/build:Textures/Ui/Buttons/Icons/Inventory/ArmourIcon.png
 
-#begin Textures/UI/Buttons/Icons/Inventory/CraftingIcon.png
+#begin Textures/Ui/Buttons/Icons/Inventory/CraftingIcon.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -694,9 +694,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/UI/Buttons/Icons/Inventory/CraftingIcon.png
+/build:Textures/Ui/Buttons/Icons/Inventory/CraftingIcon.png
 
-#begin Textures/UI/Buttons/Icons/Inventory/HotbarIcon.png
+#begin Textures/Ui/Buttons/Icons/Inventory/HotbarIcon.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -706,9 +706,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/UI/Buttons/Icons/Inventory/HotbarIcon.png
+/build:Textures/Ui/Buttons/Icons/Inventory/HotbarIcon.png
 
-#begin Textures/UI/Buttons/Icons/Inventory/WieldIcon.png
+#begin Textures/Ui/Buttons/Icons/Inventory/WieldIcon.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -718,9 +718,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/UI/Buttons/Icons/Inventory/WieldIcon.png
+/build:Textures/Ui/Buttons/Icons/Inventory/WieldIcon.png
 
-#begin Textures/UI/Buttons/Icons/Other/BackIcon.png
+#begin Textures/Ui/Buttons/Icons/Other/BackIcon.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -730,9 +730,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/UI/Buttons/Icons/Other/BackIcon.png
+/build:Textures/Ui/Buttons/Icons/Other/BackIcon.png
 
-#begin Textures/UI/Buttons/Icons/Other/ContinueIcon.png
+#begin Textures/Ui/Buttons/Icons/Other/ContinueIcon.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -742,9 +742,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/UI/Buttons/Icons/Other/ContinueIcon.png
+/build:Textures/Ui/Buttons/Icons/Other/ContinueIcon.png
 
-#begin Textures/UI/Buttons/Icons/Other/OptionsIcon.png
+#begin Textures/Ui/Buttons/Icons/Other/OptionsIcon.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -754,9 +754,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/UI/Buttons/Icons/Other/OptionsIcon.png
+/build:Textures/Ui/Buttons/Icons/Other/OptionsIcon.png
 
-#begin Textures/UI/Buttons/Icons/Other/ProduceIcon.png
+#begin Textures/Ui/Buttons/Icons/Other/ProduceIcon.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -766,9 +766,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/UI/Buttons/Icons/Other/ProduceIcon.png
+/build:Textures/Ui/Buttons/Icons/Other/ProduceIcon.png
 
-#begin Textures/UI/Buttons/Other/Button.png
+#begin Textures/Ui/Buttons/Other/Button.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -778,9 +778,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/UI/Buttons/Other/Button.png
+/build:Textures/Ui/Buttons/Other/Button.png
 
-#begin Textures/UI/Other/Cursor.png
+#begin Textures/Ui/Other/Cursor.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -790,9 +790,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/UI/Other/Cursor.png
+/build:Textures/Ui/Other/Cursor.png
 
-#begin Textures/UI/Slider/Ball.png
+#begin Textures/Ui/Slider/Ball.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -802,9 +802,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/UI/Slider/Ball.png
+/build:Textures/Ui/Slider/Ball.png
 
-#begin Textures/UI/Slider/Bar.png
+#begin Textures/Ui/Slider/Bar.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -814,5 +814,5 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/UI/Slider/Bar.png
+/build:Textures/Ui/Slider/Bar.png
 

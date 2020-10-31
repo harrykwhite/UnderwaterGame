@@ -1,29 +1,28 @@
-﻿using Microsoft.Xna.Framework;
-using UnderwaterGame.Tiles;
-
-namespace UnderwaterGame.Worlds
+﻿namespace UnderwaterGame.Worlds
 {
+    using Microsoft.Xna.Framework;
+    using UnderwaterGame.Tiles;
+
     public class WorldTileData
     {
-        public int X { get; private set; }
-        public int Y { get; private set; }
+        public int x;
 
-        public WorldTile WorldTile { get; private set; }
-        public World.TilemapType Tilemap { get; private set; }
+        public int y;
 
-        public Shape Shape { get; private set; }
+        public WorldTile worldTile;
 
-        public WorldTileData(int x, int y, WorldTile worldTile, World.TilemapType tilemap)
+        public World.Tilemap tilemap;
+
+        public Shape shape;
+
+        public WorldTileData(int x, int y, WorldTile worldTile, World.Tilemap tilemap)
         {
-            X = x;
-            Y = y;
-
-            WorldTile = worldTile;
-            Tilemap = tilemap;
-
+            this.x = x;
+            this.y = y;
+            this.worldTile = worldTile;
+            this.tilemap = tilemap;
             Shape.Fill fill = Shape.Fill.Rectangle;
-
-            switch (WorldTile.texture)
+            switch(this.worldTile.texture)
             {
                 case 16:
                     fill = Shape.Fill.TopLeftSlope;
@@ -41,11 +40,7 @@ namespace UnderwaterGame.Worlds
                     fill = Shape.Fill.BottomRightSlope;
                     break;
             }
-
-            Shape = new Shape(fill, Tile.Size, Tile.Size)
-            {
-                position = new Vector2(X, Y) * Tile.Size
-            };
+            shape = new Shape(fill, Tile.size, Tile.size) { position = new Vector2(this.x, this.y) * Tile.size };
         }
     }
 }

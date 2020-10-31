@@ -1,16 +1,15 @@
-﻿using UnderwaterGame.Sprites;
-
-namespace UnderwaterGame.Items.Armours.Legs
+﻿namespace UnderwaterGame.Items.Armours.Legs
 {
+    using UnderwaterGame.Sprites;
+
     public class WoodenLeggings : LegArmour
     {
         protected override void Init()
         {
-            Name = "Wooden Leggings";
-            Sprite = Sprite.WoodenLeggings;
-
-            WearSprite = Sprite.WoodenLeggingsWear;
-            WearDefense = 3f;
+            name = "Wooden Leggings";
+            sprite = Sprite.woodenLeggings;
+            wearSprite = Sprite.woodenLeggingsWear;
+            wearDefense = 2f;
         }
     }
 }

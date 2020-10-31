@@ -1,42 +1,41 @@
-﻿using Microsoft.Xna.Framework.Content;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
-
-namespace UnderwaterGame.Assets
+﻿namespace UnderwaterGame.Assets
 {
+    using Microsoft.Xna.Framework.Content;
+    using System;
+    using System.Collections.Generic;
+    using System.Reflection;
+
     public abstract class Library<T>
     {
         public class LibraryAsset
         {
-            public T Asset { get; private set; }
-            public string AssetPath { get; private set; }
+            public T asset;
+
+            public string assetPath;
 
             public LibraryAsset(string path)
             {
-                AssetPath = path;
+                assetPath = path;
             }
 
             public void Load(ContentManager content)
             {
-                Asset = content.Load<T>(AssetPath);
+                asset = content.Load<T>(assetPath);
             }
         }
 
-        public List<LibraryAsset> Assets { get; private set; } = new List<LibraryAsset>();
+        public List<LibraryAsset> assets = new List<LibraryAsset>();
 
         public void LoadAll(ContentManager content, Type type)
         {
             FieldInfo[] fieldInfo = GetType().GetFields();
-
-            foreach (FieldInfo field in fieldInfo)
+            foreach(FieldInfo field in fieldInfo)
             {
-                if (field.IsInitOnly && field.FieldType == typeof(LibraryAsset))
+                if(field.IsInitOnly && field.FieldType == typeof(LibraryAsset))
                 {
                     LibraryAsset asset = (LibraryAsset)field.GetValue(this);
                     asset.Load(content);
-
-                    Assets.Add(asset);
+                    assets.Add(asset);
                 }
             }
         }

@@ -1,31 +1,37 @@
-﻿using System.Collections.Generic;
-using UnderwaterGame.Tiles.Liquids;
-using UnderwaterGame.Tiles.Solids;
-using UnderwaterGame.Tiles.Walls;
-
-namespace UnderwaterGame.Tiles
+﻿namespace UnderwaterGame.Tiles
 {
+    using System.Collections.Generic;
+    using UnderwaterGame.Tiles.Liquids;
+    using UnderwaterGame.Tiles.Solids;
+    using UnderwaterGame.Tiles.Walls;
+
     public abstract partial class Tile
     {
-        public static List<Tile> Tiles { get; private set; } = new List<Tile>();
+        public static List<Tile> tiles = new List<Tile>();
 
-        public static Stone Stone { get; private set; }
-        public static Water Water { get; private set; }
-        public static Sand Sand { get; private set; }
-        public static SandWall SandWall { get; private set; }
-        public static StoneWall StoneWall { get; private set; }
-        public static Brick Brick { get; private set; }
-        public static BrickWall BrickWall { get; private set; }
+        public static Stone stone;
+
+        public static Water water;
+
+        public static Sand sand;
+
+        public static SandWall sandWall;
+
+        public static StoneWall stoneWall;
+
+        public static Brick brick;
+
+        public static BrickWall brickWall;
 
         public static void LoadAll()
         {
-            Stone = Load<Stone>(1);
-            Water = Load<Water>(2);
-            Sand = Load<Sand>(3);
-            SandWall = Load<SandWall>(4);
-            StoneWall = Load<StoneWall>(5);
-            Brick = Load<Brick>(6);
-            BrickWall = Load<BrickWall>(7);
+            stone = Load<Stone>(1);
+            water = Load<Water>(2);
+            sand = Load<Sand>(3);
+            sandWall = Load<SandWall>(4);
+            stoneWall = Load<StoneWall>(5);
+            brick = Load<Brick>(6);
+            brickWall = Load<BrickWall>(7);
         }
     }
 }

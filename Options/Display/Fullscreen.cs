@@ -4,11 +4,10 @@
     {
         protected override void Init()
         {
-            Name = "Fullscreen";
-
-            ValueMax = 1f;
-            ValueRounded = true;
-            ValueFormat = Format.Toggle;
+            name = "Fullscreen";
+            valueMax = 1f;
+            valueRounded = true;
+            valueFormat = Format.Toggle;
         }
     }
 }

@@ -1,29 +1,25 @@
-﻿using UnderwaterGame.Entities;
-using UnderwaterGame.Entities.Projectiles;
-using UnderwaterGame.UI;
-using UnderwaterGame.UI.UIElements;
-using UnderwaterGame.Utilities;
-
-namespace UnderwaterGame.Items.Weapons
+﻿namespace UnderwaterGame.Items.Weapons
 {
+    using UnderwaterGame.Entities;
+    using UnderwaterGame.Entities.Projectiles;
+    using UnderwaterGame.Ui;
+    using UnderwaterGame.Ui.UiElements;
+    using UnderwaterGame.Utilities;
+
     public abstract class WeaponItem : Item
     {
-        public float Damage { get; protected set; }
+        public float damage;
 
         protected void Shoot<T>(ItemEntity entity, float direction, float outLength) where T : ProjectileEntity
         {
             ProjectileEntity projectile = (ProjectileEntity)EntityManager.AddEntity<T>(entity.position);
             projectile.position += MathUtilities.LengthDirection(outLength, direction);
-
             projectile.direction = direction;
             projectile.angle = projectile.direction;
-
             projectile.hitEnemy = true;
-            projectile.damage += Damage;
-
+            projectile.damage += damage;
             projectile.depth = entity.depth - 0.001f;
-
-            ((GameCursorElement)UIManager.GetElement<GameCursorElement>()).Expand(0.5f);
+            ((GameCursorElement)UiManager.GetElement<GameCursorElement>()).Expand(0.5f);
             Camera.Shake(1f, projectile.direction);
         }
     }

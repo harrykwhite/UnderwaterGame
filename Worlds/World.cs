@@ -1,486 +1,442 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using UnderwaterGame.Entities;
-using UnderwaterGame.Entities.Characters;
-using UnderwaterGame.Environmentals;
-using UnderwaterGame.Items;
-using UnderwaterGame.Tiles;
-using UnderwaterGame.UI;
-using UnderwaterGame.Utilities;
-using UnderwaterGame.Worlds.Areas;
-using UnderwaterGame.Worlds.Generation;
-
-namespace UnderwaterGame.Worlds
+﻿namespace UnderwaterGame.Worlds
 {
-    public class World
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using System;
+    using System.Collections.Generic;
+    using System.Threading;
+    using UnderwaterGame.Entities;
+    using UnderwaterGame.Entities.Characters;
+    using UnderwaterGame.Entities.Characters.Enemies;
+    using UnderwaterGame.Entities.Characters.Enemies.Jellyfish;
+    using UnderwaterGame.Entities.Particles;
+    using UnderwaterGame.Environmentals;
+    using UnderwaterGame.Items;
+    using UnderwaterGame.Tiles;
+    using UnderwaterGame.Ui;
+    using UnderwaterGame.Utilities;
+    using UnderwaterGame.Worlds.Generation;
+
+    public static class World
     {
-        public enum TilemapType
+        public enum Tilemap
         {
-            Solids,
-            Walls,
-            Liquids
+            Solids, Walls, Liquids
         }
 
-        public PlayerCharacter player;
-        public Vector2 playerSpawn;
+        public static PlayerCharacter player;
 
-        public WorldTile[][,] Tilemaps { get; private set; }
-        public List<WorldEnvironmental> Environmentals { get; private set; }
+        public static WorldTile[][,] tilemaps;
 
-        public List<WorldArea> Areas { get; private set; }
-        public List<WorldGeneration> Generations { get; private set; }
+        public static List<WorldEnvironmental> environmentals;
 
-        public int Width => 600;
-        public int Height => 400;
+        public static List<WorldGeneration> generations;
 
-        public int RealWidth => Width * Tile.Size;
-        public int RealHeight => Height * Tile.Size;
+        public static int width = 600;
 
-        public float BaseGravityAcc => 0.15f;
-        public float BaseGravityMax => 8f;
+        public static int height = 400;
 
-        public World()
+        public static float gravityAcc = 0.15f;
+
+        public static float gravityMax = 8f;
+
+        public static int spawnTime;
+
+        public static int spawnTimeMax = 300;
+        
+        public static void Init()
         {
-            Tilemaps = new WorldTile[Enum.GetNames(typeof(TilemapType)).Length][,];
-
-            Tilemaps[(byte)TilemapType.Solids] = new WorldTile[Width, Height];
-            Tilemaps[(byte)TilemapType.Walls] = new WorldTile[Width, Height];
-            Tilemaps[(byte)TilemapType.Liquids] = new WorldTile[Width, Height];
-
-            for (byte m = 0; m < Tilemaps.Length; m++)
+            tilemaps = new WorldTile[Enum.GetNames(typeof(Tilemap)).Length][,];
+            tilemaps[(byte)Tilemap.Solids] = new WorldTile[width, height];
+            tilemaps[(byte)Tilemap.Walls] = new WorldTile[width, height];
+            tilemaps[(byte)Tilemap.Liquids] = new WorldTile[width, height];
+            for(byte m = 0; m < tilemaps.Length; m++)
             {
-                for (int y = 0; y < Height; y++)
+                for(int y = 0; y < height; y++)
                 {
-                    for (int x = 0; x < Width; x++)
+                    for(int x = 0; x < width; x++)
                     {
-                        Tilemaps[m][x, y] = null;
+                        tilemaps[m][x, y] = null;
                     }
                 }
             }
-
-            Environmentals = new List<WorldEnvironmental>();
-
-            InitAreas();
-            InitGenerations();
+            environmentals = new List<WorldEnvironmental>();
+            generations = new List<WorldGeneration> { new SurfaceTerrainGeneration(), new SurfaceTowerGeneration(), new SurfaceEnvironmentalGeneration(), new CleaningGeneration() };
         }
 
-        public void UpdateAreas()
+        public static void Update()
         {
-            if (Main.IsPaused)
+            if(UiManager.menuCurrent != null)
             {
                 return;
             }
-
-            foreach (WorldArea area in Areas)
+            if(spawnTime < spawnTimeMax)
             {
-                area.UpdateSpawn();
+                spawnTime++;
+            }
+            else
+            {
+                List<Type> spawnTypes = new List<Type>();
+                spawnTypes.Add(typeof(Jellyfish));
+                spawnTypes.Add(typeof(TallJellyfish));
+                EnemyCharacter enemy = (EnemyCharacter)EntityManager.AddEntity(spawnTypes[Main.random.Next(spawnTypes.Count)], Vector2.Zero);
+                do
+                {
+                    enemy.position = new Vector2(RandomUtilities.Range(Camera.position.X - (Camera.GetWidth() / 2f), Camera.position.X + (Camera.GetWidth() / 2f)), RandomUtilities.Range(Camera.position.Y - (Camera.GetHeight() / 2f), Camera.position.Y + (Camera.GetHeight() / 2f)));
+                } while(enemy.TileCollision(enemy.position, Tilemap.Solids) || !enemy.TileCollision(enemy.position, Tilemap.Liquids));
+                int smokeCount = 5;
+                for(int i = 0; i < smokeCount; i++)
+                {
+                    Smoke smoke = (Smoke)EntityManager.AddEntity<Smoke>(enemy.position);
+                    smoke.direction = ((MathHelper.Pi * 2f) / smokeCount) * i;
+                }
+                spawnTime = 0;
             }
         }
 
-        public void DrawTilemaps()
+        public static void Draw()
         {
-            int xStart = (int)Math.Max(0f, Camera.Shape.position.X / Tile.Size);
-            int yStart = (int)Math.Max(0f, Camera.Shape.position.Y / Tile.Size);
-
-            int xEnd = (int)Math.Min(Width - 1f, (Camera.Shape.position.X + Camera.Width) / Tile.Size);
-            int yEnd = (int)Math.Min(Height - 1f, (Camera.Shape.position.Y + Camera.Height) / Tile.Size);
-
-            for (byte m = 0; m < Tilemaps.Length; m++)
+            Shape cameraShape = Camera.GetShape();
+            int xStart = (int)Math.Max(0f, cameraShape.position.X / Tile.size);
+            int yStart = (int)Math.Max(0f, cameraShape.position.Y / Tile.size);
+            int xEnd = (int)Math.Min(width - 1f, (cameraShape.position.X + Camera.GetWidth()) / Tile.size);
+            int yEnd = (int)Math.Min(height - 1f, (cameraShape.position.Y + Camera.GetHeight()) / Tile.size);
+            for(byte m = 0; m < tilemaps.Length; m++)
             {
-                for (int y = yStart; y <= yEnd; y++)
+                for(int y = yStart; y <= yEnd; y++)
                 {
-                    for (int x = xStart; x <= xEnd; x++)
+                    for(int x = xStart; x <= xEnd; x++)
                     {
-                        WorldTile worldTile = Tilemaps[m][x, y];
-
-                        if (worldTile == null)
+                        WorldTile worldTile = tilemaps[m][x, y];
+                        if(worldTile == null)
                         {
                             continue;
                         }
-
-                        Main.SpriteBatch.Draw(worldTile.TileType.Textures[worldTile.texture], new Vector2(x, y) * Tile.Size, null, worldTile.TileType.GetTilemapColor() * worldTile.TileType.Alpha, 0f, Vector2.Zero, 1f, SpriteEffects.None, worldTile.TileType.GetTilemapDepth());
+                        Main.spriteBatch.Draw(Tile.GetTileById(worldTile.id).textures[worldTile.texture], new Vector2(x, y) * Tile.size, null, Tile.GetTileById(worldTile.id).GetTilemapColor() * Tile.GetTileById(worldTile.id).alpha, 0f, Vector2.Zero, 1f, SpriteEffects.None, Tile.GetTileById(worldTile.id).GetTilemapDepth());
                     }
                 }
             }
         }
 
-        public bool AddTileAt(int x, int y, TilemapType tilemap, Tile tile)
+        public static bool AddTileAt(int x, int y, Tilemap tilemap, Tile tile)
         {
-            if (x < 0 || y < 0 || x >= Width || y >= Height)
+            if(x < 0 || y < 0 || x >= width || y >= height)
             {
                 return false;
             }
-
-            if (GetTileAt(x, y, tilemap) != null)
+            if(GetTileAt(x, y, tilemap) != null)
             {
                 return false;
             }
-
-            WorldTile worldTile = new WorldTile()
-            {
-                id = tile.id
-            };
-
-            Tilemaps[(byte)tilemap][x, y] = worldTile;
-
+            WorldTile worldTile = new WorldTile() { id = tile.id };
+            tilemaps[(byte)tilemap][x, y] = worldTile;
             return true;
         }
 
-        public void RemoveTileAt(int x, int y, TilemapType tilemap)
+        public static void RemoveTileAt(int x, int y, Tilemap tilemap)
         {
-            if (x < 0 || y < 0 || x >= Width || y >= Height)
+            if(x < 0 || y < 0 || x >= width || y >= height)
             {
                 return;
             }
-
-            Tilemaps[(byte)tilemap][x, y] = null;
+            tilemaps[(byte)tilemap][x, y] = null;
         }
 
-        public WorldTile GetTileAt(int x, int y, TilemapType tilemap)
+        public static WorldTile GetTileAt(int x, int y, Tilemap tilemap)
         {
-            while (x < 0)
+            while(x < 0)
             {
                 x++;
-            }
-
-            while (y < 0)
+            } while(y < 0)
             {
                 y++;
-            }
-
-            while (x >= Width)
+            } while(x >= width)
             {
                 x--;
-            }
-
-            while (y >= Height)
+            } while(y >= height)
             {
                 y--;
             }
-
-            return Tilemaps[(byte)tilemap][x, y];
+            return tilemaps[(byte)tilemap][x, y];
         }
 
-        public WorldTileData GetTileDataAt(int x, int y, TilemapType tilemap, Predicate<WorldTileData> predicate = null)
+        public static WorldTileData GetTileDataAt(int x, int y, Tilemap tilemap, Predicate<WorldTileData> predicate = null)
         {
-            WorldTile worldTile = Main.World.GetTileAt(x, y, tilemap);
+            WorldTile worldTile = GetTileAt(x, y, tilemap);
             WorldTileData worldTileData = null;
-
-            if (worldTile != null)
+            if(worldTile != null)
             {
                 worldTileData = new WorldTileData(x, y, worldTile, tilemap);
-
-                if (predicate != null)
+                if(predicate != null)
                 {
-                    if (!predicate.Invoke(worldTileData))
+                    if(!predicate(worldTileData))
                     {
                         worldTileData = null;
                     }
                 }
             }
-
             return worldTileData;
         }
 
-        public List<WorldTileData> GetTileDataRange(int x, int y, TilemapType tilemap, int range, Predicate<WorldTileData> predicate = null)
+        public static List<WorldTileData> GetTileDataRange(int x, int y, Tilemap tilemap, int range, Predicate<WorldTileData> predicate = null)
         {
             List<WorldTileData> data = new List<WorldTileData>();
-
-            for (int ty = y - range; ty <= y + range; ty++)
+            for(int ty = y - range; ty <= y + range; ty++)
             {
-                for (int tx = x - range; tx <= x + range; tx++)
+                for(int tx = x - range; tx <= x + range; tx++)
                 {
                     WorldTileData worldTileData = GetTileDataAt(tx, ty, tilemap, predicate);
-
-                    if (worldTileData != null)
+                    if(worldTileData != null)
                     {
                         data.Add(worldTileData);
                     }
                 }
             }
-
             return data;
         }
 
-        public bool AddEnvironmentalAt(int x, int y, Environmental environmental)
+        public static bool AddEnvironmentalAt(int x, int y, Environmental environmental)
         {
-            int ew = environmental.Sprite.Width / Tile.Size;
-            int eh = environmental.Sprite.Height / Tile.Size;
-
-            if (GetEnvironmentalAt(x, y) != null)
+            int ew = environmental.sprite.textures[0].Width / Tile.size;
+            int eh = environmental.sprite.textures[0].Height / Tile.size;
+            if(GetEnvironmentalAt(x, y) != null)
             {
                 return false;
             }
-
-            for (int ey = 0; ey <= eh; ey++)
+            for(int ey = 0; ey <= eh; ey++)
             {
-                for (int ex = 0; ex < ew; ex++)
+                for(int ex = 0; ex < ew; ex++)
                 {
                     int tx = x + ex - (ew / 2);
                     int ty = y + ey - eh;
-
-                    WorldTile worldTile = GetTileAt(tx, ty, TilemapType.Solids);
-                    WorldTileData worldTileData = GetTileDataAt(tx, ty, TilemapType.Solids);
-
-                    if (ey == eh)
+                    WorldTile worldTile = GetTileAt(tx, ty, Tilemap.Solids);
+                    WorldTileData worldTileData = GetTileDataAt(tx, ty, Tilemap.Solids);
+                    if(ey == eh)
                     {
-                        if (worldTile == null)
+                        if(worldTile == null)
                         {
                             return false;
                         }
-
-                        if (worldTileData.Shape.fill != Shape.Fill.Rectangle)
+                        if(worldTileData.shape.fill != Shape.Fill.Rectangle)
                         {
                             return false;
                         }
                     }
                     else
                     {
-                        if (worldTile != null)
+                        if(worldTile != null)
                         {
                             return false;
                         }
                     }
                 }
             }
-
-            WorldEnvironmental worldEnvironmental = new WorldEnvironmental()
-            {
-                id = environmental.id,
-                x = x,
-                y = y
-            };
-
-            Environmentals.Add(worldEnvironmental);
+            environmentals.Add(new WorldEnvironmental(environmental.id, x, y));
             return true;
         }
 
-        public void RemoveEnvironmentalAt(int x, int y)
+        public static void RemoveEnvironmentalAt(int x, int y)
         {
-            List<Entity> environmentalEntities = EntityManager.Entities.FindAll((Entity entity) => entity is EnvironmentalEntity);
-
-            foreach (Entity environmentalEntity in environmentalEntities)
+            List<Entity> environmentalEntities = EntityManager.entities.FindAll((Entity entity) => entity is EnvironmentalEntity);
+            foreach(Entity environmentalEntity in environmentalEntities)
             {
                 EnvironmentalEntity environmental = (EnvironmentalEntity)environmentalEntity;
-
-                if (environmental.WorldEnvironmental.x == x && environmental.WorldEnvironmental.y == y)
+                if(environmental.worldEnvironmental.x == x && environmental.worldEnvironmental.y == y)
                 {
-                    Environmentals.Remove(environmental.WorldEnvironmental);
+                    environmentals.Remove(environmental.worldEnvironmental);
                     environmental.Destroy();
                 }
             }
         }
 
-        public WorldEnvironmental GetEnvironmentalAt(int x, int y)
+        public static WorldEnvironmental GetEnvironmentalAt(int x, int y)
         {
-            foreach (WorldEnvironmental worldEnvironmental in Environmentals)
+            foreach(WorldEnvironmental worldEnvironmental in environmentals)
             {
-                if (worldEnvironmental.x == x && worldEnvironmental.y == y)
+                if(worldEnvironmental.x == x && worldEnvironmental.y == y)
                 {
                     return worldEnvironmental;
                 }
             }
-
             return null;
         }
 
-        public Vector2 GetEnvironmentalWorldPosition(int x, int y, Environmental environmental)
+        public static Vector2 GetEnvironmentalWorldPosition(int x, int y, Environmental environmental)
         {
-            return (new Vector2(x, y) * Tile.Size) - new Vector2(0f, environmental.Sprite.Origin.Y - environmental.Sprite.Bound.Y);
+            return (new Vector2(x, y) * Tile.size) - new Vector2(0f, environmental.sprite.origin.Y - environmental.sprite.bound.Y);
         }
 
-        public void Generate()
+        public static void Generate()
         {
             Main.loading = new Thread(delegate ()
             {
                 GenerateWorld();
                 Main.loading = null;
             });
-
             Main.loading.Start();
         }
 
-        private void GenerateWorld()
+        private static void GenerateWorld()
         {
-            while (UIManager.FadeElements[2].Alpha < UIManager.FadeElements[2].alphaMax)
+            while(UiManager.fadeElements[2].alpha < UiManager.fadeElements[2].alphaMax)
             {
                 continue;
             }
-
-            if (Main.Save != null)
+            if(Main.save != null)
             {
-                for (byte m = 0; m < Tilemaps.Length; m++)
+                for(byte m = 0; m < tilemaps.Length; m++)
                 {
-                    for (int y = 0; y < Height; y++)
+                    for(int y = 0; y < height; y++)
                     {
-                        for (int x = 0; x < Width; x++)
+                        for(int x = 0; x < width; x++)
                         {
-                            if (Main.Save.tilemaps[m][x, y] != null)
+                            if(Main.save.tilemaps[m][x, y] != null)
                             {
-                                AddTileAt(x, y, (TilemapType)m, Main.Save.tilemaps[m][x, y].TileType);
-                                Tilemaps[m][x, y].texture = Main.Save.tilemaps[m][x, y].texture;
-                                Tilemaps[m][x, y].lighting = Main.Save.tilemaps[m][x, y].lighting;
+                                AddTileAt(x, y, (Tilemap)m, Tile.GetTileById(Main.save.tilemaps[m][x, y].id));
+                                tilemaps[m][x, y].texture = Main.save.tilemaps[m][x, y].texture;
+                                tilemaps[m][x, y].lighting = Main.save.tilemaps[m][x, y].lighting;
                             }
                         }
                     }
                 }
-
-                foreach (WorldEnvironmental environmental in Main.Save.environmentals)
+                foreach(WorldEnvironmental environmental in Main.save.environmentals)
                 {
-                    Environmentals.Add(environmental);
+                    environmentals.Add(environmental);
                 }
             }
             else
             {
-                foreach (WorldGeneration generation in Generations)
+                foreach(WorldGeneration generation in generations)
                 {
-                    generation.Generate(this);
-
-                    for (byte m = 0; m < Tilemaps.Length; m++)
+                    generation.Generate();
+                    for(byte m = 0; m < tilemaps.Length; m++)
                     {
-                        for (int y = 0; y < Height; y++)
+                        for(int y = 0; y < height; y++)
                         {
-                            for (int x = 0; x < Width; x++)
+                            for(int x = 0; x < width; x++)
                             {
-                                if (Tilemaps[m][x, y] == null)
+                                if(tilemaps[m][x, y] == null)
                                 {
                                     continue;
                                 }
-
-                                SetTileTexture(x, y, (TilemapType)m);
-
-                                if ((TilemapType)m == TilemapType.Solids)
+                                SetTileTexture(x, y, (Tilemap)m);
+                                if((Tilemap)m == Tilemap.Solids)
                                 {
-                                    SetTileLighting(x, y, (TilemapType)m);
+                                    SetTileLighting(x, y, (Tilemap)m);
                                 }
                             }
                         }
                     }
                 }
             }
-
-            SpawnPlayer();
-            SpawnEnvironmentals();
+            player = (PlayerCharacter)EntityManager.AddEntity<PlayerCharacter>(new Vector2((width * Tile.size) / 2f, 0f));
+            Camera.positionTo = player.position;
+            Camera.position = Camera.positionTo;
+            Item[] items = Item.items.ToArray();
+            for(int i = 0; i < items.Length; i++)
+            {
+                player.inventory.AddItem(items[i], 99);
+            }
+            foreach(WorldEnvironmental worldEnvironmental in environmentals)
+            {
+                EnvironmentalEntity environmentalEntity = (EnvironmentalEntity)EntityManager.AddEntity<EnvironmentalEntity>(GetEnvironmentalWorldPosition(worldEnvironmental.x, worldEnvironmental.y, Environmental.GetEnvironmentalById(worldEnvironmental.id)));
+                environmentalEntity.SetEnvironmental(Environmental.GetEnvironmentalById(worldEnvironmental.id), worldEnvironmental);
+            }
         }
 
-        private void SetTileTexture(int x, int y, TilemapType tilemap)
+        private static void SetTileTexture(int x, int y, Tilemap tilemap)
         {
-            WorldTile worldTile = Tilemaps[(byte)tilemap][x, y];
-            Tile tile = worldTile.TileType;
-
-            bool left = GetTileAt(x - 1, y, tilemap)?.TileType == tile;
-            bool right = GetTileAt(x + 1, y, tilemap)?.TileType == tile;
-            bool top = GetTileAt(x, y - 1, tilemap)?.TileType == tile;
-            bool bottom = GetTileAt(x, y + 1, tilemap)?.TileType == tile;
-
+            WorldTile worldTile = tilemaps[(byte)tilemap][x, y];
+            Tile tile = Tile.GetTileById(worldTile.id);
+            bool left = Tile.GetTileById(GetTileAt(x - 1, y, tilemap).id) == tile;
+            bool right = Tile.GetTileById(GetTileAt(x + 1, y, tilemap).id) == tile;
+            bool top = Tile.GetTileById(GetTileAt(x, y - 1, tilemap).id) == tile;
+            bool bottom = Tile.GetTileById(GetTileAt(x, y + 1, tilemap).id) == tile;
             bool leftEmpty = GetTileAt(x - 1, y, tilemap) == null;
             bool rightEmpty = GetTileAt(x + 1, y, tilemap) == null;
             bool topEmpty = GetTileAt(x, y - 1, tilemap) == null;
             bool bottomEmpty = GetTileAt(x, y + 1, tilemap) == null;
-
-            switch (tilemap)
+            switch(tilemap)
             {
-                case TilemapType.Solids:
-                case TilemapType.Walls:
-                    if (left && right && top && bottom)
+                case Tilemap.Solids:
+                case Tilemap.Walls:
+                    if(left && right && top && bottom)
                     {
                         worldTile.texture = 0;
                     }
-
-                    if (!left && !right && !top && !bottom)
+                    if(!left && !right && !top && !bottom)
                     {
                         worldTile.texture = 1;
                     }
-
-                    if (!left && !right && !top && bottom)
+                    if(!left && !right && !top && bottom)
                     {
                         worldTile.texture = 2;
                     }
-
-                    if (!left && !right && top && bottom)
+                    if(!left && !right && top && bottom)
                     {
                         worldTile.texture = 3;
                     }
-
-                    if (!left && !right && top && !bottom)
+                    if(!left && !right && top && !bottom)
                     {
                         worldTile.texture = 4;
                     }
-
-                    if (!left && right && !top && !bottom)
+                    if(!left && right && !top && !bottom)
                     {
                         worldTile.texture = 5;
                     }
-
-                    if (left && right && !top && !bottom)
+                    if(left && right && !top && !bottom)
                     {
                         worldTile.texture = 6;
                     }
-
-                    if (left && !right && !top && !bottom)
+                    if(left && !right && !top && !bottom)
                     {
                         worldTile.texture = 7;
                     }
-
-                    if (!left && right && !top && bottom)
+                    if(!left && right && !top && bottom)
                     {
                         worldTile.texture = 8;
                     }
-
-                    if (left && right && !top && bottom)
+                    if(left && right && !top && bottom)
                     {
                         worldTile.texture = 9;
                     }
-
-                    if (left && !right && !top && bottom)
+                    if(left && !right && !top && bottom)
                     {
                         worldTile.texture = 10;
                     }
-
-                    if (!left && right && top && bottom)
+                    if(!left && right && top && bottom)
                     {
                         worldTile.texture = 11;
                     }
-
-                    if (left && !right && top && bottom)
+                    if(left && !right && top && bottom)
                     {
                         worldTile.texture = 12;
                     }
-
-                    if (!left && right && top && !bottom)
+                    if(!left && right && top && !bottom)
                     {
                         worldTile.texture = 13;
                     }
-
-                    if (left && right && top && !bottom)
+                    if(left && right && top && !bottom)
                     {
                         worldTile.texture = 14;
                     }
-
-                    if (left && !right && top && !bottom)
+                    if(left && !right && top && !bottom)
                     {
                         worldTile.texture = 15;
                     }
-
-                    if (leftEmpty && !rightEmpty && topEmpty && !bottomEmpty)
+                    if(leftEmpty && !rightEmpty && topEmpty && !bottomEmpty)
                     {
                         worldTile.texture = 16;
                     }
-
-                    if (!leftEmpty && rightEmpty && topEmpty && !bottomEmpty)
+                    if(!leftEmpty && rightEmpty && topEmpty && !bottomEmpty)
                     {
                         worldTile.texture = 17;
                     }
-
-                    if (leftEmpty && !rightEmpty && !topEmpty && bottomEmpty)
+                    if(leftEmpty && !rightEmpty && !topEmpty && bottomEmpty)
                     {
                         worldTile.texture = 18;
                     }
-
-                    if (!leftEmpty && rightEmpty && !topEmpty && bottomEmpty)
+                    if(!leftEmpty && rightEmpty && !topEmpty && bottomEmpty)
                     {
                         worldTile.texture = 19;
                     }
@@ -488,82 +444,34 @@ namespace UnderwaterGame.Worlds
             }
         }
 
-        private void SetTileLighting(int x, int y, TilemapType tilemap)
+        private static void SetTileLighting(int x, int y, Tilemap tilemap)
         {
-            WorldTile worldTile = Tilemaps[(byte)tilemap][x, y];
+            WorldTile worldTile = tilemaps[(byte)tilemap][x, y];
             WorldTileData worldTileData = GetTileDataAt(x, y, tilemap);
-
-            int range = 255 / Lighting.Jump;
-
-            for (int r = 1; r <= range; r++)
+            int range = 255 / Lighting.jump;
+            for(int r = 1; r <= range; r++)
             {
                 bool foundEmpty = false;
-
-                for (int ty = y - r; ty <= y + r; ty++)
+                for(int ty = y - r; ty <= y + r; ty++)
                 {
-                    for (int tx = x - r; tx <= x + r; tx++)
+                    for(int tx = x - r; tx <= x + r; tx++)
                     {
-                        if (GetTileAt(tx, ty, TilemapType.Solids) == null)
+                        if(GetTileAt(tx, ty, Tilemap.Solids) == null)
                         {
                             foundEmpty = true;
                             break;
                         }
                     }
-
-                    if (foundEmpty)
+                    if(foundEmpty)
                     {
                         break;
                     }
                 }
-
-                if (foundEmpty)
+                if(foundEmpty)
                 {
                     break;
                 }
-
-                worldTile.lighting = (byte)MathUtilities.Clamp(r * Lighting.Jump, 0f, 255f);
-            }
-        }
-
-        private void InitAreas()
-        {
-            Areas = new List<WorldArea> {
-                new SurfaceArea()
-            };
-        }
-
-        private void InitGenerations()
-        {
-            Generations = new List<WorldGeneration> {
-                new SurfaceTerrainGeneration(),
-                new SurfaceTowerGeneration(),
-                new SurfaceEnvironmentalGeneration(),
-                new CleaningGeneration()
-            };
-        }
-
-        private void SpawnPlayer()
-        {
-            playerSpawn = new Vector2(RealWidth / 2f, 200f);
-            player = (PlayerCharacter)EntityManager.AddEntity<PlayerCharacter>(playerSpawn);
-
-            Camera.positionTo = player.position;
-            Camera.position = Camera.positionTo;
-
-            Item[] items = Item.Items.ToArray();
-
-            for (int i = 0; i < items.Length; i++)
-            {
-                player.Inventory.AddItem(items[i], 99);
-            }
-        }
-
-        private void SpawnEnvironmentals()
-        {
-            foreach (WorldEnvironmental worldEnvironmental in Environmentals)
-            {
-                EnvironmentalEntity environmentalEntity = (EnvironmentalEntity)EntityManager.AddEntity<EnvironmentalEntity>(GetEnvironmentalWorldPosition(worldEnvironmental.x, worldEnvironmental.y, worldEnvironmental.EnvironmentalType));
-                environmentalEntity.SetEnvironmental(worldEnvironmental.EnvironmentalType, worldEnvironmental);
+                worldTile.lighting = (byte)MathUtilities.Clamp(r * Lighting.jump, 0f, 255f);
             }
         }
     }

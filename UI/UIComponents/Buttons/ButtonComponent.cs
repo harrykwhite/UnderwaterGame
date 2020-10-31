@@ -1,73 +1,70 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-using UnderwaterGame.Input;
-using UnderwaterGame.Sound;
-using UnderwaterGame.UI.UIElements.Menus;
-
-namespace UnderwaterGame.UI.UIComponents.Buttons
+﻿namespace UnderwaterGame.Ui.UiComponents.Buttons
 {
-    public abstract class ButtonComponent : UIComponent
+    using Microsoft.Xna.Framework;
+    using System;
+    using UnderwaterGame.Sound;
+    using UnderwaterGame.Ui.UiElements.Menus;
+
+    public abstract class ButtonComponent : UiComponent
     {
         public MenuElement menuElement;
 
         public bool selected;
+
         public Action selectedAction;
+
         public Action selectedInteractAction;
+
         public Action selectedInteractAlternativeAction;
 
         public Func<bool> getSelected;
+
         public Func<bool> getSelectedInteract;
 
         public bool touching;
+
         public Func<bool> getCanTouch;
 
-        protected bool CanTouch => Alpha > 0f && Main.loading == null && UIManager.MenuCurrent == menuElement && (getCanTouch?.Invoke() ?? true);
+        protected bool CanTouch => getAlpha() > 0f && Main.loading == null && UiManager.menuCurrent == menuElement && (getCanTouch?.Invoke() ?? true);
+
         protected abstract bool IsTouching();
 
         protected void UpdateButton()
         {
             bool selectedPrevious = selected;
-
             touching = IsTouching();
             selected = getSelected?.Invoke() ?? touching;
-
             scaleTo = selected ? scaleMax : Vector2.One;
             UpdateScale();
-
-            if (selected)
+            if(selected)
             {
                 selectedAction?.Invoke();
-
-                if (touching && !selectedPrevious)
+                if(touching && !selectedPrevious)
                 {
-                    SoundManager.PlaySound(Main.SoundLibrary.UI_HOVER.Asset, SoundManager.Category.Sound);
+                    SoundManager.PlaySound(Main.soundLibrary.UI_HOVER.asset, SoundManager.Category.Sound);
                 }
-
-                if (getSelectedInteract?.Invoke() ?? true)
+                if(getSelectedInteract?.Invoke() ?? true)
                 {
                     bool interacted = false;
-
-                    if (InputManager.MouseLeftPressed())
+                    if(Control.MouseLeftPressed())
                     {
-                        if (selectedInteractAction != null)
+                        if(selectedInteractAction != null)
                         {
-                            selectedInteractAction.Invoke();
+                            selectedInteractAction();
                             interacted = true;
                         }
                     }
-
-                    if (InputManager.MouseRightPressed())
+                    if(Control.MouseRightPressed())
                     {
-                        if (selectedInteractAlternativeAction != null)
+                        if(selectedInteractAlternativeAction != null)
                         {
-                            selectedInteractAlternativeAction.Invoke();
+                            selectedInteractAlternativeAction();
                             interacted = true;
                         }
                     }
-
-                    if (interacted)
+                    if(interacted)
                     {
-                        SoundManager.PlaySound(Main.SoundLibrary.UI_CLICK.Asset, SoundManager.Category.Sound);
+                        SoundManager.PlaySound(Main.soundLibrary.UI_CLICK.asset, SoundManager.Category.Sound);
                     }
                 }
             }

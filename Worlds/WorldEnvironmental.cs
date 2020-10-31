@@ -1,16 +1,21 @@
-﻿using System;
-using UnderwaterGame.Environmentals;
-
-namespace UnderwaterGame.Worlds
+﻿namespace UnderwaterGame.Worlds
 {
+    using System;
+
     [Serializable]
     public class WorldEnvironmental
     {
         public byte id;
 
         public int x;
+
         public int y;
 
-        public Environmental EnvironmentalType => Environmental.GetEnvironmentalByID(id);
+        public WorldEnvironmental(byte id, int x, int y)
+        {
+            this.id = id;
+            this.x = x;
+            this.y = y;
+        }
     }
 }

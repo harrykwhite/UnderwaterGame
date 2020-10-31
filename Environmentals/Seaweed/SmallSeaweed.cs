@@ -1,12 +1,12 @@
-﻿using UnderwaterGame.Sprites;
-
-namespace UnderwaterGame.Environmentals.Seaweed
+﻿namespace UnderwaterGame.Environmentals.Seaweed
 {
+    using UnderwaterGame.Sprites;
+
     public class SmallSeaweed : SeaweedEnvironmental
     {
         public override void Init()
         {
-            Sprite = Sprite.SmallSeaweed;
+            sprite = Sprite.smallSeaweed;
         }
     }
 }

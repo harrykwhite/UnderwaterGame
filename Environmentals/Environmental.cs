@@ -1,20 +1,21 @@
-﻿using System;
-using UnderwaterGame.Sprites;
-
-namespace UnderwaterGame.Environmentals
+﻿namespace UnderwaterGame.Environmentals
 {
+    using System;
+    using UnderwaterGame.Sprites;
+
     public abstract partial class Environmental
     {
         public byte id;
 
-        public Sprite Sprite { get; protected set; }
+        public Sprite sprite;
 
-        public static float Speed => 0.025f;
-        public static float Depth => 0.35f;
+        public static float speed = 0.025f;
+
+        public static float depth = 0.35f;
 
         public Environmental()
         {
-            Environmentals.Add(this);
+            environmentals.Add(this);
             Init();
         }
 
@@ -22,13 +23,12 @@ namespace UnderwaterGame.Environmentals
         {
             T environmental = Activator.CreateInstance<T>();
             environmental.id = id;
-
             return environmental;
         }
 
-        public static Environmental GetEnvironmentalByID(byte id)
+        public static Environmental GetEnvironmentalById(byte id)
         {
-            return Environmentals.Find((Environmental environmental) => environmental.id == id);
+            return environmentals.Find((Environmental environmental) => environmental.id == id);
         }
 
         public abstract void Init();

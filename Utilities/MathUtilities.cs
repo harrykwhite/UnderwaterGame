@@ -1,8 +1,8 @@
-﻿using Microsoft.Xna.Framework;
-using System;
-
-namespace UnderwaterGame.Utilities
+﻿namespace UnderwaterGame.Utilities
 {
+    using Microsoft.Xna.Framework;
+    using System;
+
     public static class MathUtilities
     {
         public static int Clamp(int value, int min, int max)
@@ -24,12 +24,10 @@ namespace UnderwaterGame.Utilities
         {
             int count = values.Length;
             float sum = 0f;
-
-            for (int i = 0; i < count; i++)
+            for(int i = 0; i < count; i++)
             {
                 sum += values[i];
             }
-
             return sum / count;
         }
 
@@ -45,16 +43,13 @@ namespace UnderwaterGame.Utilities
 
         public static float AngleNormal(float angle)
         {
-            while (angle > MathHelper.Pi)
+            while(angle > MathHelper.Pi)
             {
                 angle -= MathHelper.Pi * 2f;
-            }
-
-            while (angle < -MathHelper.Pi)
+            } while(angle < -MathHelper.Pi)
             {
                 angle += MathHelper.Pi * 2f;
             }
-
             return angle;
         }
 

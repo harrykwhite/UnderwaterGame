@@ -2,6 +2,6 @@
 {
     public abstract class WorldGeneration
     {
-        public abstract void Generate(World world);
+        public abstract void Generate();
     }
 }

@@ -1,88 +1,83 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using UnderwaterGame.Input;
-using UnderwaterGame.Items;
-using UnderwaterGame.Sprites;
-using UnderwaterGame.UI;
-using UnderwaterGame.UI.UIElements.Menus;
-using UnderwaterGame.Utilities;
-
-namespace UnderwaterGame.Entities
+﻿namespace UnderwaterGame.Entities
 {
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using System;
+    using UnderwaterGame.Items;
+    using UnderwaterGame.Sprites;
+    using UnderwaterGame.Ui;
+    using UnderwaterGame.Ui.UiElements.Menus;
+    using UnderwaterGame.Utilities;
+    using UnderwaterGame.Worlds;
+
     public class ItemEntity : Entity
     {
         private bool swingEffect;
+
         private float swingEffectLength;
+
         private Animator swingEffectAnimator;
 
         public int useState;
 
         public float angleBase;
+
         public float angleBaseRelative;
 
         private float angleHoldOffset;
+
         private float angleHoldOffsetTo;
+
         private float angleHoldOffsetSpeed;
 
         public Vector2 positionOffset;
+
         public float lengthOffset;
 
-        public Item ItemType { get; private set; }
+        public Item itemType;
 
-        public int UseTimeCurrent { get; private set; }
-        public int UseTimeMax { get; private set; }
+        public int useTimeCurrent;
 
-        public bool DoUpdate => (ItemType?.UseTime ?? 0) != 0;
-        public bool DoDraw => Using && (!ItemType?.UseHide ?? false);
-
-        public bool Using => UseTimeCurrent < UseTimeMax;
+        public int useTimeMax;
 
         public void SetItem(Item itemType)
         {
-            ItemType = itemType;
-
-            if (ItemType != null)
+            this.itemType = itemType;
+            if(this.itemType != null)
             {
-                SetSprite(ItemType.Sprite);
-                Animator = new Animator(Sprite);
+                SetSprite(this.itemType.sprite);
+                animator = new Animator(sprite);
             }
-
             angleHoldOffset = 0f;
             angleHoldOffsetTo = 0f;
             angleHoldOffsetSpeed = 0f;
-
             useState = 0;
-            UseTimeCurrent = 0;
-            UseTimeMax = 0;
-
+            useTimeCurrent = 0;
+            useTimeMax = 0;
             UpdateAngle();
         }
 
         public void RemoveItem(int quantity)
         {
-            PlayerMenu playerMenu = (PlayerMenu)UIManager.GetElement<PlayerMenu>();
-
-            if (!playerMenu.Open && playerMenu.Selected)
+            PlayerMenu playerMenu = (PlayerMenu)UiManager.GetElement<PlayerMenu>();
+            if(!playerMenu.open && playerMenu.Selected)
             {
-                Main.World.player.Inventory.RemoveItemAt(playerMenu.selectedSlotX, playerMenu.selectedSlotY, playerMenu.selectedGroup, ItemType, quantity);
+                World.player.inventory.RemoveItemAt(playerMenu.selectedSlotX, playerMenu.selectedSlotY, playerMenu.selectedGroup, itemType, quantity);
             }
         }
 
         public override void Draw()
         {
-            if (DoDraw)
+            if(GetDraw())
             {
                 DrawSelf();
-
-                if (swingEffect && !swingEffectAnimator.hidden)
+                if(swingEffect && !swingEffectAnimator.hidden)
                 {
-                    Texture2D swingTexture = swingEffectAnimator.sprite.Textures[(int)swingEffectAnimator.index];
+                    Texture2D swingTexture = swingEffectAnimator.sprite.textures[(int)swingEffectAnimator.index];
                     Vector2 swingOffset = MathUtilities.LengthDirection(swingEffectLength + lengthOffset, angleBase);
-
-                    if (swingTexture != null)
+                    if(swingTexture != null)
                     {
-                        Main.SpriteBatch.Draw(swingTexture, position + swingOffset, null, Color.White, angleBase, swingEffectAnimator.sprite.Origin, 1f, Flip, depth + 0.001f);
+                        Main.spriteBatch.Draw(swingTexture, position + swingOffset, null, Color.White, angleBase, swingEffectAnimator.sprite.origin, 1f, GetFlip(), depth + 0.001f);
                     }
                 }
             }
@@ -90,106 +85,82 @@ namespace UnderwaterGame.Entities
 
         public override void Init()
         {
-            swingEffectAnimator = new Animator(Sprite.LongSwing)
-            {
-                loopAction = () => swingEffectAnimator.hidden = true
-            };
+            swingEffectAnimator = new Animator(Sprite.longSwing) { loopAction = () => swingEffectAnimator.hidden = true };
         }
 
         public override void Update()
         {
-            if (!DoUpdate)
+            if(!GetUpdate())
             {
                 return;
             }
-
             bool use = false;
             bool useLeft = true;
-
             bool buttonUse;
-
-            if (Main.World.player.Wielding)
+            if(World.player.wielding)
             {
-                PlayerMenu playerInventory = (PlayerMenu)UIManager.GetElement<PlayerMenu>();
+                PlayerMenu playerInventory = (PlayerMenu)UiManager.GetElement<PlayerMenu>();
                 useLeft = playerInventory.selectedSlotX == 0;
             }
-
-            buttonUse = useLeft ? (ItemType.UsePress ? InputManager.MouseLeftPressed() : InputManager.MouseLeftHeld()) : (ItemType.UsePress ? InputManager.MouseRightPressed() : InputManager.MouseRightHeld());
-
-            if (UseTimeCurrent < UseTimeMax)
+            buttonUse = useLeft ? (itemType.usePress ? Control.MouseLeftPressed() : Control.MouseLeftHeld()) : (itemType.usePress ? Control.MouseRightPressed() : Control.MouseRightHeld());
+            if(useTimeCurrent < useTimeMax)
             {
                 use = true;
-                UseTimeCurrent++;
-
-                ItemType.WhileUse(this);
-
-                if (ItemType.UseAngleUpdate)
+                useTimeCurrent++;
+                itemType.WhileUse(this);
+                if(itemType.useAngleUpdate)
                 {
                     UpdateAngleBase();
                 }
-
-                if (swingEffect)
+                if(swingEffect)
                 {
                     swingEffectAnimator.speed = 0.25f;
                 }
             }
-
-            if (UseTimeCurrent >= UseTimeMax)
+            if(useTimeCurrent >= useTimeMax)
             {
-                if (use)
+                if(use)
                 {
-                    ItemType.EndUse(this);
+                    itemType.EndUse(this);
                 }
-
                 swingEffect = false;
                 swingEffectAnimator.index = 0f;
                 swingEffectAnimator.hidden = false;
-
-                if (buttonUse)
+                if(buttonUse)
                 {
-                    if (ItemType.CanUse(this))
+                    if(itemType.CanUse(this))
                     {
                         UpdateAngleBase();
-
                         useState = 0;
-
-                        UseTimeCurrent = 0;
-                        UseTimeMax = ItemType.UseTime;
-
-                        ItemType.OnUse(this);
+                        useTimeCurrent = 0;
+                        useTimeMax = itemType.useTime;
+                        itemType.OnUse(this);
                     }
                 }
             }
-
             UpdateAngle();
-
-            Animator.Update();
+            animator.Update();
             swingEffectAnimator.Update();
         }
 
         public override void EndUpdate()
         {
             float outLength = lengthOffset;
-            position = Main.World.player.position;
-
-            if (!DoUpdate)
+            position = World.player.position;
+            if(!GetUpdate())
             {
                 return;
             }
-
-            outLength += ItemType.UseOffset;
-
+            outLength += itemType.useOffset;
             position += MathUtilities.LengthDirection(outLength, angleBase);
             position += positionOffset;
-
             flipVer = MathUtilities.AngleLeftHalf(angleBaseRelative);
-            depth = Main.World.player.depth + 0.001f;
+            depth = World.player.depth + 0.001f;
         }
 
         public void SetSwingEffect(Sprite sprite, float length)
         {
             swingEffectAnimator.sprite = sprite;
-
             swingEffect = true;
             swingEffectLength = length;
         }
@@ -198,7 +169,6 @@ namespace UnderwaterGame.Entities
         {
             angleHoldOffset = offset;
             angleHoldOffsetTo = offsetTo;
-
             angleHoldOffsetSpeed = Math.Abs(MathUtilities.AngleDifference(angleHoldOffset, angleHoldOffsetTo)) / (time / 2);
         }
 
@@ -206,14 +176,23 @@ namespace UnderwaterGame.Entities
         {
             float difference = MathUtilities.AngleDifference(angleHoldOffset, angleHoldOffsetTo);
             angleHoldOffset += Math.Sign(difference) * Math.Min(angleHoldOffsetSpeed, Math.Abs(difference));
-
             angle = angleBase + angleHoldOffset;
         }
 
         private void UpdateAngleBase()
         {
-            angleBase = Main.World.player.AngleToMouse;
-            angleBaseRelative = angleBase - Main.World.player.angle;
+            angleBase = MathUtilities.PointDirection(World.player.position, Control.GetMousePositionWorld());
+            angleBaseRelative = angleBase - World.player.angle;
+        }
+
+        private bool GetUpdate()
+        {
+            return (itemType?.useTime ?? 0) != 0;
+        }
+
+        private bool GetDraw()
+        {
+            return useTimeCurrent < useTimeMax && (!itemType?.useHide ?? false);
         }
     }
 }

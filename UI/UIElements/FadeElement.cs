@@ -1,41 +1,42 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-
-namespace UnderwaterGame.UI.UIElements
+﻿namespace UnderwaterGame.Ui.UiElements
 {
-    public class FadeElement : UIElement
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using System;
+
+    public class FadeElement : UiElement
     {
         public Func<bool> getActive;
 
         public float alphaSpeed = 0.05f;
+
         public float alphaMax = 0.5f;
 
-        public float Alpha { get; private set; }
-        public float AlphaTo { get; private set; }
+        public float alpha;
+
+        public float alphaTo;
 
         public override void Draw()
         {
-            Main.SpriteBatch.Draw(Main.TextureLibrary.OTHER_PIXEL.Asset, Vector2.Zero, null, Color.Black * Alpha, 0f, Vector2.Zero, UIManager.Size, SpriteEffects.None, 1f);
+            Main.spriteBatch.Draw(Main.textureLibrary.OTHER_PIXEL.asset, Vector2.Zero, null, Color.Black * alpha, 0f, Vector2.Zero, UiManager.Size, SpriteEffects.None, 1f);
         }
 
         public override void Init()
         {
-            Alpha = alphaMax;
-            AlphaTo = Alpha;
+            alpha = alphaMax;
+            alphaTo = alpha;
         }
 
         public override void Update()
         {
-            AlphaTo = getActive.Invoke() ? alphaMax : 0f;
-
-            if (Alpha < AlphaTo)
+            alphaTo = getActive() ? alphaMax : 0f;
+            if(alpha < alphaTo)
             {
-                Alpha += Math.Min(alphaSpeed, AlphaTo - Alpha);
+                alpha += Math.Min(alphaSpeed, alphaTo - alpha);
             }
-            else if (Alpha > AlphaTo)
+            else if(alpha > alphaTo)
             {
-                Alpha -= Math.Min(alphaSpeed, Alpha - AlphaTo);
+                alpha -= Math.Min(alphaSpeed, alpha - alphaTo);
             }
         }
     }

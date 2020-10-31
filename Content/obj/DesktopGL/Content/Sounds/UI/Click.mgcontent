@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Sounds/UI/Click.wav</SourceFile>
+  <SourceFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Sounds/Ui/Click.wav</SourceFile>
   <SourceTime>2020-08-02T20:04:19.9125369+10:00</SourceTime>
-  <DestFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/bin/DesktopGL/Content/Sounds/UI/Click.xnb</DestFile>
-  <DestTime>2020-10-24T19:01:28.4223542+10:00</DestTime>
+  <DestFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/bin/DesktopGL/Content/Sounds/Ui/Click.xnb</DestFile>
+  <DestTime>2020-10-31T15:45:13.2369679+10:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+10:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

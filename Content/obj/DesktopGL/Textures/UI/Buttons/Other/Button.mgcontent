@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/UI/Buttons/Other/Button.png</SourceFile>
+  <SourceFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Ui/Buttons/Other/Button.png</SourceFile>
   <SourceTime>2020-10-11T13:06:28.4544007+10:00</SourceTime>
-  <DestFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/bin/DesktopGL/Textures/UI/Buttons/Other/Button.xnb</DestFile>
-  <DestTime>2020-10-24T19:01:31.3362564+10:00</DestTime>
+  <DestFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/bin/DesktopGL/Textures/Ui/Buttons/Other/Button.xnb</DestFile>
+  <DestTime>2020-10-31T15:35:06.7265529+10:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+10:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

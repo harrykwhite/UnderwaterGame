@@ -1,35 +1,32 @@
-﻿using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Graphics;
-using System;
-using UnderwaterGame.Tiles.Liquids;
-using UnderwaterGame.Tiles.Solids;
-using UnderwaterGame.Tiles.Walls;
-using UnderwaterGame.Worlds;
-
-namespace UnderwaterGame.Tiles
+﻿namespace UnderwaterGame.Tiles
 {
+    using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using System;
+    using UnderwaterGame.Tiles.Liquids;
+    using UnderwaterGame.Tiles.Solids;
+    using UnderwaterGame.Tiles.Walls;
+    using UnderwaterGame.Worlds;
+
     public abstract partial class Tile
     {
         public byte id;
 
-        public Texture2D Texture { get; protected set; }
-        public Color TextureBorder { get; protected set; }
+        public Texture2D texture;
 
-        public Texture2D[] Textures { get; protected set; }
+        public Color textureBorder;
 
-        public float Alpha { get; protected set; } = 1f;
+        public Texture2D[] textures;
 
-        public static int Size => 8;
-        public static int Check => 4;
+        public float alpha = 1f;
 
-        public bool IsSolid => this is SolidTile;
-        public bool IsWall => this is WallTile;
-        public bool IsLiquid => this is LiquidTile;
+        public static int size = 8;
+
+        public static int check = 4;
 
         public Tile()
         {
-            Tiles.Add(this);
-
+            tiles.Add(this);
             Init();
             SetTextures();
         }
@@ -38,46 +35,39 @@ namespace UnderwaterGame.Tiles
         {
             T tile = Activator.CreateInstance<T>();
             tile.id = id;
-
             return tile;
         }
 
-        public static Tile GetTileByID(byte id)
+        public static Tile GetTileById(byte id)
         {
-            return Tiles.Find((Tile tile) => tile.id == id);
+            return tiles.Find((Tile tile) => tile.id == id);
         }
 
         protected abstract void Init();
 
         public virtual void SetTextures()
         {
-            World.TilemapType tilemapType = GetTilemapType();
+            World.Tilemap tilemap = GetTilemap();
             int tilemapCount = GetTilemapCount();
-
-            Textures = new Texture2D[tilemapCount];
-
-            Color[] textureData = new Color[Texture.Width * Texture.Height];
-            Texture.GetData(textureData);
-
-            for (int i = 0; i < tilemapCount; i++)
+            textures = new Texture2D[tilemapCount];
+            Color[] textureData = new Color[texture.Width * texture.Height];
+            texture.GetData(textureData);
+            for(int i = 0; i < tilemapCount; i++)
             {
-                Texture2D newTexture = new Texture2D(Main.GraphicsDeviceCurrent, Texture.Width, Texture.Height);
-                Color[] newTextureData = new Color[Texture.Width * Texture.Height];
-
+                Texture2D newTexture = new Texture2D(Main.graphicsDeviceCurrent, texture.Width, texture.Height);
+                Color[] newTextureData = new Color[texture.Width * texture.Height];
                 bool left = false;
                 bool right = false;
                 bool top = false;
                 bool bottom = false;
-
                 bool topLeftSlope = false;
                 bool topRightSlope = false;
                 bool bottomLeftSlope = false;
                 bool bottomRightSlope = false;
-
-                switch (tilemapType)
+                switch(tilemap)
                 {
                     default:
-                        switch (i)
+                        switch(i)
                         {
                             case 1:
                                 left = true;
@@ -174,48 +164,40 @@ namespace UnderwaterGame.Tiles
                         }
                         break;
                 }
-
-                for (int y = 0; y < Texture.Height; y++)
+                for(int y = 0; y < texture.Height; y++)
                 {
-                    for (int x = 0; x < Texture.Width; x++)
+                    for(int x = 0; x < texture.Width; x++)
                     {
-                        int index = (y * Texture.Width) + x;
-
+                        int index = (y * texture.Width) + x;
                         bool border = false;
                         bool cut = false;
-
                         border |= left && x == 0;
-                        border |= right && x == Texture.Width - 1;
+                        border |= right && x == texture.Width - 1;
                         border |= top && y == 0;
-                        border |= bottom && y == Texture.Height - 1;
-
-                        cut |= topLeftSlope && (Texture.Width - 1 - x) > y;
+                        border |= bottom && y == texture.Height - 1;
+                        cut |= topLeftSlope && (texture.Width - 1 - x) > y;
                         cut |= topRightSlope && x > y;
                         cut |= bottomLeftSlope && x < y;
-                        cut |= bottomRightSlope && (Texture.Width - 1 - x) < y;
-
-                        border |= (topLeftSlope || bottomRightSlope) && (Texture.Width - 1 - x) == y;
+                        cut |= bottomRightSlope && (texture.Width - 1 - x) < y;
+                        border |= (topLeftSlope || bottomRightSlope) && (texture.Width - 1 - x) == y;
                         border |= (topRightSlope || bottomLeftSlope) && x == y;
-
-                        newTextureData[index] = border ? TextureBorder : (cut ? Color.Transparent : textureData[index]);
+                        newTextureData[index] = border ? textureBorder : (cut ? Color.Transparent : textureData[index]);
                     }
                 }
-
                 newTexture.SetData(newTextureData);
-                Textures[i] = newTexture;
+                textures[i] = newTexture;
             }
         }
 
         public virtual float GetTilemapDepth()
         {
-            World.TilemapType tilemapType = GetTilemapType();
-
-            switch (tilemapType)
+            World.Tilemap tilemap = GetTilemap();
+            switch(tilemap)
             {
-                case World.TilemapType.Walls:
+                case World.Tilemap.Walls:
                     return 0.25f;
 
-                case World.TilemapType.Liquids:
+                case World.Tilemap.Liquids:
                     return 0.75f;
 
                 default:
@@ -225,11 +207,10 @@ namespace UnderwaterGame.Tiles
 
         public virtual Color GetTilemapColor()
         {
-            World.TilemapType tilemapType = GetTilemapType();
-
-            switch (tilemapType)
+            World.Tilemap tilemap = GetTilemap();
+            switch(tilemap)
             {
-                case World.TilemapType.Walls:
+                case World.Tilemap.Walls:
                     return new Color(80, 80, 80);
 
                 default:
@@ -239,14 +220,13 @@ namespace UnderwaterGame.Tiles
 
         public virtual int GetTilemapCount()
         {
-            World.TilemapType tilemapType = GetTilemapType();
-
-            switch (tilemapType)
+            World.Tilemap tilemap = GetTilemap();
+            switch(tilemap)
             {
-                case World.TilemapType.Walls:
+                case World.Tilemap.Walls:
                     return 0;
 
-                case World.TilemapType.Liquids:
+                case World.Tilemap.Liquids:
                     return 1;
 
                 default:
@@ -254,19 +234,17 @@ namespace UnderwaterGame.Tiles
             }
         }
 
-        public virtual World.TilemapType GetTilemapType()
+        public virtual World.Tilemap GetTilemap()
         {
-            if (IsWall)
+            if(this is WallTile)
             {
-                return World.TilemapType.Walls;
+                return World.Tilemap.Walls;
             }
-
-            if (IsLiquid)
+            if(this is LiquidTile)
             {
-                return World.TilemapType.Liquids;
+                return World.Tilemap.Liquids;
             }
-
-            return World.TilemapType.Solids;
+            return World.Tilemap.Solids;
         }
     }
 }
