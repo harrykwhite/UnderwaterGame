@@ -63,11 +63,11 @@
                 }
                 GameCursorElement gameCursor = (GameCursorElement)UiManager.GetElement<GameCursorElement>();
                 Inventory.InventorySlot slot = getInventory().groups[slotGroup].contents[slotX, slotY];
-                if(menuElement is PlayerMenu)
+                if(menuElement is PlayerMenu menu)
                 {
-                    ((PlayerMenu)menuElement).selectedSlotX = slotX;
-                    ((PlayerMenu)menuElement).selectedSlotY = slotY;
-                    ((PlayerMenu)menuElement).selectedGroup = slotGroup;
+                    menu.selectedSlotX = slotX;
+                    menu.selectedSlotY = slotY;
+                    menu.selectedGroup = slotGroup;
                 }
                 if(slot.item != null)
                 {

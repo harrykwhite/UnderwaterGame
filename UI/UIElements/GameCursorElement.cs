@@ -14,15 +14,15 @@
 
         public int dragQuantity;
 
-        public Vector2 scaleOffset;
+        public Vector2 scale = Vector2.One;
 
         public Shape shape;
 
         public override void Draw()
         {
             Vector2 mousePosition = Control.GetMousePositionUi();
-            Main.spriteBatch.Draw(Main.textureLibrary.UI_OTHER_CURSOR.asset, mousePosition, null, Color.White, 0f, new Vector2(Main.textureLibrary.UI_OTHER_CURSOR.asset.Width, Main.textureLibrary.UI_OTHER_CURSOR.asset.Height) / 2f, Vector2.One + scaleOffset, SpriteEffects.None, 1f);
-            scaleOffset *= 0.9f;
+            Main.spriteBatch.Draw(Main.textureLibrary.UI_OTHER_CURSOR.asset, mousePosition, null, Color.White, 0f, new Vector2(Main.textureLibrary.UI_OTHER_CURSOR.asset.Width, Main.textureLibrary.UI_OTHER_CURSOR.asset.Height) / 2f, scale, SpriteEffects.None, 1f);
+            scale += (Vector2.One - scale) * 0.2f;
             if(dragItem != null)
             {
                 Texture2D itemTextureOutlined = dragItem.sprite.texturesOutlined[0];
@@ -54,7 +54,7 @@
 
         public void Expand(float amount)
         {
-            scaleOffset += new Vector2(amount);
+            scale += new Vector2(amount);
         }
 
         public Shape GetShape()

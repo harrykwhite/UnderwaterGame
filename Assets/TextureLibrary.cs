@@ -30,11 +30,7 @@
 
         public readonly LibraryAsset PARTICLES_BLOOD = new LibraryAsset("Textures/Particles/Blood");
 
-        public readonly LibraryAsset PARTICLES_BUBBLE0 = new LibraryAsset("Textures/Particles/Bubble0");
-
-        public readonly LibraryAsset PARTICLES_BUBBLE1 = new LibraryAsset("Textures/Particles/Bubble1");
-
-        public readonly LibraryAsset PARTICLES_BUBBLE2 = new LibraryAsset("Textures/Particles/Bubble2");
+        public readonly LibraryAsset PARTICLES_BUBBLE = new LibraryAsset("Textures/Particles/Bubble");
 
         public readonly LibraryAsset PARTICLES_SMOKE = new LibraryAsset("Textures/Particles/Smoke");
 
@@ -62,7 +58,9 @@
 
         public readonly LibraryAsset ITEMS_WEAPONS_MAGIC_WANDS_WOODENWAND = new LibraryAsset("Textures/Items/Weapons/Magic/Wands/WoodenWand");
 
-        public readonly LibraryAsset ITEMS_CONSUMABLES_HEALINGKELP = new LibraryAsset("Textures/Items/Consumables/HealingKelp");
+        public readonly LibraryAsset ITEMS_CONSUMABLES_HEALTHKELP = new LibraryAsset("Textures/Items/Consumables/HealthKelp");
+        
+        public readonly LibraryAsset ITEMS_CONSUMABLES_MAGICKELP = new LibraryAsset("Textures/Items/Consumables/MagicKelp");
 
         public readonly LibraryAsset ITEMS_ARMOURS_HEADS_WOODENHELMET = new LibraryAsset("Textures/Items/Armours/Heads/WoodenHelmet");
 

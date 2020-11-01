@@ -24,9 +24,9 @@
 
         public int selectedGroup;
 
-        private int InventoryWidth => Inventory.groups[(int)PlayerCharacter.InventoryType.ArmourHead].contents.GetLength(0) + Inventory.groups[(int)PlayerCharacter.InventoryType.Other].contents.GetLength(0);
+        private int InventoryWidth => Inventory.groups[(int)PlayerCharacter.InventoryGroup.ArmourHead].contents.GetLength(0) + Inventory.groups[(int)PlayerCharacter.InventoryGroup.Other].contents.GetLength(0);
 
-        private int InventoryHeight => Inventory.groups[(int)PlayerCharacter.InventoryType.Other].contents.GetLength(1) + Inventory.groups[(int)PlayerCharacter.InventoryType.Crafting].contents.GetLength(1) + 1;
+        private int InventoryHeight => Inventory.groups[(int)PlayerCharacter.InventoryGroup.Other].contents.GetLength(1) + Inventory.groups[(int)PlayerCharacter.InventoryGroup.Crafting].contents.GetLength(1) + 1;
 
         public Inventory Inventory => World.player?.inventory;
 
@@ -75,7 +75,7 @@
             if(!open)
             {
                 int selectedSlotXMax;
-                selectedGroup = World.player.wielding ? (int)PlayerCharacter.InventoryType.Wield : (int)PlayerCharacter.InventoryType.Hotbar;
+                selectedGroup = World.player.wielding ? (int)PlayerCharacter.InventoryGroup.Wield : (int)PlayerCharacter.InventoryGroup.Hotbar;
                 selectedSlotXMax = Inventory.groups[selectedGroup].contents.GetLength(0) - 1;
                 selectedSlotX = MathUtilities.Clamp(selectedSlotX, 0, selectedSlotXMax);
                 selectedSlotY = 0;
@@ -188,16 +188,16 @@
             Func<Vector2> getPosition = () => UiManager.Size / 2f;
             Func<int, Vector2> getWieldPosition = (int count) => new Vector2(getPosition().X + (UiComponent.gap * 2.5f * (count == 0 ? -1f : 1f)), UiManager.Size.Y - UiComponent.gap);
             Func<int, Vector2> getArmourPosition = (int count) => getPosition() - ((new Vector2(InventoryWidth, InventoryHeight) - Vector2.One) * UiComponent.gap * 0.5f) + new Vector2(0f, UiComponent.gap * count);
-            LoadSlotGroup((int)PlayerCharacter.InventoryType.Wield, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_WIELDICON.asset, () => Vector2.Zero, () => getWieldAlpha(0));
-            LoadSlotGroup((int)PlayerCharacter.InventoryType.Hotbar, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_HOTBARICON.asset, () => new Vector2(getPosition().X - (2f * UiComponent.gap * 0.5f), UiManager.Size.Y - UiComponent.gap), () => getWieldAlpha(1));
-            LoadSlotGroup((int)PlayerCharacter.InventoryType.ArmourHead, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_ARMOURICON.asset, () => getArmourPosition(0), () => alpha);
-            LoadSlotGroup((int)PlayerCharacter.InventoryType.ArmourChest, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_ARMOURICON.asset, () => getArmourPosition(1), () => alpha);
-            LoadSlotGroup((int)PlayerCharacter.InventoryType.ArmourLegs, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_ARMOURICON.asset, () => getArmourPosition(2), () => alpha);
-            LoadSlotGroup((int)PlayerCharacter.InventoryType.ArmourFeet, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_ARMOURICON.asset, () => getArmourPosition(3), () => alpha);
-            LoadSlotGroup((int)PlayerCharacter.InventoryType.Crafting, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_CRAFTINGICON.asset, () => getPosition() - ((new Vector2(InventoryWidth, InventoryHeight) - Vector2.One) * UiComponent.gap * 0.5f) + new Vector2(0f, (InventoryHeight - 1f) * UiComponent.gap), () => alpha);
-            LoadSlotGroup((int)PlayerCharacter.InventoryType.Other, null, () => getPosition() - ((new Vector2(InventoryWidth, InventoryHeight) - Vector2.One) * UiComponent.gap * 0.5f) + new Vector2(UiComponent.gap, 0f), () => alpha);
-            slots[(int)PlayerCharacter.InventoryType.Wield][0, 0].getPosition = () => getWieldPosition(0);
-            slots[(int)PlayerCharacter.InventoryType.Wield][1, 0].getPosition = () => getWieldPosition(1);
+            LoadSlotGroup((int)PlayerCharacter.InventoryGroup.Wield, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_WIELDICON.asset, () => Vector2.Zero, () => getWieldAlpha(0));
+            LoadSlotGroup((int)PlayerCharacter.InventoryGroup.Hotbar, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_HOTBARICON.asset, () => new Vector2(getPosition().X - (2f * UiComponent.gap * 0.5f), UiManager.Size.Y - UiComponent.gap), () => getWieldAlpha(1));
+            LoadSlotGroup((int)PlayerCharacter.InventoryGroup.ArmourHead, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_ARMOURICON.asset, () => getArmourPosition(0), () => alpha);
+            LoadSlotGroup((int)PlayerCharacter.InventoryGroup.ArmourChest, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_ARMOURICON.asset, () => getArmourPosition(1), () => alpha);
+            LoadSlotGroup((int)PlayerCharacter.InventoryGroup.ArmourLegs, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_ARMOURICON.asset, () => getArmourPosition(2), () => alpha);
+            LoadSlotGroup((int)PlayerCharacter.InventoryGroup.ArmourFeet, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_ARMOURICON.asset, () => getArmourPosition(3), () => alpha);
+            LoadSlotGroup((int)PlayerCharacter.InventoryGroup.Crafting, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_CRAFTINGICON.asset, () => getPosition() - ((new Vector2(InventoryWidth, InventoryHeight) - Vector2.One) * UiComponent.gap * 0.5f) + new Vector2(0f, (InventoryHeight - 1f) * UiComponent.gap), () => alpha);
+            LoadSlotGroup((int)PlayerCharacter.InventoryGroup.Other, null, () => getPosition() - ((new Vector2(InventoryWidth, InventoryHeight) - Vector2.One) * UiComponent.gap * 0.5f) + new Vector2(UiComponent.gap, 0f), () => alpha);
+            slots[(int)PlayerCharacter.InventoryGroup.Wield][0, 0].getPosition = () => getWieldPosition(0);
+            slots[(int)PlayerCharacter.InventoryGroup.Wield][1, 0].getPosition = () => getWieldPosition(1);
             IconButton produceButton = (IconButton)AddComponent<IconButton>();
             produceButton.menuElement = this;
             produceButton.icon = Main.textureLibrary.UI_BUTTONS_ICONS_OTHER_PRODUCEICON.asset;
@@ -207,11 +207,11 @@
             produceButton.selectedInteractAction = delegate ()
             {
                 List<Item> ingredients = new List<Item>();
-                for(int y = 0; y < World.player.inventory.groups[(int)PlayerCharacter.InventoryType.Crafting].contents.GetLength(1); y++)
+                for(int y = 0; y < World.player.inventory.groups[(int)PlayerCharacter.InventoryGroup.Crafting].contents.GetLength(1); y++)
                 {
-                    for(int x = 0; x < World.player.inventory.groups[(int)PlayerCharacter.InventoryType.Crafting].contents.GetLength(0); x++)
+                    for(int x = 0; x < World.player.inventory.groups[(int)PlayerCharacter.InventoryGroup.Crafting].contents.GetLength(0); x++)
                     {
-                        ingredients.Add(World.player.inventory.groups[(int)PlayerCharacter.InventoryType.Crafting].contents[x, y].item);
+                        ingredients.Add(World.player.inventory.groups[(int)PlayerCharacter.InventoryGroup.Crafting].contents[x, y].item);
                     }
                 }
                 foreach(Item item in Item.items)
@@ -233,7 +233,7 @@
                     {
                         foreach(Item ingredient in item.ingredients)
                         {
-                            World.player.inventory.RemoveItemAt((int)PlayerCharacter.InventoryType.Crafting, ingredient, 1);
+                            World.player.inventory.RemoveItemAt((int)PlayerCharacter.InventoryGroup.Crafting, ingredient, 1);
                         }
                         World.player.inventory.AddItem(item, 1);
                     }

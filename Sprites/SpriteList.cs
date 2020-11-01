@@ -24,11 +24,7 @@
 
         public static Sprite blood;
 
-        public static Sprite bubble0;
-
-        public static Sprite bubble1;
-
-        public static Sprite bubble2;
+        public static Sprite bubble;
 
         public static Sprite smoke;
 
@@ -56,7 +52,9 @@
 
         public static Sprite woodenWand;
 
-        public static Sprite healingKelp;
+        public static Sprite healthKelp;
+
+        public static Sprite magicKelp;
 
         public static Sprite woodenHelmet;
 
@@ -85,9 +83,7 @@
             longSwing = Load(Main.textureLibrary.EFFECTS_LONGSWING);
             wideSwing = Load(Main.textureLibrary.EFFECTS_WIDESWING);
             blood = Load(Main.textureLibrary.PARTICLES_BLOOD);
-            bubble0 = Load(Main.textureLibrary.PARTICLES_BUBBLE0);
-            bubble1 = Load(Main.textureLibrary.PARTICLES_BUBBLE1);
-            bubble2 = Load(Main.textureLibrary.PARTICLES_BUBBLE2);
+            bubble = Load(Main.textureLibrary.PARTICLES_BUBBLE);
             smoke = Load(Main.textureLibrary.PARTICLES_SMOKE);
             wood = Load(Main.textureLibrary.PARTICLES_WOOD);
             crabShell = Load(Main.textureLibrary.PARTICLES_CRABSHELL);
@@ -101,7 +97,8 @@
             crabGrenade = Load(Main.textureLibrary.ITEMS_WEAPONS_RANGED_THROWABLES_CRABGRENADE);
             crabShuriken = Load(Main.textureLibrary.ITEMS_WEAPONS_RANGED_THROWABLES_CRABSHURIKEN);
             woodenWand = Load(Main.textureLibrary.ITEMS_WEAPONS_MAGIC_WANDS_WOODENWAND);
-            healingKelp = Load(Main.textureLibrary.ITEMS_CONSUMABLES_HEALINGKELP);
+            healthKelp = Load(Main.textureLibrary.ITEMS_CONSUMABLES_HEALTHKELP);
+            magicKelp = Load(Main.textureLibrary.ITEMS_CONSUMABLES_MAGICKELP);
             woodenHelmet = Load(Main.textureLibrary.ITEMS_ARMOURS_HEADS_WOODENHELMET);
             woodenHelmetWear = Load(Main.textureLibrary.ITEMS_ARMOURS_HEADS_WOODENHELMETWEAR);
             woodenChestplate = Load(Main.textureLibrary.ITEMS_ARMOURS_CHESTS_WOODENCHESTPLATE);

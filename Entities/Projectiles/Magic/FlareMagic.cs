@@ -35,7 +35,6 @@
             {
                 Fire fire = (Fire)EntityManager.AddEntity<Fire>(position);
                 fire.direction = direction - MathHelper.Pi + ((MathHelper.Pi / 36f) * (i - ((particleCount - 1f) / 2f)));
-                fire.blend = new Color(206, 167, 111);
             }
         }
     }

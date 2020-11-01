@@ -8,40 +8,34 @@
         public override void Generate()
         {
             int interval = 0;
-            int intervalMax = 2;
+            int intervalMax = 4;
+            int intervalOffset = 2;
             for(int x = 0; x < World.width; x++)
             {
-                if(interval < intervalMax)
+                if(interval > 0)
                 {
-                    interval++;
+                    interval--;
                 }
                 else
                 {
                     for(int y = 0; y < World.height; y++)
                     {
                         WorldTile worldTile = World.GetTileAt(x, y, World.Tilemap.Solids);
-                        if(Tile.GetTileById(worldTile.id) == Tile.sand)
+                        if(Tile.GetTileById(worldTile?.id ?? 0) == Tile.sand)
                         {
-                            Environmental environmental = null;
-                            if(Main.random.Next(6) == 0)
-                            {
-                                environmental = Environmental.smallSeaweed;
-                            }
-                            if(Main.random.Next(18) == 0)
+                            Environmental environmental = Environmental.smallSeaweed;
+                            if(Main.random.Next(4) == 0)
                             {
                                 environmental = Environmental.bigSeaweed;
                             }
-                            if(environmental != null)
+                            if(World.AddEnvironmentalAt(x, y, environmental))
                             {
-                                if(World.AddEnvironmentalAt(x, y, environmental))
-                                {
-                                    x += (environmental.sprite.textures[0].Width / Tile.size) - 1;
-                                    interval = 0;
-                                }
+                                x += (environmental.sprite.textures[0].Width / Tile.size) - 1;
                             }
                             break;
                         }
                     }
+                    interval = intervalMax + Main.random.Next(-intervalOffset, intervalOffset);
                 }
             }
         }

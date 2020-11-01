@@ -154,15 +154,14 @@
                     saveCheck = true;
                 }
             }
-            int displayWidth = graphicsDeviceManagerCurrent.IsFullScreen ? GraphicsDevice.DisplayMode.Width : resolutionWidth;
-            int displayHeight = graphicsDeviceManagerCurrent.IsFullScreen ? GraphicsDevice.DisplayMode.Height : resolutionHeight;
-            if(graphicsDeviceManagerCurrent.IsFullScreen != (Option.fullscreen.value == 1f) || GetBufferWidth() != displayWidth || GetBufferHeight() != displayHeight)
+            int idealWidth = Option.fullscreen.GetToggle() ? GraphicsDevice.DisplayMode.Width : resolutionWidth;
+            int idealHeight = Option.fullscreen.GetToggle() ? GraphicsDevice.DisplayMode.Height : resolutionHeight;
+            if(GetBufferWidth() != idealWidth || GetBufferHeight() != idealHeight)
             {
-                graphicsDeviceManagerCurrent.IsFullScreen = Option.fullscreen.value == 1f;
-                graphicsDeviceManagerCurrent.PreferredBackBufferWidth = displayWidth;
-                graphicsDeviceManagerCurrent.PreferredBackBufferHeight = displayHeight;
+                graphicsDeviceManagerCurrent.PreferredBackBufferWidth = idealWidth;
+                graphicsDeviceManagerCurrent.PreferredBackBufferHeight = idealHeight;
                 graphicsDeviceManagerCurrent.ApplyChanges();
-                Window.Position = graphicsDeviceManagerCurrent.IsFullScreen ? Point.Zero : windowStartingPosition;
+                Window.Position = Option.fullscreen.GetToggle() ? Point.Zero : windowStartingPosition;
             }
             Control.Refresh();
             Control.Update();

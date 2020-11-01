@@ -396,7 +396,7 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Items/Armours/Legs/WoodenLeggingsWear.png
 
-#begin Textures/Items/Consumables/HealingKelp.png
+#begin Textures/Items/Consumables/HealthKelp.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -406,7 +406,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Items/Consumables/HealingKelp.png
+/build:Textures/Items/Consumables/HealthKelp.png
+
+#begin Textures/Items/Consumables/MagicKelp.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Items/Consumables/MagicKelp.png
 
 #begin Textures/Items/Weapons/Magic/Wands/WoodenWand.png
 /importer:TextureImporter
@@ -504,7 +516,7 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Particles/Blood.png
 
-#begin Textures/Particles/Bubble0.png
+#begin Textures/Particles/Bubble.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -514,31 +526,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Particles/Bubble0.png
-
-#begin Textures/Particles/Bubble1.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Particles/Bubble1.png
-
-#begin Textures/Particles/Bubble2.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Particles/Bubble2.png
+/build:Textures/Particles/Bubble.png
 
 #begin Textures/Particles/CrabShell.png
 /importer:TextureImporter

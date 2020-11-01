@@ -31,7 +31,7 @@
             UpdateStatus();
             UpdateGravity();
             velocity.Y += gravity;
-            TileCollisions(Vector2.Zero);
+            TileCollisions();
             position += velocity;
             LockInWorld();
             animator.speed = 0.1f;

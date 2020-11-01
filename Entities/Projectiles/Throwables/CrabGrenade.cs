@@ -16,8 +16,7 @@
         {
             SetSprite(Sprite.crabGrenade);
             depth = 0.7125f;
-            angleChange = MathHelper.Pi / 36f;
-            angleChangeRelative = true;
+            angleAcc = MathHelper.Pi / 36f;
             angleRelative = false;
             speed = 6f;
         }

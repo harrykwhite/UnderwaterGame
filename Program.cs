@@ -7,10 +7,8 @@
         [STAThread]
         private static void Main()
         {
-            using(Main main = new Main())
-            {
-                main.Run();
-            }
+            using Main main = new Main();
+            main.Run();
         }
     }
 }

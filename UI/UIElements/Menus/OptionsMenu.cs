@@ -33,7 +33,7 @@
                         break;
 
                     case Option.Format.Toggle:
-                        optionTextValue = option.value == 1f ? "Enabled" : "Disabled";
+                        optionTextValue = option.GetToggle() ? "Enabled" : "Disabled";
                         break;
                 }
                 DrawUtilities.DrawString(Main.fontLibrary.ARIALSMALL.asset, new DrawUtilities.Text(option.name + ": " + optionTextValue), getPosition(), Color.White * getAlpha(), DrawUtilities.HorizontalAlign.Middle, DrawUtilities.VerticalAlign.Middle);

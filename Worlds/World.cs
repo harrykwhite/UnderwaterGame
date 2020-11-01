@@ -8,7 +8,6 @@
     using UnderwaterGame.Entities;
     using UnderwaterGame.Entities.Characters;
     using UnderwaterGame.Entities.Characters.Enemies;
-    using UnderwaterGame.Entities.Characters.Enemies.Jellyfish;
     using UnderwaterGame.Entities.Particles;
     using UnderwaterGame.Environmentals;
     using UnderwaterGame.Items;
@@ -21,7 +20,9 @@
     {
         public enum Tilemap
         {
-            Solids, Walls, Liquids
+            Solids,
+            Walls,
+            Liquids
         }
 
         public static PlayerCharacter player;
@@ -29,6 +30,8 @@
         public static WorldTile[][,] tilemaps;
 
         public static List<WorldEnvironmental> environmentals;
+
+        public static List<WorldHotspot> hotspots;
 
         public static List<WorldGeneration> generations;
 
@@ -43,6 +46,14 @@
         public static int spawnTime;
 
         public static int spawnTimeMax = 300;
+
+        public static int spawnMax = 8;
+        
+        public static int bubbleTime;
+
+        public static int bubbleTimeMax = 60;
+
+        public static WorldHotspot hotspotCurrent;
         
         public static void Init()
         {
@@ -61,7 +72,14 @@
                 }
             }
             environmentals = new List<WorldEnvironmental>();
-            generations = new List<WorldGeneration> { new SurfaceTerrainGeneration(), new SurfaceTowerGeneration(), new SurfaceEnvironmentalGeneration(), new CleaningGeneration() };
+            hotspots = new List<WorldHotspot>();
+            generations = new List<WorldGeneration> {
+                new SurfaceTerrainGeneration(),
+                new SurfaceTowerGeneration(),
+                new SurfaceEnvironmentalGeneration(),
+                new HotspotGeneration(),
+                new CleaningGeneration()
+            };
         }
 
         public static void Update()
@@ -70,27 +88,63 @@
             {
                 return;
             }
+            hotspotCurrent = null;
+            foreach(WorldHotspot hotspot in hotspots)
+            {
+                if(new Rectangle(hotspot.x * Tile.size, hotspot.y * Tile.size, hotspot.width * Tile.size, hotspot.height * Tile.size).Contains(player.position))
+                {
+                    hotspotCurrent = hotspot;
+                }
+            }
             if(spawnTime < spawnTimeMax)
             {
                 spawnTime++;
             }
             else
             {
-                List<Type> spawnTypes = new List<Type>();
-                spawnTypes.Add(typeof(Jellyfish));
-                spawnTypes.Add(typeof(TallJellyfish));
-                EnemyCharacter enemy = (EnemyCharacter)EntityManager.AddEntity(spawnTypes[Main.random.Next(spawnTypes.Count)], Vector2.Zero);
-                do
+                if(hotspotCurrent != null)
                 {
-                    enemy.position = new Vector2(RandomUtilities.Range(Camera.position.X - (Camera.GetWidth() / 2f), Camera.position.X + (Camera.GetWidth() / 2f)), RandomUtilities.Range(Camera.position.Y - (Camera.GetHeight() / 2f), Camera.position.Y + (Camera.GetHeight() / 2f)));
-                } while(enemy.TileCollision(enemy.position, Tilemap.Solids) || !enemy.TileCollision(enemy.position, Tilemap.Liquids));
-                int smokeCount = 5;
-                for(int i = 0; i < smokeCount; i++)
-                {
-                    Smoke smoke = (Smoke)EntityManager.AddEntity<Smoke>(enemy.position);
-                    smoke.direction = ((MathHelper.Pi * 2f) / smokeCount) * i;
+                    if(EntityManager.GetEntityCount<EnemyCharacter>() < spawnMax)
+                    {
+                        EnemyCharacter enemy = (EnemyCharacter)EntityManager.AddEntity(Type.GetType(hotspotCurrent.types[Main.random.Next(hotspotCurrent.types.Length)]), Vector2.Zero);
+                        do
+                        {
+                            enemy.position = new Vector2(RandomUtilities.Range(Camera.position.X - (Camera.GetWidth() / 2f), Camera.position.X + (Camera.GetWidth() / 2f)), RandomUtilities.Range(Camera.position.Y - (Camera.GetHeight() / 2f), Camera.position.Y + (Camera.GetHeight() / 2f)));
+                        } while(enemy.TileCollision(enemy.position, Tilemap.Solids) || !enemy.TileCollision(enemy.position, Tilemap.Liquids));
+                        int smokeCount = 5;
+                        for(int i = 0; i < smokeCount; i++)
+                        {
+                            Smoke smoke = (Smoke)EntityManager.AddEntity<Smoke>(enemy.position);
+                            smoke.direction = ((MathHelper.Pi * 2f) / smokeCount) * i;
+                        }
+                    }
                 }
                 spawnTime = 0;
+            }
+            if(bubbleTime < bubbleTimeMax)
+            {
+                bubbleTime++;
+            }
+            else
+            {
+                int trials = 100;
+                Bubble bubble = (Bubble)EntityManager.AddEntity<Bubble>(Vector2.Zero);
+                do
+                {
+                    bubble.position = new Vector2(RandomUtilities.Range(Camera.position.X - (Camera.GetWidth() / 2f), Camera.position.X + (Camera.GetWidth() / 2f)), RandomUtilities.Range(Camera.position.Y - (Camera.GetHeight() / 2f), Camera.position.Y + (Camera.GetHeight() / 2f)));
+                    trials--;
+                } while(!bubble.TileTypeCollision(bubble.position, Tile.water, Tilemap.Liquids) && trials > 0);
+                if(trials > 0)
+                {
+                    bubble.direction = -MathHelper.Pi / 2f;
+                    bubble.speed /= 2f;
+                    bubble.alpha = 0f;
+                }
+                else
+                {
+                    bubble.Destroy();
+                }
+                bubbleTime = 0;
             }
         }
 
@@ -266,6 +320,11 @@
             return (new Vector2(x, y) * Tile.size) - new Vector2(0f, environmental.sprite.origin.Y - environmental.sprite.bound.Y);
         }
 
+        public static void AddHotspotAt(int x, int y, int width, int height, string[] types)
+        {
+            hotspots.Add(new WorldHotspot(x, y, width, height, types));
+        }
+
         public static void Generate()
         {
             Main.loading = new Thread(delegate ()
@@ -348,22 +407,24 @@
         {
             WorldTile worldTile = tilemaps[(byte)tilemap][x, y];
             Tile tile = Tile.GetTileById(worldTile.id);
-            bool left = Tile.GetTileById(GetTileAt(x - 1, y, tilemap).id) == tile;
-            bool right = Tile.GetTileById(GetTileAt(x + 1, y, tilemap).id) == tile;
-            bool top = Tile.GetTileById(GetTileAt(x, y - 1, tilemap).id) == tile;
-            bool bottom = Tile.GetTileById(GetTileAt(x, y + 1, tilemap).id) == tile;
+            bool left = Tile.GetTileById(GetTileAt(x - 1, y, tilemap)?.id ?? 0) == tile;
+            bool right = Tile.GetTileById(GetTileAt(x + 1, y, tilemap)?.id ?? 0) == tile;
+            bool top = Tile.GetTileById(GetTileAt(x, y - 1, tilemap)?.id ?? 0) == tile;
+            bool bottom = Tile.GetTileById(GetTileAt(x, y + 1, tilemap)?.id ?? 0) == tile;
             bool leftEmpty = GetTileAt(x - 1, y, tilemap) == null;
             bool rightEmpty = GetTileAt(x + 1, y, tilemap) == null;
             bool topEmpty = GetTileAt(x, y - 1, tilemap) == null;
             bool bottomEmpty = GetTileAt(x, y + 1, tilemap) == null;
             switch(tilemap)
             {
-                case Tilemap.Solids:
-                case Tilemap.Walls:
-                    if(left && right && top && bottom)
+                case Tilemap.Liquids:
+                    if(topEmpty)
                     {
-                        worldTile.texture = 0;
+                        worldTile.texture = 1;
                     }
+                    break;
+
+                default:
                     if(!left && !right && !top && !bottom)
                     {
                         worldTile.texture = 1;
@@ -447,7 +508,6 @@
         private static void SetTileLighting(int x, int y, Tilemap tilemap)
         {
             WorldTile worldTile = tilemaps[(byte)tilemap][x, y];
-            WorldTileData worldTileData = GetTileDataAt(x, y, tilemap);
             int range = 255 / Lighting.jump;
             for(int r = 1; r <= range; r++)
             {

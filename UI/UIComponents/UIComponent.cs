@@ -5,8 +5,6 @@
 
     public abstract class UiComponent
     {
-        protected Vector2 scaleSpeed = new Vector2(0.2f);
-
         public Vector2 scale = Vector2.One;
 
         public Vector2 scaleTo = Vector2.One;
@@ -29,7 +27,7 @@
 
         protected void UpdateScale()
         {
-            scale += (scaleTo - scale) * scaleSpeed;
+            scale += (scaleTo - scale) * 0.2f;
         }
     }
 }

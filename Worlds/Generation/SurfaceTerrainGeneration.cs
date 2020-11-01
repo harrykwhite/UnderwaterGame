@@ -1,33 +1,35 @@
 ﻿namespace UnderwaterGame.Worlds.Generation
 {
     using UnderwaterGame.Tiles;
-    using UnderwaterGame.Utilities;
 
     public class SurfaceTerrainGeneration : WorldGeneration
     {
         public override void Generate()
         {
-            int waterLevel = 45;
-            int wallLevel = waterLevel + 62;
-            int sandLevel = wallLevel + 3;
-            int stoneLevel = sandLevel + 10;
+            int waterLevel = 32;
+            int wallLevel = waterLevel + 64;
+            int sandLevel = wallLevel + 2;
+            int stoneLevel = sandLevel + 8;
             int levelOffset = 0;
-            int levelOffsetMax = 8;
-            int levelInterval = 8;
-            float levelVariance = 0.2f;
+            int levelOffsetMax = 4;
+            int levelInterval = 0;
+            int levelIntervalMax = 8;
+            int levelIntervalOffset = 2;
             for(int x = 0; x < World.width; x++)
             {
-                if(x > 0 && x % levelInterval == 0)
+                if(levelInterval > 0)
                 {
-                    if(RandomUtilities.Chance(levelVariance))
+                    levelInterval--;
+                }
+                else
+                {
+                    int offset = levelOffset;
+                    do
                     {
-                        int offset = levelOffset;
-                        do
-                        {
-                            offset += Main.random.Next(2) == 0 ? 1 : -1;
-                        } while(offset == levelOffset || offset < -levelOffsetMax || offset > levelOffsetMax);
-                        levelOffset = offset;
-                    }
+                        offset += Main.random.Next(2) == 0 ? 1 : -1;
+                    } while(offset == levelOffset || offset < -levelOffsetMax || offset > levelOffsetMax);
+                    levelOffset = offset;
+                    levelInterval = levelIntervalMax + Main.random.Next(-levelIntervalOffset, levelIntervalOffset);
                 }
                 for(int y = 0; y < World.height; y++)
                 {

@@ -51,7 +51,8 @@
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Items/Armours/Heads/WoodenHelmetWear.png</File>
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Items/Armours/Legs/WoodenLeggings.png</File>
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Items/Armours/Legs/WoodenLeggingsWear.png</File>
-    <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Items/Consumables/HealingKelp.png</File>
+    <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Items/Consumables/HealthKelp.png</File>
+    <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Items/Consumables/MagicKelp.png</File>
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Items/Weapons/Magic/Wands/WoodenWand.png</File>
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Items/Weapons/Melee/Swords/WoodenSword.png</File>
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Items/Weapons/Melee/Tridents/WoodenTrident.png</File>
@@ -60,9 +61,7 @@
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Items/Weapons/Ranged/Throwables/CrabShuriken.png</File>
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Other/Pixel.png</File>
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Particles/Blood.png</File>
-    <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Particles/Bubble0.png</File>
-    <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Particles/Bubble1.png</File>
-    <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Particles/Bubble2.png</File>
+    <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Particles/Bubble.png</File>
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Particles/CrabShell.png</File>
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Particles/Fire.png</File>
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Particles/Liquid.png</File>
@@ -88,7 +87,6 @@
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Ui/Slider/Bar.png</File>
   </SourceFiles>
   <DestFiles>
-    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -7,7 +7,12 @@
     {
         public enum Fill
         {
-            Rectangle, Circle, TopLeftSlope, TopRightSlope, BottomLeftSlope, BottomRightSlope
+            Rectangle,
+            Circle,
+            TopLeftSlope,
+            TopRightSlope,
+            BottomLeftSlope,
+            BottomRightSlope
         }
 
         public Vector2 position;

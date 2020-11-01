@@ -66,6 +66,15 @@
                 bool bottomRightSlope = false;
                 switch(tilemap)
                 {
+                    case World.Tilemap.Liquids:
+                        switch(i)
+                        {
+                            case 1:
+                                top = true;
+                                break;
+                        }
+                        break;
+
                     default:
                         switch(i)
                         {
@@ -227,7 +236,7 @@
                     return 0;
 
                 case World.Tilemap.Liquids:
-                    return 1;
+                    return 2;
 
                 default:
                     return 20;

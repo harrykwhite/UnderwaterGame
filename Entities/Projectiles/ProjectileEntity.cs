@@ -16,19 +16,13 @@
 
         public float speed;
 
-        public float speedChange;
-
-        public float speedMult = 1f;
-
         public float direction;
 
-        public float directionChange;
+        public float directionAcc;
 
         public float? directionInit;
 
-        public float angleChange;
-
-        public bool angleChangeRelative;
+        public float angleAcc;
 
         public bool angleRelative = true;
 
@@ -44,10 +38,8 @@
             {
                 directionInit = direction;
             }
-            speed += speedChange;
-            direction += directionChange;
-            angle += angleChange * (angleChangeRelative ? (float)Math.Cos(direction) : 1f);
-            speed *= speedMult;
+            direction += directionAcc;
+            angle += angleAcc * (float)Math.Cos(direction);
             if(angleRelative)
             {
                 angle = direction;

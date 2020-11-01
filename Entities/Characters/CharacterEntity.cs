@@ -20,11 +20,11 @@
 
         protected int invincibleTime;
 
-        protected int invincibleTimeMax = 24;
+        protected int invincibleTimeMax = 32;
 
         protected int flashTime;
 
-        protected int flashTimeMax = 12;
+        protected int flashTimeMax = 16;
 
         protected SoundEffect hurtSound;
 
@@ -39,6 +39,12 @@
         public float healthMax;
 
         public float defense;
+
+        public float knockbackSpeed;
+
+        public float knockbackSpeedAcc;
+
+        public float knockbackDirection;
 
         public new void DrawSelf(Texture2D texture = null, Vector2? position = null, Rectangle? sourceRectangle = null, Color? color = null, float? rotation = null, Vector2? origin = null, Vector2? scale = null, SpriteEffects? flip = null, float? depth = null)
         {
@@ -58,7 +64,7 @@
                     drawTexture = animator.sprite.textures[drawTextureIndex];
                     if(invincibleTime > 0)
                     {
-                        drawAlpha = (flicker ? 1f : 2f) / 3f;
+                        drawAlpha = (flicker ? 1f : 2f) / 4f;
                     }
                 }
             }
@@ -137,7 +143,7 @@
             }
             FloatingTextEntity floatingTextEntity = (FloatingTextEntity)EntityManager.AddEntity<FloatingTextEntity>(position);
             floatingTextEntity.text = Math.Floor(-damage).ToString();
-            floatingTextEntity.speed = RandomUtilities.Range(3.5f, 4f);
+            floatingTextEntity.speed = 2.5f;
             floatingTextEntity.direction = -MathHelper.Pi / 2f;
             for(int i = 0; i < bloodParticleCount; i++)
             {
@@ -162,14 +168,13 @@
             flashTime = flashTimeMax;
             FloatingTextEntity floatingTextEntity = (FloatingTextEntity)EntityManager.AddEntity<FloatingTextEntity>(position);
             floatingTextEntity.text = "+" + Math.Floor(amount).ToString();
-            floatingTextEntity.speed = RandomUtilities.Range(3.5f, 4f);
+            floatingTextEntity.speed = 2.5f;
             floatingTextEntity.direction = -MathHelper.Pi / 2f;
             for(int i = 0; i < bloodParticleCount; i++)
             {
                 Blood blood = (Blood)EntityManager.AddEntity<Blood>(position);
                 blood.speed /= 2f;
                 blood.direction = ((MathHelper.Pi * 2f) / bloodParticleCount) * i;
-                blood.blend = new Color(226, 226, 226);
             }
             return true;
         }

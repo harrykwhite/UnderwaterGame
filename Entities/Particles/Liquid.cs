@@ -2,7 +2,6 @@
 {
     using Microsoft.Xna.Framework;
     using UnderwaterGame.Sprites;
-    using UnderwaterGame.Utilities;
     using UnderwaterGame.Worlds;
 
     public class Liquid : ParticleEntity
@@ -16,16 +15,12 @@
         {
             SetSprite(Sprite.liquid);
             depth = 0.725f;
-            speed = RandomUtilities.Range(3.5f, 4f);
+            speed = 3.5f;
             direction = -MathHelper.Pi / 2f;
         }
 
         public override void Update()
         {
-            if(life > 30)
-            {
-                scaleMult = 0.9f;
-            }
             UpdateParticle();
             UpdateGravity();
             velocity.Y += gravity;

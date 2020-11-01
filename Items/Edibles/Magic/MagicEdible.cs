@@ -1,20 +1,20 @@
-﻿namespace UnderwaterGame.Items.Edibles.Healing
+﻿namespace UnderwaterGame.Items.Edibles.Magic
 {
     using UnderwaterGame.Entities;
     using UnderwaterGame.Worlds;
 
-    public abstract class HealingEdible : EdibleItem
+    public abstract class MagicEdible : EdibleItem
     {
-        protected float healAmount;
+        protected float magicAmount;
 
         public override bool CanUse(ItemEntity entity)
         {
-            return World.player.health < World.player.healthMax;
+            return World.player.magic < World.player.magicMax;
         }
 
         public override void OnUse(ItemEntity entity)
         {
-            if(World.player.Heal(healAmount))
+            if(World.player.HealMagic(magicAmount))
             {
                 entity.RemoveItem(1);
             }

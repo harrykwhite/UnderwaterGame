@@ -8,6 +8,8 @@
     {
         public float speed;
 
+        public float speedAcc = 0.1f;
+
         public float direction;
 
         public string text;
@@ -33,7 +35,10 @@
                     Destroy();
                 }
             }
-            speed *= 0.9f;
+            if(speed > 0f)
+            {
+                speed -= Math.Min(speedAcc, speed);
+            }
             velocity = MathUtilities.LengthDirection(speed, direction);
             position += velocity;
             velocity = Vector2.Zero;

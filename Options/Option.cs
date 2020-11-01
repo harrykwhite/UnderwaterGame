@@ -6,7 +6,8 @@
     {
         public enum Format
         {
-            Percent, Toggle
+            Percent,
+            Toggle
         }
 
         public byte id;
@@ -42,5 +43,10 @@
         }
 
         protected abstract void Init();
+
+        public bool GetToggle()
+        {
+            return value == 1f;
+        }
     }
 }

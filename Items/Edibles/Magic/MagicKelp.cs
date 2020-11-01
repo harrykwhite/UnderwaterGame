@@ -1,19 +1,19 @@
-﻿namespace UnderwaterGame.Items.Edibles.Healing
+﻿namespace UnderwaterGame.Items.Edibles.Magic
 {
     using UnderwaterGame.Sprites;
 
-    public class HealingKelp : HealingEdible
+    public class MagicKelp : MagicEdible
     {
         protected override void Init()
         {
-            name = "Healing Kelp";
-            sprite = Sprite.healingKelp;
+            name = "Magic Kelp";
+            sprite = Sprite.magicKelp;
             stack = true;
             useTime = 10;
             useAngleUpdate = false;
             usePress = true;
             useHide = true;
-            healAmount = 5f;
+            magicAmount = 5f;
         }
     }
 }

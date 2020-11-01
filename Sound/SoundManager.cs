@@ -10,7 +10,8 @@
     {
         public enum Category
         {
-            Sound, Music
+            Sound,
+            Music
         }
 
         public static List<SoundEmitter> soundEmitters = new List<SoundEmitter>();
