@@ -122,6 +122,11 @@
             health = healthMax;
             magicMax = 100f;
             magic = magicMax;
+            Item[] items = Item.items.ToArray();
+            for(int i = 0; i < items.Length; i++)
+            {
+                inventory.AddItem(items[i], 99);
+            }
         }
 
         public override void Update()

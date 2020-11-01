@@ -23,13 +23,15 @@
         public Option option;
 
         public bool scrollSound = true;
+        
+        public float textGap = 16f;
 
         public static SliderComponent locked;
 
         public override void Draw()
         {
-            Main.spriteBatch.Draw(Main.textureLibrary.UI_SLIDER_BAR.asset, getPosition(), null, Color.White * 0.5f * getAlpha(), 0f, new Vector2(Main.textureLibrary.UI_SLIDER_BAR.asset.Width, Main.textureLibrary.UI_SLIDER_BAR.asset.Height) / 2f, scale, SpriteEffects.None, 1f);
-            Main.spriteBatch.Draw(Main.textureLibrary.UI_SLIDER_BALL.asset, ballPosition, null, Color.White * getAlpha(), 0f, new Vector2(Main.textureLibrary.UI_SLIDER_BALL.asset.Width, Main.textureLibrary.UI_SLIDER_BALL.asset.Height) / 2f, scale * ballScale, SpriteEffects.None, 1f);
+            Main.spriteBatch.Draw(Main.textureLibrary.UI_SLIDER_BAR.asset, getPosition() + new Vector2(0f, textGap / 2f), null, Color.White * 0.5f * getAlpha(), 0f, new Vector2(Main.textureLibrary.UI_SLIDER_BAR.asset.Width, Main.textureLibrary.UI_SLIDER_BAR.asset.Height) / 2f, scale, SpriteEffects.None, 1f);
+            Main.spriteBatch.Draw(Main.textureLibrary.UI_SLIDER_BALL.asset, ballPosition + new Vector2(0f, textGap / 2f), null, Color.White * getAlpha(), 0f, new Vector2(Main.textureLibrary.UI_SLIDER_BALL.asset.Width, Main.textureLibrary.UI_SLIDER_BALL.asset.Height) / 2f, scale * ballScale, SpriteEffects.None, 1f);
             string optionText = option.name;
             string optionTextValue = option.value.ToString();
             switch(option.valueFormat)
@@ -42,7 +44,7 @@
                     optionTextValue = option.GetToggle() ? "Enabled" : "Disabled";
                     break;
             }
-            DrawUtilities.DrawString(Main.fontLibrary.ARIALSMALL.asset, new DrawUtilities.Text(option.name + ": " + optionTextValue), getPosition() - new Vector2(0f, DrawUtilities.MeasureString(Main.fontLibrary.ARIALSMALL.asset, option.name).Y), Color.White * getAlpha(), DrawUtilities.HorizontalAlign.Middle, DrawUtilities.VerticalAlign.Middle);
+            DrawUtilities.DrawString(Main.fontLibrary.ARIALSMALL.asset, new DrawUtilities.Text(option.name + ": " + optionTextValue), getPosition() - new Vector2(0f, textGap / 2f), Color.White * getAlpha(), DrawUtilities.HorizontalAlign.Middle, DrawUtilities.VerticalAlign.Middle);
         }
 
         public override void Init()
@@ -55,7 +57,7 @@
             bool ballSelectedPrevious = ballSelected;
             ballSelected = locked == this;
             Shape ballShape = this.ballShape;
-            ballShape.position = ballPosition - new Vector2((int)Math.Ceiling(Main.textureLibrary.UI_SLIDER_BALL.asset.Width / 2f), (int)Math.Ceiling(Main.textureLibrary.UI_SLIDER_BALL.asset.Height / 2f));
+            ballShape.position = ballPosition - new Vector2((int)Math.Ceiling(Main.textureLibrary.UI_SLIDER_BALL.asset.Width / 2f), (int)Math.Ceiling(Main.textureLibrary.UI_SLIDER_BALL.asset.Height / 2f) - (textGap / 2f));
             if(getAlpha() > 0f && UiManager.menuCurrent == menuElement)
             {
                 if(ballShape.Intersects(((GameCursorElement)UiManager.GetElement<GameCursorElement>()).GetShape()))

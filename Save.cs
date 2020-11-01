@@ -12,9 +12,7 @@
 
         public WorldEnvironmental[] environmentals;
 
-        public byte gameCursorDragItemId;
-
-        public int gameCursorDragQuantity;
+        public WorldHotspot[] hotspots;
 
         public Save()
         {
@@ -31,9 +29,7 @@
                 }
             }
             environmentals = World.environmentals.ToArray();
-            GameCursorElement gameCursor = (GameCursorElement)UiManager.GetElement<GameCursorElement>();
-            gameCursorDragItemId = gameCursor.dragItem?.id ?? 0;
-            gameCursorDragQuantity = gameCursor.dragQuantity;
+            hotspots = World.hotspots.ToArray();
         }
     }
 }

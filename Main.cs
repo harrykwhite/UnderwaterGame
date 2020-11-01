@@ -146,12 +146,6 @@
                 if(!saveCheck)
                 {
                     World.Generate();
-                    if(save != null)
-                    {
-                        GameCursorElement gameCursor = (GameCursorElement)UiManager.GetElement<GameCursorElement>();
-                        gameCursor.dragItem = Item.GetItemById(save.gameCursorDragItemId);
-                        gameCursor.dragQuantity = save.gameCursorDragQuantity;
-                    }
                     saveCheck = true;
                 }
             }

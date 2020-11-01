@@ -10,7 +10,6 @@
     using UnderwaterGame.Entities.Characters.Enemies;
     using UnderwaterGame.Entities.Particles;
     using UnderwaterGame.Environmentals;
-    using UnderwaterGame.Items;
     using UnderwaterGame.Tiles;
     using UnderwaterGame.Ui;
     using UnderwaterGame.Utilities;
@@ -51,7 +50,7 @@
         
         public static int bubbleTime;
 
-        public static int bubbleTimeMax = 30;
+        public static int bubbleTimeMax = 60;
 
         public static WorldHotspot hotspotCurrent;
         
@@ -80,6 +79,9 @@
                 new HotspotGeneration(),
                 new CleaningGeneration()
             };
+            spawnTime = 0;
+            bubbleTime = 0;
+            hotspotCurrent = null;
         }
 
         public static void Update()
@@ -106,16 +108,25 @@
                 {
                     if(EntityManager.GetEntityCount<EnemyCharacter>() < spawnMax)
                     {
+                        int trials = 100;
                         EnemyCharacter enemy = (EnemyCharacter)EntityManager.AddEntity(Type.GetType(hotspotCurrent.types[Main.random.Next(hotspotCurrent.types.Length)]), Vector2.Zero);
                         do
                         {
                             enemy.position = new Vector2(RandomUtilities.Range(Camera.position.X - (Camera.GetWidth() / 2f), Camera.position.X + (Camera.GetWidth() / 2f)), RandomUtilities.Range(Camera.position.Y - (Camera.GetHeight() / 2f), Camera.position.Y + (Camera.GetHeight() / 2f)));
-                        } while(enemy.TileCollision(enemy.position, Tilemap.Solids) || !enemy.TileCollision(enemy.position, Tilemap.Liquids));
-                        int smokeCount = 5;
-                        for(int i = 0; i < smokeCount; i++)
+                            trials--;
+                        } while((enemy.TileCollision(enemy.position, Tilemap.Solids) || !enemy.TileCollision(enemy.position, Tilemap.Liquids)) && trials > 0);
+                        if(trials > 0)
                         {
-                            Smoke smoke = (Smoke)EntityManager.AddEntity<Smoke>(enemy.position);
-                            smoke.direction = ((MathHelper.Pi * 2f) / smokeCount) * i;
+                            int smokeCount = 5;
+                            for(int i = 0; i < smokeCount; i++)
+                            {
+                                Smoke smoke = (Smoke)EntityManager.AddEntity<Smoke>(enemy.position);
+                                smoke.direction = ((MathHelper.Pi * 2f) / smokeCount) * i;
+                            }
+                        }
+                        else
+                        {
+                            enemy.Destroy();
                         }
                     }
                 }
@@ -127,21 +138,27 @@
             }
             else
             {
-                int trials = 100;
-                Bubble bubble = (Bubble)EntityManager.AddEntity<Bubble>(Vector2.Zero);
-                do
+                int bubbleCount = Main.random.Next(2) + 1;
+                for(int i = 0; i < bubbleCount; i++)
                 {
-                    bubble.position = new Vector2(RandomUtilities.Range(Camera.position.X - (Camera.GetWidth() / 2f), Camera.position.X + (Camera.GetWidth() / 2f)), RandomUtilities.Range(Camera.position.Y - (Camera.GetHeight() / 2f), Camera.position.Y + (Camera.GetHeight() / 2f)));
-                    trials--;
-                } while(!bubble.TileTypeCollision(bubble.position, Tile.water, Tilemap.Liquids) && trials > 0);
-                if(trials > 0)
-                {
-                    bubble.direction = -MathHelper.Pi / 2f;
-                    bubble.alpha = 0f;
-                }
-                else
-                {
-                    bubble.Destroy();
+                    int trials = 100;
+                    Bubble bubble = (Bubble)EntityManager.AddEntity<Bubble>(Vector2.Zero);
+                    do
+                    {
+                        bubble.position = new Vector2(RandomUtilities.Range(Camera.position.X - (Camera.GetWidth() / 2f), Camera.position.X + (Camera.GetWidth() / 2f)), RandomUtilities.Range(Camera.position.Y - (Camera.GetHeight() / 2f), Camera.position.Y + (Camera.GetHeight() / 2f)));
+                        trials--;
+                    } while(!bubble.TileTypeCollision(bubble.position, Tile.water, Tilemap.Liquids) && trials > 0);
+                    if(trials > 0)
+                    {
+                        bubble.direction = -MathHelper.Pi / 2f;
+                        bubble.alpha = 0f;
+                        bubble.life = -30;
+                    }
+                    else
+                    {
+                        bubble.Destroy();
+                        break;
+                    }
                 }
                 bubbleTime = 0;
             }
@@ -361,6 +378,10 @@
                 {
                     environmentals.Add(environmental);
                 }
+                foreach(WorldHotspot hotspot in Main.save.hotspots)
+                {
+                    hotspots.Add(hotspot);
+                }
             }
             else
             {
@@ -390,11 +411,6 @@
             player = (PlayerCharacter)EntityManager.AddEntity<PlayerCharacter>(new Vector2((width * Tile.size) / 2f, 0f));
             Camera.positionTo = player.position;
             Camera.position = Camera.positionTo;
-            Item[] items = Item.items.ToArray();
-            for(int i = 0; i < items.Length; i++)
-            {
-                player.inventory.AddItem(items[i], 99);
-            }
             foreach(WorldEnvironmental worldEnvironmental in environmentals)
             {
                 EnvironmentalEntity environmentalEntity = (EnvironmentalEntity)EntityManager.AddEntity<EnvironmentalEntity>(GetEnvironmentalWorldPosition(worldEnvironmental.x, worldEnvironmental.y, Environmental.GetEnvironmentalById(worldEnvironmental.id)));

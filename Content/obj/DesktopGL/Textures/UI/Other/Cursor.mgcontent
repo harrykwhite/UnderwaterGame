@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Ui/Other/Cursor.png</SourceFile>
-  <SourceTime>2020-10-11T13:06:27.6954459+10:00</SourceTime>
+  <SourceTime>2020-11-01T18:57:02.5212136+10:00</SourceTime>
   <DestFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/bin/DesktopGL/Textures/Ui/Other/Cursor.xnb</DestFile>
-  <DestTime>2020-10-31T15:35:06.7564744+10:00</DestTime>
+  <DestTime>2020-11-01T19:59:39.2367798+10:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+10:00</ImporterTime>
   <Processor>TextureProcessor</Processor>
