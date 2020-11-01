@@ -720,6 +720,30 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Ui/Buttons/Icons/Other/BackIcon.png
 
+#begin Textures/Ui/Buttons/Icons/Other/BackIcon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Ui/Buttons/Icons/Other/BackIcon.png
+
+#begin Textures/Ui/Buttons/Icons/Other/ContinueIcon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Ui/Buttons/Icons/Other/ContinueIcon.png
+
 #begin Textures/Ui/Buttons/Icons/Other/ContinueIcon.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -744,6 +768,18 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Ui/Buttons/Icons/Other/OptionsIcon.png
 
+#begin Textures/Ui/Buttons/Icons/Other/OptionsIcon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Ui/Buttons/Icons/Other/OptionsIcon.png
+
 #begin Textures/Ui/Buttons/Icons/Other/ProduceIcon.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -755,6 +791,30 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/Ui/Buttons/Icons/Other/ProduceIcon.png
+
+#begin Textures/Ui/Buttons/Icons/Other/ProduceIcon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Ui/Buttons/Icons/Other/ProduceIcon.png
+
+#begin Textures/Ui/Buttons/Icons/Other/RestartIcon.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Ui/Buttons/Icons/Other/RestartIcon.png
 
 #begin Textures/Ui/Buttons/Other/Button.png
 /importer:TextureImporter

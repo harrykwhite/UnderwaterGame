@@ -95,6 +95,8 @@
         public readonly LibraryAsset UI_BUTTONS_ICONS_OTHER_CONTINUEICON = new LibraryAsset("Textures/Ui/Buttons/Icons/Other/ContinueIcon");
 
         public readonly LibraryAsset UI_BUTTONS_ICONS_OTHER_PRODUCEICON = new LibraryAsset("Textures/Ui/Buttons/Icons/Other/ProduceIcon");
+        
+        public readonly LibraryAsset UI_BUTTONS_ICONS_OTHER_RESTARTICON = new LibraryAsset("Textures/Ui/Buttons/Icons/Other/RestartIcon");
 
         public readonly LibraryAsset UI_SLIDER_BAR = new LibraryAsset("Textures/Ui/Slider/Bar");
 

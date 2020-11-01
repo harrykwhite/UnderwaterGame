@@ -14,22 +14,28 @@
             Music
         }
 
-        public static List<SoundEmitter> soundEmitters = new List<SoundEmitter>();
+        public static List<SoundEmitter> soundEmitters;
 
-        public static List<SoundLayer> soundLayers = new List<SoundLayer>();
+        public static List<SoundLayer> soundLayers;
 
-        public static List<SoundEmitter> stopSoundEmitters = new List<SoundEmitter>();
+        public static List<SoundEmitter> stopSoundEmitters;
 
-        public static List<SoundLayer> stopSoundLayers = new List<SoundLayer>();
+        public static List<SoundLayer> stopSoundLayers;
 
         public static void Init()
         {
-            stopSoundEmitters.Clear();
-            stopSoundLayers.Clear();
-            stopSoundEmitters.AddRange(soundEmitters);
-            stopSoundLayers.AddRange(soundLayers);
-            soundEmitters.Clear();
-            soundLayers.Clear();
+            stopSoundEmitters = new List<SoundEmitter>();
+            stopSoundLayers = new List<SoundLayer>();
+            if(soundEmitters != null)
+            {
+                stopSoundEmitters.AddRange(soundEmitters);
+            }
+            if(soundLayers != null)
+            {
+                stopSoundLayers.AddRange(soundLayers);
+            }
+            soundEmitters = new List<SoundEmitter>();
+            soundLayers = new List<SoundLayer>();
             LoadLayers();
         }
 

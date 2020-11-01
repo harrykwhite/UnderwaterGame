@@ -17,7 +17,7 @@
 
         public override void OnUse(ItemEntity entity)
         {
-            if(World.player.HurtMagic(5f))
+            if(World.player.HurtMagic(2f))
             {
                 Shoot<FlareMagic>(entity, entity.angleBase, 12f);
             }

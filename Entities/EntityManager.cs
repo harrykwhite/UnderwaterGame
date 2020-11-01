@@ -7,7 +7,12 @@
 
     public static class EntityManager
     {
-        public static List<Entity> entities = new List<Entity>();
+        public static List<Entity> entities;
+
+        public static void Init()
+        {
+            entities = new List<Entity>();
+        }
 
         public static void Update()
         {

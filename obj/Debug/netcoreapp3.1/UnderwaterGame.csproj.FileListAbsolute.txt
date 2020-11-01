@@ -106,3 +106,4 @@ C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\obj\
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Textures\Particles\Bubble.xnb
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Textures\Items\Consumables\HealthKelp.xnb
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Textures\Items\Consumables\MagicKelp.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Textures\UI\Buttons\Icons\Other\RestartIcon.xnb

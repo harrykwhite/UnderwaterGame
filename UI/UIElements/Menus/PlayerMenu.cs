@@ -37,6 +37,11 @@
                 OptionsMenu optionsMenu = (OptionsMenu)UiManager.GetElement<OptionsMenu>();
                 optionsMenu.ToggleOpen(true);
             };
+            IconButton restartButton = AddIconButton(0, Main.textureLibrary.UI_BUTTONS_ICONS_OTHER_RESTARTICON.asset, () => true);
+            restartButton.selectedInteractAction = delegate ()
+            {
+                Main.Restart(true);
+            };
         }
 
         public override void Update()

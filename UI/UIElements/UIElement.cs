@@ -28,9 +28,9 @@
         {
             foreach(UiComponent component in components)
             {
-                if(component is T)
+                if(component is T t)
                 {
-                    return (T)component;
+                    return t;
                 }
             }
             return null;

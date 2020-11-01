@@ -9,9 +9,9 @@
 
     public static class UiManager
     {
-        public static List<UiElement> uiElements = new List<UiElement>();
+        public static List<UiElement> uiElements;
 
-        public static FadeElement[] fadeElements = new FadeElement[4];
+        public static FadeElement[] fadeElements;
 
         public static MenuElement menuCurrent;
 
@@ -19,7 +19,8 @@
 
         public static void Init()
         {
-            uiElements.Clear();
+            uiElements = new List<UiElement>();
+            fadeElements = new FadeElement[4];
             LoadElements();
         }
 
@@ -46,6 +47,7 @@
             AddElement<OptionsMenu>();
             fadeElements[2] = new FadeElement { alphaMax = 1f, getActive = () => Main.loading != null };
             AddElement(fadeElements[2], true);
+            AddElement<LoadingElement>(true);
             AddElement<GameCursorElement>(true);
             AddElement<ScreenFlashElement>();
         }

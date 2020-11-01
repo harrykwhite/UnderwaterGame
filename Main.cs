@@ -86,6 +86,7 @@
             Tile.LoadAll();
             Environmental.LoadAll();
             Option.LoadAll();
+            EntityManager.Init();
             UiManager.Init();
             SoundManager.Init();
             Camera.Init();
@@ -184,11 +185,11 @@
             base.Draw(gameTime);
         }
 
-        public static void Restart()
+        public static void Restart(bool restartSave = false)
         {
             loading = new Thread(delegate ()
             {
-                RestartGame();
+                RestartGame(restartSave);
                 loading = null;
             });
             loading.Start();
@@ -222,18 +223,33 @@
             loading.Start();
         }
 
-        private static void RestartGame()
+        private static void RestartGame(bool restartSave = false)
         {
             while(UiManager.fadeElements[2].alpha < UiManager.fadeElements[2].alphaMax)
             {
                 continue;
             }
             WriteConfig();
-            WriteSave();
-            EntityManager.entities.Clear();
+            configCheck = false;
+            if(restartSave)
+            {
+                if(File.Exists(GetGameDirectory() + "Save.dat"))
+                {
+                    File.Delete(GetGameDirectory() + "Save.dat");
+                }
+                save = null;
+            }
+            else
+            {
+                WriteSave();
+            }
+            saveCheck = false;
+            EntityManager.Init();
             UiManager.Init();
             SoundManager.Init();
+            Camera.Init();
             Lighting.Init();
+            World.Init();
             Camera.positionTo = new Vector2(Camera.GetWidth(), Camera.GetHeight()) / 2f;
             Camera.position = Camera.positionTo;
         }
