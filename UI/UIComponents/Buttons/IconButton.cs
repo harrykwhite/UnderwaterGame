@@ -15,10 +15,8 @@
 
         public override void Draw()
         {
-            Vector2 position = getPosition();
-            float alpha = getAlpha();
-            Main.spriteBatch.Draw(texture, position, null, Color.White * alpha, 0f, new Vector2(texture.Width, texture.Height) / 2f, scale, SpriteEffects.None, 1f);
-            Main.spriteBatch.Draw(icon, position, null, Color.White * alpha, 0f, new Vector2(icon.Width, icon.Height) / 2f, scale, SpriteEffects.None, 1f);
+            Main.spriteBatch.Draw(texture, getPosition(), null, Color.White * getAlpha(), 0f, new Vector2(texture.Width, texture.Height) / 2f, scale, SpriteEffects.None, 1f);
+            Main.spriteBatch.Draw(icon, getPosition(), null, Color.White * getAlpha(), 0f, new Vector2(icon.Width, icon.Height) / 2f, scale, SpriteEffects.None, 1f);
         }
 
         public override void Init()
@@ -34,7 +32,7 @@
 
         protected override bool IsTouching()
         {
-            if(!CanTouch)
+            if(!GetCanTouch())
             {
                 return false;
             }

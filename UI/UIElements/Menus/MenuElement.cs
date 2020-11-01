@@ -17,9 +17,9 @@
 
         protected float alpha;
 
-        protected virtual float AlphaTo => open ? 1f : 0f;
+        protected float alphaTo;
 
-        protected virtual float AlphaSpeed => 0.1f;
+        protected float alphaSpeed = 0.1f;
 
         public bool open;
 
@@ -35,13 +35,19 @@
 
         protected void UpdateAlpha()
         {
-            if(alpha < AlphaTo)
+            if(open)
             {
-                alpha += Math.Min(AlphaTo - alpha, AlphaSpeed);
+                if(alpha < 1f)
+                {
+                    alpha += Math.Min(alphaSpeed, 1f - alpha);
+                }
             }
-            else if(alpha > AlphaTo)
+            else
             {
-                alpha -= Math.Min(alpha - AlphaTo, AlphaSpeed);
+                if(alpha > 0f)
+                {
+                    alpha -= Math.Min(alphaSpeed, alpha);
+                }
             }
         }
 
@@ -81,21 +87,14 @@
             iconButton.getActive = getActive;
             iconButton.getPosition = delegate ()
             {
-                switch(corner)
+                return corner switch
                 {
-                    case 0:
-                        return new Vector2(UiComponent.gap * (count + 1), UiComponent.gap);
-
-                    case 1:
-                        return new Vector2(UiManager.Size.X - (UiComponent.gap * (count + 1)), UiComponent.gap);
-
-                    case 2:
-                        return new Vector2(UiComponent.gap * (count + 1), UiManager.Size.Y - UiComponent.gap);
-
-                    case 3:
-                        return new Vector2(UiManager.Size.X - (UiComponent.gap * (count + 1)), UiManager.Size.Y - UiComponent.gap);
-                }
-                return Vector2.Zero;
+                    0 => new Vector2(UiComponent.gap * (count + 1), UiComponent.gap),
+                    1 => new Vector2(UiManager.GetSize().X - (UiComponent.gap * (count + 1)), UiComponent.gap),
+                    2 => new Vector2(UiComponent.gap * (count + 1), UiManager.GetSize().Y - UiComponent.gap),
+                    3 => new Vector2(UiManager.GetSize().X - (UiComponent.gap * (count + 1)), UiManager.GetSize().Y - UiComponent.gap),
+                    _ => Vector2.Zero,
+                };
             };
             return iconButton;
         }

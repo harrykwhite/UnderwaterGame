@@ -12,7 +12,7 @@
 
         public static Texture2D CreateFilled(Texture2D texture, Color color, bool alphaMatch = false)
         {
-            Texture2D newTexture = new Texture2D(Main.graphicsDeviceCurrent, texture.Width, texture.Height);
+            Texture2D newTexture = new Texture2D(Main.graphicsDevice, texture.Width, texture.Height);
             Color[] newTextureData = new Color[texture.Width * texture.Height];
             texture.GetData(newTextureData);
             for(int i = 0; i < newTextureData.Length; i++)
@@ -37,7 +37,7 @@
             {
                 texture = CreateResized(texture, texture.Width + 2, texture.Height + 2, true, true);
             }
-            Texture2D outlinedTexture = new Texture2D(Main.graphicsDeviceCurrent, texture.Width, texture.Height);
+            Texture2D outlinedTexture = new Texture2D(Main.graphicsDevice, texture.Width, texture.Height);
             Color[] textureData = new Color[texture.Width * texture.Height];
             texture.GetData(textureData);
             Color[,] outlinedTextureDataTwoDimensional = new Color[texture.Width, texture.Height];
@@ -97,7 +97,7 @@
             {
                 yStart += (height - texture.Height) / 2;
             }
-            Texture2D resizedTexture = new Texture2D(Main.graphicsDeviceCurrent, width, height);
+            Texture2D resizedTexture = new Texture2D(Main.graphicsDevice, width, height);
             Color[] textureData = new Color[texture.Width * texture.Height];
             texture.GetData(textureData);
             Color[,] resizedTextureDataTwoDimensional = new Color[width, height];
@@ -125,7 +125,7 @@
 
         public static Texture2D CreateResized(Texture2D texture, int xStart, int yStart, int width, int height)
         {
-            Texture2D resizedTexture = new Texture2D(Main.graphicsDeviceCurrent, width, height);
+            Texture2D resizedTexture = new Texture2D(Main.graphicsDevice, width, height);
             Color[] textureData = new Color[texture.Width * texture.Height];
             texture.GetData(textureData);
             Color[,] resizedTextureDataTwoDimensional = new Color[width, height];

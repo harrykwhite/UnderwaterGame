@@ -60,7 +60,7 @@
         public void RemoveItem(int quantity)
         {
             PlayerMenu playerMenu = (PlayerMenu)UiManager.GetElement<PlayerMenu>();
-            if(!playerMenu.open && playerMenu.Selected)
+            if(!playerMenu.open && playerMenu.GetSelected())
             {
                 World.player.inventory.RemoveItemAt(playerMenu.selectedSlotX, playerMenu.selectedSlotY, playerMenu.selectedGroup, itemType, quantity);
             }

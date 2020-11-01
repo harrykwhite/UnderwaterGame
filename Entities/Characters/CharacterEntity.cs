@@ -173,7 +173,6 @@
             for(int i = 0; i < bloodParticleCount; i++)
             {
                 Blood blood = (Blood)EntityManager.AddEntity<Blood>(position);
-                blood.speed /= 2f;
                 blood.direction = ((MathHelper.Pi * 2f) / bloodParticleCount) * i;
             }
             return true;

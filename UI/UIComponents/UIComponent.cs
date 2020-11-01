@@ -2,14 +2,19 @@
 {
     using Microsoft.Xna.Framework;
     using System;
+    using UnderwaterGame.Ui.UiElements.Menus;
 
     public abstract class UiComponent
     {
+        public MenuElement menuElement;
+
         public Vector2 scale = Vector2.One;
 
         public Vector2 scaleTo = Vector2.One;
 
         public Vector2 scaleMax = new Vector2(1.2f);
+
+        public float scaleSpeed = 0.2f;
 
         public Func<Vector2> getPosition = () => Vector2.Zero;
 
@@ -27,7 +32,7 @@
 
         protected void UpdateScale()
         {
-            scale += (scaleTo - scale) * 0.2f;
+            scale += (scaleTo - scale) * scaleSpeed;
         }
     }
 }

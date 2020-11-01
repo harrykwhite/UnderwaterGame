@@ -54,7 +54,7 @@
             texture.GetData(textureData);
             for(int i = 0; i < tilemapCount; i++)
             {
-                Texture2D newTexture = new Texture2D(Main.graphicsDeviceCurrent, texture.Width, texture.Height);
+                Texture2D newTexture = new Texture2D(Main.graphicsDevice, texture.Width, texture.Height);
                 Color[] newTextureData = new Color[texture.Width * texture.Height];
                 bool left = false;
                 bool right = false;

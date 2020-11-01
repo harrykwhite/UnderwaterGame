@@ -15,8 +15,6 @@
 
         public static MenuElement menuCurrent;
 
-        public static Vector2 Size => new Vector2(Main.GetBufferWidth(), Main.GetBufferHeight()) / scale;
-
         public static int scale = 2;
 
         public static void Init()
@@ -142,15 +140,19 @@
             menuCurrent = null;
             foreach(UiElement element in uiElements)
             {
-                if(element is MenuElement)
+                if(element is MenuElement menuElement)
                 {
-                    MenuElement menuElement = (MenuElement)element;
                     if(menuElement.open)
                     {
                         menuCurrent = menuElement;
                     }
                 }
             }
+        }
+
+        public static Vector2 GetSize()
+        {
+            return new Vector2(Main.GetBufferWidth(), Main.GetBufferHeight()) / scale;
         }
     }
 }

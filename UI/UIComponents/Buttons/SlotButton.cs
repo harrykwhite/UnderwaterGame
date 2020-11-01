@@ -116,7 +116,7 @@
 
         protected override bool IsTouching()
         {
-            if(!CanTouch)
+            if(!GetCanTouch())
             {
                 return false;
             }

@@ -51,7 +51,7 @@
         
         public static int bubbleTime;
 
-        public static int bubbleTimeMax = 60;
+        public static int bubbleTimeMax = 30;
 
         public static WorldHotspot hotspotCurrent;
         
@@ -137,7 +137,6 @@
                 if(trials > 0)
                 {
                     bubble.direction = -MathHelper.Pi / 2f;
-                    bubble.speed /= 2f;
                     bubble.alpha = 0f;
                 }
                 else

@@ -3,12 +3,9 @@
     using Microsoft.Xna.Framework;
     using System;
     using UnderwaterGame.Sound;
-    using UnderwaterGame.Ui.UiElements.Menus;
-
+    
     public abstract class ButtonComponent : UiComponent
     {
-        public MenuElement menuElement;
-
         public bool selected;
 
         public Action selectedAction;
@@ -22,10 +19,6 @@
         public Func<bool> getSelectedInteract;
 
         public bool touching;
-
-        public Func<bool> getCanTouch;
-
-        protected bool CanTouch => getAlpha() > 0f && Main.loading == null && UiManager.menuCurrent == menuElement && (getCanTouch?.Invoke() ?? true);
 
         protected abstract bool IsTouching();
 
@@ -68,6 +61,11 @@
                     }
                 }
             }
+        }
+
+        protected bool GetCanTouch()
+        {
+            return getAlpha() > 0f && UiManager.menuCurrent == menuElement && SliderComponent.locked == null;
         }
     }
 }

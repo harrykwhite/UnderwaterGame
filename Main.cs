@@ -37,9 +37,9 @@
 
         public static SoundLibrary soundLibrary;
 
-        public static GraphicsDevice graphicsDeviceCurrent;
+        public static GraphicsDevice graphicsDevice;
 
-        public static GraphicsDeviceManager graphicsDeviceManagerCurrent;
+        public static GraphicsDeviceManager graphicsDeviceManager;
 
         public static SpriteBatch spriteBatch;
 
@@ -53,16 +53,16 @@
 
         public Main()
         {
-            graphicsDeviceManagerCurrent = new GraphicsDeviceManager(this);
+            graphicsDeviceManager = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
 
         protected override void Initialize()
         {
-            graphicsDeviceCurrent = GraphicsDevice;
-            graphicsDeviceManagerCurrent.PreferredBackBufferWidth = resolutionWidth;
-            graphicsDeviceManagerCurrent.PreferredBackBufferHeight = resolutionHeight;
-            graphicsDeviceManagerCurrent.ApplyChanges();
+            graphicsDevice = GraphicsDevice;
+            graphicsDeviceManager.PreferredBackBufferWidth = resolutionWidth;
+            graphicsDeviceManager.PreferredBackBufferHeight = resolutionHeight;
+            graphicsDeviceManager.ApplyChanges();
             Control.Refresh();
             Window.Title = "Underwater Game";
             Window.AllowUserResizing = false;
@@ -153,15 +153,6 @@
                     }
                     saveCheck = true;
                 }
-            }
-            int idealWidth = Option.fullscreen.GetToggle() ? GraphicsDevice.DisplayMode.Width : resolutionWidth;
-            int idealHeight = Option.fullscreen.GetToggle() ? GraphicsDevice.DisplayMode.Height : resolutionHeight;
-            if(GetBufferWidth() != idealWidth || GetBufferHeight() != idealHeight)
-            {
-                graphicsDeviceManagerCurrent.PreferredBackBufferWidth = idealWidth;
-                graphicsDeviceManagerCurrent.PreferredBackBufferHeight = idealHeight;
-                graphicsDeviceManagerCurrent.ApplyChanges();
-                Window.Position = Option.fullscreen.GetToggle() ? Point.Zero : windowStartingPosition;
             }
             Control.Refresh();
             Control.Update();
@@ -303,12 +294,12 @@
 
         public static int GetBufferWidth()
         {
-            return graphicsDeviceManagerCurrent.PreferredBackBufferWidth;
+            return graphicsDeviceManager.PreferredBackBufferWidth;
         }
 
         public static int GetBufferHeight()
         {
-            return graphicsDeviceManagerCurrent.PreferredBackBufferHeight;
+            return graphicsDeviceManager.PreferredBackBufferHeight;
         }
 
         public static string GetGameDirectory()

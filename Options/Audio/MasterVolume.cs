@@ -1,6 +1,6 @@
-﻿namespace UnderwaterGame.Options.Display
+﻿namespace UnderwaterGame.Options.Audio
 {
-    public class MasterVolume : DisplayOption
+    public class MasterVolume : AudioOption
     {
         protected override void Init()
         {

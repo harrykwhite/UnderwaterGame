@@ -357,7 +357,7 @@
             {
                 return;
             }
-            if(playerInventory.Selected)
+            if(playerInventory.GetSelected())
             {
                 item = inventory.groups[playerInventory.selectedGroup].contents[playerInventory.selectedSlotX, playerInventory.selectedSlotY].item;
             }
@@ -394,7 +394,6 @@
             for(int i = 0; i < bloodParticleCount; i++)
             {
                 Blood blood = (Blood)EntityManager.AddEntity<Blood>(position);
-                blood.speed /= 2f;
                 blood.direction = ((MathHelper.Pi * 2f) / bloodParticleCount) * i;
             }
             return true;
