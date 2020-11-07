@@ -306,23 +306,7 @@
         {
             base.Kill();
             SoundManager.PlaySound(Main.soundLibrary.CHARACTERS_PLAYER_DEATH.asset, SoundManager.Category.Sound);
-            Main.loading = new Thread(delegate ()
-            {
-                Respawn();
-                Main.loading = null;
-            });
-            Main.loading.Start();
-        }
-
-        public void Respawn()
-        {
-            while(UiManager.fadeElements[2].alpha < UiManager.fadeElements[2].alphaMax)
-            {
-                continue;
-            }
-            World.player = (PlayerCharacter)EntityManager.AddEntity<PlayerCharacter>(new Vector2((World.width * Tile.size) / 2f, 0f));
-            Camera.positionTo = World.player.position;
-            Camera.position = Camera.positionTo;
+            Main.Restart(true);
         }
 
         public void RefreshDefense()

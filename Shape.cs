@@ -2,7 +2,6 @@
 {
     using Microsoft.Xna.Framework;
     using System;
-    using System.Net.Http.Headers;
 
     public class Shape
     {

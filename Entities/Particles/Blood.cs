@@ -14,7 +14,7 @@
         {
             SetSprite(Sprite.blood, false);
             depth = 0.725f;
-            speed = 2.5f;
+            speed = 2f;
             direction = MathHelper.ToRadians(Main.random.Next(360));
             blend = Color.White;
         }

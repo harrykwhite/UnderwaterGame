@@ -99,6 +99,11 @@
                 sprite.origin = new Vector2(18f, sprite.textures[0].Height / 2f);
                 return true;
             }
+            if(libraryAsset == Main.textureLibrary.OTHER_CLOUD)
+            {
+                sprite.origin = Vector2.Zero;
+                return true;
+            }
             return false;
         }
 

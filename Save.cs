@@ -1,8 +1,6 @@
 ﻿namespace UnderwaterGame
 {
     using System;
-    using UnderwaterGame.Ui;
-    using UnderwaterGame.Ui.UiElements;
     using UnderwaterGame.Worlds;
 
     [Serializable]

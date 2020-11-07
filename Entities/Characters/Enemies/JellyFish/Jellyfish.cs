@@ -16,7 +16,7 @@
             animator = new Animator(sprite);
             healthMax = 18f;
             health = healthMax;
-            touchDamage = 6f;
+            touchDamage = 8f;
             touchDamagePlayer = true;
             bloodParticleColor = new Color(216, 143, 172);
         }

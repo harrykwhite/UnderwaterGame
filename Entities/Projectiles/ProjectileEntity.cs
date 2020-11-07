@@ -60,8 +60,7 @@
 
         public HitData HitCharacter(Entity target)
         {
-            HitData hitData = new HitData { damage = damage, at = target.position, direction = direction, hitEnemy = hitEnemy, hitPlayer = hitPlayer, hitAction = delegate (CharacterEntity character) { HitCharacter(character); if(!pierce) { Destroy(); } } };
-            return hitData;
+            return new HitData { damage = damage, at = target.position, direction = direction, hitEnemy = hitEnemy, hitPlayer = hitPlayer, hitAction = delegate (CharacterEntity character) { HitCharacter(character); if(!pierce) { Destroy(); } } };
         }
 
         protected virtual void Hit()

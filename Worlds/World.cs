@@ -10,6 +10,7 @@
     using UnderwaterGame.Entities.Characters.Enemies;
     using UnderwaterGame.Entities.Particles;
     using UnderwaterGame.Environmentals;
+    using UnderwaterGame.Sprites;
     using UnderwaterGame.Tiles;
     using UnderwaterGame.Ui;
     using UnderwaterGame.Utilities;
@@ -196,6 +197,11 @@
                         Main.spriteBatch.Draw(Tile.GetTileById(worldTile.id).textures[worldTile.texture], new Vector2(x, y) * Tile.size, null, Tile.GetTileById(worldTile.id).GetTilemapColor() * Tile.GetTileById(worldTile.id).alpha, 0f, Vector2.Zero, 1f, SpriteEffects.None, Tile.GetTileById(worldTile.id).GetTilemapDepth());
                     }
                 }
+            }
+            int cloudCount = ((width * Tile.size) / Sprite.cloud.textures[0].Width) + 2;
+            for(int i = 0; i < cloudCount; i++)
+            {
+                Main.spriteBatch.Draw(Sprite.cloud.textures[i % 2 == 0 ? 0 : 1], new Vector2(i * Sprite.cloud.textures[0].Width, 0f), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 1f);
             }
         }
 
@@ -426,12 +432,6 @@
             {
                 EnvironmentalEntity environmentalEntity = (EnvironmentalEntity)EntityManager.AddEntity<EnvironmentalEntity>(GetEnvironmentalWorldPosition(worldEnvironmental.x, worldEnvironmental.y, Environmental.GetEnvironmentalById(worldEnvironmental.id)));
                 environmentalEntity.SetEnvironmental(Environmental.GetEnvironmentalById(worldEnvironmental.id), worldEnvironmental);
-            }
-            int cloudGap = 128;
-            int cloudCount = ((width * Tile.size) / cloudGap) + 2;
-            for(int i = 0; i < cloudCount; i++)
-            {
-                EntityManager.AddEntity<Cloud>(new Vector2(i * cloudGap, Main.random.Next(-8, 8)));
             }
         }
 

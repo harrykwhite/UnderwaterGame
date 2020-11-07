@@ -13,7 +13,7 @@
             useAngleUpdate = false;
             usePress = true;
             useHide = true;
-            magicAmount = 5f;
+            magicAmount = 10f;
         }
     }
 }

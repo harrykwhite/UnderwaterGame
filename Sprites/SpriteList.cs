@@ -69,7 +69,7 @@
         public static Sprite woodenLeggingsWear;
 
         public static Sprite woodenBoots;
-
+        
         public static Sprite woodenBootsWear;
         
         public static Sprite cloud;

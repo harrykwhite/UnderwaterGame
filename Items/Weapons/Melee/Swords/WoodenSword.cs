@@ -9,7 +9,7 @@
             name = "Wooden Sword";
             sprite = Sprite.woodenSword;
             useTime = 24;
-            damage = 7f;
+            damage = 8f;
             hitboxOffset = 24f;
             swingSprite = Sprite.wideSwing;
         }

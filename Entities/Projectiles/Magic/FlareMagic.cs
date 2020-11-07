@@ -30,11 +30,11 @@
         protected override void Hit()
         {
             base.Hit();
-            int particleCount = 2;
+            int particleCount = 3;
             for(int i = 0; i < particleCount; i++)
             {
                 Fire fire = (Fire)EntityManager.AddEntity<Fire>(position);
-                fire.direction = direction - MathHelper.Pi + ((MathHelper.Pi / 36f) * (i - ((particleCount - 1f) / 2f)));
+                fire.direction = direction - MathHelper.Pi + ((MathHelper.Pi / 12f) * (i - ((particleCount - 1f) / 2f)));
             }
         }
     }

@@ -10,7 +10,7 @@
 
         public Vector2 at;
 
-        public float direction;
+        public float? direction;
 
         public bool hitEnemy;
 

@@ -42,7 +42,7 @@
 
         public float knockbackSpeed;
 
-        public float knockbackSpeedAcc;
+        public float knockbackSpeedAcc = 0.1f;
 
         public float knockbackDirection;
 
@@ -95,6 +95,11 @@
             {
                 flashTime--;
             }
+            if(knockbackSpeed > 0f)
+            {
+                knockbackSpeed -= Math.Min(knockbackSpeedAcc, knockbackSpeed);
+            }
+            velocity += MathUtilities.LengthDirection(knockbackSpeed, knockbackDirection);
             if(health <= 0f)
             {
                 Kill();
@@ -129,12 +134,18 @@
             {
                 return false;
             }
-            float damage = Math.Max(hitData.damage - defense, 0f);
-            health -= damage;
+            float amount = Math.Max(hitData.damage - defense, 1f);
+            health -= amount;
             health = MathUtilities.Clamp(health, 0f, healthMax);
             invincibleTime = invincibleTimeMax;
             flickerTime = flickerTimeMax;
             flashTime = flashTimeMax;
+            knockbackSpeedAcc = 0.1f;
+            if(hitData.direction != null)
+            {
+                knockbackSpeed += amount / 2f;
+                knockbackDirection = hitData.direction.Value;
+            }
             hitData.hitAction?.Invoke(this);
             Camera.Shake(2f, position);
             if(hurtSound != null)
@@ -142,13 +153,13 @@
                 SoundManager.PlaySound(hurtSound, SoundManager.Category.Sound);
             }
             FloatingTextEntity floatingTextEntity = (FloatingTextEntity)EntityManager.AddEntity<FloatingTextEntity>(position);
-            floatingTextEntity.text = Math.Floor(-damage).ToString();
-            floatingTextEntity.speed = 2.5f;
+            floatingTextEntity.text = "-" + amount.ToString();
+            floatingTextEntity.speed = 3f;
             floatingTextEntity.direction = -MathHelper.Pi / 2f;
             for(int i = 0; i < bloodParticleCount; i++)
             {
                 Blood blood = (Blood)EntityManager.AddEntity<Blood>(position);
-                blood.direction = hitData.direction - ((MathHelper.Pi / 12f) * 13f) + ((i / (float)bloodParticleCount) * (MathHelper.Pi / 6f));
+                blood.direction = hitData.direction == null ? ((MathHelper.Pi * 2f) / bloodParticleCount) * i : hitData.direction.Value - MathHelper.Pi + ((MathHelper.Pi / 12f) * (i - ((bloodParticleCount - 1f) / 2f)));
                 blood.blend = bloodParticleColor;
             }
             return true;
@@ -167,8 +178,8 @@
             flickerTime = flickerTimeMax;
             flashTime = flashTimeMax;
             FloatingTextEntity floatingTextEntity = (FloatingTextEntity)EntityManager.AddEntity<FloatingTextEntity>(position);
-            floatingTextEntity.text = "+" + Math.Floor(amount).ToString();
-            floatingTextEntity.speed = 2.5f;
+            floatingTextEntity.text = "+" + amount.ToString();
+            floatingTextEntity.speed = 3f;
             floatingTextEntity.direction = -MathHelper.Pi / 2f;
             for(int i = 0; i < bloodParticleCount; i++)
             {
