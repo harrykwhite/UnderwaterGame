@@ -3,17 +3,16 @@
     using Microsoft.Xna.Framework;
     using System;
     using UnderwaterGame.Utilities;
-    using UnderwaterGame.Worlds;
 
     public abstract class JellyfishEnemy : EnemyCharacter
     {
-        protected Vector2 swimPositionTo;
+        protected int swimTime;
 
-        protected bool swimPositionToReached = true;
+        protected int swimTimeMax = 30;
 
-        protected int swimPositionToTime;
+        protected int swimBreakTime;
 
-        protected int swimPositionToTimeMax = 60 * 2;
+        protected int swimBreakTimeMax = 60;
 
         protected float swimSpeed;
 
@@ -27,37 +26,29 @@
 
         protected void JellyfishUpdate()
         {
-            if(swimPositionToTime > 0)
+            if(swimTime > 0)
             {
-                swimPositionToTime--;
-            }
-            else
-            {
-                do
-                {
-                    swimPositionTo = position + MathUtilities.LengthDirection(RandomUtilities.Range(40f, 60f), MathHelper.ToRadians(Main.random.Next(360)));
-                } while(TileCollisionLine(position, swimPositionTo, World.Tilemap.Solids) || !InWorld(swimPositionTo));
-                swimPositionToTime = swimPositionToTimeMax;
-                swimPositionToReached = false;
-            }
-            float distanceTo = Vector2.Distance(position, swimPositionTo);
-            if(distanceTo <= 20f)
-            {
-                swimPositionToReached = true;
-            }
-            if(!swimPositionToReached && inWater)
-            {
-                swimDirection = MathUtilities.PointDirection(position, swimPositionTo);
                 if(swimSpeed < swimSpeedMax)
                 {
                     swimSpeed += Math.Min(swimSpeedAcc, swimSpeedMax - swimSpeed);
                 }
+                swimTime--;
             }
             else
             {
                 if(swimSpeed > 0f)
                 {
                     swimSpeed -= Math.Min(swimSpeedAcc, swimSpeed);
+                }
+                if(swimBreakTime < swimBreakTimeMax)
+                {
+                    swimBreakTime++;
+                }
+                else
+                {
+                    swimDirection = MathHelper.ToRadians(Main.random.Next(360));
+                    swimTime = swimTimeMax;
+                    swimBreakTime = 0;
                 }
             }
             velocity = MathUtilities.LengthDirection(swimSpeed, swimDirection);

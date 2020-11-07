@@ -6,7 +6,7 @@
 
     public class HitEntity : Entity, IHitCharacter
     {
-        private HitInfo hitInfo = new HitInfo();
+        public HitData hitData = new HitData();
 
         public override void Draw()
         {
@@ -14,36 +14,30 @@
 
         public override void Init()
         {
+            collider = new Collider(new Shape(Shape.Fill.Rectangle, 16, 16), this);
         }
 
         public override void Update()
         {
-            if(life >= 2)
+            if(life > 0)
             {
                 Destroy();
             }
         }
 
-        public HitInfo HitCharacter(Entity target)
+        public HitData HitCharacter(Entity target)
         {
-            return hitInfo;
+            return hitData;
         }
 
-        public void SetHitInfo(float damage, Vector2 at, float direction, bool hitPlayer, bool hitEnemy, Action<CharacterEntity> hitAction = null)
+        public void SetHitData(float damage, Vector2 at, float direction, bool hitPlayer, bool hitEnemy, Action<CharacterEntity> hitAction = null)
         {
-            hitInfo.damage = damage;
-            hitInfo.at = at;
-            hitInfo.direction = direction;
-            hitInfo.hitPlayer = hitPlayer;
-            hitInfo.hitEnemy = hitEnemy;
-            hitInfo.hitAction = hitAction;
-        }
-
-        public void SetScaleInfo(int width, int height)
-        {
-            collider.shape.width = width;
-            collider.shape.height = height;
-            collider.shape.Clear();
+            hitData.damage = damage;
+            hitData.at = at;
+            hitData.direction = direction;
+            hitData.hitPlayer = hitPlayer;
+            hitData.hitEnemy = hitEnemy;
+            hitData.hitAction = hitAction;
         }
     }
 }

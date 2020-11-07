@@ -7,7 +7,7 @@ namespace UnderwaterGame.Tiles.Liquids
         protected override void Init()
         {
             texture = Main.textureLibrary.TILES_LIQUIDS_WATER.asset;
-            textureBorder = new Color(16, 103, 153);
+            textureBorder = new Color(18, 101, 142);
             alpha = 0.2f;
         }
     }

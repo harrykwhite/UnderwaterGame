@@ -45,7 +45,7 @@
             this.itemType = itemType;
             if(this.itemType != null)
             {
-                SetSprite(this.itemType.sprite);
+                SetSprite(this.itemType.sprite, false);
                 animator = new Animator(sprite);
             }
             angleHoldOffset = 0f;

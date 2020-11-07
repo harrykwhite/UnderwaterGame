@@ -99,7 +99,7 @@
 
         public override void Init()
         {
-            SetSprite(Sprite.playerSwim);
+            SetSprite(Sprite.playerSwim, true);
             animator = new Animator(sprite);
             depth = 0.55f;
             inventory = new Inventory(Enum.GetNames(typeof(InventoryGroup)).Length);
@@ -291,9 +291,9 @@
             heldItem.Destroy();
         }
 
-        public override bool Hurt(HitInfo hitInfo)
+        public override bool Hurt(HitData hitData)
         {
-            bool damaged = base.Hurt(hitInfo);
+            bool damaged = base.Hurt(hitData);
             if(damaged)
             {
                 ScreenFlashElement screenFlash = (ScreenFlashElement)UiManager.GetElement<ScreenFlashElement>();

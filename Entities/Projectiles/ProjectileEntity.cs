@@ -49,10 +49,6 @@
                 HitTile();
                 Destroy();
             }
-            if(!InWorld(position))
-            {
-                Destroy();
-            }
             velocity = MathUtilities.LengthDirection(speed, directionInit.Value);
             if(hasGravity)
             {
@@ -62,10 +58,10 @@
             direction = MathUtilities.PointDirection(Vector2.Zero, velocity);
         }
 
-        public HitInfo HitCharacter(Entity target)
+        public HitData HitCharacter(Entity target)
         {
-            HitInfo hitInfo = new HitInfo { damage = damage, at = target.position, direction = direction, hitEnemy = hitEnemy, hitPlayer = hitPlayer, hitAction = delegate (CharacterEntity character) { HitCharacter(character); if(!pierce) { Destroy(); } } };
-            return hitInfo;
+            HitData hitData = new HitData { damage = damage, at = target.position, direction = direction, hitEnemy = hitEnemy, hitPlayer = hitPlayer, hitAction = delegate (CharacterEntity character) { HitCharacter(character); if(!pierce) { Destroy(); } } };
+            return hitData;
         }
 
         protected virtual void Hit()

@@ -13,7 +13,7 @@
         {
             this.environmentalType = environmentalType;
             this.worldEnvironmental = worldEnvironmental;
-            SetSprite(this.environmentalType.sprite);
+            SetSprite(this.environmentalType.sprite, false);
             animator = new Animator(sprite) { speed = Environmental.speed };
         }
 

@@ -4,6 +4,6 @@
 
     public interface IHitCharacter
     {
-        HitInfo HitCharacter(Entity target);
+        HitData HitCharacter(Entity target);
     }
 }

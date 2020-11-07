@@ -10,10 +10,10 @@
 
         public bool touchDamagePlayer;
 
-        public HitInfo HitCharacter(Entity target)
+        public HitData HitCharacter(Entity target)
         {
-            HitInfo hitInfo = new HitInfo { damage = touchDamage, at = target.position, direction = MathUtilities.PointDirection(position, target.position), hitPlayer = touchDamagePlayer, hitEnemy = touchDamageEnemy };
-            return hitInfo;
+            HitData hitData = new HitData { damage = touchDamage, at = target.position, direction = MathUtilities.PointDirection(position, target.position), hitPlayer = touchDamagePlayer, hitEnemy = touchDamageEnemy };
+            return hitData;
         }
     }
 }

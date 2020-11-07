@@ -13,7 +13,7 @@
 
         public override void Init()
         {
-            SetSprite(Sprite.liquid);
+            SetSprite(Sprite.liquid, true);
             depth = 0.725f;
             speed = 3.5f;
             direction = -MathHelper.Pi / 2f;

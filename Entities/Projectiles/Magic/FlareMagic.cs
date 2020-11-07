@@ -13,7 +13,7 @@
 
         public override void Init()
         {
-            SetSprite(Sprite.flareMagic);
+            SetSprite(Sprite.flareMagic, true);
             depth = 0.7125f;
             speed = 4f;
             hasGravity = false;

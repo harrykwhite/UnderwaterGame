@@ -109,7 +109,18 @@
                     if(EntityManager.GetEntityCount<EnemyCharacter>() < spawnMax)
                     {
                         int trials = 100;
-                        EnemyCharacter enemy = (EnemyCharacter)EntityManager.AddEntity(Type.GetType(hotspotCurrent.types[Main.random.Next(hotspotCurrent.types.Length)]), Vector2.Zero);
+                        Type enemyType = null;
+                        do
+                        {
+                            for(int i = 0; i < hotspotCurrent.spawns.Length; i++)
+                            {
+                                if(Main.random.Next(100) <= (hotspotCurrent.spawns[i].chance * 100f))
+                                {
+                                    enemyType = Type.GetType(hotspotCurrent.spawns[i].type);
+                                }
+                            }
+                        } while(enemyType == null);
+                        EnemyCharacter enemy = (EnemyCharacter)EntityManager.AddEntity(enemyType, Vector2.Zero);
                         do
                         {
                             enemy.position = new Vector2(RandomUtilities.Range(Camera.position.X - (Camera.GetWidth() / 2f), Camera.position.X + (Camera.GetWidth() / 2f)), RandomUtilities.Range(Camera.position.Y - (Camera.GetHeight() / 2f), Camera.position.Y + (Camera.GetHeight() / 2f)));
@@ -117,7 +128,7 @@
                         } while((enemy.TileCollision(enemy.position, Tilemap.Solids) || !enemy.TileCollision(enemy.position, Tilemap.Liquids)) && trials > 0);
                         if(trials > 0)
                         {
-                            int smokeCount = 5;
+                            int smokeCount = 6;
                             for(int i = 0; i < smokeCount; i++)
                             {
                                 Smoke smoke = (Smoke)EntityManager.AddEntity<Smoke>(enemy.position);
@@ -336,9 +347,9 @@
             return (new Vector2(x, y) * Tile.size) - new Vector2(0f, environmental.sprite.origin.Y - environmental.sprite.bound.Y);
         }
 
-        public static void AddHotspotAt(int x, int y, int width, int height, string[] types)
+        public static void AddHotspotAt(int x, int y, int width, int height, WorldHotspot.Spawn[] spawns)
         {
-            hotspots.Add(new WorldHotspot(x, y, width, height, types));
+            hotspots.Add(new WorldHotspot(x, y, width, height, spawns));
         }
 
         public static void Generate()
@@ -415,6 +426,12 @@
             {
                 EnvironmentalEntity environmentalEntity = (EnvironmentalEntity)EntityManager.AddEntity<EnvironmentalEntity>(GetEnvironmentalWorldPosition(worldEnvironmental.x, worldEnvironmental.y, Environmental.GetEnvironmentalById(worldEnvironmental.id)));
                 environmentalEntity.SetEnvironmental(Environmental.GetEnvironmentalById(worldEnvironmental.id), worldEnvironmental);
+            }
+            int cloudGap = 128;
+            int cloudCount = ((width * Tile.size) / cloudGap) + 2;
+            for(int i = 0; i < cloudCount; i++)
+            {
+                EntityManager.AddEntity<Cloud>(new Vector2(i * cloudGap, Main.random.Next(-8, 8)));
             }
         }
 

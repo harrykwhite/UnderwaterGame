@@ -12,7 +12,7 @@
 
         public override void Init()
         {
-            SetSprite(Sprite.wood);
+            SetSprite(Sprite.wood, true);
             depth = 0.725f;
             speed = 2f;
             direction = MathHelper.ToRadians(Main.random.Next(360));

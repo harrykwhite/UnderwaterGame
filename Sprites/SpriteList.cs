@@ -71,6 +71,8 @@
         public static Sprite woodenBoots;
 
         public static Sprite woodenBootsWear;
+        
+        public static Sprite cloud;
 
         public static void LoadAll()
         {
@@ -107,6 +109,7 @@
             woodenLeggingsWear = Load(Main.textureLibrary.ITEMS_ARMOURS_LEGS_WOODENLEGGINGSWEAR);
             woodenBoots = Load(Main.textureLibrary.ITEMS_ARMOURS_FEET_WOODENBOOTS);
             woodenBootsWear = Load(Main.textureLibrary.ITEMS_ARMOURS_FEET_WOODENBOOTSWEAR);
+            cloud = Load(Main.textureLibrary.OTHER_CLOUD);
         }
     }
 }

@@ -2,8 +2,6 @@
 {
     using Microsoft.Xna.Framework;
     using UnderwaterGame.Sprites;
-    using UnderwaterGame.Tiles;
-    using UnderwaterGame.Worlds;
 
     public class Bubble : ParticleEntity
     {
@@ -14,7 +12,7 @@
 
         public override void Init()
         {
-            SetSprite(Sprite.bubble);
+            SetSprite(Sprite.bubble, true);
             depth = 0.725f;
             speed = 2f;
             direction = MathHelper.ToRadians(Main.random.Next(360));

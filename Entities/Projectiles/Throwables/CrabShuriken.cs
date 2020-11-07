@@ -13,7 +13,7 @@
 
         public override void Init()
         {
-            SetSprite(Sprite.crabShuriken);
+            SetSprite(Sprite.crabShuriken, true);
             depth = 0.7125f;
             angleAcc = MathHelper.Pi / 36f;
             angleRelative = false;

@@ -57,6 +57,11 @@
                 sprite.SetTextureSheet(libraryAsset.asset, 3);
                 return true;
             }
+            if(libraryAsset == Main.textureLibrary.OTHER_CLOUD)
+            {
+                sprite.SetTextureSheet(libraryAsset.asset, 128);
+                return true;
+            }
             return false;
         }
 

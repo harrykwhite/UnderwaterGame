@@ -25,8 +25,9 @@
         {
             hitEntity = (HitEntity)EntityManager.AddEntity<HitEntity>(entity.position);
             hitEntity.position += MathUtilities.LengthDirection(hitboxOffset + entity.lengthOffset, entity.angleBase);
-            hitEntity.SetHitInfo(damage, hitEntity.position, entity.angleBase, false, true);
-            hitEntity.SetScaleInfo(hitboxSize, hitboxSize);
+            hitEntity.SetHitData(damage, hitEntity.position, entity.angleBase, false, true);
+            hitEntity.collider.shape.width = hitEntity.collider.shape.height = hitboxSize;
+            hitEntity.collider.shape.Clear();
             hitEntity.depth = entity.depth + 0.001f;
             entity.SetSwingEffect(swingSprite, hitboxOffset);
             ((GameCursorElement)UiManager.GetElement<GameCursorElement>()).Expand(0.5f);

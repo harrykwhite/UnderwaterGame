@@ -14,7 +14,7 @@
 
         public override void Init()
         {
-            SetSprite(Sprite.crabGrenade);
+            SetSprite(Sprite.crabGrenade, true);
             depth = 0.7125f;
             angleAcc = MathHelper.Pi / 36f;
             angleRelative = false;
@@ -32,15 +32,16 @@
         protected override void Hit()
         {
             base.Hit();
-            int particleCount = 5;
+            int particleCount = 6;
             for(int i = 0; i < particleCount; i++)
             {
                 Smoke smoke = (Smoke)EntityManager.AddEntity<Smoke>(position);
                 smoke.direction = ((MathHelper.Pi * 2f) / particleCount) * i;
             }
             HitEntity hitEntity = (HitEntity)EntityManager.AddEntity<HitEntity>(position);
-            hitEntity.SetHitInfo(damage, hitEntity.position, RandomUtilities.Range(0f, MathHelper.Pi), hitPlayer, hitEnemy);
-            hitEntity.SetScaleInfo(20, 20);
+            hitEntity.SetHitData(damage, hitEntity.position, RandomUtilities.Range(0f, MathHelper.Pi), hitPlayer, hitEnemy);
+            hitEntity.collider.shape.width = hitEntity.collider.shape.height = 20;
+            hitEntity.collider.shape.Clear();
             Camera.Shake(2f, position);
         }
     }

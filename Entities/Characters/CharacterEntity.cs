@@ -107,35 +107,35 @@
             foreach(Entity hitCharacterEntity in hitCharacterEntities)
             {
                 IHitCharacter hitCharacter = (IHitCharacter)hitCharacterEntity;
-                HitInfo hitInfo = hitCharacter.HitCharacter(this);
-                if(this is PlayerCharacter && !hitInfo.hitPlayer)
+                HitData hitData = hitCharacter.HitCharacter(this);
+                if(this is PlayerCharacter && !hitData.hitPlayer)
                 {
                     continue;
                 }
-                if(this is EnemyCharacter && !hitInfo.hitEnemy)
+                if(this is EnemyCharacter && !hitData.hitEnemy)
                 {
                     continue;
                 }
                 if(hitCharacterEntity.collider.IsTouching(hitCharacterEntity.position, hit))
                 {
-                    Hurt(hitInfo);
+                    Hurt(hitData);
                 }
             }
         }
 
-        public virtual bool Hurt(HitInfo hitInfo)
+        public virtual bool Hurt(HitData hitData)
         {
             if(invincibleTime > 0 || health <= 0f)
             {
                 return false;
             }
-            float damage = Math.Max(hitInfo.damage - defense, 0f);
+            float damage = Math.Max(hitData.damage - defense, 0f);
             health -= damage;
             health = MathUtilities.Clamp(health, 0f, healthMax);
             invincibleTime = invincibleTimeMax;
             flickerTime = flickerTimeMax;
             flashTime = flashTimeMax;
-            hitInfo.hitAction?.Invoke(this);
+            hitData.hitAction?.Invoke(this);
             Camera.Shake(2f, position);
             if(hurtSound != null)
             {
@@ -148,7 +148,7 @@
             for(int i = 0; i < bloodParticleCount; i++)
             {
                 Blood blood = (Blood)EntityManager.AddEntity<Blood>(position);
-                blood.direction = hitInfo.direction - ((MathHelper.Pi / 12f) * 13f) + ((i / (float)bloodParticleCount) * (MathHelper.Pi / 6f));
+                blood.direction = hitData.direction - ((MathHelper.Pi / 12f) * 13f) + ((i / (float)bloodParticleCount) * (MathHelper.Pi / 6f));
                 blood.blend = bloodParticleColor;
             }
             return true;
@@ -182,11 +182,12 @@
         {
             Destroy();
             Camera.Shake(4f, position);
-            for(int i = 0; i < bloodParticleCount; i++)
+            int particleCount = bloodParticleCount * 2;
+            for(int i = 0; i < particleCount; i++)
             {
                 Blood blood = (Blood)EntityManager.AddEntity<Blood>(position);
                 blood.speed /= 2f;
-                blood.direction = ((MathHelper.Pi * 2f) / bloodParticleCount) * i;
+                blood.direction = ((MathHelper.Pi * 2f) / particleCount) * i;
                 blood.blend = bloodParticleColor;
             }
             if(deathSound != null)

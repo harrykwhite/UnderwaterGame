@@ -12,15 +12,14 @@
 
         public override void Init()
         {
-            SetSprite(Sprite.tallJellyfish);
+            SetSprite(Sprite.tallJellyfish, true);
             animator = new Animator(sprite);
-            healthMax = 30f;
+            healthMax = 24f;
             health = healthMax;
             touchDamage = 6f;
             touchDamagePlayer = true;
             bloodParticleColor = new Color(164, 132, 183);
-            swimPositionToTime = swimPositionToTimeMax;
-            swimPositionToTimeMax = 60;
+            swimBreakTimeMax = 30;
             swimTargeted = true;
         }
 

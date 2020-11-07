@@ -52,7 +52,6 @@
 
         public Entity()
         {
-            collider = new Collider(new Shape(Shape.Fill.Rectangle, 16, 16), this);
         }
 
         public abstract void Init();
@@ -130,10 +129,13 @@
             Main.spriteBatch.Draw(texture, position.Value, sourceRectangle, color.Value, rotation.Value, origin.Value, scale.Value, flip.Value, depth.Value);
         }
 
-        public void SetSprite(Sprite sprite)
+        public void SetSprite(Sprite sprite, bool collider)
         {
             this.sprite = sprite;
-            collider.shape = sprite.shape;
+            if(collider)
+            {
+                this.collider = new Collider(sprite.shape, this);
+            }
         }
 
         public bool GetExists()
@@ -209,11 +211,9 @@
             }
         }
 
-        public bool InWorld(Vector2 at, bool hor = true, bool ver = true)
+        public bool InWorld()
         {
-            bool inHor = at.X >= 0f && at.X <= World.width * Tile.size;
-            bool inVer = at.Y >= 0f && at.Y <= World.height * Tile.size;
-            return hor ^ ver ? (hor && inHor) || (ver && inVer) : inHor && inVer;
+            return position.X >= 0f && position.Y >= 0f && position.X <= World.width * Tile.size && position.Y <= World.height * Tile.size;
         }
 
         protected void LockInWorld()

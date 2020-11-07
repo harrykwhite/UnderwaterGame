@@ -12,7 +12,7 @@
 
         public override void Init()
         {
-            SetSprite(Sprite.smoke);
+            SetSprite(Sprite.smoke, false);
             depth = 0.725f;
             speed = 0.5f;
             direction = MathHelper.ToRadians(Main.random.Next(360));

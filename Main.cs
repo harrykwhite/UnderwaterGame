@@ -164,7 +164,7 @@
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(new Color(112, 200, 255));
+            GraphicsDevice.Clear(new Color(107, 205, 255));
             spriteBatch.Begin(sortMode: SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend, transformMatrix: Matrix.CreateTranslation(-Camera.position.X + (Camera.GetWidth() / 2f), -Camera.position.Y + (Camera.GetHeight() / 2f), 0f) * Matrix.CreateScale(Camera.scale, Camera.scale, 0f));
             if(loading == null || UiManager.fadeElements[2].alpha != UiManager.fadeElements[2].alphaMax)
             {

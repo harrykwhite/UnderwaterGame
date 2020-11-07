@@ -13,7 +13,7 @@
 
         public override void Init()
         {
-            SetSprite(Sprite.woodenArrow);
+            SetSprite(Sprite.woodenArrow, true);
             depth = 0.7125f;
             speed = 8f;
         }
