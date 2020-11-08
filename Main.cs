@@ -12,7 +12,6 @@
     using UnderwaterGame.Environmentals;
     using UnderwaterGame.Items;
     using UnderwaterGame.Options;
-    using UnderwaterGame.Sound;
     using UnderwaterGame.Sprites;
     using UnderwaterGame.Tiles;
     using UnderwaterGame.Ui;
@@ -88,10 +87,10 @@
             Option.LoadAll();
             EntityManager.Init();
             UiManager.Init();
-            SoundManager.Init();
             Camera.Init();
             Lighting.Init();
             World.Init();
+            Music.Init();
             Read();
         }
 
@@ -156,9 +155,9 @@
                 EntityManager.Update();
                 Camera.Update();
                 World.Update();
+                Music.Update();
             }
             UiManager.Update();
-            SoundManager.Update();
             base.Update(gameTime);
         }
 
@@ -240,10 +239,10 @@
             saveCheck = false;
             EntityManager.Init();
             UiManager.Init();
-            SoundManager.Init();
             Camera.Init();
             Lighting.Init();
             World.Init();
+            Music.Init();
             Camera.positionTo = new Vector2(Camera.GetWidth(), Camera.GetHeight()) / 2f;
             Camera.position = Camera.positionTo;
         }

@@ -4,7 +4,6 @@
     using Microsoft.Xna.Framework.Graphics;
     using System;
     using UnderwaterGame.Options;
-    using UnderwaterGame.Sound;
     using UnderwaterGame.Ui.UiElements;
     using UnderwaterGame.Utilities;
 
@@ -67,7 +66,7 @@
                         ballSelected = true;
                         if(!ballSelectedPrevious)
                         {
-                            SoundManager.PlaySound(Main.soundLibrary.UI_HOVER.asset, SoundManager.Category.Sound);
+                            SoundUtilities.PlaySound(Main.soundLibrary.UI_HOVER.asset);
                         }
                     }
                     if(Control.MouseLeftPressed())
@@ -75,7 +74,7 @@
                         if(locked != this)
                         {
                             locked = this;
-                            SoundManager.PlaySound(Main.soundLibrary.UI_CLICK.asset, SoundManager.Category.Sound);
+                            SoundUtilities.PlaySound(Main.soundLibrary.UI_CLICK.asset);
                         }
                     }
                 }
@@ -114,7 +113,7 @@
                 {
                     if(scrollSound)
                     {
-                        SoundManager.PlaySound(Main.soundLibrary.UI_SCROLL.asset, SoundManager.Category.Sound);
+                        SoundUtilities.PlaySound(Main.soundLibrary.UI_SCROLL.asset);
                     }
                     scrollSound = !scrollSound;
                     if(option.valueRounded)

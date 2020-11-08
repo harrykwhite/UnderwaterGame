@@ -4,17 +4,37 @@
 
     public class SoundLibrary : Library<SoundEffect>
     {
-        public readonly LibraryAsset MUSIC_LAYER0_TRACK0 = new LibraryAsset("Sounds/Music/Layer0/Track0");
+        public readonly LibraryAsset MUSIC_LAYER0_LOOP0 = new LibraryAsset("Sounds/Music/Layer0/Loop0");
 
-        public readonly LibraryAsset MUSIC_LAYER0_TRACK1 = new LibraryAsset("Sounds/Music/Layer0/Track1");
+        public readonly LibraryAsset MUSIC_LAYER0_LOOP1 = new LibraryAsset("Sounds/Music/Layer0/Loop1");
 
-        public readonly LibraryAsset MUSIC_LAYER0_TRACK2 = new LibraryAsset("Sounds/Music/Layer0/Track2");
+        public readonly LibraryAsset MUSIC_LAYER0_LOOP2 = new LibraryAsset("Sounds/Music/Layer0/Loop2");
 
-        public readonly LibraryAsset MUSIC_LAYER0_TRACK3 = new LibraryAsset("Sounds/Music/Layer0/Track3");
+        public readonly LibraryAsset MUSIC_LAYER0_LOOP3 = new LibraryAsset("Sounds/Music/Layer0/Loop3");
 
-        public readonly LibraryAsset MUSIC_LAYER0_TRACK4 = new LibraryAsset("Sounds/Music/Layer0/Track4");
+        public readonly LibraryAsset MUSIC_LAYER0_LOOP4 = new LibraryAsset("Sounds/Music/Layer0/Loop4");
 
-        public readonly LibraryAsset MUSIC_LAYER0_TRACK5 = new LibraryAsset("Sounds/Music/Layer0/Track5");
+        public readonly LibraryAsset MUSIC_LAYER0_LOOP5 = new LibraryAsset("Sounds/Music/Layer0/Loop5");
+
+        public readonly LibraryAsset MUSIC_COMBAT_INTROSTINGER0 = new LibraryAsset("Sounds/Music/Combat/IntroStinger0");
+
+        public readonly LibraryAsset MUSIC_COMBAT_INTROSTINGER1 = new LibraryAsset("Sounds/Music/Combat/IntroStinger1");
+        
+        public readonly LibraryAsset MUSIC_COMBAT_INTROSTINGER2 = new LibraryAsset("Sounds/Music/Combat/IntroStinger2");
+        
+        public readonly LibraryAsset MUSIC_COMBAT_OUTROSTINGER0 = new LibraryAsset("Sounds/Music/Combat/OutroStinger0");
+        
+        public readonly LibraryAsset MUSIC_COMBAT_OUTROSTINGER1 = new LibraryAsset("Sounds/Music/Combat/OutroStinger1");
+        
+        public readonly LibraryAsset MUSIC_COMBAT_OUTROSTINGER2 = new LibraryAsset("Sounds/Music/Combat/OutroStinger2");
+        
+        public readonly LibraryAsset MUSIC_COMBAT_LOOP0 = new LibraryAsset("Sounds/Music/Combat/Loop0");
+
+        public readonly LibraryAsset MUSIC_COMBAT_LOOP1 = new LibraryAsset("Sounds/Music/Combat/Loop1");
+
+        public readonly LibraryAsset MUSIC_COMBAT_LOOP2 = new LibraryAsset("Sounds/Music/Combat/Loop2");
+
+        public readonly LibraryAsset MUSIC_COMBAT_LOOP3 = new LibraryAsset("Sounds/Music/Combat/Loop3");
 
         public readonly LibraryAsset CHARACTERS_PLAYER_PICKUP0 = new LibraryAsset("Sounds/Characters/Player/Pickup0");
 

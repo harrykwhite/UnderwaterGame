@@ -6,7 +6,7 @@
     {
         public override void Generate()
         {
-            World.AddHotspotAt(0, 0, World.width, World.height, new WorldHotspot.Spawn[2] { new WorldHotspot.Spawn(typeof(Jellyfish).FullName, 0.5f), new WorldHotspot.Spawn(typeof(TallJellyfish).FullName, 0.25f) });
+            World.AddHotspotAt(0, 0, World.width, World.height / 8, new WorldHotspot.Spawn[2] { new WorldHotspot.Spawn(typeof(Jellyfish).FullName, 0.5f), new WorldHotspot.Spawn(typeof(TallJellyfish).FullName, 0.25f) }, 32);
         }
     }
 }

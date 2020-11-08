@@ -2,8 +2,8 @@
 {
     using Microsoft.Xna.Framework;
     using System;
-    using UnderwaterGame.Sound;
-    
+    using UnderwaterGame.Utilities;
+
     public abstract class ButtonComponent : UiComponent
     {
         public bool selected;
@@ -34,7 +34,7 @@
                 selectedAction?.Invoke();
                 if(touching && !selectedPrevious)
                 {
-                    SoundManager.PlaySound(Main.soundLibrary.UI_HOVER.asset, SoundManager.Category.Sound);
+                    SoundUtilities.PlaySound(Main.soundLibrary.UI_HOVER.asset);
                 }
                 if(getSelectedInteract?.Invoke() ?? true)
                 {
@@ -57,7 +57,7 @@
                     }
                     if(interacted)
                     {
-                        SoundManager.PlaySound(Main.soundLibrary.UI_CLICK.asset, SoundManager.Category.Sound);
+                        SoundUtilities.PlaySound(Main.soundLibrary.UI_CLICK.asset);
                     }
                 }
             }

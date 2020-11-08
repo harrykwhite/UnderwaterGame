@@ -28,13 +28,16 @@
 
         public Spawn[] spawns;
 
-        public WorldHotspot(int x, int y, int width, int height, Spawn[] spawns)
+        public int count;
+
+        public WorldHotspot(int x, int y, int width, int height, Spawn[] spawns, int count)
         {
             this.x = x;
             this.y = y;
             this.width = width;
             this.height = height;
             this.spawns = spawns;
+            this.count = count;
         }
     }
 }

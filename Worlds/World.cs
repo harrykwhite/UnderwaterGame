@@ -107,7 +107,7 @@
             {
                 if(hotspotCurrent != null)
                 {
-                    if(EntityManager.GetEntityCount<EnemyCharacter>() < spawnMax)
+                    if(EntityManager.GetEntityCount<EnemyCharacter>() < spawnMax && hotspotCurrent.count > 0)
                     {
                         int trials = 100;
                         Type enemyType = null;
@@ -135,6 +135,7 @@
                                 Smoke smoke = (Smoke)EntityManager.AddEntity<Smoke>(enemy.position);
                                 smoke.direction = ((MathHelper.Pi * 2f) / smokeCount) * i;
                             }
+                            hotspotCurrent.count--;
                         }
                         else
                         {
@@ -353,9 +354,9 @@
             return (new Vector2(x, y) * Tile.size) - new Vector2(0f, environmental.sprite.origin.Y - environmental.sprite.bound.Y);
         }
 
-        public static void AddHotspotAt(int x, int y, int width, int height, WorldHotspot.Spawn[] spawns)
+        public static void AddHotspotAt(int x, int y, int width, int height, WorldHotspot.Spawn[] spawns, int count)
         {
-            hotspots.Add(new WorldHotspot(x, y, width, height, spawns));
+            hotspots.Add(new WorldHotspot(x, y, width, height, spawns, count));
         }
 
         public static void Generate()

@@ -7,7 +7,6 @@
     using System.Collections.Generic;
     using UnderwaterGame.Entities.Characters.Enemies;
     using UnderwaterGame.Entities.Particles;
-    using UnderwaterGame.Sound;
     using UnderwaterGame.Utilities;
 
     public abstract class CharacterEntity : Entity
@@ -150,7 +149,7 @@
             Camera.Shake(2f, position);
             if(hurtSound != null)
             {
-                SoundManager.PlaySound(hurtSound, SoundManager.Category.Sound);
+                SoundUtilities.PlaySound(hurtSound);
             }
             FloatingTextEntity floatingTextEntity = (FloatingTextEntity)EntityManager.AddEntity<FloatingTextEntity>(position);
             floatingTextEntity.text = "-" + amount.ToString();
@@ -203,7 +202,7 @@
             }
             if(deathSound != null)
             {
-                SoundManager.PlaySound(deathSound, SoundManager.Category.Sound);
+                SoundUtilities.PlaySound(deathSound);
             }
         }
     }

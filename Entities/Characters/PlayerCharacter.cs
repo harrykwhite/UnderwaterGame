@@ -3,7 +3,6 @@
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;
     using System;
-    using System.Threading;
     using UnderwaterGame.Entities.Particles;
     using UnderwaterGame.Items;
     using UnderwaterGame.Items.Armours;
@@ -12,14 +11,11 @@
     using UnderwaterGame.Items.Armours.Heads;
     using UnderwaterGame.Items.Armours.Legs;
     using UnderwaterGame.Items.Weapons;
-    using UnderwaterGame.Sound;
     using UnderwaterGame.Sprites;
-    using UnderwaterGame.Tiles;
     using UnderwaterGame.Ui;
     using UnderwaterGame.Ui.UiElements;
     using UnderwaterGame.Ui.UiElements.Menus;
     using UnderwaterGame.Utilities;
-    using UnderwaterGame.Worlds;
 
     public class PlayerCharacter : CharacterEntity
     {
@@ -305,7 +301,7 @@
         public override void Kill()
         {
             base.Kill();
-            SoundManager.PlaySound(Main.soundLibrary.CHARACTERS_PLAYER_DEATH.asset, SoundManager.Category.Sound);
+            SoundUtilities.PlaySound(Main.soundLibrary.CHARACTERS_PLAYER_DEATH.asset);
             Main.Restart(true);
         }
 

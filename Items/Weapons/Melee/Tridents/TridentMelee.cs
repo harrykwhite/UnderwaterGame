@@ -2,7 +2,7 @@
 {
     using Microsoft.Xna.Framework.Audio;
     using UnderwaterGame.Entities;
-    using UnderwaterGame.Sound;
+    using UnderwaterGame.Utilities;
 
     public abstract class TridentMelee : MeleeWeapon
     {
@@ -39,26 +39,14 @@
 
         protected override HitEntity Swing(ItemEntity entity)
         {
-            SoundEffect soundEffect;
-            switch(Main.random.Next(4))
+            SoundEffect soundEffect = (Main.random.Next(4)) switch
             {
-                case 1:
-                    soundEffect = Main.soundLibrary.ITEMS_WEAPONS_MELEE_TRIDENT1.asset;
-                    break;
-
-                case 2:
-                    soundEffect = Main.soundLibrary.ITEMS_WEAPONS_MELEE_TRIDENT2.asset;
-                    break;
-
-                case 3:
-                    soundEffect = Main.soundLibrary.ITEMS_WEAPONS_MELEE_TRIDENT3.asset;
-                    break;
-
-                default:
-                    soundEffect = Main.soundLibrary.ITEMS_WEAPONS_MELEE_TRIDENT0.asset;
-                    break;
-            }
-            SoundManager.PlaySound(soundEffect, SoundManager.Category.Sound);
+                1 => Main.soundLibrary.ITEMS_WEAPONS_MELEE_TRIDENT1.asset,
+                2 => Main.soundLibrary.ITEMS_WEAPONS_MELEE_TRIDENT2.asset,
+                3 => Main.soundLibrary.ITEMS_WEAPONS_MELEE_TRIDENT3.asset,
+                _ => Main.soundLibrary.ITEMS_WEAPONS_MELEE_TRIDENT0.asset,
+            };
+            SoundUtilities.PlaySound(soundEffect);
             Camera.Shake(1f, entity.angleBase);
             return base.Swing(entity);
         }
