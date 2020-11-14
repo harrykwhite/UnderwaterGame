@@ -30,14 +30,14 @@
                 Main.spriteBatch.Draw(itemTextureOutlined, itemPosition, null, Color.White, 0f, new Vector2(dragItem.sprite.bound.X + (dragItem.sprite.bound.Width / 2f), dragItem.sprite.bound.Y + (dragItem.sprite.bound.Height / 2f)) + Vector2.One, 1f, SpriteEffects.None, 1f);
                 if(dragItem.stack)
                 {
-                    DrawUtilities.DrawString(Main.fontLibrary.ARIALSMALL.asset, new DrawUtilities.Text(dragQuantity.ToString()), itemPosition + new Vector2(12f, 14f), Color.White, DrawUtilities.HorizontalAlign.Right, DrawUtilities.VerticalAlign.Bottom);
+                    DrawUtilities.DrawString(Main.fontLibrary.ARIALMEDIUM.asset, new DrawUtilities.Text(dragQuantity.ToString()), itemPosition + new Vector2(12f, 14f), Color.White, DrawUtilities.HorizontalAlign.Right, DrawUtilities.VerticalAlign.Bottom);
                 }
             }
             else
             {
                 if(text != "")
                 {
-                    DrawUtilities.DrawString(Main.fontLibrary.ARIALSMALL.asset, new DrawUtilities.Text(text), mousePosition + new Vector2(4f), Color.White, DrawUtilities.HorizontalAlign.Left, DrawUtilities.VerticalAlign.Top);
+                    DrawUtilities.DrawString(Main.fontLibrary.ARIALMEDIUM.asset, new DrawUtilities.Text(text), mousePosition + new Vector2(4f), Color.White, DrawUtilities.HorizontalAlign.Left, DrawUtilities.VerticalAlign.Top);
                 }
             }
             text = "";

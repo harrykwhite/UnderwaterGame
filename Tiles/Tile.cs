@@ -4,7 +4,6 @@
     using Microsoft.Xna.Framework.Graphics;
     using System;
     using UnderwaterGame.Tiles.Liquids;
-    using UnderwaterGame.Tiles.Solids;
     using UnderwaterGame.Tiles.Walls;
     using UnderwaterGame.Worlds;
 
@@ -47,12 +46,15 @@
 
         public virtual void SetTextures()
         {
-            World.Tilemap tilemap = GetTilemap();
-            int tilemapCount = GetTilemapCount();
-            textures = new Texture2D[tilemapCount];
+            if(this is WallTile)
+            {
+                return;
+            }
+            int textureCount = this is LiquidTile ? 2 : 20;
+            textures = new Texture2D[textureCount];
             Color[] textureData = new Color[texture.Width * texture.Height];
             texture.GetData(textureData);
-            for(int i = 0; i < tilemapCount; i++)
+            for(int i = 0; i < textureCount; i++)
             {
                 Texture2D newTexture = new Texture2D(Main.graphicsDevice, texture.Width, texture.Height);
                 Color[] newTextureData = new Color[texture.Width * texture.Height];
@@ -64,114 +66,112 @@
                 bool topRightSlope = false;
                 bool bottomLeftSlope = false;
                 bool bottomRightSlope = false;
-                switch(tilemap)
+                if(this is LiquidTile)
                 {
-                    case World.Tilemap.Liquids:
-                        switch(i)
-                        {
-                            case 1:
-                                top = true;
-                                break;
-                        }
-                        break;
+                    switch(i)
+                    {
+                        case 1:
+                            top = true;
+                            break;
+                    }
+                }
+                else
+                {
+                    switch(i)
+                    {
+                        case 1:
+                            left = true;
+                            right = true;
+                            top = true;
+                            bottom = true;
+                            break;
 
-                    default:
-                        switch(i)
-                        {
-                            case 1:
-                                left = true;
-                                right = true;
-                                top = true;
-                                bottom = true;
-                                break;
+                        case 2:
+                            left = true;
+                            right = true;
+                            top = true;
+                            break;
 
-                            case 2:
-                                left = true;
-                                right = true;
-                                top = true;
-                                break;
+                        case 3:
+                            left = true;
+                            right = true;
+                            break;
 
-                            case 3:
-                                left = true;
-                                right = true;
-                                break;
+                        case 4:
+                            left = true;
+                            right = true;
+                            bottom = true;
+                            break;
 
-                            case 4:
-                                left = true;
-                                right = true;
-                                bottom = true;
-                                break;
+                        case 5:
+                            left = true;
+                            top = true;
+                            bottom = true;
+                            break;
 
-                            case 5:
-                                left = true;
-                                top = true;
-                                bottom = true;
-                                break;
+                        case 6:
+                            top = true;
+                            bottom = true;
+                            break;
 
-                            case 6:
-                                top = true;
-                                bottom = true;
-                                break;
+                        case 7:
+                            right = true;
+                            top = true;
+                            bottom = true;
+                            break;
 
-                            case 7:
-                                right = true;
-                                top = true;
-                                bottom = true;
-                                break;
+                        case 8:
+                            left = true;
+                            top = true;
+                            break;
 
-                            case 8:
-                                left = true;
-                                top = true;
-                                break;
+                        case 9:
+                            top = true;
+                            break;
 
-                            case 9:
-                                top = true;
-                                break;
+                        case 10:
+                            right = true;
+                            top = true;
+                            break;
 
-                            case 10:
-                                right = true;
-                                top = true;
-                                break;
+                        case 11:
+                            left = true;
+                            break;
 
-                            case 11:
-                                left = true;
-                                break;
+                        case 12:
+                            right = true;
+                            break;
 
-                            case 12:
-                                right = true;
-                                break;
+                        case 13:
+                            left = true;
+                            bottom = true;
+                            break;
 
-                            case 13:
-                                left = true;
-                                bottom = true;
-                                break;
+                        case 14:
+                            bottom = true;
+                            break;
 
-                            case 14:
-                                bottom = true;
-                                break;
+                        case 15:
+                            right = true;
+                            bottom = true;
+                            break;
 
-                            case 15:
-                                right = true;
-                                bottom = true;
-                                break;
+                        case 16:
+                            topLeftSlope = true;
+                            break;
 
-                            case 16:
-                                topLeftSlope = true;
-                                break;
+                        case 17:
+                            topRightSlope = true;
+                            break;
 
-                            case 17:
-                                topRightSlope = true;
-                                break;
+                        case 18:
+                            bottomLeftSlope = true;
+                            break;
 
-                            case 18:
-                                bottomLeftSlope = true;
-                                break;
-
-                            case 19:
-                                bottomRightSlope = true;
-                                break;
-                        }
-                        break;
+                        case 19:
+                            bottomRightSlope = true;
+                            break;
+                    }
                 }
                 for(int y = 0; y < texture.Height; y++)
                 {
@@ -194,66 +194,9 @@
                     }
                 }
                 newTexture.SetData(newTextureData);
+                Main.unloadTextures.Add(newTexture);
                 textures[i] = newTexture;
             }
-        }
-
-        public virtual float GetTilemapDepth()
-        {
-            World.Tilemap tilemap = GetTilemap();
-            switch(tilemap)
-            {
-                case World.Tilemap.Walls:
-                    return 0.25f;
-
-                case World.Tilemap.Liquids:
-                    return 0.75f;
-
-                default:
-                    return 0.65f;
-            }
-        }
-
-        public virtual Color GetTilemapColor()
-        {
-            World.Tilemap tilemap = GetTilemap();
-            switch(tilemap)
-            {
-                case World.Tilemap.Walls:
-                    return new Color(80, 80, 80);
-
-                default:
-                    return Color.White;
-            }
-        }
-
-        public virtual int GetTilemapCount()
-        {
-            World.Tilemap tilemap = GetTilemap();
-            switch(tilemap)
-            {
-                case World.Tilemap.Walls:
-                    return 0;
-
-                case World.Tilemap.Liquids:
-                    return 2;
-
-                default:
-                    return 20;
-            }
-        }
-
-        public virtual World.Tilemap GetTilemap()
-        {
-            if(this is WallTile)
-            {
-                return World.Tilemap.Walls;
-            }
-            if(this is LiquidTile)
-            {
-                return World.Tilemap.Liquids;
-            }
-            return World.Tilemap.Solids;
         }
     }
 }

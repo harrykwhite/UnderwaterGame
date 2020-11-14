@@ -3,6 +3,7 @@
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using System;
+    using System.Collections.Generic;
     using System.IO;
     using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
@@ -15,7 +16,6 @@
     using UnderwaterGame.Sprites;
     using UnderwaterGame.Tiles;
     using UnderwaterGame.Ui;
-    using UnderwaterGame.Ui.UiElements;
     using UnderwaterGame.Worlds;
 
     public class Main : Game
@@ -45,6 +45,8 @@
         public static Point windowStartingPosition;
 
         public static Random random;
+
+        public static List<Texture2D> unloadTextures = new List<Texture2D>();
 
         public static int resolutionWidth = 1600;
 
@@ -77,9 +79,9 @@
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            textureLibrary.LoadAll(Content, typeof(TextureLibrary));
-            fontLibrary.LoadAll(Content, typeof(FontLibrary));
-            soundLibrary.LoadAll(Content, typeof(SoundLibrary));
+            textureLibrary.LoadAll(Content);
+            fontLibrary.LoadAll(Content);
+            soundLibrary.LoadAll(Content);
             Sprite.LoadAll();
             Item.LoadAll();
             Tile.LoadAll();
@@ -102,28 +104,9 @@
                 WriteConfig();
             }
             Content.Unload();
-            foreach(Sprite sprite in Sprite.sprites)
+            foreach(Texture2D unloadTexture in unloadTextures)
             {
-                foreach(Texture2D texture in sprite.textures)
-                {
-                    texture.Dispose();
-                }
-                foreach(Texture2D texture in sprite.texturesFilled)
-                {
-                    texture.Dispose();
-                }
-                foreach(Texture2D texture in sprite.texturesOutlined)
-                {
-                    texture.Dispose();
-                }
-            }
-            Tile[] tiles = Tile.tiles.ToArray();
-            for(int i = 0; i < tiles.Length; i++)
-            {
-                for(int t = 0; t < tiles[i].textures.Length; t++)
-                {
-                    tiles[i].textures[t].Dispose();
-                }
+                unloadTexture.Dispose();
             }
         }
 
@@ -155,9 +138,9 @@
                 EntityManager.Update();
                 Camera.Update();
                 World.Update();
-                Music.Update();
             }
             UiManager.Update();
+            Music.Update();
             base.Update(gameTime);
         }
 

@@ -6,12 +6,10 @@
 
     public class SurfaceTowerGeneration : WorldGeneration
     {
-        private Point[] towerPositions = new Point[3];
-
-        private int towerPositionsGap = 128;
-
         public override void Generate()
         {
+            Point[] towerPositions = new Point[3];
+            int towerPositionsGap = 128;
             for(int i = 0; i < towerPositions.Length; i++)
             {
                 int levelWidth = Main.random.Next(8, 10);
@@ -37,7 +35,7 @@
                 }
                 do
                 {
-                    towerPositions[i].X = Main.random.Next(levelWidth / 2, World.width - (levelWidth / 2));
+                    towerPositions[i].X = Main.random.Next(World.width);
                     towerPositions[i].Y = 0;
                     while(World.GetTileAt(towerPositions[i].X, towerPositions[i].Y, World.Tilemap.Solids) == null)
                     {
@@ -61,7 +59,7 @@
                                 continue;
                             }
                             World.RemoveTileAt(x, y, World.Tilemap.Solids);
-                            World.RemoveTileAt(x, y, World.Tilemap.Walls);
+                            World.RemoveTileAt(x, y, World.Tilemap.FirstWalls);
                             if(x == xStart || y == yStart || x == xEnd || (y == yEnd && l == 0))
                             {
                                 bool placeTile = true;
@@ -87,23 +85,22 @@
                                     World.AddTileAt(x, y, World.Tilemap.Solids, Tile.brick);
                                 }
                             }
-                            World.AddTileAt(x, y, World.Tilemap.Walls, Tile.brickWall);
+                            World.AddTileAt(x, y, World.Tilemap.FirstWalls, Tile.brickWall);
                         }
                     }
                 }
             }
-        }
-
-        private bool ValidTowerPosition(int index)
-        {
-            for(int i = index - 1; i >= 0; i--)
+            bool ValidTowerPosition(int index)
             {
-                if(Math.Abs(towerPositions[i].X - towerPositions[index].X) < towerPositionsGap)
+                for(int i = index - 1; i >= 0; i--)
                 {
-                    return false;
+                    if(Math.Abs(towerPositions[i].X - towerPositions[index].X) < towerPositionsGap)
+                    {
+                        return false;
+                    }
                 }
+                return true;
             }
-            return true;
         }
     }
 }

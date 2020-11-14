@@ -39,7 +39,7 @@
                 Main.spriteBatch.Draw(slot.item.sprite.texturesOutlined[0], getPosition(), null, Color.White * getAlpha(), 0f, new Vector2(slot.item.sprite.bound.X + (slot.item.sprite.bound.Width / 2f), slot.item.sprite.bound.Y + (slot.item.sprite.bound.Height / 2f)) + Vector2.One, 1f, SpriteEffects.None, 1f);
                 if(slot.item.stack)
                 {
-                    DrawUtilities.DrawString(Main.fontLibrary.ARIALSMALL.asset, new DrawUtilities.Text(slot.quantity.ToString()), getPosition() + new Vector2(12f, 14f), Color.White * getAlpha(), DrawUtilities.HorizontalAlign.Right, DrawUtilities.VerticalAlign.Bottom);
+                    DrawUtilities.DrawString(Main.fontLibrary.ARIALMEDIUM.asset, new DrawUtilities.Text(slot.quantity.ToString()), getPosition() + new Vector2(12f, 14f), Color.White * getAlpha(), DrawUtilities.HorizontalAlign.Right, DrawUtilities.VerticalAlign.Bottom);
                 }
             }
             else

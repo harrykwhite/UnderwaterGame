@@ -105,8 +105,10 @@
         public readonly LibraryAsset UI_SLIDER_BALL = new LibraryAsset("Textures/Ui/Slider/Ball");
 
         public readonly LibraryAsset UI_OTHER_CURSOR = new LibraryAsset("Textures/Ui/Other/Cursor");
-
+        
         public readonly LibraryAsset OTHER_CLOUD = new LibraryAsset("Textures/Other/Cloud");
+        
+        public readonly LibraryAsset OTHER_HOTSPOT = new LibraryAsset("Textures/Other/Hotspot");
         
         public readonly LibraryAsset OTHER_PIXEL = new LibraryAsset("Textures/Other/Pixel");
     }

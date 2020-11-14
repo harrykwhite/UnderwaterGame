@@ -5,11 +5,6 @@
 
     public static class TextureUtilities
     {
-        public static Vector2 TextureSize(Texture2D texture)
-        {
-            return new Vector2(texture.Width, texture.Height);
-        }
-
         public static Texture2D CreateFilled(Texture2D texture, Color color, bool alphaMatch = false)
         {
             Texture2D newTexture = new Texture2D(Main.graphicsDevice, texture.Width, texture.Height);
@@ -28,6 +23,7 @@
                 }
             }
             newTexture.SetData(newTextureData);
+            Main.unloadTextures.Add(newTexture);
             return newTexture;
         }
 
@@ -83,6 +79,7 @@
                 }
             }
             outlinedTexture.SetData(GeneralUtilities.AsOneDimensional(outlinedTextureDataTwoDimensional));
+            Main.unloadTextures.Add(outlinedTexture);
             return outlinedTexture;
         }
 
@@ -120,9 +117,10 @@
                 }
             }
             resizedTexture.SetData(GeneralUtilities.AsOneDimensional(resizedTextureDataTwoDimensional));
+            Main.unloadTextures.Add(resizedTexture);
             return resizedTexture;
         }
-
+        
         public static Texture2D CreateResized(Texture2D texture, int xStart, int yStart, int width, int height)
         {
             Texture2D resizedTexture = new Texture2D(Main.graphicsDevice, width, height);
@@ -148,6 +146,7 @@
                 }
             }
             resizedTexture.SetData(GeneralUtilities.AsOneDimensional(resizedTextureDataTwoDimensional));
+            Main.unloadTextures.Add(resizedTexture);
             return resizedTexture;
         }
 

@@ -37,8 +37,9 @@
 
         public static void LoadElements()
         {
-            AddElement<FloatingTextElement>();
+            AddElement<HotspotCountElement>();
             AddElement<CharacterHealthElement>();
+            AddElement<FloatingTextElement>();
             fadeElements[0] = new FadeElement { alphaMax = 0.5f, getActive = () => menuCurrent != null };
             AddElement(fadeElements[0], true);
             AddElement<PlayerMenu>();

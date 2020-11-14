@@ -126,3 +126,5 @@ C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Textures\Particles\Hotspot.xnb
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Sounds\Music\Combat\IntroStinger1.xnb
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Sounds\Music\Combat\IntroStinger2.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Textures\Other\Hotspot.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Textures\Backgrounds\Surface.xnb

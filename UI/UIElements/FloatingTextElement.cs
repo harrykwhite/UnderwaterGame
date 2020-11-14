@@ -15,7 +15,7 @@
             {
                 FloatingTextEntity floatingText = (FloatingTextEntity)floatingTextEntity;
                 Vector2 position = UiManager.WorldToUi(floatingText.position);
-                SpriteFont font = Main.fontLibrary.ARIALLARGE.asset;
+                SpriteFont font = Main.fontLibrary.ARIALMEDIUM.asset;
                 DrawUtilities.DrawStringExt(font, new DrawUtilities.Text(floatingText.text), position, floatingText.blend * floatingText.alpha, floatingText.angle, floatingText.scale, DrawUtilities.HorizontalAlign.Middle, DrawUtilities.VerticalAlign.Middle);
             }
         }

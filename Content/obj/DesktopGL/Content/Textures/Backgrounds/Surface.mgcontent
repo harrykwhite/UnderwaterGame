@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Other/Cloud.png</SourceFile>
-  <SourceTime>2020-11-14T14:43:44.9430723+10:00</SourceTime>
-  <DestFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/bin/DesktopGL/Content/Textures/Other/Cloud.xnb</DestFile>
-  <DestTime>2020-11-14T14:46:04.7598932+10:00</DestTime>
+  <SourceFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Backgrounds/Surface.png</SourceFile>
+  <SourceTime>2020-11-14T17:34:58.0075199+10:00</SourceTime>
+  <DestFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/bin/DesktopGL/Content/Textures/Backgrounds/Surface.xnb</DestFile>
+  <DestTime>2020-11-14T17:35:02.1370723+10:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+10:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

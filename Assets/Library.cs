@@ -1,7 +1,6 @@
 ﻿namespace UnderwaterGame.Assets
 {
     using Microsoft.Xna.Framework.Content;
-    using System;
     using System.Collections.Generic;
     using System.Reflection;
 
@@ -26,7 +25,7 @@
 
         public List<LibraryAsset> assets = new List<LibraryAsset>();
 
-        public void LoadAll(ContentManager content, Type type)
+        public void LoadAll(ContentManager content)
         {
             FieldInfo[] fieldInfo = GetType().GetFields();
             foreach(FieldInfo field in fieldInfo)

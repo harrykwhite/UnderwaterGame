@@ -43,7 +43,7 @@
                     optionTextValue = option.GetToggle() ? "Enabled" : "Disabled";
                     break;
             }
-            DrawUtilities.DrawString(Main.fontLibrary.ARIALSMALL.asset, new DrawUtilities.Text(option.name + ": " + optionTextValue), getPosition() - new Vector2(0f, textGap / 2f), Color.White * getAlpha(), DrawUtilities.HorizontalAlign.Middle, DrawUtilities.VerticalAlign.Middle);
+            DrawUtilities.DrawString(Main.fontLibrary.ARIALMEDIUM.asset, new DrawUtilities.Text(option.name + ": " + optionTextValue), getPosition() - new Vector2(0f, textGap / 2f), Color.White * getAlpha(), DrawUtilities.HorizontalAlign.Middle, DrawUtilities.VerticalAlign.Middle);
         }
 
         public override void Init()

@@ -18,24 +18,18 @@
             }
         }
 
-        public int x;
+        public float x;
 
-        public int y;
-
-        public int width;
-
-        public int height;
+        public float y;
 
         public Spawn[] spawns;
 
         public int count;
 
-        public WorldHotspot(int x, int y, int width, int height, Spawn[] spawns, int count)
+        public WorldHotspot(float x, float y, Spawn[] spawns, int count)
         {
             this.x = x;
             this.y = y;
-            this.width = width;
-            this.height = height;
             this.spawns = spawns;
             this.count = count;
         }

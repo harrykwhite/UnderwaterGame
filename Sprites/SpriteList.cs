@@ -1,6 +1,8 @@
 ﻿namespace UnderwaterGame.Sprites
 {
+    using Microsoft.Xna.Framework;
     using System.Collections.Generic;
+    using UnderwaterGame.Utilities;
 
     public partial class Sprite
     {
@@ -35,6 +37,8 @@
         public static Sprite liquid;
 
         public static Sprite fire;
+
+        public static Sprite hotspot;
 
         public static Sprite woodenArrow;
 
@@ -72,8 +76,6 @@
         
         public static Sprite woodenBootsWear;
         
-        public static Sprite cloud;
-
         public static void LoadAll()
         {
             bigSeaweed = Load(Main.textureLibrary.ENVIRONMENTALS_BIGSEAWEED);
@@ -91,6 +93,7 @@
             crabShell = Load(Main.textureLibrary.PARTICLES_CRABSHELL);
             liquid = Load(Main.textureLibrary.PARTICLES_LIQUID);
             fire = Load(Main.textureLibrary.PARTICLES_FIRE);
+            hotspot = Load(Main.textureLibrary.PARTICLES_HOTSPOT);
             woodenArrow = Load(Main.textureLibrary.PROJECTILES_ARROWS_WOODENARROW);
             flareMagic = Load(Main.textureLibrary.PROJECTILES_MAGIC_FLAREMAGIC);
             woodenTrident = Load(Main.textureLibrary.ITEMS_WEAPONS_MELEE_TRIDENTS_WOODENTRIDENT);
@@ -109,7 +112,6 @@
             woodenLeggingsWear = Load(Main.textureLibrary.ITEMS_ARMOURS_LEGS_WOODENLEGGINGSWEAR);
             woodenBoots = Load(Main.textureLibrary.ITEMS_ARMOURS_FEET_WOODENBOOTS);
             woodenBootsWear = Load(Main.textureLibrary.ITEMS_ARMOURS_FEET_WOODENBOOTSWEAR);
-            cloud = Load(Main.textureLibrary.OTHER_CLOUD);
         }
     }
 }

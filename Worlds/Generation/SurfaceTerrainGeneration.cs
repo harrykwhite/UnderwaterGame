@@ -6,8 +6,8 @@
     {
         public override void Generate()
         {
-            int waterLevel = 16;
-            int wallLevel = waterLevel + 64;
+            int waterLevel = 20;
+            int wallLevel = waterLevel + 62;
             int sandLevel = wallLevel + 2;
             int stoneLevel = sandLevel + 8;
             int levelOffset = 0;
@@ -36,16 +36,16 @@
                     if(y >= stoneLevel + levelOffset)
                     {
                         World.AddTileAt(x, y, World.Tilemap.Solids, Tile.stone);
-                        World.AddTileAt(x, y, World.Tilemap.Walls, Tile.stoneWall);
+                        World.AddTileAt(x, y, World.Tilemap.FirstWalls, Tile.stoneWall);
                     }
                     else if(y >= sandLevel + levelOffset)
                     {
                         World.AddTileAt(x, y, World.Tilemap.Solids, Tile.sand);
-                        World.AddTileAt(x, y, World.Tilemap.Walls, Tile.sandWall);
+                        World.AddTileAt(x, y, World.Tilemap.FirstWalls, Tile.sandWall);
                     }
                     else if(y >= wallLevel + levelOffset)
                     {
-                        World.AddTileAt(x, y, World.Tilemap.Walls, Tile.sandWall);
+                        World.AddTileAt(x, y, World.Tilemap.FirstWalls, Tile.sandWall);
                     }
                     if(y >= waterLevel)
                     {

@@ -28,10 +28,13 @@ namespace UnderwaterGame
         
         public static void Init()
         {
+            combatLoop = Main.random.Next(combatLoopMax + 1);
         }
 
         public static void Update()
         {
+            float layerVolumeAcc = 0.1f;
+            float combatVolumeAcc = 0.01f;
             int layerLoopPrevious = layerLoop;
             layerLoop = 0;
             if(World.player != null)
@@ -60,13 +63,13 @@ namespace UnderwaterGame
             }
             if(layerLoopInstance.Volume < 1f)
             {
-                layerLoopInstance.Volume += Math.Min(0.1f, 1f - layerLoopInstance.Volume);
+                layerLoopInstance.Volume += Math.Min(layerVolumeAcc, 1f - layerLoopInstance.Volume);
             }
             if(layerLoopInstancePrevious != null)
             {
                 if(layerLoopInstancePrevious.Volume > 0f)
                 {
-                    layerLoopInstancePrevious.Volume -= Math.Min(0.1f, layerLoopInstancePrevious.Volume);
+                    layerLoopInstancePrevious.Volume -= Math.Min(layerVolumeAcc, layerLoopInstancePrevious.Volume);
                 }
                 else
                 {
@@ -116,7 +119,7 @@ namespace UnderwaterGame
                 }
                 if(combatLoopInstance.Volume < 1f)
                 {
-                    combatLoopInstance.Volume += Math.Min(0.1f, 1f - combatLoopInstance.Volume);
+                    combatLoopInstance.Volume += Math.Min(combatVolumeAcc, 1f - combatLoopInstance.Volume);
                 }
             }
             else
@@ -137,7 +140,7 @@ namespace UnderwaterGame
                 {
                     if(combatLoopInstance.Volume > 0f)
                     {
-                        combatLoopInstance.Volume -= Math.Min(0.1f, combatLoopInstance.Volume);
+                        combatLoopInstance.Volume -= Math.Min(combatVolumeAcc, combatLoopInstance.Volume);
                     }
                     else
                     {

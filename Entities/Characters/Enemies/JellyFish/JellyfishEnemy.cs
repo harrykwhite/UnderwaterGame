@@ -48,12 +48,19 @@
                 }
                 else
                 {
-                    Vector2 swimPosition;
-                    do
+                    if(Vector2.Distance(position, new Vector2(hotspot.x, hotspot.y)) > Main.textureLibrary.OTHER_HOTSPOT.asset.Width / 2f)
                     {
-                        swimDirection = MathHelper.ToRadians(Main.random.Next(360));
-                        swimPosition = position + MathUtilities.LengthDirection(swimSpeedMax * swimTimeMax, swimDirection);
-                    } while(TileCollisionLine(position, swimPosition, World.Tilemap.Solids) || swimPosition.X < 0f || swimPosition.Y < 0f || position.X > World.width * Tile.size || position.Y > World.height * Tile.size);
+                        swimDirection = MathUtilities.PointDirection(position, new Vector2(hotspot.x, hotspot.y));
+                    }
+                    else
+                    {
+                        Vector2 swimPosition;
+                        do
+                        {
+                            swimDirection = MathHelper.ToRadians(Main.random.Next(360));
+                            swimPosition = position + MathUtilities.LengthDirection(swimSpeedMax * swimTimeMax, swimDirection);
+                        } while(TileCollisionLine(position, swimPosition, World.Tilemap.Solids) || Vector2.Distance(swimPosition, new Vector2(hotspot.x, hotspot.y)) > Main.textureLibrary.OTHER_HOTSPOT.asset.Width / 2f || swimPosition.X < 0f || swimPosition.Y < 0f || position.X > World.width * Tile.size || position.Y > World.height * Tile.size);
+                    }
                     swimTime = swimTimeMax;
                     swimBreakTime = 0;
                 }
