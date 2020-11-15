@@ -23,11 +23,11 @@
                 }
                 barShape.position.X = (int)(barPosition.X - (barShape.width / 2f));
                 barShape.position.Y = (int)(barPosition.Y - (barShape.height / 2f));
-                DrawUtilities.DrawBar(barShape, character.health / character.healthMax, Color.White, Color.White * 0.5f, 0);
+                DrawUtilities.DrawBar(barShape, character.health / character.healthMax, Color.White, Color.White * 0.25f, 0);
                 if(World.player == character)
                 {
                     barShape.position.Y += 4f;
-                    DrawUtilities.DrawBar(barShape, World.player.magic / World.player.magicMax, Color.White, Color.White * 0.5f, 0);
+                    DrawUtilities.DrawBar(barShape, World.player.magic / World.player.magicMax, Color.White, Color.White * 0.25f, 0);
                 }
             }
         }

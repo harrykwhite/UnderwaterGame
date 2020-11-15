@@ -60,7 +60,7 @@
             {
                 if(!element.loadingUpdate)
                 {
-                    if(Main.loading != null && fadeElements[2].alpha == fadeElements[2].alphaMax)
+                    if(Main.loading != null)
                     {
                         continue;
                     }

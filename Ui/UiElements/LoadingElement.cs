@@ -29,21 +29,29 @@
 
         public override void Update()
         {
-            if(ellipsisTime < ellipsisTimeMax)
+            if(Main.loading == null)
             {
-                ellipsisTime++;
+                ellipsisCount = 0;
+                ellipsisTime = 0;
             }
             else
             {
-                if(ellipsisCount < ellipsisCountMax)
+                if(ellipsisTime < ellipsisTimeMax)
                 {
-                    ellipsisCount++;
+                    ellipsisTime++;
                 }
                 else
                 {
-                    ellipsisCount = 0;
+                    if(ellipsisCount < ellipsisCountMax)
+                    {
+                        ellipsisCount++;
+                    }
+                    else
+                    {
+                        ellipsisCount = 0;
+                    }
+                    ellipsisTime = 0;
                 }
-                ellipsisTime = 0;
             }
         }
     }

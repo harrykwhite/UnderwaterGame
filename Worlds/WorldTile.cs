@@ -8,7 +8,5 @@
         public byte id;
 
         public byte texture;
-
-        public byte lighting;
     }
 }

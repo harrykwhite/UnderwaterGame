@@ -9,7 +9,7 @@
         {
             SoundEffectInstance soundEffectInstance = soundEffect.CreateInstance();
             soundEffectInstance.Play();
-            soundEffectInstance.Volume = volume * Option.soundVolume.value;
+            soundEffectInstance.Volume = volume * Option.soundVolume.value * Option.masterVolume.value;
             soundEffectInstance.Pitch = pitch;
             soundEffectInstance.Pan = pan;
             return soundEffectInstance;
@@ -19,7 +19,7 @@
         {
             SoundEffectInstance soundEffectInstance = soundEffect.CreateInstance();
             soundEffectInstance.Play();
-            soundEffectInstance.Volume = RandomUtilities.Range(volumeMin, volumeMax) * Option.soundVolume.value;
+            soundEffectInstance.Volume = RandomUtilities.Range(volumeMin, volumeMax) * Option.soundVolume.value * Option.masterVolume.value;
             soundEffectInstance.Pitch = RandomUtilities.Range(pitchMin, pitchMax);
             soundEffectInstance.Pan = RandomUtilities.Range(panMin, panMax);
             return soundEffectInstance;

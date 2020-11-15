@@ -19,7 +19,7 @@
 
         private static float shakeTime;
 
-        private static float shakeSpeed = (MathHelper.Pi * 2f) / 9f;
+        private static float shakeSpeed = MathHelper.Pi / 6f;
 
         public static Vector2 position;
 
@@ -45,10 +45,10 @@
             positionTo.Y = MathUtilities.Clamp(positionTo.Y, GetHeight() / 2f, (World.height * Tile.size) - (GetHeight() / 2f));
             position.X += (float)(positionTo.X - position.X) * speed;
             position.Y += (float)(positionTo.Y - position.Y) * speed;
-            position += shake * (float)Math.Sin(shakeTime);
             shake *= 0.9f;
             shakeTime += shakeSpeed;
             shakeTime %= MathHelper.Pi * 2f;
+            position += shake * (float)Math.Sin(shakeTime);
             position.X = MathUtilities.Clamp(position.X, GetWidth() / 2f, (World.width * Tile.size) - (GetWidth() / 2f));
             position.Y = MathUtilities.Clamp(position.Y, GetHeight() / 2f, (World.height * Tile.size) - (GetHeight() / 2f));
         }

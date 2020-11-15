@@ -6,7 +6,7 @@
     {
         public override void Generate()
         {
-            int waterLevel = 20;
+            int waterLevel = 24;
             int wallLevel = waterLevel + 62;
             int sandLevel = wallLevel + 2;
             int stoneLevel = sandLevel + 8;

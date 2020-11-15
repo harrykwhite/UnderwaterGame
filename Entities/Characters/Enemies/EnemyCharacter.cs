@@ -1,10 +1,8 @@
-﻿using UnderwaterGame.Worlds;
-
-namespace UnderwaterGame.Entities.Characters.Enemies
+﻿namespace UnderwaterGame.Entities.Characters.Enemies
 {
     public abstract class EnemyCharacter : CharacterEntity, IHitCharacter
     {
-        public WorldHotspot hotspot;
+        public Hotspot hotspot;
 
         public float touchDamage;
 
@@ -23,6 +21,7 @@ namespace UnderwaterGame.Entities.Characters.Enemies
             if(hotspot.count > 0)
             {
                 hotspot.count--;
+                hotspot.countScale = hotspot.countScaleMax;
             }
         }
     }

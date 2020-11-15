@@ -39,7 +39,7 @@
                 directionInit = direction;
             }
             direction += directionAcc;
-            angle += angleAcc * (float)Math.Cos(direction);
+            angle += angleAcc * ((float)Math.Cos(direction) >= 0f ? 1f : -1f);
             if(angleRelative)
             {
                 angle = direction;

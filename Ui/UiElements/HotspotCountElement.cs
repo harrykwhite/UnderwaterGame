@@ -11,9 +11,9 @@
     {
         public override void Draw()
         {
-            foreach(WorldHotspot hotspot in World.hotspots)
+            foreach(Hotspot hotspot in World.hotspots)
             {
-                DrawUtilities.DrawString(Main.fontLibrary.ARIALMEDIUM.asset, new DrawUtilities.Text(hotspot.count.ToString() + " enemies"), UiManager.WorldToUi(new Vector2(hotspot.x, hotspot.y)), Color.White, DrawUtilities.HorizontalAlign.Middle, DrawUtilities.VerticalAlign.Middle);
+                DrawUtilities.DrawStringExt(Main.fontLibrary.ARIALMEDIUM.asset, new DrawUtilities.Text(hotspot.count.ToString() + " enemies"), UiManager.WorldToUi(hotspot.position), Color.White, 0f, new Vector2(hotspot.countScale), DrawUtilities.HorizontalAlign.Middle, DrawUtilities.VerticalAlign.Middle);
             }
             List<Entity> characterEntities = EntityManager.entities.FindAll((Entity entity) => entity is CharacterEntity);
             foreach(Entity characterEntity in characterEntities)
@@ -27,11 +27,11 @@
                 }
                 barShape.position.X = (int)(barPosition.X - (barShape.width / 2f));
                 barShape.position.Y = (int)(barPosition.Y - (barShape.height / 2f));
-                DrawUtilities.DrawBar(barShape, character.health / character.healthMax, Color.White, Color.White * 0.5f, 0);
+                DrawUtilities.DrawBar(barShape, character.health / character.healthMax, Color.White, Color.White * 0.25f, 0);
                 if(World.player == character)
                 {
                     barShape.position.Y += 4f;
-                    DrawUtilities.DrawBar(barShape, World.player.magic / World.player.magicMax, Color.White, Color.White * 0.5f, 0);
+                    DrawUtilities.DrawBar(barShape, World.player.magic / World.player.magicMax, Color.White, Color.White * 0.25f, 0);
                 }
             }
         }

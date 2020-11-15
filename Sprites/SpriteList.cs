@@ -38,7 +38,7 @@
 
         public static Sprite fire;
 
-        public static Sprite hotspot;
+        public static Sprite hotspotParticle;
 
         public static Sprite woodenArrow;
 
@@ -93,7 +93,7 @@
             crabShell = Load(Main.textureLibrary.PARTICLES_CRABSHELL);
             liquid = Load(Main.textureLibrary.PARTICLES_LIQUID);
             fire = Load(Main.textureLibrary.PARTICLES_FIRE);
-            hotspot = Load(Main.textureLibrary.PARTICLES_HOTSPOT);
+            hotspotParticle = Load(Main.textureLibrary.PARTICLES_HOTSPOTPARTICLE);
             woodenArrow = Load(Main.textureLibrary.PROJECTILES_ARROWS_WOODENARROW);
             flareMagic = Load(Main.textureLibrary.PROJECTILES_MAGIC_FLAREMAGIC);
             woodenTrident = Load(Main.textureLibrary.ITEMS_WEAPONS_MELEE_TRIDENTS_WOODENTRIDENT);

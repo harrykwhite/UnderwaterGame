@@ -35,7 +35,7 @@
         public static FontLibrary fontLibrary;
 
         public static SoundLibrary soundLibrary;
-
+        
         public static GraphicsDevice graphicsDevice;
 
         public static GraphicsDeviceManager graphicsDeviceManager;
@@ -51,6 +51,8 @@
         public static int resolutionWidth = 1600;
 
         public static int resolutionHeight = 900;
+
+        public static int elapsedTime;
 
         public Main()
         {
@@ -112,6 +114,7 @@
 
         protected override void Update(GameTime gameTime)
         {
+            elapsedTime = gameTime.ElapsedGameTime.Milliseconds;
             if(loading == null)
             {
                 if(!configCheck)
@@ -133,7 +136,7 @@
             }
             Control.Refresh();
             Control.Update();
-            if(loading == null || UiManager.fadeElements[2].alpha != UiManager.fadeElements[2].alphaMax)
+            if(loading == null)
             {
                 EntityManager.Update();
                 Camera.Update();

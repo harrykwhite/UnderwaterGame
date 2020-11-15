@@ -73,23 +73,22 @@
         {
             DrawSelf();
             int armourIndex = animator.sprite == Sprite.playerIdle ? Sprite.playerSwim.textures.Length - 1 : (int)animator.index;
-            Color armourColor = flashTime > 0 ? Color.White : blend;
             float armourDepth = depth + 0.0005f;
             if(armourHead != null)
             {
-                DrawSelf(flashTime > 0 ? armourHead.wearSprite.texturesFilled[armourIndex] : armourHead.wearSprite.textures[armourIndex], color: armourColor, depth: armourDepth);
+                DrawSelf(armourHead.wearSprite.textures[armourIndex], depth: armourDepth);
             }
             if(armourChest != null)
             {
-                DrawSelf(flashTime > 0 ? armourChest.wearSprite.texturesFilled[armourIndex] : armourChest.wearSprite.textures[armourIndex], color: armourColor, depth: armourDepth);
+                DrawSelf(armourChest.wearSprite.textures[armourIndex], depth: armourDepth);
             }
             if(armourLegs != null)
             {
-                DrawSelf(flashTime > 0 ? armourLegs.wearSprite.texturesFilled[armourIndex] : armourLegs.wearSprite.textures[armourIndex], color: armourColor, depth: armourDepth);
+                DrawSelf(armourLegs.wearSprite.textures[armourIndex], depth: armourDepth);
             }
             if(armourFeet != null)
             {
-                DrawSelf(flashTime > 0 ? armourFeet.wearSprite.texturesFilled[armourIndex] : armourFeet.wearSprite.textures[armourIndex], color: armourColor, depth: armourDepth);
+                DrawSelf(armourFeet.wearSprite.textures[armourIndex], depth: armourDepth);
             }
         }
 
