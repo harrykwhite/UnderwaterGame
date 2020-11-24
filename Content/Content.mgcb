@@ -150,11 +150,23 @@
 /processorParam:Quality=Best
 /build:Sounds/Items/Weapons/Melee/Trident3.wav
 
-#begin Sounds/Music/Combat/Loop0.wav
+#begin Sounds/Music/Combat/IntroStinger0.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Music/Combat/Loop0.wav
+/build:Sounds/Music/Combat/IntroStinger0.wav
+
+#begin Sounds/Music/Combat/IntroStinger1.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Music/Combat/IntroStinger1.wav
+
+#begin Sounds/Music/Combat/IntroStinger2.wav
+/importer:WavImporter
+/processor:SoundEffectProcessor
+/processorParam:Quality=Best
+/build:Sounds/Music/Combat/IntroStinger2.wav
 
 #begin Sounds/Music/Combat/Loop0.wav
 /importer:WavImporter
@@ -168,18 +180,6 @@
 /processorParam:Quality=Best
 /build:Sounds/Music/Combat/Loop1.wav
 
-#begin Sounds/Music/Combat/Loop1.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Sounds/Music/Combat/Loop1.wav
-
-#begin Sounds/Music/Combat/Loop2.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Sounds/Music/Combat/Loop2.wav
-
 #begin Sounds/Music/Combat/Loop2.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -192,29 +192,23 @@
 /processorParam:Quality=Best
 /build:Sounds/Music/Combat/Loop3.wav
 
-#begin Sounds/Music/Combat/Loop3.wav
+#begin Sounds/Music/Combat/OutroStinger0.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Music/Combat/Loop3.wav
+/build:Sounds/Music/Combat/OutroStinger0.wav
 
-#begin Sounds/Music/Combat/Stinger0.wav
+#begin Sounds/Music/Combat/OutroStinger1.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Music/Combat/Stinger0.wav
+/build:Sounds/Music/Combat/OutroStinger1.wav
 
-#begin Sounds/Music/Combat/Stinger1.wav
+#begin Sounds/Music/Combat/OutroStinger2.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
 /processorParam:Quality=Best
-/build:Sounds/Music/Combat/Stinger1.wav
-
-#begin Sounds/Music/Combat/Stinger2.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Sounds/Music/Combat/Stinger2.wav
+/build:Sounds/Music/Combat/OutroStinger2.wav
 
 #begin Sounds/Music/Layer0/Loop0.wav
 /importer:WavImporter
@@ -558,7 +552,7 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Items/Weapons/Ranged/Throwables/CrabShuriken.png
 
-#begin Textures/Other/Cloud.png
+#begin Textures/Other/HotspotInner.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -568,9 +562,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Other/Cloud.png
+/build:Textures/Other/HotspotInner.png
 
-#begin Textures/Other/Hotspot.png
+#begin Textures/Other/HotspotOuter.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -580,7 +574,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Other/Hotspot.png
+/build:Textures/Other/HotspotOuter.png
 
 #begin Textures/Other/Pixel.png
 /importer:TextureImporter
@@ -737,6 +731,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/Tiles/Solids/Brick.png
+
+#begin Textures/Tiles/Solids/Cloud.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Tiles/Solids/Cloud.png
 
 #begin Textures/Tiles/Solids/Sand.png
 /importer:TextureImporter

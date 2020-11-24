@@ -44,7 +44,7 @@
             {
                 angle = direction;
             }
-            if(TileCollision(position, World.Tilemap.Solids))
+            if(TileCollision(position, World.Tilemap.FirstSolids))
             {
                 HitTile();
                 Destroy();

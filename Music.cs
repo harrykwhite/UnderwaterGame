@@ -22,10 +22,6 @@ namespace UnderwaterGame
         public static SoundEffectInstance layerLoopInstancePrevious;
 
         public static bool combat;
-
-        public static float combatVolume;
-
-        public static float combatVolumeAcc = 0.01f;
         
         public static int combatLoop;
 
@@ -39,7 +35,9 @@ namespace UnderwaterGame
 
         public static SoundEffectInstance combatLoopInstancePrevious;
 
-        public static SoundEffectInstance combatStingerInstance;
+        public static SoundEffectInstance combatIntroStingerInstance;
+        
+        public static SoundEffectInstance combatOutroStingerInstance;
 
         public static void Init()
         {
@@ -143,23 +141,17 @@ namespace UnderwaterGame
                     combatLoopInstance = soundEffect.CreateInstance();
                     combatLoopInstance.Play();
                 }
-                if(Main.loading == null && World.hotspotCurrent != null)
+                if(Main.loading != null || World.hotspotCurrent == null)
                 {
-                    if(combatVolume < 1f)
+                    SoundEffect soundEffect = Main.random.Next(3) switch
                     {
-                        combatVolume += Math.Min(combatVolumeAcc, 1f - combatVolume);
-                    }
-                }
-                else
-                {
-                    if(combatVolume > 0f)
-                    {
-                        combatVolume -= Math.Min(combatVolumeAcc, combatVolume);
-                    }
-                    else
-                    {
-                        combat = false;
-                    }
+                        1 => Main.soundLibrary.MUSIC_COMBAT_OUTROSTINGER1.asset,
+                        2 => Main.soundLibrary.MUSIC_COMBAT_OUTROSTINGER2.asset,
+                        _ => Main.soundLibrary.MUSIC_COMBAT_OUTROSTINGER0.asset,
+                    };
+                    combatOutroStingerInstance = soundEffect.CreateInstance();
+                    combatOutroStingerInstance.Play();
+                    combat = false;
                 }
             }
             else
@@ -170,15 +162,15 @@ namespace UnderwaterGame
                 combatLoopInstancePrevious = null;
                 if(Main.loading == null && World.hotspotCurrent != null)
                 {
-                    combat = true;
                     SoundEffect soundEffect = Main.random.Next(3) switch
                     {
-                        1 => Main.soundLibrary.MUSIC_COMBAT_STINGER1.asset,
-                        2 => Main.soundLibrary.MUSIC_COMBAT_STINGER2.asset,
-                        _ => Main.soundLibrary.MUSIC_COMBAT_STINGER0.asset,
+                        1 => Main.soundLibrary.MUSIC_COMBAT_INTROSTINGER1.asset,
+                        2 => Main.soundLibrary.MUSIC_COMBAT_INTROSTINGER2.asset,
+                        _ => Main.soundLibrary.MUSIC_COMBAT_INTROSTINGER0.asset,
                     };
-                    combatStingerInstance = soundEffect.CreateInstance();
-                    combatStingerInstance.Play();
+                    combatIntroStingerInstance = soundEffect.CreateInstance();
+                    combatIntroStingerInstance.Play();
+                    combat = true;
                 }
             }
             if(layerLoopInstance != null)
@@ -191,15 +183,19 @@ namespace UnderwaterGame
             }
             if(combatLoopInstance != null)
             {
-                combatLoopInstance.Volume = combatVolume * Option.musicVolume.value * Option.masterVolume.value;
+                combatLoopInstance.Volume = World.spawnTimeAcc * Option.musicVolume.value * Option.masterVolume.value;
             }
             if(combatLoopInstancePrevious != null)
             {
-                combatLoopInstancePrevious.Volume = combatVolume * Option.musicVolume.value * Option.masterVolume.value;
+                combatLoopInstancePrevious.Volume = World.spawnTimeAcc * Option.musicVolume.value * Option.masterVolume.value;
             }
-            if(combatStingerInstance != null)
+            if(combatIntroStingerInstance != null)
             {
-                combatStingerInstance.Volume = combatVolume * Option.musicVolume.value * Option.masterVolume.value;
+                combatIntroStingerInstance.Volume = World.spawnTimeAcc * Option.musicVolume.value * Option.masterVolume.value;
+            }
+            if(combatOutroStingerInstance != null)
+            {
+                combatOutroStingerInstance.Volume = (1f - World.spawnTimeAcc) * Option.musicVolume.value * Option.masterVolume.value;
             }
         }
     }

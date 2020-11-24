@@ -9,7 +9,7 @@
     public class GameCursorElement : UiElement
     {
         public string text = "";
-
+        
         public Item dragItem;
 
         public int dragQuantity;

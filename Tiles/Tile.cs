@@ -5,7 +5,6 @@
     using System;
     using UnderwaterGame.Tiles.Liquids;
     using UnderwaterGame.Tiles.Walls;
-    using UnderwaterGame.Worlds;
 
     public abstract partial class Tile
     {

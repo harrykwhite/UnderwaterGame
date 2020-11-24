@@ -13,12 +13,12 @@ namespace UnderwaterGame.Worlds.Generation
             for(int i = 0; i < mountainPositions.Length; i++)
             {
                 int width = Main.random.Next(6, 8);
-                int height = Main.random.Next(40, 48);
+                int height = Main.random.Next(56, 72);
                 do
                 {
                     mountainPositions[i].X = Main.random.Next(World.width);
                     mountainPositions[i].Y = 0;
-                    while(World.GetTileAt(mountainPositions[i].X, mountainPositions[i].Y, World.Tilemap.Solids) == null)
+                    while(World.GetTileAt(mountainPositions[i].X, mountainPositions[i].Y, World.Tilemap.FirstSolids) == null)
                     {
                         mountainPositions[i].Y++;
                     }

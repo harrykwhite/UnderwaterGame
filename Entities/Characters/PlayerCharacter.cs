@@ -45,7 +45,7 @@
 
         private float swimSpeedAcc = 0.1f;
 
-        private float swimSpeedMax = 2.5f;
+        private float swimSpeedMax = 2f;
 
         private float swimSpeedWaterMult;
 
@@ -72,8 +72,9 @@
         public override void Draw()
         {
             DrawSelf();
+            DrawFlash();
             int armourIndex = animator.sprite == Sprite.playerIdle ? Sprite.playerSwim.textures.Length - 1 : (int)animator.index;
-            float armourDepth = depth + 0.0005f;
+            float armourDepth = depth + 0.002f;
             if(armourHead != null)
             {
                 DrawSelf(armourHead.wearSprite.textures[armourIndex], depth: armourDepth);
@@ -300,8 +301,9 @@
         public override void Kill()
         {
             base.Kill();
-            SoundUtilities.PlaySound(Main.soundLibrary.CHARACTERS_PLAYER_DEATH.asset);
-            Main.Restart(true);
+            Main.restart = true;
+            Main.restartTime = 60;
+            Main.restartSave = true;
         }
 
         public void RefreshDefense()
@@ -365,15 +367,13 @@
 
         public bool HealMagic(float amount)
         {
-            if(invincibleTime > 0 || magic >= magicMax)
+            if(flashTime > 0 || magic >= magicMax)
             {
                 return false;
             }
             amount = Math.Max(amount, 0f);
             magic += amount;
             magic = MathUtilities.Clamp(magic, 0f, magicMax);
-            invincibleTime = invincibleTimeMax;
-            flickerTime = flickerTimeMax;
             flashTime = flashTimeMax;
             for(int i = 0; i < bloodParticleCount; i++)
             {

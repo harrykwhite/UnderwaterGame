@@ -8,6 +8,7 @@
         public override void Draw()
         {
             DrawSelf();
+            DrawFlash();
         }
 
         public override void Init()

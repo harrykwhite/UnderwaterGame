@@ -33,6 +33,7 @@
             for(int i = 0; i < particleCount; i++)
             {
                 Wood wood = (Wood)EntityManager.AddEntity<Wood>(position);
+                wood.speed = speed / 2f;
                 wood.direction = direction - MathHelper.Pi + ((MathHelper.Pi / 12f) * (i - ((particleCount - 1f) / 2f)));
             }
         }

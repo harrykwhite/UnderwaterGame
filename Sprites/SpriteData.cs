@@ -57,11 +57,6 @@
                 sprite.SetTextureSheet(libraryAsset.asset, 3);
                 return true;
             }
-            if(libraryAsset == Main.textureLibrary.OTHER_CLOUD)
-            {
-                sprite.SetTextureSheet(libraryAsset.asset, 128);
-                return true;
-            }
             return false;
         }
 
@@ -97,11 +92,6 @@
             if(libraryAsset == Main.textureLibrary.EFFECTS_WIDESWING)
             {
                 sprite.origin = new Vector2(18f, sprite.textures[0].Height / 2f);
-                return true;
-            }
-            if(libraryAsset == Main.textureLibrary.OTHER_CLOUD)
-            {
-                sprite.origin = Vector2.Zero;
                 return true;
             }
             return false;

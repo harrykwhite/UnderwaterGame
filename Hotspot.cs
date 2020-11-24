@@ -42,8 +42,8 @@
             Vector2 particlePosition;
             do
             {
-                particlePosition = position + new Vector2(Main.random.Next(-Main.textureLibrary.OTHER_HOTSPOT.asset.Width / 2, Main.textureLibrary.OTHER_HOTSPOT.asset.Width / 2), Main.random.Next(-Main.textureLibrary.OTHER_HOTSPOT.asset.Height / 2, Main.textureLibrary.OTHER_HOTSPOT.asset.Height / 2));
-            } while(Vector2.Distance(particlePosition, position) > Main.textureLibrary.OTHER_HOTSPOT.asset.Width / 2f);
+                particlePosition = position + new Vector2(Main.random.Next(-Main.textureLibrary.OTHER_HOTSPOTOUTER.asset.Width / 2, Main.textureLibrary.OTHER_HOTSPOTOUTER.asset.Width / 2), Main.random.Next(-Main.textureLibrary.OTHER_HOTSPOTOUTER.asset.Height / 2, Main.textureLibrary.OTHER_HOTSPOTOUTER.asset.Height / 2));
+            } while(Vector2.Distance(particlePosition, position) > Main.textureLibrary.OTHER_HOTSPOTOUTER.asset.Width / 2f);
             EntityManager.AddEntity<HotspotParticle>(particlePosition);
             countScale += (1f - countScale) * 0.2f;
         }

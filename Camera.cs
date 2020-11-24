@@ -29,7 +29,7 @@
 
         public static void Init()
         {
-            position = new Vector2(GetWidth(), GetHeight());
+            position = new Vector2(GetWidth(), GetHeight()) / 2f;
         }
 
         public static void Update()

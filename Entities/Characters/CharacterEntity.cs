@@ -2,7 +2,6 @@
 {
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Audio;
-    using Microsoft.Xna.Framework.Graphics;
     using System;
     using System.Collections.Generic;
     using UnderwaterGame.Entities.Characters.Enemies;
@@ -11,16 +10,6 @@
 
     public abstract class CharacterEntity : Entity
     {
-        protected bool flicker;
-
-        protected int flickerTime;
-
-        protected int flickerTimeMax = 8;
-
-        protected int invincibleTime;
-
-        protected int invincibleTimeMax = 32;
-
         protected int flashTime;
 
         protected int flashTimeMax = 16;
@@ -45,51 +34,8 @@
 
         public float knockbackDirection;
 
-        public new void DrawSelf(Texture2D texture = null, Vector2? position = null, Rectangle? sourceRectangle = null, Color? color = null, float? rotation = null, Vector2? origin = null, Vector2? scale = null, SpriteEffects? flip = null, float? depth = null)
-        {
-            Texture2D drawTexture = texture;
-            int drawTextureIndex = (int)(animator?.index ?? 0f);
-            Color drawColor = color ?? blend;
-            float drawAlpha = 1f;
-            if(drawTexture == null)
-            {
-                if(flashTime > 0)
-                {
-                    drawTexture = animator.sprite.texturesFilled[drawTextureIndex];
-                    drawColor = Color.White;
-                }
-                else
-                {
-                    drawTexture = animator.sprite.textures[drawTextureIndex];
-                    if(invincibleTime > 0)
-                    {
-                        drawAlpha = (flicker ? 1f : 2f) / 4f;
-                    }
-                }
-            }
-            base.DrawSelf(drawTexture, position, sourceRectangle, drawColor * drawAlpha * alpha, rotation, origin, scale, flip, depth);
-        }
-
         protected void UpdateStatus()
         {
-            if(invincibleTime > 0)
-            {
-                if(flickerTime > 0)
-                {
-                    flickerTime--;
-                }
-                else
-                {
-                    flicker = !flicker;
-                    flickerTime = flickerTimeMax;
-                }
-                invincibleTime--;
-            }
-            else
-            {
-                flicker = false;
-                flickerTime = 0;
-            }
             if(flashTime > 0)
             {
                 flashTime--;
@@ -103,6 +49,11 @@
             {
                 Kill();
             }
+        }
+
+        protected void DrawFlash()
+        {
+            DrawSelf(sprite.texturesFilled[(int)animator.index], color: Color.White * ((float)(flashTime * 2f) / (float)flashTimeMax), depth: depth + 0.001f);
         }
 
         protected void CheckForDamage(Collider hit)
@@ -129,15 +80,13 @@
 
         public virtual bool Hurt(HitData hitData)
         {
-            if(invincibleTime > 0 || health <= 0f)
+            if(flashTime > 0 || health <= 0f)
             {
                 return false;
             }
             float amount = Math.Max(hitData.damage - defense, 1f);
             health -= amount;
             health = MathUtilities.Clamp(health, 0f, healthMax);
-            invincibleTime = invincibleTimeMax;
-            flickerTime = flickerTimeMax;
             flashTime = flashTimeMax;
             knockbackSpeedAcc = 0.1f;
             if(hitData.direction != null)
@@ -153,32 +102,33 @@
             }
             FloatingTextEntity floatingTextEntity = (FloatingTextEntity)EntityManager.AddEntity<FloatingTextEntity>(position);
             floatingTextEntity.text = "-" + amount.ToString();
-            floatingTextEntity.speed = 3f;
+            floatingTextEntity.speed = 4f;
             floatingTextEntity.direction = -MathHelper.Pi / 2f;
-            for(int i = 0; i < bloodParticleCount; i++)
+            if(health > 0f)
             {
-                Blood blood = (Blood)EntityManager.AddEntity<Blood>(position);
-                blood.direction = hitData.direction == null ? ((MathHelper.Pi * 2f) / bloodParticleCount) * i : hitData.direction.Value - MathHelper.Pi + ((MathHelper.Pi / 12f) * (i - ((bloodParticleCount - 1f) / 2f)));
-                blood.blend = bloodParticleColor;
+                for(int i = 0; i < bloodParticleCount; i++)
+                {
+                    Blood blood = (Blood)EntityManager.AddEntity<Blood>(position);
+                    blood.direction = hitData.direction == null ? ((MathHelper.Pi * 2f) / bloodParticleCount) * i : hitData.direction.Value - MathHelper.Pi + ((MathHelper.Pi / 12f) * (i - ((bloodParticleCount - 1f) / 2f)));
+                    blood.blend = bloodParticleColor;
+                }
             }
             return true;
         }
 
         public virtual bool Heal(float amount)
         {
-            if(invincibleTime > 0 || health >= healthMax)
+            if(flashTime > 0 || health >= healthMax)
             {
                 return false;
             }
             amount = Math.Max(amount, 0f);
             health += amount;
             health = MathUtilities.Clamp(health, 0f, healthMax);
-            invincibleTime = invincibleTimeMax;
-            flickerTime = flickerTimeMax;
             flashTime = flashTimeMax;
             FloatingTextEntity floatingTextEntity = (FloatingTextEntity)EntityManager.AddEntity<FloatingTextEntity>(position);
             floatingTextEntity.text = "+" + amount.ToString();
-            floatingTextEntity.speed = 3f;
+            floatingTextEntity.speed = 4f;
             floatingTextEntity.direction = -MathHelper.Pi / 2f;
             for(int i = 0; i < bloodParticleCount; i++)
             {
@@ -196,7 +146,6 @@
             for(int i = 0; i < particleCount; i++)
             {
                 Blood blood = (Blood)EntityManager.AddEntity<Blood>(position);
-                blood.speed /= 2f;
                 blood.direction = ((MathHelper.Pi * 2f) / particleCount) * i;
                 blood.blend = bloodParticleColor;
             }

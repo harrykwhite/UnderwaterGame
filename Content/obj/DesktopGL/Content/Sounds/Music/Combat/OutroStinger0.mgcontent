@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Sounds/Music/Combat/OutroStinger0.wav</SourceFile>
-  <SourceTime>2020-11-08T22:48:33.6857496+10:00</SourceTime>
+  <SourceTime>2020-11-24T07:14:19.1225902+10:00</SourceTime>
   <DestFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/bin/DesktopGL/Content/Sounds/Music/Combat/OutroStinger0.xnb</DestFile>
-  <DestTime>2020-11-15T15:21:09.2288409+10:00</DestTime>
+  <DestTime>2020-11-24T07:17:06.9594949+10:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+10:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

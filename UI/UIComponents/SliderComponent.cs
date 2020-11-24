@@ -20,8 +20,6 @@
         private bool ballSelected;
 
         public Option option;
-
-        public bool scrollSound = true;
         
         public float textGap = 16f;
 
@@ -111,19 +109,11 @@
                 int valuePreviousDisplay = (int)Math.Floor(valuePrevious * 100f);
                 if(valueDisplay != valuePreviousDisplay)
                 {
-                    if(scrollSound)
-                    {
-                        SoundUtilities.PlaySound(Main.soundLibrary.UI_SCROLL.asset);
-                    }
-                    scrollSound = !scrollSound;
+                    SoundUtilities.PlaySound(Main.soundLibrary.UI_SCROLL.asset);
                     if(option.valueRounded)
                     {
                         locked = null;
                     }
-                }
-                else
-                {
-                    scrollSound = true;
                 }
             }
             ballPosition = getPosition() + new Vector2(((rawValue / rawSpan) - 0.5f) * width, 0f);

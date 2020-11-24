@@ -54,6 +54,12 @@
 
         public static int elapsedTime;
 
+        public static bool restart;
+
+        public static int restartTime;
+
+        public static bool restartSave;
+        
         public Main()
         {
             graphicsDeviceManager = new GraphicsDeviceManager(this);
@@ -68,7 +74,6 @@
             graphicsDeviceManager.ApplyChanges();
             Control.Refresh();
             Window.Title = "Underwater Game";
-            Window.AllowUserResizing = false;
             Window.AllowAltF4 = true;
             textureLibrary = new TextureLibrary();
             fontLibrary = new FontLibrary();
@@ -115,6 +120,23 @@
         protected override void Update(GameTime gameTime)
         {
             elapsedTime = gameTime.ElapsedGameTime.Milliseconds;
+            if(restart)
+            {
+                if(restartTime > 0)
+                {
+                    restartTime--;
+                }
+                else
+                {
+                    loading = new Thread(delegate ()
+                    {
+                        RestartGame(restartSave);
+                        loading = null;
+                    });
+                    loading.Start();
+                    restart = false;
+                }
+            }
             if(loading == null)
             {
                 if(!configCheck)
@@ -162,16 +184,6 @@
             UiManager.Draw();
             spriteBatch.End();
             base.Draw(gameTime);
-        }
-
-        public static void Restart(bool restartSave = false)
-        {
-            loading = new Thread(delegate ()
-            {
-                RestartGame(restartSave);
-                loading = null;
-            });
-            loading.Start();
         }
 
         public static void Read()

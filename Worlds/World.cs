@@ -19,7 +19,8 @@
     {
         public enum Tilemap
         {
-            Solids,
+            FirstSolids,
+            SecondSolids,
             FirstWalls,
             SecondWalls,
             Liquids
@@ -43,9 +44,11 @@
 
         public static float gravityMax = 8f;
 
-        public static int spawnTime;
+        public static float spawnTime;
 
-        public static int spawnTimeMax = 300;
+        public static float spawnTimeAcc;
+
+        public static float spawnTimeMax = 300f;
 
         public static int spawnMax = 8;
         
@@ -58,7 +61,8 @@
         public static void Init()
         {
             tilemaps = new WorldTile[Enum.GetNames(typeof(Tilemap)).Length][,];
-            tilemaps[(byte)Tilemap.Solids] = new WorldTile[width, height];
+            tilemaps[(byte)Tilemap.FirstSolids] = new WorldTile[width, height];
+            tilemaps[(byte)Tilemap.SecondSolids] = new WorldTile[width, height];
             tilemaps[(byte)Tilemap.FirstWalls] = new WorldTile[width, height];
             tilemaps[(byte)Tilemap.SecondWalls] = new WorldTile[width, height];
             tilemaps[(byte)Tilemap.Liquids] = new WorldTile[width, height];
@@ -78,11 +82,12 @@
                 new SurfaceMountainGeneration(),
                 new SurfaceTowerGeneration(),
                 new SurfaceEnvironmentalGeneration(),
-                new HotspotGeneration(),
-                new CleaningGeneration()
+                new CloudGeneration(),
+                new CleaningGeneration(),
+                new HotspotGeneration()
             };
             hotspots = new List<Hotspot>();
-            spawnTime = 0;
+            spawnTime = 0f;
             bubbleTime = 0;
             hotspotCurrent = null;
         }
@@ -99,57 +104,58 @@
                 foreach(Hotspot hotspot in hotspots)
                 {
                     hotspot.Update();
-                    if(Vector2.Distance(player.position, hotspot.position) <= Main.textureLibrary.OTHER_HOTSPOT.asset.Width / 2f)
+                    if(Vector2.Distance(player.position, hotspot.position) <= Main.textureLibrary.OTHER_HOTSPOTOUTER.asset.Width / 2f)
                     {
                         hotspotCurrent = hotspot;
                     }
                 }
-            }
-            if(spawnTime < spawnTimeMax)
-            {
-                spawnTime++;
-            }
-            else
-            {
                 if(hotspotCurrent != null)
                 {
-                    if(EntityManager.GetEntityCount<EnemyCharacter>() < spawnMax && hotspotCurrent.count > 0)
+                    spawnTimeAcc = MathUtilities.Clamp(1f - ((Vector2.Distance(hotspotCurrent.position, player.position) - (Main.textureLibrary.OTHER_HOTSPOTINNER.asset.Width / 2f)) / ((Main.textureLibrary.OTHER_HOTSPOTOUTER.asset.Width - Main.textureLibrary.OTHER_HOTSPOTINNER.asset.Width) / 2f)), 0f, 1f);
+                    if(spawnTime < spawnTimeMax)
                     {
-                        int trials = 100;
-                        Type enemyType = null;
-                        do
+                        spawnTime += spawnTimeAcc;
+                    }
+                    else
+                    {
+                        if(EntityManager.GetEntityCount<EnemyCharacter>() < spawnMax && hotspotCurrent.count > 0)
                         {
-                            for(int i = 0; i < hotspotCurrent.spawns.Length; i++)
+                            int trials = 100;
+                            Type enemyType = null;
+                            do
                             {
-                                if(Main.random.Next(100) <= (hotspotCurrent.spawns[i].chance * 100f))
+                                for(int i = 0; i < hotspotCurrent.spawns.Length; i++)
                                 {
-                                    enemyType = Type.GetType(hotspotCurrent.spawns[i].type);
+                                    if(Main.random.Next(100) <= (hotspotCurrent.spawns[i].chance * 100f))
+                                    {
+                                        enemyType = Type.GetType(hotspotCurrent.spawns[i].type);
+                                    }
                                 }
-                            }
-                        } while(enemyType == null);
-                        EnemyCharacter enemy = (EnemyCharacter)EntityManager.AddEntity(enemyType, Vector2.Zero);
-                        do
-                        {
-                            enemy.position = hotspotCurrent.position + MathUtilities.LengthDirection(RandomUtilities.Range(0f, Main.textureLibrary.OTHER_HOTSPOT.asset.Width / 2f), MathHelper.ToRadians(Main.random.Next(360)));
-                            trials--;
-                        } while((enemy.TileCollision(enemy.position, Tilemap.Solids) || !enemy.TileCollision(enemy.position, Tilemap.Liquids)) && trials > 0);
-                        if(trials > 0)
-                        {
-                            int smokeCount = 6;
-                            for(int i = 0; i < smokeCount; i++)
+                            } while(enemyType == null);
+                            EnemyCharacter enemy = (EnemyCharacter)EntityManager.AddEntity(enemyType, Vector2.Zero);
+                            do
                             {
-                                Smoke smoke = (Smoke)EntityManager.AddEntity<Smoke>(enemy.position);
-                                smoke.direction = ((MathHelper.Pi * 2f) / smokeCount) * i;
+                                enemy.position = hotspotCurrent.position + MathUtilities.LengthDirection(RandomUtilities.Range(0f, Main.textureLibrary.OTHER_HOTSPOTOUTER.asset.Width / 2f), MathHelper.ToRadians(Main.random.Next(360)));
+                                trials--;
+                            } while((enemy.TileCollision(enemy.position, Tilemap.FirstSolids) || !enemy.TileCollision(enemy.position, Tilemap.Liquids)) && trials > 0);
+                            if(trials > 0)
+                            {
+                                int smokeCount = 6;
+                                for(int i = 0; i < smokeCount; i++)
+                                {
+                                    Smoke smoke = (Smoke)EntityManager.AddEntity<Smoke>(enemy.position);
+                                    smoke.direction = ((MathHelper.Pi * 2f) / smokeCount) * i;
+                                }
+                                enemy.hotspot = hotspotCurrent;
                             }
-                            enemy.hotspot = hotspotCurrent;
+                            else
+                            {
+                                enemy.Destroy();
+                            }
                         }
-                        else
-                        {
-                            enemy.Destroy();
-                        }
+                        spawnTime = 0f;
                     }
                 }
-                spawnTime = 0;
             }
             if(bubbleTime < bubbleTimeMax)
             {
@@ -188,8 +194,8 @@
             Shape cameraShape = Camera.GetShape();
             int xStart = (int)Math.Max(0f, cameraShape.position.X / Tile.size);
             int yStart = (int)Math.Max(0f, cameraShape.position.Y / Tile.size);
-            int xEnd = (int)Math.Min(width - 1f, (cameraShape.position.X + Camera.GetWidth()) / Tile.size);
-            int yEnd = (int)Math.Min(height - 1f, (cameraShape.position.Y + Camera.GetHeight()) / Tile.size);
+            int xEnd = (int)Math.Min(width - 1f, Math.Ceiling((cameraShape.position.X + Camera.GetWidth()) / Tile.size));
+            int yEnd = (int)Math.Min(height - 1f, Math.Ceiling((cameraShape.position.Y + Camera.GetHeight()) / Tile.size));
             for(byte m = 0; m < tilemaps.Length; m++)
             {
                 for(int y = yStart; y <= yEnd; y++)
@@ -201,6 +207,10 @@
                         float depth = 0.65f;
                         switch((Tilemap)m)
                         {
+                            case Tilemap.SecondSolids:
+                                depth = 0.85f;
+                                break;
+
                             case Tilemap.FirstWalls:
                                 color = new Color(80, 80, 80);
                                 depth = 0.25f;
@@ -223,13 +233,10 @@
                     }
                 }
             }
-            for(int i = 0; i <= (width * Tile.size) / Main.textureLibrary.OTHER_CLOUD.asset.Width; i++)
-            {
-                Main.spriteBatch.Draw(Main.textureLibrary.OTHER_CLOUD.asset, new Vector2(i * Main.textureLibrary.OTHER_CLOUD.asset.Width, 0f), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0.95f);
-            }
             foreach(Hotspot hotspot in hotspots)
             {
-                Main.spriteBatch.Draw(Main.textureLibrary.OTHER_HOTSPOT.asset, hotspot.position, null, Color.White, 0f, new Vector2(Main.textureLibrary.OTHER_HOTSPOT.asset.Width, Main.textureLibrary.OTHER_HOTSPOT.asset.Height) / 2f, 1f, SpriteEffects.None, 0.9f);
+                Main.spriteBatch.Draw(Main.textureLibrary.OTHER_HOTSPOTINNER.asset, hotspot.position, null, Color.White * 0.25f, 0f, new Vector2(Main.textureLibrary.OTHER_HOTSPOTINNER.asset.Width, Main.textureLibrary.OTHER_HOTSPOTINNER.asset.Height) / 2f, 1f, SpriteEffects.None, 0.9f);
+                Main.spriteBatch.Draw(Main.textureLibrary.OTHER_HOTSPOTOUTER.asset, hotspot.position, null, Color.White, 0f, new Vector2(Main.textureLibrary.OTHER_HOTSPOTOUTER.asset.Width, Main.textureLibrary.OTHER_HOTSPOTOUTER.asset.Height) / 2f, 1f, SpriteEffects.None, 0.9f);
             }
         }
 
@@ -324,8 +331,8 @@
                 {
                     int tx = x + ex - (ew / 2);
                     int ty = y + ey - eh;
-                    WorldTile worldTile = GetTileAt(tx, ty, Tilemap.Solids);
-                    WorldTileData worldTileData = GetTileDataAt(tx, ty, Tilemap.Solids);
+                    WorldTile worldTile = GetTileAt(tx, ty, Tilemap.FirstSolids);
+                    WorldTileData worldTileData = GetTileDataAt(tx, ty, Tilemap.FirstSolids);
                     if(ey == eh)
                     {
                         if(worldTile == null)

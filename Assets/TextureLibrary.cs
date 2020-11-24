@@ -9,6 +9,8 @@
         public readonly LibraryAsset TILES_SOLIDS_SAND = new LibraryAsset("Textures/Tiles/Solids/Sand");
 
         public readonly LibraryAsset TILES_SOLIDS_BRICK = new LibraryAsset("Textures/Tiles/Solids/Brick");
+        
+        public readonly LibraryAsset TILES_SOLIDS_CLOUD = new LibraryAsset("Textures/Tiles/Solids/Cloud");
 
         public readonly LibraryAsset TILES_LIQUIDS_WATER = new LibraryAsset("Textures/Tiles/Liquids/Water");
 
@@ -106,9 +108,9 @@
 
         public readonly LibraryAsset UI_OTHER_CURSOR = new LibraryAsset("Textures/Ui/Other/Cursor");
         
-        public readonly LibraryAsset OTHER_CLOUD = new LibraryAsset("Textures/Other/Cloud");
-        
-        public readonly LibraryAsset OTHER_HOTSPOT = new LibraryAsset("Textures/Other/Hotspot");
+        public readonly LibraryAsset OTHER_HOTSPOTINNER = new LibraryAsset("Textures/Other/HotspotInner");
+
+        public readonly LibraryAsset OTHER_HOTSPOTOUTER = new LibraryAsset("Textures/Other/HotspotOuter");
         
         public readonly LibraryAsset OTHER_PIXEL = new LibraryAsset("Textures/Other/Pixel");
     }

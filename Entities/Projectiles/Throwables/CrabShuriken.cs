@@ -36,6 +36,7 @@
             for(int i = 0; i < particleCount; i++)
             {
                 CrabShell crabShell = (CrabShell)EntityManager.AddEntity<CrabShell>(position);
+                crabShell.speed = speed / 2f;
                 crabShell.direction = direction - MathHelper.Pi + ((MathHelper.Pi / 12f) * (i - ((particleCount - 1f) / 2f)));
             }
         }
