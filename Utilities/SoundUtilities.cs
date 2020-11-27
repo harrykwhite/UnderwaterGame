@@ -2,7 +2,7 @@
 {
     using Microsoft.Xna.Framework.Audio;
     using UnderwaterGame.Options;
-    
+
     public static class SoundUtilities
     {
         public static SoundEffectInstance PlaySound(SoundEffect soundEffect, float volume = 1f, float pitch = 0f, float pan = 0f)

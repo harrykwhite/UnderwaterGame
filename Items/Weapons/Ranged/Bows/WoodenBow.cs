@@ -12,7 +12,7 @@
             sprite = Sprite.woodenBow;
             useTime = 35;
             useAngleUpdate = true;
-            damage = 3f;
+            damage = 4f;
         }
 
         public override void WhileUse(ItemEntity entity)

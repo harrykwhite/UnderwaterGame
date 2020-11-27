@@ -1,5 +1,6 @@
 ﻿namespace UnderwaterGame.Items.Weapons
 {
+    using Microsoft.Xna.Framework;
     using UnderwaterGame.Entities;
     using UnderwaterGame.Entities.Projectiles;
     using UnderwaterGame.Ui;
@@ -19,7 +20,7 @@
             projectile.hitEnemy = true;
             projectile.damage += damage;
             projectile.depth = entity.depth - 0.001f;
-            ((GameCursorElement)UiManager.GetElement<GameCursorElement>()).Expand(0.5f);
+            ((GameCursorElement)UiManager.GetElement<GameCursorElement>()).scale += new Vector2(0.5f);
             Camera.Shake(1f, projectile.direction);
         }
     }

@@ -7,8 +7,8 @@ namespace UnderwaterGame.Worlds.Generation
         public override void Generate()
         {
             int levelOffset = 8;
-            int levelOffsetMin = 4;
-            int levelOffsetMax = 12;
+            int levelOffsetMin = 6;
+            int levelOffsetMax = 10;
             int levelInterval = 0;
             int levelIntervalMax = 4;
             for(int x = 0; x < World.width; x++)

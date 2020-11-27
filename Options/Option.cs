@@ -7,6 +7,7 @@
         public enum Format
         {
             Percent,
+
             Toggle
         }
 

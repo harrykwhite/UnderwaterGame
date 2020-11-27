@@ -22,12 +22,19 @@
         public enum InventoryGroup
         {
             Wield,
+
             Hotbar,
+
             ArmourHead,
+
             ArmourChest,
+
             ArmourLegs,
+
             ArmourFeet,
+
             Crafting,
+
             Other
         }
 
@@ -249,6 +256,7 @@
                     {
                         Bubble bubble = (Bubble)EntityManager.AddEntity<Bubble>(position);
                         bubble.position += MathUtilities.LengthDirection(10f, angle + angleOffset);
+                        bubble.speed = swimSpeedMax / 2f;
                         bubble.direction = angle + angleOffset;
                         bubbleTime = 0;
                     }
@@ -292,8 +300,8 @@
             bool damaged = base.Hurt(hitData);
             if(damaged)
             {
-                ScreenFlashElement screenFlash = (ScreenFlashElement)UiManager.GetElement<ScreenFlashElement>();
-                screenFlash.SetFlash(bloodParticleColor, 0.2f);
+                UiManager.vignetteElements[1].color = bloodParticleColor;
+                UiManager.vignetteElements[1].alpha = UiManager.vignetteElements[1].alphaMax;
             }
             return damaged;
         }

@@ -120,7 +120,7 @@
             Main.unloadTextures.Add(resizedTexture);
             return resizedTexture;
         }
-        
+
         public static Texture2D CreateResized(Texture2D texture, int xStart, int yStart, int width, int height)
         {
             Texture2D resizedTexture = new Texture2D(Main.graphicsDevice, width, height);

@@ -13,7 +13,7 @@ namespace UnderwaterGame.Worlds.Generation
             for(int i = 0; i < mountainPositions.Length; i++)
             {
                 int width = Main.random.Next(6, 8);
-                int height = Main.random.Next(56, 72);
+                int height = Main.random.Next(64, 80);
                 do
                 {
                     mountainPositions[i].X = Main.random.Next(World.width);
@@ -48,10 +48,6 @@ namespace UnderwaterGame.Worlds.Generation
                     }
                     for(int x = xStart; x <= xEnd; x++)
                     {
-                        if(y == yStart && (x == xStart || x == xEnd))
-                        {
-                            continue;
-                        }
                         World.AddTileAt(x + xOffset, y, World.Tilemap.SecondWalls, Tile.stoneWall);
                     }
                 }

@@ -9,7 +9,7 @@
         public readonly LibraryAsset TILES_SOLIDS_SAND = new LibraryAsset("Textures/Tiles/Solids/Sand");
 
         public readonly LibraryAsset TILES_SOLIDS_BRICK = new LibraryAsset("Textures/Tiles/Solids/Brick");
-        
+
         public readonly LibraryAsset TILES_SOLIDS_CLOUD = new LibraryAsset("Textures/Tiles/Solids/Cloud");
 
         public readonly LibraryAsset TILES_LIQUIDS_WATER = new LibraryAsset("Textures/Tiles/Liquids/Water");
@@ -43,7 +43,7 @@
         public readonly LibraryAsset PARTICLES_LIQUID = new LibraryAsset("Textures/Particles/Liquid");
 
         public readonly LibraryAsset PARTICLES_FIRE = new LibraryAsset("Textures/Particles/Fire");
-        
+
         public readonly LibraryAsset PARTICLES_HOTSPOTPARTICLE = new LibraryAsset("Textures/Particles/HotspotParticle");
 
         public readonly LibraryAsset PROJECTILES_ARROWS_WOODENARROW = new LibraryAsset("Textures/Projectiles/Arrows/WoodenArrow");
@@ -63,7 +63,7 @@
         public readonly LibraryAsset ITEMS_WEAPONS_MAGIC_WANDS_WOODENWAND = new LibraryAsset("Textures/Items/Weapons/Magic/Wands/WoodenWand");
 
         public readonly LibraryAsset ITEMS_CONSUMABLES_HEALTHKELP = new LibraryAsset("Textures/Items/Consumables/HealthKelp");
-        
+
         public readonly LibraryAsset ITEMS_CONSUMABLES_MAGICKELP = new LibraryAsset("Textures/Items/Consumables/MagicKelp");
 
         public readonly LibraryAsset ITEMS_ARMOURS_HEADS_WOODENHELMET = new LibraryAsset("Textures/Items/Armours/Heads/WoodenHelmet");
@@ -99,7 +99,7 @@
         public readonly LibraryAsset UI_BUTTONS_ICONS_OTHER_CONTINUEICON = new LibraryAsset("Textures/Ui/Buttons/Icons/Other/ContinueIcon");
 
         public readonly LibraryAsset UI_BUTTONS_ICONS_OTHER_PRODUCEICON = new LibraryAsset("Textures/Ui/Buttons/Icons/Other/ProduceIcon");
-        
+
         public readonly LibraryAsset UI_BUTTONS_ICONS_OTHER_RESTARTICON = new LibraryAsset("Textures/Ui/Buttons/Icons/Other/RestartIcon");
 
         public readonly LibraryAsset UI_SLIDER_BAR = new LibraryAsset("Textures/Ui/Slider/Bar");
@@ -108,9 +108,13 @@
 
         public readonly LibraryAsset UI_OTHER_CURSOR = new LibraryAsset("Textures/Ui/Other/Cursor");
         
-        public readonly LibraryAsset OTHER_HOTSPOTINNER = new LibraryAsset("Textures/Other/HotspotInner");
+        public readonly LibraryAsset UI_OTHER_BIGVIGNETTE = new LibraryAsset("Textures/Ui/Other/BigVignette");
 
-        public readonly LibraryAsset OTHER_HOTSPOTOUTER = new LibraryAsset("Textures/Other/HotspotOuter");
+        public readonly LibraryAsset UI_OTHER_SMALLVIGNETTE = new LibraryAsset("Textures/Ui/Other/SmallVignette");
+
+        public readonly LibraryAsset OTHER_INNERHOTSPOT = new LibraryAsset("Textures/Other/HotspotInner");
+
+        public readonly LibraryAsset OTHER_OUTERHOTSPOT = new LibraryAsset("Textures/Other/HotspotOuter");
         
         public readonly LibraryAsset OTHER_PIXEL = new LibraryAsset("Textures/Other/Pixel");
     }

@@ -1,8 +1,6 @@
 ﻿namespace UnderwaterGame.Sprites
 {
-    using Microsoft.Xna.Framework;
     using System.Collections.Generic;
-    using UnderwaterGame.Utilities;
 
     public partial class Sprite
     {
@@ -73,9 +71,9 @@
         public static Sprite woodenLeggingsWear;
 
         public static Sprite woodenBoots;
-        
+
         public static Sprite woodenBootsWear;
-        
+
         public static void LoadAll()
         {
             bigSeaweed = Load(Main.textureLibrary.ENVIRONMENTALS_BIGSEAWEED);

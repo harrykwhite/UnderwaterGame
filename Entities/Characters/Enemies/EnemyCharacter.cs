@@ -18,10 +18,13 @@
         public override void Kill()
         {
             base.Kill();
-            if(hotspot.count > 0)
+            if(hotspot != null)
             {
-                hotspot.count--;
-                hotspot.countScale = hotspot.countScaleMax;
+                if(hotspot.count > 0)
+                {
+                    hotspot.count--;
+                    hotspot.countScale = hotspot.countScaleMax;
+                }
             }
         }
     }

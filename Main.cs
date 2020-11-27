@@ -35,7 +35,7 @@
         public static FontLibrary fontLibrary;
 
         public static SoundLibrary soundLibrary;
-        
+
         public static GraphicsDevice graphicsDevice;
 
         public static GraphicsDeviceManager graphicsDeviceManager;
@@ -59,7 +59,7 @@
         public static int restartTime;
 
         public static bool restartSave;
-        
+
         public Main()
         {
             graphicsDeviceManager = new GraphicsDeviceManager(this);

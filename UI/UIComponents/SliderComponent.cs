@@ -12,15 +12,15 @@
         private Vector2 ballPosition;
 
         private Shape ballShape;
-        
+
         private Vector2 ballScale = Vector2.One;
-        
+
         private Vector2 ballScaleTo = Vector2.One;
-        
+
         private bool ballSelected;
 
         public Option option;
-        
+
         public float textGap = 16f;
 
         public static SliderComponent locked;

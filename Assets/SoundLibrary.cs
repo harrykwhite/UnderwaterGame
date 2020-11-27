@@ -19,7 +19,7 @@
         public readonly LibraryAsset MUSIC_COMBAT_INTROSTINGER0 = new LibraryAsset("Sounds/Music/Combat/IntroStinger0");
 
         public readonly LibraryAsset MUSIC_COMBAT_INTROSTINGER1 = new LibraryAsset("Sounds/Music/Combat/IntroStinger1");
-        
+
         public readonly LibraryAsset MUSIC_COMBAT_INTROSTINGER2 = new LibraryAsset("Sounds/Music/Combat/IntroStinger2");
 
         public readonly LibraryAsset MUSIC_COMBAT_OUTROSTINGER0 = new LibraryAsset("Sounds/Music/Combat/OutroStinger0");
@@ -27,7 +27,7 @@
         public readonly LibraryAsset MUSIC_COMBAT_OUTROSTINGER1 = new LibraryAsset("Sounds/Music/Combat/OutroStinger1");
 
         public readonly LibraryAsset MUSIC_COMBAT_OUTROSTINGER2 = new LibraryAsset("Sounds/Music/Combat/OutroStinger2");
-        
+
         public readonly LibraryAsset MUSIC_COMBAT_LOOP0 = new LibraryAsset("Sounds/Music/Combat/Loop0");
 
         public readonly LibraryAsset MUSIC_COMBAT_LOOP1 = new LibraryAsset("Sounds/Music/Combat/Loop1");

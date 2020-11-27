@@ -2,8 +2,12 @@
 {
     using Microsoft.Xna.Framework;
     using System;
+    using System.Collections.Generic;
     using UnderwaterGame.Entities;
+    using UnderwaterGame.Entities.Characters.Enemies;
     using UnderwaterGame.Entities.Particles;
+    using UnderwaterGame.Utilities;
+    using UnderwaterGame.Worlds;
 
     public class Hotspot
     {
@@ -11,6 +15,7 @@
         public class Spawn
         {
             public string type;
+
             public float chance;
 
             public Spawn(string type, float chance)
@@ -24,27 +29,118 @@
 
         public Spawn[] spawns;
 
+        public int spawnMax;
+
+        public float spawnTime;
+
+        public float spawnTimeAcc;
+
+        public float spawnTimeMax;
+
         public int count;
 
         public float countScale = 1f;
 
         public float countScaleMax = 1.5f;
 
-        public Hotspot(Vector2 position, Spawn[] spawns, int count)
+        public float alpha;
+
+        public float alphaAcc = 0.01f;
+
+        public Hotspot(Vector2 position, Spawn[] spawns, int spawnMax, float spawnTimeMax, int count)
         {
             this.position = position;
             this.spawns = spawns;
+            this.spawnMax = spawnMax;
+            this.spawnTimeMax = spawnTimeMax;
             this.count = count;
+            alpha = count <= 0 ? 0f : 1f;
         }
 
         public void Update()
         {
-            Vector2 particlePosition;
-            do
+            List<Entity> enemyCharacterEntities = EntityManager.entities.FindAll((Entity entity) => entity is EnemyCharacter enemyCharacter && (enemyCharacter.hotspot == this));
+            if(count <= 0)
             {
-                particlePosition = position + new Vector2(Main.random.Next(-Main.textureLibrary.OTHER_HOTSPOTOUTER.asset.Width / 2, Main.textureLibrary.OTHER_HOTSPOTOUTER.asset.Width / 2), Main.random.Next(-Main.textureLibrary.OTHER_HOTSPOTOUTER.asset.Height / 2, Main.textureLibrary.OTHER_HOTSPOTOUTER.asset.Height / 2));
-            } while(Vector2.Distance(particlePosition, position) > Main.textureLibrary.OTHER_HOTSPOTOUTER.asset.Width / 2f);
-            EntityManager.AddEntity<HotspotParticle>(particlePosition);
+                if(alpha > 0f)
+                {
+                    alpha -= Math.Min(alphaAcc, alpha);
+                    if(alpha == 0f)
+                    {
+                        foreach(Entity enemyCharacterEntity in enemyCharacterEntities)
+                        {
+                            EnemyCharacter enemyCharacter = (EnemyCharacter)enemyCharacterEntity;
+                            enemyCharacter.hotspot = null;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                if(World.player?.GetExists() ?? false)
+                {
+                    spawnTimeAcc = MathUtilities.Clamp(1f - ((Vector2.Distance(position, World.player.position) - (Main.textureLibrary.OTHER_INNERHOTSPOT.asset.Width / 2f)) / ((Main.textureLibrary.OTHER_OUTERHOTSPOT.asset.Width - Main.textureLibrary.OTHER_INNERHOTSPOT.asset.Width) / 2f)), 0f, 1f);
+                }
+                if(World.hotspotCurrent == this)
+                {
+                    if(spawnTime > 0f)
+                    {
+                        spawnTime -= Math.Min(spawnTimeAcc, spawnTime);
+                    }
+                    else
+                    {
+                        if(enemyCharacterEntities.Count < spawnMax)
+                        {
+                            int trials = 100;
+                            Type enemyType = null;
+                            do
+                            {
+                                for(int i = 0; i < spawns.Length; i++)
+                                {
+                                    if(Main.random.Next(100) <= (spawns[i].chance * 100f))
+                                    {
+                                        enemyType = Type.GetType(spawns[i].type);
+                                    }
+                                }
+                            } while(enemyType == null);
+                            EnemyCharacter enemy = (EnemyCharacter)EntityManager.AddEntity(enemyType, Vector2.Zero);
+                            do
+                            {
+                                enemy.position = position + MathUtilities.LengthDirection(RandomUtilities.Range(0f, Main.textureLibrary.OTHER_OUTERHOTSPOT.asset.Width / 2f), MathHelper.ToRadians(Main.random.Next(360)));
+                                trials--;
+                            } while((enemy.TileCollision(enemy.position, World.Tilemap.FirstSolids) || !enemy.TileCollision(enemy.position, World.Tilemap.Liquids)) && trials > 0);
+                            if(trials > 0)
+                            {
+                                int smokeCount = 6;
+                                for(int i = 0; i < smokeCount; i++)
+                                {
+                                    Smoke smoke = (Smoke)EntityManager.AddEntity<Smoke>(enemy.position);
+                                    smoke.direction = ((MathHelper.Pi * 2f) / smokeCount) * i;
+                                }
+                                enemy.hotspot = this;
+                            }
+                            else
+                            {
+                                enemy.Destroy();
+                            }
+                        }
+                        spawnTime = spawnTimeMax;
+                    }
+                }
+                else
+                {
+                    if(spawnTime < spawnTimeMax)
+                    {
+                        spawnTime += Math.Min(spawnTimeAcc, spawnTimeMax - spawnTime);
+                    }
+                }
+                Vector2 particlePosition;
+                do
+                {
+                    particlePosition = position + new Vector2(Main.random.Next(-Main.textureLibrary.OTHER_OUTERHOTSPOT.asset.Width / 2, Main.textureLibrary.OTHER_OUTERHOTSPOT.asset.Width / 2), Main.random.Next(-Main.textureLibrary.OTHER_OUTERHOTSPOT.asset.Height / 2, Main.textureLibrary.OTHER_OUTERHOTSPOT.asset.Height / 2));
+                } while(Vector2.Distance(particlePosition, position) > Main.textureLibrary.OTHER_OUTERHOTSPOT.asset.Width / 2f);
+                EntityManager.AddEntity<HotspotParticle>(particlePosition);
+            }
             countScale += (1f - countScale) * 0.2f;
         }
     }

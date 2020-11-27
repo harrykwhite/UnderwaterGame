@@ -9,7 +9,7 @@
     public class GameCursorElement : UiElement
     {
         public string text = "";
-        
+
         public Item dragItem;
 
         public int dragQuantity;
@@ -50,11 +50,6 @@
 
         public override void Update()
         {
-        }
-
-        public void Expand(float amount)
-        {
-            scale += new Vector2(amount);
         }
 
         public Shape GetShape()

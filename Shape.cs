@@ -8,10 +8,15 @@
         public enum Fill
         {
             Rectangle,
+
             Circle,
+
             TopLeftSlope,
+
             TopRightSlope,
+
             BottomLeftSlope,
+
             BottomRightSlope
         }
 

@@ -7,7 +7,6 @@
     using System.Threading;
     using UnderwaterGame.Entities;
     using UnderwaterGame.Entities.Characters;
-    using UnderwaterGame.Entities.Characters.Enemies;
     using UnderwaterGame.Entities.Particles;
     using UnderwaterGame.Environmentals;
     using UnderwaterGame.Tiles;
@@ -20,9 +19,13 @@
         public enum Tilemap
         {
             FirstSolids,
+
             SecondSolids,
+
             FirstWalls,
+
             SecondWalls,
+
             Liquids
         }
 
@@ -33,7 +36,7 @@
         public static List<WorldEnvironmental> environmentals;
 
         public static List<WorldGeneration> generations;
-        
+
         public static List<Hotspot> hotspots;
 
         public static int width = 600;
@@ -44,19 +47,13 @@
 
         public static float gravityMax = 8f;
 
-        public static float spawnTime;
-
-        public static float spawnTimeAcc;
-
-        public static float spawnTimeMax = 300f;
-
-        public static int spawnMax = 8;
-        
         public static int bubbleTime;
 
         public static int bubbleTimeMax = 60;
 
         public static Hotspot hotspotCurrent;
+
+        public static Hotspot hotspotPrevious;
 
         public static void Init()
         {
@@ -87,7 +84,6 @@
                 new HotspotGeneration()
             };
             hotspots = new List<Hotspot>();
-            spawnTime = 0f;
             bubbleTime = 0;
             hotspotCurrent = null;
         }
@@ -98,64 +94,24 @@
             {
                 return;
             }
+            hotspotPrevious = hotspotCurrent;
             hotspotCurrent = null;
             if(player?.GetExists() ?? false)
             {
                 foreach(Hotspot hotspot in hotspots)
                 {
-                    hotspot.Update();
-                    if(Vector2.Distance(player.position, hotspot.position) <= Main.textureLibrary.OTHER_HOTSPOTOUTER.asset.Width / 2f)
+                    if(hotspot.count > 0)
                     {
-                        hotspotCurrent = hotspot;
-                    }
-                }
-                if(hotspotCurrent != null)
-                {
-                    spawnTimeAcc = MathUtilities.Clamp(1f - ((Vector2.Distance(hotspotCurrent.position, player.position) - (Main.textureLibrary.OTHER_HOTSPOTINNER.asset.Width / 2f)) / ((Main.textureLibrary.OTHER_HOTSPOTOUTER.asset.Width - Main.textureLibrary.OTHER_HOTSPOTINNER.asset.Width) / 2f)), 0f, 1f);
-                    if(spawnTime < spawnTimeMax)
-                    {
-                        spawnTime += spawnTimeAcc;
-                    }
-                    else
-                    {
-                        if(EntityManager.GetEntityCount<EnemyCharacter>() < spawnMax && hotspotCurrent.count > 0)
+                        if(Vector2.Distance(player.position, hotspot.position) <= Main.textureLibrary.OTHER_OUTERHOTSPOT.asset.Width / 2f)
                         {
-                            int trials = 100;
-                            Type enemyType = null;
-                            do
-                            {
-                                for(int i = 0; i < hotspotCurrent.spawns.Length; i++)
-                                {
-                                    if(Main.random.Next(100) <= (hotspotCurrent.spawns[i].chance * 100f))
-                                    {
-                                        enemyType = Type.GetType(hotspotCurrent.spawns[i].type);
-                                    }
-                                }
-                            } while(enemyType == null);
-                            EnemyCharacter enemy = (EnemyCharacter)EntityManager.AddEntity(enemyType, Vector2.Zero);
-                            do
-                            {
-                                enemy.position = hotspotCurrent.position + MathUtilities.LengthDirection(RandomUtilities.Range(0f, Main.textureLibrary.OTHER_HOTSPOTOUTER.asset.Width / 2f), MathHelper.ToRadians(Main.random.Next(360)));
-                                trials--;
-                            } while((enemy.TileCollision(enemy.position, Tilemap.FirstSolids) || !enemy.TileCollision(enemy.position, Tilemap.Liquids)) && trials > 0);
-                            if(trials > 0)
-                            {
-                                int smokeCount = 6;
-                                for(int i = 0; i < smokeCount; i++)
-                                {
-                                    Smoke smoke = (Smoke)EntityManager.AddEntity<Smoke>(enemy.position);
-                                    smoke.direction = ((MathHelper.Pi * 2f) / smokeCount) * i;
-                                }
-                                enemy.hotspot = hotspotCurrent;
-                            }
-                            else
-                            {
-                                enemy.Destroy();
-                            }
+                            hotspotCurrent = hotspot;
                         }
-                        spawnTime = 0f;
                     }
                 }
+            }
+            foreach(Hotspot hotspot in hotspots)
+            {
+                hotspot.Update();
             }
             if(bubbleTime < bubbleTimeMax)
             {
@@ -235,8 +191,8 @@
             }
             foreach(Hotspot hotspot in hotspots)
             {
-                Main.spriteBatch.Draw(Main.textureLibrary.OTHER_HOTSPOTINNER.asset, hotspot.position, null, Color.White * 0.25f, 0f, new Vector2(Main.textureLibrary.OTHER_HOTSPOTINNER.asset.Width, Main.textureLibrary.OTHER_HOTSPOTINNER.asset.Height) / 2f, 1f, SpriteEffects.None, 0.9f);
-                Main.spriteBatch.Draw(Main.textureLibrary.OTHER_HOTSPOTOUTER.asset, hotspot.position, null, Color.White, 0f, new Vector2(Main.textureLibrary.OTHER_HOTSPOTOUTER.asset.Width, Main.textureLibrary.OTHER_HOTSPOTOUTER.asset.Height) / 2f, 1f, SpriteEffects.None, 0.9f);
+                Main.spriteBatch.Draw(Main.textureLibrary.OTHER_INNERHOTSPOT.asset, hotspot.position, null, Color.White * 0.25f * hotspot.alpha, 0f, new Vector2(Main.textureLibrary.OTHER_INNERHOTSPOT.asset.Width, Main.textureLibrary.OTHER_INNERHOTSPOT.asset.Height) / 2f, 1f, SpriteEffects.None, 0.9f);
+                Main.spriteBatch.Draw(Main.textureLibrary.OTHER_OUTERHOTSPOT.asset, hotspot.position, null, Color.White * hotspot.alpha, 0f, new Vector2(Main.textureLibrary.OTHER_OUTERHOTSPOT.asset.Width, Main.textureLibrary.OTHER_OUTERHOTSPOT.asset.Height) / 2f, 1f, SpriteEffects.None, 0.9f);
             }
         }
 
@@ -388,9 +344,9 @@
             return (new Vector2(x, y) * Tile.size) - new Vector2(0f, environmental.sprite.origin.Y - environmental.sprite.bound.Y);
         }
 
-        public static void AddHotspotAt(Vector2 position, Hotspot.Spawn[] spawns, int count)
+        public static void AddHotspotAt(Vector2 position, Hotspot.Spawn[] spawns, int spawnMax, float spawnTimeMax, int count)
         {
-            hotspots.Add(new Hotspot(position, spawns, count));
+            hotspots.Add(new Hotspot(position, spawns, spawnMax, spawnTimeMax, count));
         }
 
         public static void Generate()
@@ -431,7 +387,7 @@
                 }
                 foreach(WorldHotspot hotspot in Main.save.hotspots)
                 {
-                    hotspots.Add(new Hotspot(new Vector2(hotspot.x, hotspot.y), hotspot.spawns, hotspot.count));
+                    hotspots.Add(new Hotspot(new Vector2(hotspot.x, hotspot.y), hotspot.spawns, hotspot.spawnMax, hotspot.spawnTimeMax, hotspot.count));
                 }
             }
             else

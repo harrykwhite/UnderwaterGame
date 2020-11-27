@@ -1,5 +1,6 @@
 ﻿namespace UnderwaterGame.Items.Weapons.Melee
 {
+    using Microsoft.Xna.Framework;
     using UnderwaterGame.Entities;
     using UnderwaterGame.Sprites;
     using UnderwaterGame.Ui;
@@ -30,7 +31,7 @@
             hitEntity.collider.shape.Clear();
             hitEntity.depth = entity.depth + 0.001f;
             entity.SetSwingEffect(swingSprite, hitboxOffset);
-            ((GameCursorElement)UiManager.GetElement<GameCursorElement>()).Expand(0.5f);
+            ((GameCursorElement)UiManager.GetElement<GameCursorElement>()).scale += new Vector2(0.5f);
             return hitEntity;
         }
 

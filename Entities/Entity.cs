@@ -7,7 +7,6 @@
     using UnderwaterGame.Entities.Particles;
     using UnderwaterGame.Sprites;
     using UnderwaterGame.Tiles;
-    using UnderwaterGame.Tiles.Solids;
     using UnderwaterGame.Utilities;
     using UnderwaterGame.Worlds;
 

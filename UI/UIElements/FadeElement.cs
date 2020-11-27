@@ -8,7 +8,7 @@
     {
         public Func<bool> getActive;
 
-        public float alphaSpeed = 0.05f;
+        public float alphaAcc = 0.05f;
 
         public float alphaMax = 0.5f;
 
@@ -32,11 +32,11 @@
             alphaTo = getActive() ? alphaMax : 0f;
             if(alpha < alphaTo)
             {
-                alpha += Math.Min(alphaSpeed, alphaTo - alpha);
+                alpha += Math.Min(alphaAcc, alphaTo - alpha);
             }
             else if(alpha > alphaTo)
             {
-                alpha -= Math.Min(alphaSpeed, alpha - alphaTo);
+                alpha -= Math.Min(alphaAcc, alpha - alphaTo);
             }
         }
     }

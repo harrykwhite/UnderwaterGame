@@ -6,9 +6,9 @@
     public class LoadingElement : UiElement
     {
         public int ellipsisCount;
-        
+
         public int ellipsisCountMax = 3;
-        
+
         public int ellipsisTime;
 
         public int ellipsisTimeMax = 30;

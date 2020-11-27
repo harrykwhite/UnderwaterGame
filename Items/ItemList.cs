@@ -40,7 +40,7 @@
         public static WoodenWand woodenWand;
 
         public static MagicKelp magicKelp;
-        
+
         public static void LoadAll()
         {
             woodenTrident = Load<WoodenTrident>(1);

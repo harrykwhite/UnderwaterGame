@@ -18,14 +18,18 @@
         public enum HorizontalAlign
         {
             Left,
+
             Middle,
+
             Right
         }
 
         public enum VerticalAlign
         {
             Top,
+
             Middle,
+
             Bottom
         }
 

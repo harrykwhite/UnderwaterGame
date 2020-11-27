@@ -1,10 +1,10 @@
-﻿using Microsoft.Xna.Framework.Audio;
-using System;
-using UnderwaterGame.Options;
-using UnderwaterGame.Worlds;
-
-namespace UnderwaterGame
+﻿namespace UnderwaterGame
 {
+    using Microsoft.Xna.Framework.Audio;
+    using System;
+    using UnderwaterGame.Options;
+    using UnderwaterGame.Worlds;
+
     public static class Music
     {
         public static bool layer;
@@ -14,15 +14,15 @@ namespace UnderwaterGame
         public static float layerLoopVolume;
 
         public static float layerLoopPreviousVolume;
-        
+
         public static float layerLoopVolumeAcc = 0.1f;
-        
+
         public static SoundEffectInstance layerLoopInstance;
-        
+
         public static SoundEffectInstance layerLoopInstancePrevious;
 
         public static bool combat;
-        
+
         public static int combatLoop;
 
         public static int combatLoopMax = 3;
@@ -31,12 +31,18 @@ namespace UnderwaterGame
 
         public static int combatLoopTimeMax = 16320;
 
+        public static float combatLoopVolume;
+
+        public static float combatLoopVolumeAcc = 0.01f;
+
+        public static float combatLoopVolumeTo;
+
         public static SoundEffectInstance combatLoopInstance;
 
         public static SoundEffectInstance combatLoopInstancePrevious;
 
         public static SoundEffectInstance combatIntroStingerInstance;
-        
+
         public static SoundEffectInstance combatOutroStingerInstance;
 
         public static void Init()
@@ -111,67 +117,86 @@ namespace UnderwaterGame
             }
             if(combat)
             {
-                int combatLoopPrevious = combatLoop;
-                if(combatLoopTime < combatLoopTimeMax)
+                combatLoopVolumeTo = World.hotspotCurrent?.spawnTimeAcc ?? 0f;
+                if(Main.loading == null && World.hotspotCurrent == null)
                 {
-                    combatLoopTime += Main.elapsedTime;
-                }
-                else
-                {
-                    if(combatLoop < combatLoopMax)
+                    if(World.hotspotPrevious != null)
                     {
-                        combatLoop++;
+                        if(World.hotspotPrevious.count <= 0)
+                        {
+                            SoundEffect soundEffect = Main.random.Next(3) switch
+                            {
+                                1 => Main.soundLibrary.MUSIC_COMBAT_OUTROSTINGER1.asset,
+                                2 => Main.soundLibrary.MUSIC_COMBAT_OUTROSTINGER2.asset,
+                                _ => Main.soundLibrary.MUSIC_COMBAT_OUTROSTINGER0.asset,
+                            };
+                            combatOutroStingerInstance = soundEffect.CreateInstance();
+                            combatOutroStingerInstance.Play();
+                        }
                     }
-                    else
-                    {
-                        combatLoop = 0;
-                    }
-                    combatLoopTime = 0;
-                }
-                if(combatLoopInstance == null || combatLoop != combatLoopPrevious)
-                {
-                    SoundEffect soundEffect = combatLoop switch
-                    {
-                        1 => Main.soundLibrary.MUSIC_COMBAT_LOOP1.asset,
-                        2 => Main.soundLibrary.MUSIC_COMBAT_LOOP2.asset,
-                        3 => Main.soundLibrary.MUSIC_COMBAT_LOOP3.asset,
-                        _ => Main.soundLibrary.MUSIC_COMBAT_LOOP0.asset,
-                    };
-                    combatLoopInstancePrevious = combatLoopInstance;
-                    combatLoopInstance = soundEffect.CreateInstance();
-                    combatLoopInstance.Play();
-                }
-                if(Main.loading != null || World.hotspotCurrent == null)
-                {
-                    SoundEffect soundEffect = Main.random.Next(3) switch
-                    {
-                        1 => Main.soundLibrary.MUSIC_COMBAT_OUTROSTINGER1.asset,
-                        2 => Main.soundLibrary.MUSIC_COMBAT_OUTROSTINGER2.asset,
-                        _ => Main.soundLibrary.MUSIC_COMBAT_OUTROSTINGER0.asset,
-                    };
-                    combatOutroStingerInstance = soundEffect.CreateInstance();
-                    combatOutroStingerInstance.Play();
                     combat = false;
                 }
             }
             else
             {
-                combatLoop = 0;
-                combatLoopTime = 0;
-                combatLoopInstance = null;
-                combatLoopInstancePrevious = null;
+                combatLoopVolumeTo = 0f;
                 if(Main.loading == null && World.hotspotCurrent != null)
                 {
-                    SoundEffect soundEffect = Main.random.Next(3) switch
+                    if(combatLoopVolume == 0f)
                     {
-                        1 => Main.soundLibrary.MUSIC_COMBAT_INTROSTINGER1.asset,
-                        2 => Main.soundLibrary.MUSIC_COMBAT_INTROSTINGER2.asset,
-                        _ => Main.soundLibrary.MUSIC_COMBAT_INTROSTINGER0.asset,
-                    };
-                    combatIntroStingerInstance = soundEffect.CreateInstance();
-                    combatIntroStingerInstance.Play();
+                        SoundEffect soundEffect = Main.random.Next(3) switch
+                        {
+                            1 => Main.soundLibrary.MUSIC_COMBAT_INTROSTINGER1.asset,
+                            2 => Main.soundLibrary.MUSIC_COMBAT_INTROSTINGER2.asset,
+                            _ => Main.soundLibrary.MUSIC_COMBAT_INTROSTINGER0.asset,
+                        };
+                        combatIntroStingerInstance = soundEffect.CreateInstance();
+                        combatIntroStingerInstance.Play();
+                        combatLoop = 0;
+                        combatLoopTime = 0;
+                        combatLoopInstance = null;
+                        combatLoopInstancePrevious = null;
+                    }
                     combat = true;
                 }
+            }
+            int combatLoopPrevious = combatLoop;
+            if(combatLoopTime < combatLoopTimeMax)
+            {
+                combatLoopTime += Main.elapsedTime;
+            }
+            else
+            {
+                if(combatLoop < combatLoopMax)
+                {
+                    combatLoop++;
+                }
+                else
+                {
+                    combatLoop = 0;
+                }
+                combatLoopTime = 0;
+            }
+            if(combatLoopInstance == null || combatLoop != combatLoopPrevious)
+            {
+                SoundEffect soundEffect = combatLoop switch
+                {
+                    1 => Main.soundLibrary.MUSIC_COMBAT_LOOP1.asset,
+                    2 => Main.soundLibrary.MUSIC_COMBAT_LOOP2.asset,
+                    3 => Main.soundLibrary.MUSIC_COMBAT_LOOP3.asset,
+                    _ => Main.soundLibrary.MUSIC_COMBAT_LOOP0.asset,
+                };
+                combatLoopInstancePrevious = combatLoopInstance;
+                combatLoopInstance = soundEffect.CreateInstance();
+                combatLoopInstance.Play();
+            }
+            if(combatLoopVolume < combatLoopVolumeTo)
+            {
+                combatLoopVolume += Math.Min(combatLoopVolumeAcc, combatLoopVolumeTo - combatLoopVolume);
+            }
+            else if(combatLoopVolume > combatLoopVolumeTo)
+            {
+                combatLoopVolume -= Math.Min(combatLoopVolumeAcc, combatLoopVolume - combatLoopVolumeTo);
             }
             if(layerLoopInstance != null)
             {
@@ -183,19 +208,19 @@ namespace UnderwaterGame
             }
             if(combatLoopInstance != null)
             {
-                combatLoopInstance.Volume = World.spawnTimeAcc * Option.musicVolume.value * Option.masterVolume.value;
+                combatLoopInstance.Volume = combatLoopVolume * Option.musicVolume.value * Option.masterVolume.value;
             }
             if(combatLoopInstancePrevious != null)
             {
-                combatLoopInstancePrevious.Volume = World.spawnTimeAcc * Option.musicVolume.value * Option.masterVolume.value;
+                combatLoopInstancePrevious.Volume = combatLoopVolume * Option.musicVolume.value * Option.masterVolume.value;
             }
             if(combatIntroStingerInstance != null)
             {
-                combatIntroStingerInstance.Volume = World.spawnTimeAcc * Option.musicVolume.value * Option.masterVolume.value;
+                combatIntroStingerInstance.Volume = combatLoopVolume * Option.musicVolume.value * Option.masterVolume.value;
             }
             if(combatOutroStingerInstance != null)
             {
-                combatOutroStingerInstance.Volume = (1f - World.spawnTimeAcc) * Option.musicVolume.value * Option.masterVolume.value;
+                combatOutroStingerInstance.Volume = (1f - combatLoopVolume) * Option.musicVolume.value * Option.masterVolume.value;
             }
         }
     }
