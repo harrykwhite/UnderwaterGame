@@ -13,7 +13,6 @@
     using UnderwaterGame.Items.Weapons;
     using UnderwaterGame.Sprites;
     using UnderwaterGame.Ui;
-    using UnderwaterGame.Ui.UiElements;
     using UnderwaterGame.Ui.UiElements.Menus;
     using UnderwaterGame.Utilities;
 
@@ -38,13 +37,13 @@
             Other
         }
 
-        private int bubbleTime;
+        private float bubbleTime;
 
-        private int bubbleTimeMax = 4;
+        private float bubbleTimeMax = 8f;
 
         private float swimAngleTo;
 
-        private float swimAngleToMult = 0.2f;
+        private float swimAngleToMult = 0.1f;
 
         private float swimSpeedHor;
 
@@ -138,7 +137,7 @@
             bool keyLeft = Control.KeyHeld(Keys.A);
             bool keyDown = Control.KeyHeld(Keys.S);
             bool keyUp = Control.KeyHeld(Keys.W);
-            bool keyWield = Control.KeyPressed(Keys.F);
+            bool keyWieldPressed = Control.KeyPressed(Keys.F);
             Vector2 swimVector = Vector2.Zero;
             if(keyRight)
             {
@@ -246,19 +245,17 @@
             bool idle = true;
             if(inWater)
             {
-                if(new Vector2(swimSpeedHor, swimSpeedVer).Length() * swimSpeedWaterMult > 0f)
+                float distance = new Vector2(swimSpeedHor, swimSpeedVer).Length() * swimSpeedWaterMult;
+                if(distance > 0f)
                 {
                     if(bubbleTime < bubbleTimeMax)
                     {
-                        bubbleTime++;
-                    }
-                    else
-                    {
+                        bubbleTime += distance / swimSpeedMax;
+                    }else{
                         Bubble bubble = (Bubble)EntityManager.AddEntity<Bubble>(position);
                         bubble.position += MathUtilities.LengthDirection(10f, angle + angleOffset);
-                        bubble.speed = swimSpeedMax / 2f;
                         bubble.direction = angle + angleOffset;
-                        bubbleTime = 0;
+                        bubbleTime = 0f;
                     }
                     animator.sprite = Sprite.playerSwim;
                     animator.speed = 0.25f;
@@ -275,7 +272,7 @@
             UpdateWater();
             if(heldItem.useTimeCurrent >= heldItem.useTimeMax)
             {
-                if(keyWield)
+                if(keyWieldPressed)
                 {
                     PlayerMenu playerMenu = (PlayerMenu)UiManager.GetElement<PlayerMenu>();
                     playerMenu.selectedSlotX = 0;

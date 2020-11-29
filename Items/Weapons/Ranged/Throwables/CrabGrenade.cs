@@ -1,7 +1,7 @@
 ﻿namespace UnderwaterGame.Items.Weapons.Ranged.Throwables
 {
-    using UnderwaterGame.Entities;
     using UnderwaterGame.Sprites;
+    using UnderwaterGame.Worlds;
 
     public class CrabGrenade : ThrowableRanged
     {
@@ -14,9 +14,9 @@
             damage = 8f;
         }
 
-        public override void OnUse(ItemEntity entity)
+        public override void OnUse()
         {
-            Shoot<Entities.Projectiles.Throwables.CrabGrenade>(entity, entity.angleBase, 7f);
+            Shoot<Entities.Projectiles.Throwables.CrabGrenade>(World.player.heldItem.angleBase, 7f);
         }
     }
 }

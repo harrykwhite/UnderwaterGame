@@ -4,22 +4,23 @@
     using Microsoft.Xna.Framework.Audio;
     using UnderwaterGame.Entities;
     using UnderwaterGame.Utilities;
+    using UnderwaterGame.Worlds;
 
     public abstract class SwordMelee : MeleeWeapon
     {
         protected float swingAngleRange = MathHelper.Pi / 3f;
 
-        public override void WhileUse(ItemEntity entity)
+        public override void WhileUse()
         {
-            SwingUpdate(entity);
+            SwingUpdate();
         }
 
-        protected override HitEntity Swing(ItemEntity entity)
+        protected override HitEntity Swing()
         {
-            HitEntity hitEntity = base.Swing(entity);
-            float from = swingAngleRange * (MathUtilities.AngleLeftHalf(entity.angleBaseRelative) ? 1f : -1f);
+            HitEntity hitEntity = base.Swing();
+            float from = swingAngleRange * (MathUtilities.AngleLeftHalf(World.player.heldItem.angleBaseRelative) ? 1f : -1f);
             float to = -from;
-            entity.SetAngleHoldOffset(from, to, useTime);
+            World.player.heldItem.SetAngleHoldOffset(from, to, useTime);
             SoundEffect soundEffect = (Main.random.Next(4)) switch
             {
                 1 => Main.soundLibrary.ITEMS_WEAPONS_MELEE_SWORD1.asset,
@@ -28,7 +29,7 @@
                 _ => Main.soundLibrary.ITEMS_WEAPONS_MELEE_SWORD0.asset,
             };
             SoundUtilities.PlaySound(soundEffect);
-            Camera.Shake(1f, entity.angleBase);
+            Camera.Shake(1f, World.player.heldItem.angleBase);
             return hitEntity;
         }
     }

@@ -5,7 +5,7 @@
 
     public abstract class MagicWeapon : WeaponItem
     {
-        public override bool CanUse(ItemEntity entity)
+        public override bool CanUse()
         {
             return World.player.magic > 0f;
         }

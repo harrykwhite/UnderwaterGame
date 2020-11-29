@@ -3,6 +3,7 @@
     using Microsoft.Xna.Framework.Audio;
     using UnderwaterGame.Entities;
     using UnderwaterGame.Utilities;
+    using UnderwaterGame.Worlds;
 
     public abstract class TridentMelee : MeleeWeapon
     {
@@ -10,34 +11,34 @@
 
         protected float swingLength = 4f;
 
-        public override void WhileUse(ItemEntity entity)
+        public override void WhileUse()
         {
-            if(entity.useState == 0)
+            if(World.player.heldItem.useState == 0)
             {
-                if(entity.lengthOffset < swingLength)
+                if(World.player.heldItem.lengthOffset < swingLength)
                 {
-                    entity.lengthOffset += swingSpeed;
+                    World.player.heldItem.lengthOffset += swingSpeed;
                 }
                 else
                 {
-                    entity.useState = 1;
+                    World.player.heldItem.useState = 1;
                 }
             }
-            if(entity.useState == 1)
+            if(World.player.heldItem.useState == 1)
             {
-                if(entity.lengthOffset > 0f)
+                if(World.player.heldItem.lengthOffset > 0f)
                 {
-                    entity.lengthOffset -= swingSpeed;
+                    World.player.heldItem.lengthOffset -= swingSpeed;
                 }
                 else
                 {
-                    entity.lengthOffset = 0f;
+                    World.player.heldItem.lengthOffset = 0f;
                 }
             }
-            SwingUpdate(entity);
+            SwingUpdate();
         }
 
-        protected override HitEntity Swing(ItemEntity entity)
+        protected override HitEntity Swing()
         {
             SoundEffect soundEffect = (Main.random.Next(4)) switch
             {
@@ -47,8 +48,8 @@
                 _ => Main.soundLibrary.ITEMS_WEAPONS_MELEE_TRIDENT0.asset,
             };
             SoundUtilities.PlaySound(soundEffect);
-            Camera.Shake(1f, entity.angleBase);
-            return base.Swing(entity);
+            Camera.Shake(1f, World.player.heldItem.angleBase);
+            return base.Swing();
         }
     }
 }

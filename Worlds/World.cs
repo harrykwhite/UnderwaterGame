@@ -161,6 +161,7 @@
                         WorldTile worldTile = tilemaps[m][x, y];
                         Color color = Color.White;
                         float depth = 0.65f;
+                        Vector2 offset = Vector2.Zero;
                         switch((Tilemap)m)
                         {
                             case Tilemap.SecondSolids:
@@ -185,7 +186,7 @@
                         {
                             continue;
                         }
-                        Main.spriteBatch.Draw(Tile.GetTileById(worldTile.id).textures[worldTile.texture], new Vector2(x, y) * Tile.size, null, color * Tile.GetTileById(worldTile.id).alpha, 0f, Vector2.Zero, 1f, SpriteEffects.None, depth);
+                        Main.spriteBatch.Draw(Tile.GetTileById(worldTile.id).textures[worldTile.texture], (new Vector2(x, y) * Tile.size) + offset, null, color * Tile.GetTileById(worldTile.id).alpha, 0f, Vector2.Zero, 1f, SpriteEffects.None, depth);
                     }
                 }
             }

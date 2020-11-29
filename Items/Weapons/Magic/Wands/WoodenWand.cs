@@ -15,11 +15,11 @@
             damage = 8f;
         }
 
-        public override void OnUse(ItemEntity entity)
+        public override void OnUse()
         {
             if(World.player.HurtMagic(2f))
             {
-                Shoot<FlareMagic>(entity, entity.angleBase, 12f);
+                Shoot<FlareMagic>(World.player.heldItem.angleBase, 12f);
             }
         }
     }

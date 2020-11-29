@@ -6,6 +6,7 @@
     using UnderwaterGame.Ui;
     using UnderwaterGame.Ui.UiElements;
     using UnderwaterGame.Utilities;
+    using UnderwaterGame.Worlds;
 
     public abstract class MeleeWeapon : WeaponItem
     {
@@ -17,29 +18,31 @@
 
         protected int hitboxSize = 23;
 
-        public override void OnUse(ItemEntity entity)
+        public override void OnUse()
         {
-            Swing(entity);
+            Swing();
         }
 
-        protected virtual HitEntity Swing(ItemEntity entity)
+        protected virtual HitEntity Swing()
         {
-            hitEntity = (HitEntity)EntityManager.AddEntity<HitEntity>(entity.position);
-            hitEntity.position += MathUtilities.LengthDirection(hitboxOffset + entity.lengthOffset, entity.angleBase);
-            hitEntity.SetHitData(damage, hitEntity.position, entity.angleBase, false, true);
+            hitEntity = (HitEntity)EntityManager.AddEntity<HitEntity>(World.player.heldItem.position);
+            hitEntity.position += MathUtilities.LengthDirection(hitboxOffset + World.player.heldItem.lengthOffset, World.player.heldItem.angleBase);
+            hitEntity.SetHitData(damage, hitEntity.position, World.player.heldItem.angleBase, false, true);
             hitEntity.collider.shape.width = hitEntity.collider.shape.height = hitboxSize;
             hitEntity.collider.shape.Clear();
-            hitEntity.depth = entity.depth + 0.001f;
-            entity.SetSwingEffect(swingSprite, hitboxOffset);
+            hitEntity.depth = World.player.heldItem.depth + 0.001f;
+            World.player.heldItem.SetSwingEffect(swingSprite, hitboxOffset);
+            World.player.knockbackSpeed += hitEntity.hitData.damage / 4f;
+            World.player.knockbackDirection = World.player.heldItem.angleBase;
             ((GameCursorElement)UiManager.GetElement<GameCursorElement>()).scale += new Vector2(0.5f);
             return hitEntity;
         }
 
-        protected virtual void SwingUpdate(ItemEntity entity)
+        protected virtual void SwingUpdate()
         {
             if(hitEntity.GetExists())
             {
-                hitEntity.position = entity.position + MathUtilities.LengthDirection(hitboxOffset, entity.angleBase);
+                hitEntity.position = World.player.heldItem.position + MathUtilities.LengthDirection(hitboxOffset, World.player.heldItem.angleBase);
             }
         }
     }

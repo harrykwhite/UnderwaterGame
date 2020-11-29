@@ -552,6 +552,18 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Items/Weapons/Ranged/Throwables/CrabShuriken.png
 
+#begin Textures/Other/Background.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Other/Background.png
+
 #begin Textures/Other/InnerHotspot.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -575,18 +587,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/Other/OuterHotspot.png
-
-#begin Textures/Other/Pixel.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Other/Pixel.png
 
 #begin Textures/Other/Pixel.png
 /importer:TextureImporter
@@ -911,18 +911,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/Ui/Other/BigVignette.png
-
-#begin Textures/Ui/Other/Cursor.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Ui/Other/Cursor.png
 
 #begin Textures/Ui/Other/Cursor.png
 /importer:TextureImporter

@@ -37,6 +37,10 @@
 
         public static float combatLoopVolumeTo;
 
+        public static int combatLoopIntroStingerTime;
+
+        public static int combatLoopIntroStingerTimeMax;
+
         public static SoundEffectInstance combatLoopInstance;
 
         public static SoundEffectInstance combatLoopInstancePrevious;
@@ -144,51 +148,71 @@
                 {
                     if(combatLoopVolume == 0f)
                     {
-                        SoundEffect soundEffect = Main.random.Next(3) switch
+                        SoundEffect soundEffect;
+                        switch(Main.random.Next(3))
                         {
-                            1 => Main.soundLibrary.MUSIC_COMBAT_INTROSTINGER1.asset,
-                            2 => Main.soundLibrary.MUSIC_COMBAT_INTROSTINGER2.asset,
-                            _ => Main.soundLibrary.MUSIC_COMBAT_INTROSTINGER0.asset,
-                        };
+                            case 1:
+                                soundEffect = Main.soundLibrary.MUSIC_COMBAT_INTROSTINGER1.asset;
+                                combatLoopIntroStingerTimeMax = 2032;
+                                break;
+
+                            case 2:
+                                soundEffect = Main.soundLibrary.MUSIC_COMBAT_INTROSTINGER2.asset;
+                                combatLoopIntroStingerTimeMax = 1024;
+                                break;
+
+                            default:
+                                soundEffect = Main.soundLibrary.MUSIC_COMBAT_INTROSTINGER0.asset;
+                                combatLoopIntroStingerTimeMax = 1040;
+                                break;
+                        }
                         combatIntroStingerInstance = soundEffect.CreateInstance();
                         combatIntroStingerInstance.Play();
                         combatLoop = 0;
                         combatLoopTime = 0;
+                        combatLoopIntroStingerTime = 0;
                         combatLoopInstance = null;
                         combatLoopInstancePrevious = null;
                     }
                     combat = true;
                 }
             }
-            int combatLoopPrevious = combatLoop;
-            if(combatLoopTime < combatLoopTimeMax)
+            if(combatLoopIntroStingerTime < combatLoopIntroStingerTimeMax)
             {
-                combatLoopTime += Main.elapsedTime;
+                combatLoopIntroStingerTime += Main.elapsedTime;
             }
             else
             {
-                if(combatLoop < combatLoopMax)
+                int combatLoopPrevious = combatLoop;
+                if(combatLoopTime < combatLoopTimeMax)
                 {
-                    combatLoop++;
+                    combatLoopTime += Main.elapsedTime;
                 }
                 else
                 {
-                    combatLoop = 0;
+                    if(combatLoop < combatLoopMax)
+                    {
+                        combatLoop++;
+                    }
+                    else
+                    {
+                        combatLoop = 0;
+                    }
+                    combatLoopTime = 0;
                 }
-                combatLoopTime = 0;
-            }
-            if(combatLoopInstance == null || combatLoop != combatLoopPrevious)
-            {
-                SoundEffect soundEffect = combatLoop switch
+                if(combatLoopInstance == null || combatLoop != combatLoopPrevious)
                 {
-                    1 => Main.soundLibrary.MUSIC_COMBAT_LOOP1.asset,
-                    2 => Main.soundLibrary.MUSIC_COMBAT_LOOP2.asset,
-                    3 => Main.soundLibrary.MUSIC_COMBAT_LOOP3.asset,
-                    _ => Main.soundLibrary.MUSIC_COMBAT_LOOP0.asset,
-                };
-                combatLoopInstancePrevious = combatLoopInstance;
-                combatLoopInstance = soundEffect.CreateInstance();
-                combatLoopInstance.Play();
+                    SoundEffect soundEffect = combatLoop switch
+                    {
+                        1 => Main.soundLibrary.MUSIC_COMBAT_LOOP1.asset,
+                        2 => Main.soundLibrary.MUSIC_COMBAT_LOOP2.asset,
+                        3 => Main.soundLibrary.MUSIC_COMBAT_LOOP3.asset,
+                        _ => Main.soundLibrary.MUSIC_COMBAT_LOOP0.asset,
+                    };
+                    combatLoopInstancePrevious = combatLoopInstance;
+                    combatLoopInstance = soundEffect.CreateInstance();
+                    combatLoopInstance.Play();
+                }
             }
             if(combatLoopVolume < combatLoopVolumeTo)
             {

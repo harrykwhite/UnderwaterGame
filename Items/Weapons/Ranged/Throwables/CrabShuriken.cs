@@ -2,6 +2,7 @@
 {
     using UnderwaterGame.Entities;
     using UnderwaterGame.Sprites;
+    using UnderwaterGame.Worlds;
 
     public class CrabShuriken : ThrowableRanged
     {
@@ -14,9 +15,9 @@
             damage = 2f;
         }
 
-        public override void OnUse(ItemEntity entity)
+        public override void OnUse()
         {
-            Shoot<Entities.Projectiles.Throwables.CrabShuriken>(entity, entity.angleBase, 7f);
+            Shoot<Entities.Projectiles.Throwables.CrabShuriken>(World.player.heldItem.angleBase, 7f);
         }
     }
 }

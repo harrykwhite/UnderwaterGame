@@ -107,7 +107,7 @@
             {
                 use = true;
                 useTimeCurrent++;
-                itemType.WhileUse(this);
+                itemType.WhileUse();
                 if(itemType.useAngleUpdate)
                 {
                     UpdateAngleBase();
@@ -121,20 +121,20 @@
             {
                 if(use)
                 {
-                    itemType.EndUse(this);
+                    itemType.EndUse();
                 }
                 swingEffect = false;
                 swingEffectAnimator.index = 0f;
                 swingEffectAnimator.hidden = false;
                 if(buttonUse)
                 {
-                    if(itemType.CanUse(this))
+                    if(itemType.CanUse())
                     {
                         UpdateAngleBase();
                         useState = 0;
                         useTimeCurrent = 0;
                         useTimeMax = itemType.useTime;
-                        itemType.OnUse(this);
+                        itemType.OnUse();
                     }
                 }
             }

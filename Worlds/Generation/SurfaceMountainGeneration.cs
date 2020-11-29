@@ -8,12 +8,12 @@ namespace UnderwaterGame.Worlds.Generation
     {
         public override void Generate()
         {
-            Point[] mountainPositions = new Point[12];
+            Point[] mountainPositions = new Point[8];
             int mountainPositionsGap = 32;
             for(int i = 0; i < mountainPositions.Length; i++)
             {
-                int width = Main.random.Next(6, 8);
-                int height = Main.random.Next(64, 80);
+                int width = Main.random.Next(8, 10);
+                int height = Main.random.Next(64, 72);
                 do
                 {
                     mountainPositions[i].X = Main.random.Next(World.width);

@@ -151,3 +151,11 @@ C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Other\HotspotInner.xnb
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Other\HotspotOuter.xnb
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Tiles\Solids\Cloud.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Other\Background.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Other\InnerHotspot.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Other\OuterHotspot.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Other\Vignette.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Other\VignetteLarge.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Other\VignetteSmall.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\UI\Other\BigVignette.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\UI\Other\SmallVignette.xnb

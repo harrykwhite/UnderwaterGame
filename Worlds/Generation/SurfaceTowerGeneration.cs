@@ -8,8 +8,8 @@
     {
         public override void Generate()
         {
-            Point[] towerPositions = new Point[3];
-            int towerPositionsGap = 128;
+            Point[] towerPositions = new Point[4];
+            int towerPositionsGap = 64;
             for(int i = 0; i < towerPositions.Length; i++)
             {
                 int levelWidth = Main.random.Next(8, 10);

@@ -49,19 +49,19 @@
 
         protected abstract void Init();
 
-        public virtual void OnUse(ItemEntity entity)
+        public virtual void OnUse()
         {
         }
 
-        public virtual void WhileUse(ItemEntity entity)
+        public virtual void WhileUse()
         {
         }
 
-        public virtual void EndUse(ItemEntity entity)
+        public virtual void EndUse()
         {
         }
 
-        public virtual bool CanUse(ItemEntity entity)
+        public virtual bool CanUse()
         {
             return true;
         }

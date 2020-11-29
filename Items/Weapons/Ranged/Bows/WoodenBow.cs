@@ -3,6 +3,7 @@
     using UnderwaterGame.Entities;
     using UnderwaterGame.Entities.Projectiles.Arrows;
     using UnderwaterGame.Sprites;
+    using UnderwaterGame.Worlds;
 
     public class WoodenBow : BowRanged
     {
@@ -15,14 +16,14 @@
             damage = 4f;
         }
 
-        public override void WhileUse(ItemEntity entity)
+        public override void WhileUse()
         {
-            if(entity.useState != 0 || (int)entity.animator.index != 3)
+            if(World.player.heldItem.useState != 0 || (int)World.player.heldItem.animator.index != 3)
             {
                 return;
             }
-            Shoot<WoodenArrow>(entity, entity.angleBase, 7f);
-            entity.useState = 1;
+            Shoot<WoodenArrow>(World.player.heldItem.angleBase, 7f);
+            World.player.heldItem.useState = 1;
         }
     }
 }
