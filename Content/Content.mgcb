@@ -552,7 +552,7 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Items/Weapons/Ranged/Throwables/CrabShuriken.png
 
-#begin Textures/Other/Background.png
+#begin Textures/Other/Hotspot.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -562,31 +562,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Other/Background.png
-
-#begin Textures/Other/InnerHotspot.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Other/InnerHotspot.png
-
-#begin Textures/Other/OuterHotspot.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Other/OuterHotspot.png
+/build:Textures/Other/Hotspot.png
 
 #begin Textures/Other/Pixel.png
 /importer:TextureImporter

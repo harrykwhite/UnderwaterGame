@@ -121,7 +121,7 @@
             }
             if(combat)
             {
-                combatLoopVolumeTo = World.hotspotCurrent?.spawnTimeAcc ?? 0f;
+                combatLoopVolumeTo = 1f;
                 if(Main.loading == null && World.hotspotCurrent == null)
                 {
                     if(World.hotspotPrevious != null)
@@ -146,7 +146,7 @@
                 combatLoopVolumeTo = 0f;
                 if(Main.loading == null && World.hotspotCurrent != null)
                 {
-                    if(combatLoopVolume == 0f)
+                    if(combatLoopVolume == 0f && (combatIntroStingerInstance == null || combatLoopIntroStingerTime == combatLoopIntroStingerTimeMax))
                     {
                         SoundEffect soundEffect;
                         switch(Main.random.Next(3))
@@ -179,7 +179,10 @@
             }
             if(combatLoopIntroStingerTime < combatLoopIntroStingerTimeMax)
             {
-                combatLoopIntroStingerTime += Main.elapsedTime;
+                if(combatIntroStingerInstance != null)
+                {
+                    combatLoopIntroStingerTime += Main.elapsedTime;
+                }
             }
             else
             {
@@ -240,11 +243,11 @@
             }
             if(combatIntroStingerInstance != null)
             {
-                combatIntroStingerInstance.Volume = combatLoopVolume * Option.musicVolume.value * Option.masterVolume.value;
+                combatIntroStingerInstance.Volume = Option.musicVolume.value * Option.masterVolume.value;
             }
             if(combatOutroStingerInstance != null)
             {
-                combatOutroStingerInstance.Volume = (1f - combatLoopVolume) * Option.musicVolume.value * Option.masterVolume.value;
+                combatOutroStingerInstance.Volume = Option.musicVolume.value * Option.masterVolume.value;
             }
         }
     }

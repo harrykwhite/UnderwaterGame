@@ -111,10 +111,8 @@
         public readonly LibraryAsset UI_OTHER_BIGVIGNETTE = new LibraryAsset("Textures/Ui/Other/BigVignette");
 
         public readonly LibraryAsset UI_OTHER_SMALLVIGNETTE = new LibraryAsset("Textures/Ui/Other/SmallVignette");
-
-        public readonly LibraryAsset OTHER_INNERHOTSPOT = new LibraryAsset("Textures/Other/HotspotInner");
-
-        public readonly LibraryAsset OTHER_OUTERHOTSPOT = new LibraryAsset("Textures/Other/HotspotOuter");
+        
+        public readonly LibraryAsset OTHER_HOTSPOT = new LibraryAsset("Textures/Other/Hotspot");
         
         public readonly LibraryAsset OTHER_PIXEL = new LibraryAsset("Textures/Other/Pixel");
     }

@@ -102,7 +102,7 @@
                 {
                     if(hotspot.count > 0)
                     {
-                        if(Vector2.Distance(player.position, hotspot.position) <= Main.textureLibrary.OTHER_OUTERHOTSPOT.asset.Width / 2f)
+                        if(Vector2.Distance(player.position, hotspot.position) <= Main.textureLibrary.OTHER_HOTSPOT.asset.Width / 2f)
                         {
                             hotspotCurrent = hotspot;
                         }
@@ -192,8 +192,7 @@
             }
             foreach(Hotspot hotspot in hotspots)
             {
-                Main.spriteBatch.Draw(Main.textureLibrary.OTHER_INNERHOTSPOT.asset, hotspot.position, null, Color.White * 0.25f * hotspot.alpha, 0f, new Vector2(Main.textureLibrary.OTHER_INNERHOTSPOT.asset.Width, Main.textureLibrary.OTHER_INNERHOTSPOT.asset.Height) / 2f, 1f, SpriteEffects.None, 0.9f);
-                Main.spriteBatch.Draw(Main.textureLibrary.OTHER_OUTERHOTSPOT.asset, hotspot.position, null, Color.White * hotspot.alpha, 0f, new Vector2(Main.textureLibrary.OTHER_OUTERHOTSPOT.asset.Width, Main.textureLibrary.OTHER_OUTERHOTSPOT.asset.Height) / 2f, 1f, SpriteEffects.None, 0.9f);
+                Main.spriteBatch.Draw(Main.textureLibrary.OTHER_HOTSPOT.asset, hotspot.position, null, Color.White * hotspot.alpha, 0f, new Vector2(Main.textureLibrary.OTHER_HOTSPOT.asset.Width, Main.textureLibrary.OTHER_HOTSPOT.asset.Height) / 2f, 1f, SpriteEffects.None, 0.9f);
             }
         }
 
@@ -345,7 +344,7 @@
             return (new Vector2(x, y) * Tile.size) - new Vector2(0f, environmental.sprite.origin.Y - environmental.sprite.bound.Y);
         }
 
-        public static void AddHotspotAt(Vector2 position, Hotspot.Spawn[] spawns, int spawnMax, float spawnTimeMax, int count)
+        public static void AddHotspotAt(Vector2 position, Hotspot.Spawn[] spawns, int spawnMax, int spawnTimeMax, int count)
         {
             hotspots.Add(new Hotspot(position, spawns, spawnMax, spawnTimeMax, count));
         }
