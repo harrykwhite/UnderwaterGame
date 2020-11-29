@@ -39,7 +39,7 @@
                 smoke.direction = ((MathHelper.Pi * 2f) / particleCount) * i;
             }
             HitEntity hitEntity = (HitEntity)EntityManager.AddEntity<HitEntity>(position);
-            hitEntity.SetHitData(damage, hitEntity.position, RandomUtilities.Range(0f, MathHelper.Pi), hitPlayer, hitEnemy);
+            hitEntity.SetHitData(damage, strength, hitEntity.position, RandomUtilities.Range(0f, MathHelper.Pi), hitPlayer, hitEnemy);
             hitEntity.collider.shape.width = hitEntity.collider.shape.height = 20;
             hitEntity.collider.shape.Clear();
             Camera.Shake(2f, position);

@@ -10,6 +10,8 @@
     {
         public float damage;
 
+        public float strength;
+
         public bool hitEnemy;
 
         public bool hitPlayer;
@@ -60,7 +62,7 @@
 
         public HitData HitCharacter(Entity target)
         {
-            return new HitData { damage = damage, at = target.position, direction = direction, hitEnemy = hitEnemy, hitPlayer = hitPlayer, hitAction = delegate (CharacterEntity character) { HitCharacter(character); if(!pierce) { Destroy(); } } };
+            return new HitData { damage = damage, strength = strength, at = target.position, direction = direction, hitEnemy = hitEnemy, hitPlayer = hitPlayer, hitAction = delegate (CharacterEntity character) { HitCharacter(character); if(!pierce) { Destroy(); } } };
         }
 
         protected virtual void Hit()

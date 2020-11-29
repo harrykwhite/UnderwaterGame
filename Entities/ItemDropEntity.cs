@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using UnderwaterGame.Entities.Particles;
 using UnderwaterGame.Items;
 using UnderwaterGame.Worlds;
 
@@ -16,7 +17,7 @@ namespace UnderwaterGame.Entities
             this.quantity = quantity;
             if(this.itemType != null)
             {
-                SetSprite(this.itemType.sprite, false);
+                SetSprite(this.itemType.sprite, true);
                 animator = new Animator(sprite);
             }
         }
@@ -36,6 +37,12 @@ namespace UnderwaterGame.Entities
             {
                 if(World.player.inventory.AddItem(itemType, quantity))
                 {
+                    int particleCount = 3;
+                    for(int i = 0; i < particleCount; i++)
+                    {
+                        Blood blood = (Blood)EntityManager.AddEntity<Blood>(position);
+                        blood.direction = ((MathHelper.Pi * 2f) / particleCount) * i;
+                    }
                     Destroy();
                 }
             }

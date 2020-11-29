@@ -10,8 +10,10 @@
             name = "Crab Grenade";
             sprite = Sprite.crabGrenade;
             useTime = 45;
+            useStrength = 1f;
             useHide = true;
             damage = 8f;
+            strength = 4f;
         }
 
         public override void OnUse()

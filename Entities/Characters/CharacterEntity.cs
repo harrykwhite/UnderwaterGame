@@ -91,7 +91,7 @@
             knockbackSpeedAcc = 0.1f;
             if(hitData.direction != null)
             {
-                knockbackSpeed += amount / 2f;
+                knockbackSpeed += hitData.strength;
                 knockbackDirection = hitData.direction.Value;
             }
             hitData.hitAction?.Invoke(this);

@@ -1,6 +1,5 @@
 ﻿namespace UnderwaterGame.Items.Weapons.Ranged.Bows
 {
-    using UnderwaterGame.Entities;
     using UnderwaterGame.Entities.Projectiles.Arrows;
     using UnderwaterGame.Sprites;
     using UnderwaterGame.Worlds;
@@ -12,8 +11,10 @@
             name = "Wooden Bow";
             sprite = Sprite.woodenBow;
             useTime = 35;
+            useStrength = 1f;
             useAngleUpdate = true;
             damage = 4f;
+            strength = 2f;
         }
 
         public override void WhileUse()

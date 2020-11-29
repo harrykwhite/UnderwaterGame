@@ -1,4 +1,6 @@
-﻿namespace UnderwaterGame.Entities.Characters.Enemies
+﻿using UnderwaterGame.Items;
+
+namespace UnderwaterGame.Entities.Characters.Enemies
 {
     public abstract class EnemyCharacter : CharacterEntity, IHitCharacter
     {
@@ -12,7 +14,7 @@
 
         public HitData HitCharacter(Entity target)
         {
-            return new HitData { damage = touchDamage, at = target.position, direction = null, hitPlayer = touchDamagePlayer, hitEnemy = touchDamageEnemy };
+            return new HitData { damage = touchDamage, at = target.position, hitPlayer = touchDamagePlayer, hitEnemy = touchDamageEnemy };
         }
 
         public override void Kill()

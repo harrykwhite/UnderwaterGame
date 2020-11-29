@@ -11,6 +11,7 @@
     public abstract class WeaponItem : Item
     {
         public float damage;
+        public float strength;
 
         protected void Shoot<T>(float direction, float outLength) where T : ProjectileEntity
         {
@@ -19,10 +20,11 @@
             projectile.direction = direction;
             projectile.angle = projectile.direction;
             projectile.hitEnemy = true;
-            projectile.damage += damage;
+            projectile.damage = damage;
+            projectile.strength = strength;
             projectile.depth = World.player.heldItem.depth - 0.001f;
-            World.player.knockbackSpeed += projectile.damage / 4f;
-            World.player.knockbackDirection = World.player.heldItem.angleBase - MathHelper.Pi;
+            World.player.knockbackSpeed += useStrength;
+            World.player.knockbackDirection = World.player.heldItem.angleBase;
             ((GameCursorElement)UiManager.GetElement<GameCursorElement>()).scale += new Vector2(0.5f);
             Camera.Shake(1f, projectile.direction);
         }

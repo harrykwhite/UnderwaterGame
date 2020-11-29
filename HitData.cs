@@ -8,6 +8,8 @@
     {
         public float damage;
 
+        public float strength;
+
         public Vector2 at;
 
         public float? direction;

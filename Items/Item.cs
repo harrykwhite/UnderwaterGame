@@ -2,7 +2,6 @@
 {
     using System;
     using System.Collections.Generic;
-    using UnderwaterGame.Entities;
     using UnderwaterGame.Sprites;
 
     public abstract partial class Item
@@ -20,6 +19,8 @@
         public int useTime;
 
         public float useOffset;
+
+        public float useStrength;
 
         public bool useAngleUpdate;
 

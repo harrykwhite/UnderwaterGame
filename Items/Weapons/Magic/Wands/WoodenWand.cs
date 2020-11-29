@@ -12,7 +12,9 @@
             name = "Wooden Wand";
             sprite = Sprite.woodenWand;
             useTime = 40;
+            useStrength = 1f;
             damage = 8f;
+            strength = 2f;
         }
 
         public override void OnUse()
