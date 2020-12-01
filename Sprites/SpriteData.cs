@@ -52,11 +52,6 @@
                 sprite.SetTextureSheet(libraryAsset.asset, 32);
                 return true;
             }
-            if(libraryAsset == Main.textureLibrary.PARTICLES_BLOOD)
-            {
-                sprite.SetTextureSheet(libraryAsset.asset, 3);
-                return true;
-            }
             return false;
         }
 

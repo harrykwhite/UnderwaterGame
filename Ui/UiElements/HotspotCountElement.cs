@@ -10,7 +10,7 @@
         {
             foreach(Hotspot hotspot in World.hotspots)
             {
-                DrawUtilities.DrawStringExt(Main.fontLibrary.ARIALMEDIUM.asset, new DrawUtilities.Text(hotspot.count.ToString() + " enemies"), UiManager.WorldToUi(hotspot.position), Color.White * hotspot.alpha, 0f, new Vector2(hotspot.countScale), DrawUtilities.HorizontalAlign.Middle, DrawUtilities.VerticalAlign.Middle);
+                DrawUtilities.DrawStringExt(Main.fontLibrary.ARIALMEDIUM.asset, new DrawUtilities.Text(hotspot.count.ToString() + " enemies"), UiManager.WorldToUi(hotspot.position), Color.White * hotspot.alpha, 0f, hotspot.countScale, DrawUtilities.HorizontalAlign.Middle, DrawUtilities.VerticalAlign.Middle);
             }
         }
 

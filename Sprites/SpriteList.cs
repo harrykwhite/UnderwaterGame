@@ -38,6 +38,8 @@
 
         public static Sprite hotspotParticle;
 
+        public static Sprite fish;
+
         public static Sprite woodenArrow;
 
         public static Sprite flareMagic;
@@ -92,6 +94,7 @@
             liquid = Load(Main.textureLibrary.PARTICLES_LIQUID);
             fire = Load(Main.textureLibrary.PARTICLES_FIRE);
             hotspotParticle = Load(Main.textureLibrary.PARTICLES_HOTSPOTPARTICLE);
+            fish = Load(Main.textureLibrary.PARTICLES_FISH);
             woodenArrow = Load(Main.textureLibrary.PROJECTILES_ARROWS_WOODENARROW);
             flareMagic = Load(Main.textureLibrary.PROJECTILES_MAGIC_FLAREMAGIC);
             woodenTrident = Load(Main.textureLibrary.ITEMS_WEAPONS_MELEE_TRIDENTS_WOODENTRIDENT);

@@ -35,12 +35,12 @@
                 {
                     if(y >= stoneLevel + levelOffset)
                     {
-                        World.AddTileAt(x, y, World.Tilemap.FirstSolids, Tile.stone);
+                        World.AddTileAt(x, y, World.Tilemap.Solids, Tile.stone);
                         World.AddTileAt(x, y, World.Tilemap.FirstWalls, Tile.stoneWall);
                     }
                     else if(y >= sandLevel + levelOffset)
                     {
-                        World.AddTileAt(x, y, World.Tilemap.FirstSolids, Tile.sand);
+                        World.AddTileAt(x, y, World.Tilemap.Solids, Tile.sand);
                         World.AddTileAt(x, y, World.Tilemap.FirstWalls, Tile.sandWall);
                     }
                     else if(y >= wallLevel + levelOffset)

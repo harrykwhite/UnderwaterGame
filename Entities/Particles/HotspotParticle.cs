@@ -14,7 +14,6 @@
         {
             SetSprite(Sprite.hotspotParticle, false);
             depth = 0.725f;
-            blend = Color.White;
         }
 
         public override void Update()

@@ -10,8 +10,6 @@
 
         public readonly LibraryAsset TILES_SOLIDS_BRICK = new LibraryAsset("Textures/Tiles/Solids/Brick");
 
-        public readonly LibraryAsset TILES_SOLIDS_CLOUD = new LibraryAsset("Textures/Tiles/Solids/Cloud");
-
         public readonly LibraryAsset TILES_LIQUIDS_WATER = new LibraryAsset("Textures/Tiles/Liquids/Water");
 
         public readonly LibraryAsset ENVIRONMENTALS_BIGSEAWEED = new LibraryAsset("Textures/Environmentals/BigSeaweed");
@@ -45,6 +43,8 @@
         public readonly LibraryAsset PARTICLES_FIRE = new LibraryAsset("Textures/Particles/Fire");
 
         public readonly LibraryAsset PARTICLES_HOTSPOTPARTICLE = new LibraryAsset("Textures/Particles/HotspotParticle");
+        
+        public readonly LibraryAsset PARTICLES_FISH = new LibraryAsset("Textures/Particles/Fish");
 
         public readonly LibraryAsset PROJECTILES_ARROWS_WOODENARROW = new LibraryAsset("Textures/Projectiles/Arrows/WoodenArrow");
 

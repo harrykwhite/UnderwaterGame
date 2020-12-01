@@ -3,7 +3,7 @@
     using Microsoft.Xna.Framework;
     using UnderwaterGame.Sprites;
 
-    public class Blood : ParticleEntity
+    public class Fish : ParticleEntity
     {
         public override void Draw()
         {
@@ -12,10 +12,10 @@
 
         public override void Init()
         {
-            SetSprite(Sprite.blood, false);
+            SetSprite(Sprite.fish, true);
             depth = 0.725f;
-            speed = 2f;
-            direction = MathHelper.ToRadians(Main.random.Next(360));
+            speed = 1f;
+            lifeMax = 1200;
         }
 
         public override void Update()

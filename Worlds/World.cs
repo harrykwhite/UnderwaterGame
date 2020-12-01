@@ -18,9 +18,7 @@
     {
         public enum Tilemap
         {
-            FirstSolids,
-
-            SecondSolids,
+            Solids,
 
             FirstWalls,
 
@@ -39,7 +37,7 @@
 
         public static List<Hotspot> hotspots;
 
-        public static int width = 600;
+        public static int width = 1200;
 
         public static int height = 400;
 
@@ -51,6 +49,10 @@
 
         public static int bubbleTimeMax = 60;
 
+        public static int fishTime;
+
+        public static int fishTimeMax = 300;
+        
         public static Hotspot hotspotCurrent;
 
         public static Hotspot hotspotPrevious;
@@ -58,8 +60,7 @@
         public static void Init()
         {
             tilemaps = new WorldTile[Enum.GetNames(typeof(Tilemap)).Length][,];
-            tilemaps[(byte)Tilemap.FirstSolids] = new WorldTile[width, height];
-            tilemaps[(byte)Tilemap.SecondSolids] = new WorldTile[width, height];
+            tilemaps[(byte)Tilemap.Solids] = new WorldTile[width, height];
             tilemaps[(byte)Tilemap.FirstWalls] = new WorldTile[width, height];
             tilemaps[(byte)Tilemap.SecondWalls] = new WorldTile[width, height];
             tilemaps[(byte)Tilemap.Liquids] = new WorldTile[width, height];
@@ -79,12 +80,12 @@
                 new SurfaceMountainGeneration(),
                 new SurfaceTowerGeneration(),
                 new SurfaceEnvironmentalGeneration(),
-                new CloudGeneration(),
                 new CleaningGeneration(),
                 new HotspotGeneration()
             };
             hotspots = new List<Hotspot>();
             bubbleTime = 0;
+            fishTime = 0;
             hotspotCurrent = null;
         }
 
@@ -119,29 +120,56 @@
             }
             else
             {
-                int bubbleCount = 2 + Main.random.Next(2);
-                for(int i = 0; i < bubbleCount; i++)
+                int trials = 100;
+                Bubble bubble = (Bubble)EntityManager.AddEntity<Bubble>(Vector2.Zero);
+                do
                 {
-                    int trials = 100;
-                    Bubble bubble = (Bubble)EntityManager.AddEntity<Bubble>(Vector2.Zero);
-                    do
+                    bubble.position = new Vector2(RandomUtilities.Range(Camera.position.X - (Camera.GetWidth() / 2f), Camera.position.X + (Camera.GetWidth() / 2f)), RandomUtilities.Range(Camera.position.Y - (Camera.GetHeight() / 2f), Camera.position.Y + (Camera.GetHeight() / 2f)));
+                    trials--;
+                } while(!bubble.TileTypeCollision(bubble.position, Tile.water, Tilemap.Liquids) && trials > 0);
+                if(trials > 0)
+                {
+                    bubble.direction = -MathHelper.Pi / 2f;
+                    bubble.alpha = 0f;
+                    bubble.life = -30;
+                }
+                else
+                {
+                    bubble.Destroy();
+                }
+                bubbleTime = 0;
+            }
+            if(fishTime < fishTimeMax)
+            {
+                fishTime++;
+            }
+            else
+            {
+                List<Fish> fishies = new List<Fish>();
+                bool fishGroupLeft = Main.random.Next(2) == 0;
+                Vector2 fishGroupPosition = Camera.position + new Vector2(Camera.GetWidth() * 0.5f * (fishGroupLeft ? 1f : -1f), RandomUtilities.Range(-Camera.GetHeight() / 2f, Camera.GetHeight() / 2f));
+                int fishCount = (Main.random.Next(5) == 0 ? 5 : 0) + 1;
+                float fishOffset = 8f;
+                float fishDirectionOffset = MathHelper.ToRadians(Main.random.Next(360));
+                for(int i = 0; i < fishCount; i++)
+                {
+                    Fish fish = (Fish)EntityManager.AddEntity<Fish>(fishGroupPosition + (i > 0 ? MathUtilities.LengthDirection(fishOffset, (((MathHelper.Pi * 2f) / (fishCount - 1f)) * i) + fishDirectionOffset) : Vector2.Zero));
+                    fishies.Add(fish);
+                    if(fish.TileTypeCollision(fish.position, Tile.water, Tilemap.Liquids))
                     {
-                        bubble.position = new Vector2(RandomUtilities.Range(Camera.position.X - (Camera.GetWidth() / 2f), Camera.position.X + (Camera.GetWidth() / 2f)), RandomUtilities.Range(Camera.position.Y - (Camera.GetHeight() / 2f), Camera.position.Y + (Camera.GetHeight() / 2f)));
-                        trials--;
-                    } while(!bubble.TileTypeCollision(bubble.position, Tile.water, Tilemap.Liquids) && trials > 0);
-                    if(trials > 0)
-                    {
-                        bubble.direction = -MathHelper.Pi / 2f;
-                        bubble.alpha = 0f;
-                        bubble.life = -30;
+                        fish.direction = fishGroupLeft ? MathHelper.Pi : 0f;
+                        fish.alpha = 0f;
+                        fish.flipHor = fishGroupLeft;
                     }
                     else
                     {
-                        bubble.Destroy();
-                        break;
+                        foreach(Fish fishy in fishies)
+                        {
+                            fishy.Destroy();
+                        }
                     }
                 }
-                bubbleTime = 0;
+                fishTime = 0;
             }
         }
 
@@ -164,10 +192,6 @@
                         Vector2 offset = Vector2.Zero;
                         switch((Tilemap)m)
                         {
-                            case Tilemap.SecondSolids:
-                                depth = 0.85f;
-                                break;
-
                             case Tilemap.FirstWalls:
                                 color = new Color(80, 80, 80);
                                 depth = 0.25f;
@@ -287,8 +311,8 @@
                 {
                     int tx = x + ex - (ew / 2);
                     int ty = y + ey - eh;
-                    WorldTile worldTile = GetTileAt(tx, ty, Tilemap.FirstSolids);
-                    WorldTileData worldTileData = GetTileDataAt(tx, ty, Tilemap.FirstSolids);
+                    WorldTile worldTile = GetTileAt(tx, ty, Tilemap.Solids);
+                    WorldTileData worldTileData = GetTileDataAt(tx, ty, Tilemap.Solids);
                     if(ey == eh)
                     {
                         if(worldTile == null)
@@ -353,7 +377,15 @@
         {
             Main.loading = new Thread(delegate ()
             {
-                GenerateWorld();
+                try
+                {
+                    GenerateWorld();
+                }
+                catch
+                {
+                    Main.save = null;
+                    GenerateWorld();
+                }
                 Main.loading = null;
             });
             Main.loading.Start();

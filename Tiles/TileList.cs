@@ -23,8 +23,6 @@
 
         public static BrickWall brickWall;
 
-        public static Cloud cloud;
-
         public static void LoadAll()
         {
             stone = Load<Stone>(1);
@@ -34,7 +32,6 @@
             stoneWall = Load<StoneWall>(5);
             brick = Load<Brick>(6);
             brickWall = Load<BrickWall>(7);
-            cloud = Load<Cloud>(8);
         }
     }
 }

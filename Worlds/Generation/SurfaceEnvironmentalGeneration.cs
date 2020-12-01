@@ -20,7 +20,7 @@
                 {
                     for(int y = 0; y < World.height; y++)
                     {
-                        WorldTile worldTile = World.GetTileAt(x, y, World.Tilemap.FirstSolids);
+                        WorldTile worldTile = World.GetTileAt(x, y, World.Tilemap.Solids);
                         if(Tile.GetTileById(worldTile?.id ?? 0) == Tile.sand)
                         {
                             Environmental environmental = Environmental.smallSeaweed;

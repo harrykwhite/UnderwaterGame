@@ -8,7 +8,8 @@ namespace UnderwaterGame.Worlds.Generation
     {
         public override void Generate()
         {
-            Point[] mountainPositions = new Point[8];
+            return;
+            Point[] mountainPositions = new Point[16];
             int mountainPositionsGap = 32;
             for(int i = 0; i < mountainPositions.Length; i++)
             {
@@ -18,7 +19,7 @@ namespace UnderwaterGame.Worlds.Generation
                 {
                     mountainPositions[i].X = Main.random.Next(World.width);
                     mountainPositions[i].Y = 0;
-                    while(World.GetTileAt(mountainPositions[i].X, mountainPositions[i].Y, World.Tilemap.FirstSolids) == null)
+                    while(World.GetTileAt(mountainPositions[i].X, mountainPositions[i].Y, World.Tilemap.Solids) == null)
                     {
                         mountainPositions[i].Y++;
                     }

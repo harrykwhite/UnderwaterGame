@@ -5,7 +5,6 @@
     using System;
     using System.Collections.Generic;
     using System.IO;
-    using System.Runtime.Serialization;
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Threading;
     using UnderwaterGame.Assets;
@@ -248,55 +247,57 @@
         private static void ReadConfig()
         {
             Directory.CreateDirectory(GetGameDirectory());
-            FileStream stream = new FileStream(GetGameDirectory() + "Config.dat", FileMode.Open);
-            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream fileStream = new FileStream(GetGameDirectory() + "Config.dat", FileMode.Open);
             try
             {
-                config = (Config)formatter.Deserialize(stream);
+                config = (Config)new BinaryFormatter().Deserialize(fileStream);
             }
-            catch(SerializationException e) { Console.WriteLine(e.Message); }
-            finally { stream.Close(); }
+            finally
+            {
+                fileStream.Close();
+            }
         }
 
         private static void WriteConfig()
         {
             Directory.CreateDirectory(GetGameDirectory());
-            FileStream stream = new FileStream(GetGameDirectory() + "Config.dat", FileMode.Create);
-            BinaryFormatter formatter = new BinaryFormatter();
-            config = new Config();
+            FileStream fileStream = new FileStream(GetGameDirectory() + "Config.dat", FileMode.Create);
             try
             {
-                formatter.Serialize(stream, config);
+                new BinaryFormatter().Serialize(fileStream, config = new Config());
             }
-            catch(SerializationException e) { Console.WriteLine(e.Message); }
-            finally { stream.Close(); }
+            finally
+            {
+                fileStream.Close();
+            }
         }
 
         private static void ReadSave()
         {
             Directory.CreateDirectory(GetGameDirectory());
-            FileStream stream = new FileStream(GetGameDirectory() + "Save.dat", FileMode.Open);
-            BinaryFormatter formatter = new BinaryFormatter();
+            FileStream fileStream = new FileStream(GetGameDirectory() + "Save.dat", FileMode.Open);
             try
             {
-                save = (Save)formatter.Deserialize(stream);
+                save = (Save)new BinaryFormatter().Deserialize(fileStream);
             }
-            catch(SerializationException e) { Console.WriteLine(e.Message); }
-            finally { stream.Close(); }
+            finally
+            {
+                fileStream.Close();
+            }
         }
 
         private static void WriteSave()
         {
             Directory.CreateDirectory(GetGameDirectory());
-            FileStream stream = new FileStream(GetGameDirectory() + "Save.dat", FileMode.Create);
-            BinaryFormatter formatter = new BinaryFormatter();
-            save = new Save();
+            FileStream fileStream = new FileStream(GetGameDirectory() + "Save.dat", FileMode.Create);
             try
             {
-                formatter.Serialize(stream, save);
+                new BinaryFormatter().Serialize(fileStream, save = new Save());
             }
-            catch(SerializationException e) { Console.WriteLine(e.Message); }
-            finally { stream.Close(); }
+            finally
+            {
+                fileStream.Close();
+            }
         }
 
         public static int GetBufferWidth()

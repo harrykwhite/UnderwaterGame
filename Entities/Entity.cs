@@ -307,7 +307,7 @@
         protected void TileCollisions()
         {
             Point tilePosition = GetTilePosition(Vector2.Zero);
-            List<WorldTileData> worldTileData = World.GetTileDataRange(tilePosition.X, tilePosition.Y, World.Tilemap.FirstSolids, Math.Max(Tile.check, (int)velocity.Length() / Tile.size));
+            List<WorldTileData> worldTileData = World.GetTileDataRange(tilePosition.X, tilePosition.Y, World.Tilemap.Solids, Math.Max(Tile.check, (int)velocity.Length() / Tile.size));
             foreach(WorldTileData data in worldTileData)
             {
                 if(collider.GetRelative(position + new Vector2(velocity.X, 0f)).Intersects(data.shape))
@@ -348,7 +348,7 @@
             bool TileCollision()
             {
                 Point tilePosition = GetTilePosition(Vector2.Zero);
-                List<WorldTileData> worldTileData = World.GetTileDataRange(tilePosition.X, tilePosition.Y, World.Tilemap.FirstSolids, Math.Max(Tile.check, (int)velocity.Length() / Tile.size));
+                List<WorldTileData> worldTileData = World.GetTileDataRange(tilePosition.X, tilePosition.Y, World.Tilemap.Solids, Math.Max(Tile.check, (int)velocity.Length() / Tile.size));
                 foreach(WorldTileData data in worldTileData)
                 {
                     if(collider.GetRelative(position + (normal * lengthAcc)).Intersects(data.shape))

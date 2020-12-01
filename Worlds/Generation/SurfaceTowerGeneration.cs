@@ -8,7 +8,7 @@
     {
         public override void Generate()
         {
-            Point[] towerPositions = new Point[4];
+            Point[] towerPositions = new Point[8];
             int towerPositionsGap = 64;
             for(int i = 0; i < towerPositions.Length; i++)
             {
@@ -37,7 +37,7 @@
                 {
                     towerPositions[i].X = Main.random.Next(World.width);
                     towerPositions[i].Y = 0;
-                    while(World.GetTileAt(towerPositions[i].X, towerPositions[i].Y, World.Tilemap.FirstSolids) == null)
+                    while(World.GetTileAt(towerPositions[i].X, towerPositions[i].Y, World.Tilemap.Solids) == null)
                     {
                         towerPositions[i].Y++;
                     }
@@ -58,7 +58,7 @@
                             {
                                 continue;
                             }
-                            World.RemoveTileAt(x, y, World.Tilemap.FirstSolids);
+                            World.RemoveTileAt(x, y, World.Tilemap.Solids);
                             World.RemoveTileAt(x, y, World.Tilemap.FirstWalls);
                             if(x == xStart || y == yStart || x == xEnd || (y == yEnd && l == 0))
                             {
@@ -82,7 +82,7 @@
                                 }
                                 if(placeTile)
                                 {
-                                    World.AddTileAt(x, y, World.Tilemap.FirstSolids, Tile.brick);
+                                    World.AddTileAt(x, y, World.Tilemap.Solids, Tile.brick);
                                 }
                             }
                             World.AddTileAt(x, y, World.Tilemap.FirstWalls, Tile.brickWall);

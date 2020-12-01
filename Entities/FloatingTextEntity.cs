@@ -24,7 +24,7 @@
 
         public override void Update()
         {
-            if(life >= 90)
+            if(life > 90)
             {
                 if(alpha > 0f)
                 {

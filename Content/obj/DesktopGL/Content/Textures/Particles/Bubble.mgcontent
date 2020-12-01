@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Particles/Bubble.png</SourceFile>
-  <SourceTime>2020-11-01T10:30:39.3936997+10:00</SourceTime>
+  <SourceTime>2020-12-01T21:41:57.7569492+10:00</SourceTime>
   <DestFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/bin/DesktopGL/Content/Textures/Particles/Bubble.xnb</DestFile>
-  <DestTime>2020-11-01T10:34:05.2546987+10:00</DestTime>
+  <DestTime>2020-12-01T21:44:17.1551733+10:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+10:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

@@ -37,13 +37,17 @@
 
         public int count;
 
-        public float countScale = 1f;
+        public Vector2 countScale = Vector2.One;
 
-        public float countScaleMax = 1.5f;
+        public Vector2 countScaleMax = new Vector2(1.2f);
 
         public float alpha;
 
-        public float alphaAcc = 0.01f;
+        private float alphaAcc = 0.01f;
+
+        private int particleTime;
+
+        private int particleTimeMax = 4;
 
         public Hotspot(Vector2 position, Spawn[] spawns, int spawnMax, int spawnTimeMax, int count)
         {
@@ -98,7 +102,7 @@
                             {
                                 enemy.position = position + MathUtilities.LengthDirection(RandomUtilities.Range(0f, Main.textureLibrary.OTHER_HOTSPOT.asset.Width / 2f), MathHelper.ToRadians(Main.random.Next(360)));
                                 trials--;
-                            } while((enemy.TileCollision(enemy.position, World.Tilemap.FirstSolids) || !enemy.TileCollision(enemy.position, World.Tilemap.Liquids)) && trials > 0);
+                            } while((enemy.TileCollision(enemy.position, World.Tilemap.Solids) || !enemy.TileCollision(enemy.position, World.Tilemap.Liquids)) && trials > 0);
                             if(trials > 0)
                             {
                                 int smokeCount = 6;
@@ -117,18 +121,29 @@
                         spawnTime = spawnTimeMax;
                     }
                 }
-                Vector2 particlePosition;
-                do
-                {
-                    particlePosition = position + new Vector2(Main.random.Next(-Main.textureLibrary.OTHER_HOTSPOT.asset.Width / 2, Main.textureLibrary.OTHER_HOTSPOT.asset.Width / 2), Main.random.Next(-Main.textureLibrary.OTHER_HOTSPOT.asset.Height / 2, Main.textureLibrary.OTHER_HOTSPOT.asset.Height / 2));
-                } while(Vector2.Distance(particlePosition, position) > Main.textureLibrary.OTHER_HOTSPOT.asset.Width / 2f);
-                EntityManager.AddEntity<HotspotParticle>(particlePosition);
             }
             if(spawnTime > 0)
             {
                 spawnTime--;
             }
-            countScale += (1f - countScale) * 0.2f;
+            if(alpha > 0f)
+            {
+                if(particleTime < particleTimeMax)
+                {
+                    particleTime++;
+                }
+                else
+                {
+                    Vector2 particlePosition;
+                    do
+                    {
+                        particlePosition = position + new Vector2(Main.random.Next(-Main.textureLibrary.OTHER_HOTSPOT.asset.Width / 2, Main.textureLibrary.OTHER_HOTSPOT.asset.Width / 2), Main.random.Next(-Main.textureLibrary.OTHER_HOTSPOT.asset.Height / 2, Main.textureLibrary.OTHER_HOTSPOT.asset.Height / 2));
+                    } while(Vector2.Distance(particlePosition, position) > Main.textureLibrary.OTHER_HOTSPOT.asset.Width / 2f);
+                    EntityManager.AddEntity<HotspotParticle>(particlePosition);
+                    particleTime = 0;
+                }
+            }
+            countScale += (Vector2.One - countScale) * 0.1f;
         }
     }
 }
