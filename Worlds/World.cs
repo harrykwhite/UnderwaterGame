@@ -440,6 +440,7 @@
                 {
                     hotspots.Add(new Hotspot(new Vector2(hotspot.x, hotspot.y), hotspot.spawns, hotspot.spawnMax, hotspot.spawnTimeMax, hotspot.count));
                 }
+                playerSpawnPosition = new Vector2(Main.save.playerSpawnX, Main.save.playerSpawnY);
             }
             else
             {
@@ -461,11 +462,12 @@
                         }
                     }
                 }
-            }
-            playerSpawnPosition = new Vector2((int)(width / 2f) * Tile.size, 0f);
-            while(GetTileAt((int)(playerSpawnPosition.X / Tile.size), (int)(playerSpawnPosition.Y / Tile.size) + 3, Tilemap.Solids) == null)
-            {
-                playerSpawnPosition.Y += Tile.size;
+                playerSpawnPosition = new Vector2(width * 0.5f * Tile.size, 0f);
+                while(GetTileAt((int)(playerSpawnPosition.X / Tile.size), (int)(playerSpawnPosition.Y / Tile.size) + 1, Tilemap.Solids) == null)
+                {
+                    playerSpawnPosition.Y += Tile.size;
+                }
+                playerSpawnPosition.Y -= Tile.size / 2f;
             }
             Camera.positionTo = playerSpawnPosition;
             Camera.position = Camera.positionTo;

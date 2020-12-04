@@ -12,6 +12,10 @@
 
         public WorldHotspot[] hotspots;
 
+        public float playerSpawnX;
+
+        public float playerSpawnY;
+
         public int version;
 
         public Save()
@@ -34,6 +38,8 @@
             {
                 hotspots[i] = new WorldHotspot(World.hotspots[i].position.X, World.hotspots[i].position.Y, World.hotspots[i].spawns, World.hotspots[i].spawnMax, World.hotspots[i].spawnTimeMax, World.hotspots[i].count);
             }
+            playerSpawnX = World.playerSpawnPosition.X;
+            playerSpawnY = World.playerSpawnPosition.Y;
             version = Main.version;
         }
     }

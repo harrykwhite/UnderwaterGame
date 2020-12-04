@@ -9,6 +9,8 @@
         public static Sprite bigSeaweed;
 
         public static Sprite smallSeaweed;
+        
+        public static Sprite spawnStatue;
 
         public static Sprite jellyfish;
 
@@ -78,8 +80,9 @@
 
         public static void LoadAll()
         {
-            bigSeaweed = Load(Main.textureLibrary.ENVIRONMENTALS_BIGSEAWEED);
-            smallSeaweed = Load(Main.textureLibrary.ENVIRONMENTALS_SMALLSEAWEED);
+            bigSeaweed = Load(Main.textureLibrary.ENVIRONMENTALS_SEAWEED_BIGSEAWEED);
+            smallSeaweed = Load(Main.textureLibrary.ENVIRONMENTALS_SEAWEED_SMALLSEAWEED);
+            spawnStatue = Load(Main.textureLibrary.ENVIRONMENTALS_STATUES_SPAWNSTATUE);
             jellyfish = Load(Main.textureLibrary.CHARACTERS_ENEMIES_JELLYFISH_JELLYFISH);
             tallJellyfish = Load(Main.textureLibrary.CHARACTERS_ENEMIES_JELLYFISH_TALLJELLYFISH);
             playerIdle = Load(Main.textureLibrary.CHARACTERS_PLAYER_PLAYERIDLE);

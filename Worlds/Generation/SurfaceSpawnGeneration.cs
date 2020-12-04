@@ -4,9 +4,9 @@ namespace UnderwaterGame.Worlds.Generation
 {
     public class SurfaceSpawnGeneration : WorldGeneration
     {
-        public int width = 24;
+        public int width = 32;
 
-        public int height = 4;
+        public int height = 8;
 
         public override void Generate()
         {

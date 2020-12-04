@@ -336,7 +336,7 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Effects/WideSwing.png
 
-#begin Textures/Environmentals/BigSeaweed.png
+#begin Textures/Environmentals/Seaweed/BigSeaweed.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -346,9 +346,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Environmentals/BigSeaweed.png
+/build:Textures/Environmentals/Seaweed/BigSeaweed.png
 
-#begin Textures/Environmentals/SmallSeaweed.png
+#begin Textures/Environmentals/Seaweed/SmallSeaweed.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -358,7 +358,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Environmentals/SmallSeaweed.png
+/build:Textures/Environmentals/Seaweed/SmallSeaweed.png
+
+#begin Textures/Environmentals/Statues/SpawnStatue.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Environmentals/Statues/SpawnStatue.png
 
 #begin Textures/Items/Armours/Chests/WoodenChestplate.png
 /importer:TextureImporter
@@ -588,30 +600,6 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Particles/Blood.png
 
-#begin Textures/Particles/Blood.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Particles/Blood.png
-
-#begin Textures/Particles/Bubble.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Particles/Bubble.png
-
 #begin Textures/Particles/Bubble.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -635,30 +623,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/Particles/CrabShell.png
-
-#begin Textures/Particles/CrabShell.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Particles/CrabShell.png
-
-#begin Textures/Particles/Fire.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Particles/Fire.png
 
 #begin Textures/Particles/Fire.png
 /importer:TextureImporter
@@ -696,30 +660,6 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Particles/HotspotParticle.png
 
-#begin Textures/Particles/HotspotParticle.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Particles/HotspotParticle.png
-
-#begin Textures/Particles/Liquid.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Particles/Liquid.png
-
 #begin Textures/Particles/Liquid.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -743,30 +683,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/Particles/Smoke.png
-
-#begin Textures/Particles/Smoke.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Particles/Smoke.png
-
-#begin Textures/Particles/Wood.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Particles/Wood.png
 
 #begin Textures/Particles/Wood.png
 /importer:TextureImporter

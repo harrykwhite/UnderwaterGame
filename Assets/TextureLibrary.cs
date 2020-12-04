@@ -12,9 +12,11 @@
 
         public readonly LibraryAsset TILES_LIQUIDS_WATER = new LibraryAsset("Textures/Tiles/Liquids/Water");
 
-        public readonly LibraryAsset ENVIRONMENTALS_BIGSEAWEED = new LibraryAsset("Textures/Environmentals/BigSeaweed");
+        public readonly LibraryAsset ENVIRONMENTALS_SEAWEED_BIGSEAWEED = new LibraryAsset("Textures/Environmentals/Seaweed/BigSeaweed");
 
-        public readonly LibraryAsset ENVIRONMENTALS_SMALLSEAWEED = new LibraryAsset("Textures/Environmentals/SmallSeaweed");
+        public readonly LibraryAsset ENVIRONMENTALS_SEAWEED_SMALLSEAWEED = new LibraryAsset("Textures/Environmentals/Seaweed/SmallSeaweed");
+
+        public readonly LibraryAsset ENVIRONMENTALS_STATUES_SPAWNSTATUE = new LibraryAsset("Textures/Environmentals/Statues/SpawnStatue");
 
         public readonly LibraryAsset CHARACTERS_ENEMIES_JELLYFISH_JELLYFISH = new LibraryAsset("Textures/Characters/Enemies/Jellyfish/Jellyfish");
 

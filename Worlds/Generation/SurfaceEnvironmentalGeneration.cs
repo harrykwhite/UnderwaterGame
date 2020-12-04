@@ -21,7 +21,8 @@
                     for(int y = 0; y < World.height; y++)
                     {
                         WorldTile worldTile = World.GetTileAt(x, y, World.Tilemap.Solids);
-                        if(Tile.GetTileById(worldTile?.id ?? 0) == Tile.sand)
+                        Tile tile = Tile.GetTileById(worldTile?.id ?? 0);
+                        if(tile == Tile.sand)
                         {
                             Environmental environmental = Environmental.smallSeaweed;
                             if(Main.random.Next(4) == 0)
@@ -38,6 +39,12 @@
                     interval = intervalMax + Main.random.Next(-intervalOffset, intervalOffset);
                 }
             }
+            int spawnerStatueY = 0;
+            while(World.GetTileAt(World.width / 2, spawnerStatueY, World.Tilemap.Solids) == null)
+            {
+                spawnerStatueY++;
+            }
+            World.AddEnvironmentalAt(World.width / 2, spawnerStatueY, Environmental.spawnStatue);
         }
     }
 }
