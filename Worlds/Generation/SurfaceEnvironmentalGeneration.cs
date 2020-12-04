@@ -1,5 +1,6 @@
 ﻿namespace UnderwaterGame.Worlds.Generation
 {
+    using Microsoft.Xna.Framework;
     using UnderwaterGame.Environmentals;
     using UnderwaterGame.Tiles;
 
@@ -39,12 +40,22 @@
                     interval = intervalMax + Main.random.Next(-intervalOffset, intervalOffset);
                 }
             }
-            int spawnerStatueY = 0;
-            while(World.GetTileAt(World.width / 2, spawnerStatueY, World.Tilemap.Solids) == null)
+            SurfaceSpawnGeneration surfaceSpawnGeneration = (SurfaceSpawnGeneration)World.generations.Find((WorldGeneration worldGeneration) => worldGeneration is SurfaceSpawnGeneration);
+            int spawnStatueX, spawnStatueY;
+            do
             {
-                spawnerStatueY++;
-            }
-            World.AddEnvironmentalAt(World.width / 2, spawnerStatueY, Environmental.spawnStatue);
+                spawnStatueX = ((World.width - surfaceSpawnGeneration.width) / 2) + Main.random.Next(surfaceSpawnGeneration.width);
+                spawnStatueY = 0;
+                for(int y = 0; y < World.height; y++)
+                {
+                    if(World.GetTileAt(spawnStatueX, y, World.Tilemap.Solids) != null)
+                    {
+                        spawnStatueY = y;
+                        break;
+                    }
+                }
+            } while(!World.AddEnvironmentalAt(spawnStatueX, spawnStatueY, Environmental.spawnStatue));
+            World.playerSpawnPosition = new Vector2(spawnStatueX, spawnStatueY - 1.5f) * Tile.size;
         }
     }
 }

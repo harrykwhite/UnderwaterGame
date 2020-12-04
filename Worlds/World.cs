@@ -328,27 +328,11 @@
             {
                 for(int ex = 0; ex < ew; ex++)
                 {
-                    int tx = x + ex - (ew / 2);
+                    int tx = x + ex - (int)Math.Ceiling(ew / 2f);
                     int ty = y + ey - eh;
-                    WorldTile worldTile = GetTileAt(tx, ty, Tilemap.Solids);
-                    WorldTileData worldTileData = GetTileDataAt(tx, ty, Tilemap.Solids);
-                    if(ey == eh)
+                    if(!(GetTileAt(tx, ty, Tilemap.Solids) == null ^ ey == eh))
                     {
-                        if(worldTile == null)
-                        {
-                            return false;
-                        }
-                        if(worldTileData.shape.fill != Shape.Fill.Rectangle)
-                        {
-                            return false;
-                        }
-                    }
-                    else
-                    {
-                        if(worldTile != null)
-                        {
-                            return false;
-                        }
+                        return false;
                     }
                 }
             }
@@ -462,12 +446,6 @@
                         }
                     }
                 }
-                playerSpawnPosition = new Vector2(width * 0.5f * Tile.size, 0f);
-                while(GetTileAt((int)(playerSpawnPosition.X / Tile.size), (int)(playerSpawnPosition.Y / Tile.size) + 1, Tilemap.Solids) == null)
-                {
-                    playerSpawnPosition.Y += Tile.size;
-                }
-                playerSpawnPosition.Y -= Tile.size / 2f;
             }
             Camera.positionTo = playerSpawnPosition;
             Camera.position = Camera.positionTo;
