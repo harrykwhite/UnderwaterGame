@@ -33,9 +33,9 @@
 
         public static float combatLoopVolume;
 
-        public static float combatLoopVolumeAcc = 0.01f;
+        public static float combatLoopVolumeInAcc = 0.01f;
 
-        public static float combatLoopVolumeTo;
+        public static float combatLoopVolumeOutAcc = 0.005f;
 
         public static int combatLoopIntroStingerTime;
 
@@ -121,7 +121,10 @@
             }
             if(combat)
             {
-                combatLoopVolumeTo = 1f;
+                if(combatLoopVolume < 1f)
+                {
+                    combatLoopVolume += Math.Min(combatLoopVolumeInAcc, 1f - combatLoopVolume);
+                }
                 if(Main.loading == null && World.hotspotCurrent == null)
                 {
                     if(World.hotspotPrevious != null)
@@ -143,7 +146,10 @@
             }
             else
             {
-                combatLoopVolumeTo = 0f;
+                if(combatLoopVolume > 0f)
+                {
+                    combatLoopVolume -= Math.Min(combatLoopVolumeOutAcc, combatLoopVolume);
+                }
                 if(Main.loading == null && World.hotspotCurrent != null)
                 {
                     if(combatLoopVolume == 0f && (combatIntroStingerInstance == null || combatLoopIntroStingerTime == combatLoopIntroStingerTimeMax))
@@ -216,14 +222,6 @@
                     combatLoopInstance = soundEffect.CreateInstance();
                     combatLoopInstance.Play();
                 }
-            }
-            if(combatLoopVolume < combatLoopVolumeTo)
-            {
-                combatLoopVolume += Math.Min(combatLoopVolumeAcc, combatLoopVolumeTo - combatLoopVolume);
-            }
-            else if(combatLoopVolume > combatLoopVolumeTo)
-            {
-                combatLoopVolume -= Math.Min(combatLoopVolumeAcc, combatLoopVolume - combatLoopVolumeTo);
             }
             if(layerLoopInstance != null)
             {

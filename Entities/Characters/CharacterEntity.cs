@@ -10,9 +10,9 @@
 
     public abstract class CharacterEntity : Entity
     {
-        protected int flashTime;
+        public int flashTime;
 
-        protected int flashTimeMax = 16;
+        public int flashTimeMax = 16;
 
         protected SoundEffect hurtSound;
 

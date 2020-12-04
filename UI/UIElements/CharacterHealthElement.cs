@@ -15,7 +15,7 @@
             foreach(Entity characterEntity in characterEntities)
             {
                 CharacterEntity character = (CharacterEntity)characterEntity;
-                Shape barShape = new Shape(Shape.Fill.Rectangle, 24, 1);
+                Shape barShape = new Shape(Shape.Fill.Rectangle, 16, 1);
                 Vector2 barPosition = UiManager.WorldToUi(character.position - new Vector2(0f, character.sprite.origin.Y));
                 if(character.sprite?.textures[0] != null)
                 {

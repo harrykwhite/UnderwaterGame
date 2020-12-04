@@ -59,6 +59,8 @@
 
         public static bool restartSave;
 
+        public static int version = 1;
+
         public Main()
         {
             graphicsDeviceManager = new GraphicsDeviceManager(this);
@@ -151,6 +153,10 @@
                 }
                 if(!saveCheck)
                 {
+                    if(save?.version != version)
+                    {
+                        save = null;
+                    }
                     World.Generate();
                     saveCheck = true;
                 }
@@ -172,7 +178,7 @@
         {
             GraphicsDevice.Clear(new Color(107, 205, 255));
             spriteBatch.Begin(sortMode: SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend, transformMatrix: Matrix.CreateTranslation(-Camera.position.X + (Camera.GetWidth() / 2f), -Camera.position.Y + (Camera.GetHeight() / 2f), 0f) * Matrix.CreateScale(Camera.scale, Camera.scale, 0f));
-            if(loading == null || UiManager.fadeElements[2].alpha != UiManager.fadeElements[2].alphaMax)
+            if(loading == null || UiManager.fadeElements[2]?.alpha != UiManager.fadeElements[2]?.alphaMax)
             {
                 EntityManager.Draw();
                 Lighting.Draw();
@@ -215,7 +221,7 @@
 
         private static void RestartGame(bool restartSave = false)
         {
-            while(UiManager.fadeElements[2].alpha < UiManager.fadeElements[2].alphaMax)
+            while((UiManager.fadeElements[2]?.alpha ?? 0f) < (UiManager.fadeElements[2]?.alphaMax ?? 0f))
             {
                 continue;
             }
@@ -252,6 +258,10 @@
             {
                 config = (Config)new BinaryFormatter().Deserialize(fileStream);
             }
+            catch
+            {
+                config = null;
+            }
             finally
             {
                 fileStream.Close();
@@ -265,6 +275,9 @@
             try
             {
                 new BinaryFormatter().Serialize(fileStream, config = new Config());
+            }
+            catch
+            {
             }
             finally
             {
@@ -280,6 +293,10 @@
             {
                 save = (Save)new BinaryFormatter().Deserialize(fileStream);
             }
+            catch
+            {
+                save = null;
+            }
             finally
             {
                 fileStream.Close();
@@ -293,6 +310,9 @@
             try
             {
                 new BinaryFormatter().Serialize(fileStream, save = new Save());
+            }
+            catch
+            {
             }
             finally
             {

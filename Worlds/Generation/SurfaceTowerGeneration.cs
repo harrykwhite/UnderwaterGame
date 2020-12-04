@@ -8,7 +8,7 @@
     {
         public override void Generate()
         {
-            Point[] towerPositions = new Point[8];
+            Point[] towerPositions = new Point[4];
             int towerPositionsGap = 64;
             for(int i = 0; i < towerPositions.Length; i++)
             {
@@ -59,7 +59,7 @@
                                 continue;
                             }
                             World.RemoveTileAt(x, y, World.Tilemap.Solids);
-                            World.RemoveTileAt(x, y, World.Tilemap.FirstWalls);
+                            World.RemoveTileAt(x, y, World.Tilemap.Walls);
                             if(x == xStart || y == yStart || x == xEnd || (y == yEnd && l == 0))
                             {
                                 bool placeTile = true;
@@ -85,16 +85,17 @@
                                     World.AddTileAt(x, y, World.Tilemap.Solids, Tile.brick);
                                 }
                             }
-                            World.AddTileAt(x, y, World.Tilemap.FirstWalls, Tile.brickWall);
+                            World.AddTileAt(x, y, World.Tilemap.Walls, Tile.brickWall);
                         }
                     }
                 }
             }
             bool ValidTowerPosition(int index)
             {
+                SurfaceSpawnGeneration surfaceSpawnGeneration = (SurfaceSpawnGeneration)World.generations.Find((WorldGeneration worldGeneration) => worldGeneration is SurfaceSpawnGeneration);
                 for(int i = index - 1; i >= 0; i--)
                 {
-                    if(Math.Abs(towerPositions[i].X - towerPositions[index].X) < towerPositionsGap)
+                    if(Math.Abs(towerPositions[i].X - towerPositions[index].X) < towerPositionsGap || ((towerPositions[i].X >= (World.width - surfaceSpawnGeneration.width) / 2) && (towerPositions[i].X <= (World.width + surfaceSpawnGeneration.width) / 2)))
                     {
                         return false;
                     }

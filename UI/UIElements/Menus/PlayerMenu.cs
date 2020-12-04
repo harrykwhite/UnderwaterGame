@@ -219,11 +219,13 @@
                     }
                     if(match)
                     {
-                        foreach(Item ingredient in item.ingredients)
+                        if(World.player.inventory.AddItem(item, 1))
                         {
-                            World.player.inventory.RemoveItemAt((int)PlayerCharacter.InventoryGroup.Crafting, ingredient, 1);
+                            foreach(Item ingredient in item.ingredients)
+                            {
+                                World.player.inventory.RemoveItemAt((int)PlayerCharacter.InventoryGroup.Crafting, ingredient, 1);
+                            }
                         }
-                        World.player.inventory.AddItem(item, 1);
                     }
                 }
             };

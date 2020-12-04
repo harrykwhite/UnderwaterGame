@@ -14,7 +14,8 @@
             int levelOffsetMax = 4;
             int levelInterval = 0;
             int levelIntervalMax = 8;
-            int levelIntervalOffset = 2;
+            int levelIntervalMaxOffset = 2;
+            int levelIntervalCount = 0;
             for(int x = 0; x < World.width; x++)
             {
                 if(levelInterval > 0)
@@ -29,23 +30,24 @@
                         offset += Main.random.Next(2) == 0 ? 1 : -1;
                     } while(offset == levelOffset || offset < -levelOffsetMax || offset > levelOffsetMax);
                     levelOffset = offset;
-                    levelInterval = levelIntervalMax + Main.random.Next(-levelIntervalOffset, levelIntervalOffset);
+                    levelIntervalCount++;
+                    levelInterval = levelIntervalMax + Main.random.Next(-levelIntervalMaxOffset, levelIntervalMaxOffset);
                 }
                 for(int y = 0; y < World.height; y++)
                 {
                     if(y >= stoneLevel + levelOffset)
                     {
                         World.AddTileAt(x, y, World.Tilemap.Solids, Tile.stone);
-                        World.AddTileAt(x, y, World.Tilemap.FirstWalls, Tile.stoneWall);
+                        World.AddTileAt(x, y, World.Tilemap.Walls, Tile.stoneWall);
                     }
                     else if(y >= sandLevel + levelOffset)
                     {
                         World.AddTileAt(x, y, World.Tilemap.Solids, Tile.sand);
-                        World.AddTileAt(x, y, World.Tilemap.FirstWalls, Tile.sandWall);
+                        World.AddTileAt(x, y, World.Tilemap.Walls, Tile.sandWall);
                     }
                     else if(y >= wallLevel + levelOffset)
                     {
-                        World.AddTileAt(x, y, World.Tilemap.FirstWalls, Tile.sandWall);
+                        World.AddTileAt(x, y, World.Tilemap.Walls, Tile.sandWall);
                     }
                     if(y >= waterLevel)
                     {

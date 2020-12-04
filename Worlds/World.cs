@@ -20,14 +20,18 @@
         {
             Solids,
 
-            FirstWalls,
-
-            SecondWalls,
+            Walls,
 
             Liquids
         }
 
         public static PlayerCharacter player;
+
+        public static int playerSpawnTime;
+
+        public static int playerSpawnTimeMax = 60;
+
+        public static Vector2 playerSpawnPosition;
 
         public static WorldTile[][,] tilemaps;
 
@@ -52,17 +56,18 @@
         public static int fishTime;
 
         public static int fishTimeMax = 300;
-        
+
         public static Hotspot hotspotCurrent;
 
         public static Hotspot hotspotPrevious;
 
         public static void Init()
         {
+            player = null;
+            playerSpawnTime = 0;
             tilemaps = new WorldTile[Enum.GetNames(typeof(Tilemap)).Length][,];
             tilemaps[(byte)Tilemap.Solids] = new WorldTile[width, height];
-            tilemaps[(byte)Tilemap.FirstWalls] = new WorldTile[width, height];
-            tilemaps[(byte)Tilemap.SecondWalls] = new WorldTile[width, height];
+            tilemaps[(byte)Tilemap.Walls] = new WorldTile[width, height];
             tilemaps[(byte)Tilemap.Liquids] = new WorldTile[width, height];
             for(byte m = 0; m < tilemaps.Length; m++)
             {
@@ -77,7 +82,7 @@
             environmentals = new List<WorldEnvironmental>();
             generations = new List<WorldGeneration> {
                 new SurfaceTerrainGeneration(),
-                new SurfaceMountainGeneration(),
+                new SurfaceSpawnGeneration(),
                 new SurfaceTowerGeneration(),
                 new SurfaceEnvironmentalGeneration(),
                 new CleaningGeneration(),
@@ -87,6 +92,7 @@
             bubbleTime = 0;
             fishTime = 0;
             hotspotCurrent = null;
+            hotspotPrevious = null;
         }
 
         public static void Update()
@@ -107,6 +113,24 @@
                         {
                             hotspotCurrent = hotspot;
                         }
+                    }
+                }
+            }
+            else
+            {
+                if(playerSpawnTime < playerSpawnTimeMax)
+                {
+                    playerSpawnTime++;
+                }
+                else
+                {
+                    player = (PlayerCharacter)EntityManager.AddEntity<PlayerCharacter>(playerSpawnPosition);
+                    player.flashTime = player.flashTimeMax;
+                    int particleCount = 6;
+                    for(int i = 0; i < particleCount; i++)
+                    {
+                        Blood blood = (Blood)EntityManager.AddEntity<Blood>(player.position);
+                        blood.direction = ((MathHelper.Pi * 2f) / particleCount) * i;
                     }
                 }
             }
@@ -192,14 +216,9 @@
                         Vector2 offset = Vector2.Zero;
                         switch((Tilemap)m)
                         {
-                            case Tilemap.FirstWalls:
+                            case Tilemap.Walls:
                                 color = new Color(80, 80, 80);
                                 depth = 0.25f;
-                                break;
-
-                            case Tilemap.SecondWalls:
-                                color = new Color(40, 40, 40);
-                                depth = 0.15f;
                                 break;
 
                             case Tilemap.Liquids:
@@ -393,7 +412,7 @@
 
         private static void GenerateWorld()
         {
-            while(UiManager.fadeElements[2].alpha < UiManager.fadeElements[2].alphaMax)
+            while((UiManager.fadeElements[2]?.alpha ?? 0f) < (UiManager.fadeElements[2]?.alphaMax ?? 0f))
             {
                 continue;
             }
@@ -443,8 +462,12 @@
                     }
                 }
             }
-            player = (PlayerCharacter)EntityManager.AddEntity<PlayerCharacter>(new Vector2((width * Tile.size) / 2f, 0f));
-            Camera.positionTo = player.position;
+            playerSpawnPosition = new Vector2((int)(width / 2f) * Tile.size, 0f);
+            while(GetTileAt((int)(playerSpawnPosition.X / Tile.size), (int)(playerSpawnPosition.Y / Tile.size) + 3, Tilemap.Solids) == null)
+            {
+                playerSpawnPosition.Y += Tile.size;
+            }
+            Camera.positionTo = playerSpawnPosition;
             Camera.position = Camera.positionTo;
             foreach(WorldEnvironmental worldEnvironmental in environmentals)
             {
