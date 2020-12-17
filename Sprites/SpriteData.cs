@@ -32,7 +32,7 @@
         private static bool LoadTexture(Sprite sprite)
         {
             TextureLibrary.LibraryAsset libraryAsset = sprite.libraryAsset;
-            if(libraryAsset == Main.textureLibrary.ENVIRONMENTALS_SEAWEED_BIGSEAWEED || libraryAsset == Main.textureLibrary.ENVIRONMENTALS_SEAWEED_SMALLSEAWEED || libraryAsset == Main.textureLibrary.CHARACTERS_PLAYER_PLAYERIDLE || libraryAsset == Main.textureLibrary.CHARACTERS_PLAYER_PLAYERSWIM || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_HEADS_WOODENHELMETWEAR || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_CHESTS_WOODENCHESTPLATEWEAR || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_LEGS_WOODENLEGGINGSWEAR || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_FEET_WOODENBOOTSWEAR || libraryAsset == Main.textureLibrary.ITEMS_WEAPONS_RANGED_BOWS_WOODENBOW)
+            if(libraryAsset == Main.textureLibrary.ENVIRONMENTALS_SEAWEED_SEAWEED || libraryAsset == Main.textureLibrary.CHARACTERS_PLAYER_PLAYERIDLE || libraryAsset == Main.textureLibrary.CHARACTERS_PLAYER_PLAYERSWIM || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_HEADS_STONEHELMETWEAR || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_CHESTS_STONECHESTPLATEWEAR || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_LEGS_STONELEGGINGSWEAR || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_FEET_STONEBOOTSWEAR || libraryAsset == Main.textureLibrary.ITEMS_WEAPONS_RANGED_BOWS_WOODENBOW)
             {
                 sprite.SetTextureSheet(libraryAsset.asset, 16);
                 return true;
@@ -95,7 +95,7 @@
         private static bool LoadShape(Sprite sprite)
         {
             TextureLibrary.LibraryAsset libraryAsset = sprite.libraryAsset;
-            if(libraryAsset == Main.textureLibrary.CHARACTERS_PLAYER_PLAYERIDLE || libraryAsset == Main.textureLibrary.CHARACTERS_PLAYER_PLAYERSWIM || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_HEADS_WOODENHELMETWEAR || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_CHESTS_WOODENCHESTPLATEWEAR || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_LEGS_WOODENLEGGINGSWEAR || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_FEET_WOODENBOOTSWEAR)
+            if(libraryAsset == Main.textureLibrary.CHARACTERS_PLAYER_PLAYERIDLE || libraryAsset == Main.textureLibrary.CHARACTERS_PLAYER_PLAYERSWIM || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_HEADS_STONEHELMETWEAR || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_CHESTS_STONECHESTPLATEWEAR || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_LEGS_STONELEGGINGSWEAR || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_FEET_STONEBOOTSWEAR)
             {
                 sprite.shape = new Shape(Shape.Fill.Rectangle, 8, 8);
                 return true;

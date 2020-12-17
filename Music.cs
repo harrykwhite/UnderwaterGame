@@ -63,7 +63,7 @@
                     layerLoop = 0;
                     if(World.player != null)
                     {
-                        if(World.player.inWater)
+                        if(World.player.inWater && World.player.life > 0)
                         {
                             layerLoop = 1;
                         }

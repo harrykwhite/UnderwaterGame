@@ -31,6 +31,8 @@
 
         public static int playerSpawnTimeMax = 60;
 
+        public static bool playerSpawned;
+
         public static Vector2 playerSpawnPosition;
 
         public static WorldTile[][,] tilemaps;
@@ -53,10 +55,6 @@
 
         public static int bubbleTimeMax = 60;
 
-        public static int fishTime;
-
-        public static int fishTimeMax = 300;
-
         public static Hotspot hotspotCurrent;
 
         public static Hotspot hotspotPrevious;
@@ -65,6 +63,7 @@
         {
             player = null;
             playerSpawnTime = 0;
+            playerSpawned = false;
             tilemaps = new WorldTile[Enum.GetNames(typeof(Tilemap)).Length][,];
             tilemaps[(byte)Tilemap.Solids] = new WorldTile[width, height];
             tilemaps[(byte)Tilemap.Walls] = new WorldTile[width, height];
@@ -90,7 +89,6 @@
             };
             hotspots = new List<Hotspot>();
             bubbleTime = 0;
-            fishTime = 0;
             hotspotCurrent = null;
             hotspotPrevious = null;
         }
@@ -118,19 +116,23 @@
             }
             else
             {
-                if(playerSpawnTime < playerSpawnTimeMax)
+                if(!playerSpawned)
                 {
-                    playerSpawnTime++;
-                }
-                else
-                {
-                    player = (PlayerCharacter)EntityManager.AddEntity<PlayerCharacter>(playerSpawnPosition);
-                    player.flashTime = player.flashTimeMax;
-                    int particleCount = 6;
-                    for(int i = 0; i < particleCount; i++)
+                    if(playerSpawnTime < playerSpawnTimeMax)
                     {
-                        Blood blood = (Blood)EntityManager.AddEntity<Blood>(player.position);
-                        blood.direction = ((MathHelper.Pi * 2f) / particleCount) * i;
+                        playerSpawnTime++;
+                    }
+                    else
+                    {
+                        player = (PlayerCharacter)EntityManager.AddEntity<PlayerCharacter>(playerSpawnPosition);
+                        player.flashTime = player.flashTimeMax;
+                        int particleCount = 6;
+                        for(int i = 0; i < particleCount; i++)
+                        {
+                            Blood blood = (Blood)EntityManager.AddEntity<Blood>(player.position);
+                            blood.direction = ((MathHelper.Pi * 2f) / particleCount) * i;
+                        }
+                        playerSpawned = true;
                     }
                 }
             }
@@ -163,38 +165,6 @@
                 }
                 bubbleTime = 0;
             }
-            if(fishTime < fishTimeMax)
-            {
-                fishTime++;
-            }
-            else
-            {
-                List<Fish> fishies = new List<Fish>();
-                bool fishGroupLeft = Main.random.Next(2) == 0;
-                Vector2 fishGroupPosition = Camera.position + new Vector2(Camera.GetWidth() * 0.5f * (fishGroupLeft ? 1f : -1f), RandomUtilities.Range(-Camera.GetHeight() / 2f, Camera.GetHeight() / 2f));
-                int fishCount = (Main.random.Next(5) == 0 ? 5 : 0) + 1;
-                float fishOffset = 8f;
-                float fishDirectionOffset = MathHelper.ToRadians(Main.random.Next(360));
-                for(int i = 0; i < fishCount; i++)
-                {
-                    Fish fish = (Fish)EntityManager.AddEntity<Fish>(fishGroupPosition + (i > 0 ? MathUtilities.LengthDirection(fishOffset, (((MathHelper.Pi * 2f) / (fishCount - 1f)) * i) + fishDirectionOffset) : Vector2.Zero));
-                    fishies.Add(fish);
-                    if(fish.TileTypeCollision(fish.position, Tile.water, Tilemap.Liquids))
-                    {
-                        fish.direction = fishGroupLeft ? MathHelper.Pi : 0f;
-                        fish.alpha = 0f;
-                        fish.flipHor = fishGroupLeft;
-                    }
-                    else
-                    {
-                        foreach(Fish fishy in fishies)
-                        {
-                            fishy.Destroy();
-                        }
-                    }
-                }
-                fishTime = 0;
-            }
         }
 
         public static void Draw()
@@ -217,7 +187,7 @@
                         switch((Tilemap)m)
                         {
                             case Tilemap.Walls:
-                                color = new Color(80, 80, 80);
+                                color = new Color(120, 120, 120);
                                 depth = 0.25f;
                                 break;
 
@@ -380,15 +350,7 @@
         {
             Main.loading = new Thread(delegate ()
             {
-                try
-                {
-                    GenerateWorld();
-                }
-                catch
-                {
-                    Main.save = null;
-                    GenerateWorld();
-                }
+                GenerateWorld();
                 Main.loading = null;
             });
             Main.loading.Start();

@@ -336,7 +336,7 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Effects/WideSwing.png
 
-#begin Textures/Environmentals/Seaweed/BigSeaweed.png
+#begin Textures/Environmentals/Seaweed/Seaweed.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -346,19 +346,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Environmentals/Seaweed/BigSeaweed.png
-
-#begin Textures/Environmentals/Seaweed/SmallSeaweed.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Environmentals/Seaweed/SmallSeaweed.png
+/build:Textures/Environmentals/Seaweed/Seaweed.png
 
 #begin Textures/Environmentals/Statues/SpawnStatue.png
 /importer:TextureImporter
@@ -372,7 +360,7 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Environmentals/Statues/SpawnStatue.png
 
-#begin Textures/Items/Armours/Chests/WoodenChestplate.png
+#begin Textures/Items/Armours/Chests/StoneChestplate.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -382,9 +370,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Items/Armours/Chests/WoodenChestplate.png
+/build:Textures/Items/Armours/Chests/StoneChestplate.png
 
-#begin Textures/Items/Armours/Chests/WoodenChestplateWear.png
+#begin Textures/Items/Armours/Chests/StoneChestplateWear.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -394,9 +382,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Items/Armours/Chests/WoodenChestplateWear.png
+/build:Textures/Items/Armours/Chests/StoneChestplateWear.png
 
-#begin Textures/Items/Armours/Feet/WoodenBoots.png
+#begin Textures/Items/Armours/Feet/StoneBoots.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -406,9 +394,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Items/Armours/Feet/WoodenBoots.png
+/build:Textures/Items/Armours/Feet/StoneBoots.png
 
-#begin Textures/Items/Armours/Feet/WoodenBootsWear.png
+#begin Textures/Items/Armours/Feet/StoneBootsWear.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -418,9 +406,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Items/Armours/Feet/WoodenBootsWear.png
+/build:Textures/Items/Armours/Feet/StoneBootsWear.png
 
-#begin Textures/Items/Armours/Heads/WoodenHelmet.png
+#begin Textures/Items/Armours/Heads/StoneHelmet.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -430,9 +418,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Items/Armours/Heads/WoodenHelmet.png
+/build:Textures/Items/Armours/Heads/StoneHelmet.png
 
-#begin Textures/Items/Armours/Heads/WoodenHelmetWear.png
+#begin Textures/Items/Armours/Heads/StoneHelmetWear.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -442,9 +430,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Items/Armours/Heads/WoodenHelmetWear.png
+/build:Textures/Items/Armours/Heads/StoneHelmetWear.png
 
-#begin Textures/Items/Armours/Legs/WoodenLeggings.png
+#begin Textures/Items/Armours/Legs/StoneLeggings.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -454,9 +442,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Items/Armours/Legs/WoodenLeggings.png
+/build:Textures/Items/Armours/Legs/StoneLeggings.png
 
-#begin Textures/Items/Armours/Legs/WoodenLeggingsWear.png
+#begin Textures/Items/Armours/Legs/StoneLeggingsWear.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -466,7 +454,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Items/Armours/Legs/WoodenLeggingsWear.png
+/build:Textures/Items/Armours/Legs/StoneLeggingsWear.png
 
 #begin Textures/Items/Consumables/HealthKelp.png
 /importer:TextureImporter
@@ -635,18 +623,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/Particles/Fire.png
-
-#begin Textures/Particles/Fish.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Particles/Fish.png
 
 #begin Textures/Particles/HotspotParticle.png
 /importer:TextureImporter

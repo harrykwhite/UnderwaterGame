@@ -15,9 +15,9 @@
         {
             SetSprite(Sprite.jellyfish, true);
             animator = new Animator(sprite);
-            healthMax = 18f;
+            healthMax = 16f;
             health = healthMax;
-            touchDamage = 8f;
+            touchDamage = 6f;
             touchDamagePlayer = true;
             bloodParticleColor = new Color(216, 143, 172);
         }

@@ -159,3 +159,10 @@ C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Other\VignetteSmall.xnb
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\UI\Other\BigVignette.xnb
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\UI\Other\SmallVignette.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Characters\Enemies\Sharks\Shark.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Environmentals\Seaweed\BigSeaweed.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Environmentals\Seaweed\Seaweed.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Environmentals\Seaweed\SmallSeaweed.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Environmentals\Statues\SpawnStatue.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Other\Fish.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Particles\Fish.xnb

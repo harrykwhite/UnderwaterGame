@@ -258,10 +258,6 @@
             {
                 config = (Config)new BinaryFormatter().Deserialize(fileStream);
             }
-            catch
-            {
-                config = null;
-            }
             finally
             {
                 fileStream.Close();
@@ -275,9 +271,6 @@
             try
             {
                 new BinaryFormatter().Serialize(fileStream, config = new Config());
-            }
-            catch
-            {
             }
             finally
             {
@@ -293,10 +286,6 @@
             {
                 save = (Save)new BinaryFormatter().Deserialize(fileStream);
             }
-            catch
-            {
-                save = null;
-            }
             finally
             {
                 fileStream.Close();
@@ -310,9 +299,6 @@
             try
             {
                 new BinaryFormatter().Serialize(fileStream, save = new Save());
-            }
-            catch
-            {
             }
             finally
             {

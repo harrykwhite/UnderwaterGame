@@ -53,7 +53,7 @@
 
         private float swimSpeedMax = 2f;
 
-        private float swimSpeedWaterMult;
+        private float? swimSpeedWaterMult;
 
         private float swimSpeedWaterMultAcc = 0.01f;
 
@@ -155,65 +155,76 @@
             {
                 swimVector.Y += -1f;
             }
-            if(inWater)
+            if(life > 0)
             {
-                if(swimVector.X == 1f)
+                if(inWater)
                 {
-                    if(swimSpeedHor < swimSpeedMax)
+                    if(swimVector.X == 1f)
                     {
-                        swimSpeedHor += Math.Min(swimSpeedAcc, swimSpeedMax - swimSpeedHor);
+                        if(swimSpeedHor < swimSpeedMax)
+                        {
+                            swimSpeedHor += Math.Min(swimSpeedAcc, swimSpeedMax - swimSpeedHor);
+                        }
+                    }
+                    else if(swimVector.X == -1f)
+                    {
+                        if(swimSpeedHor > -swimSpeedMax)
+                        {
+                            swimSpeedHor -= Math.Min(swimSpeedAcc, swimSpeedHor + swimSpeedMax);
+                        }
+                    }
+                    else if(swimVector.X == 0f)
+                    {
+                        if(swimSpeedHor != 0f)
+                        {
+                            swimSpeedHor -= Math.Sign(swimSpeedHor) * Math.Min(Math.Abs(swimSpeedHor), swimSpeedAcc);
+                        }
+                    }
+                    if(swimVector.Y == 1f)
+                    {
+                        if(swimSpeedVer < swimSpeedMax)
+                        {
+                            swimSpeedVer += Math.Min(swimSpeedAcc, swimSpeedMax - swimSpeedVer);
+                        }
+                    }
+                    else if(swimVector.Y == -1f)
+                    {
+                        if(swimSpeedVer > -swimSpeedMax)
+                        {
+                            swimSpeedVer -= Math.Min(swimSpeedAcc, swimSpeedVer + swimSpeedMax);
+                        }
+                    }
+                    else if(swimVector.Y == 0f)
+                    {
+                        if(swimSpeedVer != 0f)
+                        {
+                            swimSpeedVer -= Math.Sign(swimSpeedVer) * Math.Min(Math.Abs(swimSpeedVer), swimSpeedAcc);
+                        }
+                    }
+                    if(swimSpeedWaterMult == null)
+                    {
+                        swimSpeedWaterMult = 1f;
+                    }
+                    if(swimSpeedWaterMult < 1f)
+                    {
+                        swimSpeedWaterMult += Math.Min(swimSpeedWaterMultAcc, 1f - swimSpeedWaterMult.Value);
                     }
                 }
-                else if(swimVector.X == -1f)
+                else
                 {
-                    if(swimSpeedHor > -swimSpeedMax)
+                    if(swimSpeedWaterMult == null)
                     {
-                        swimSpeedHor -= Math.Min(swimSpeedAcc, swimSpeedHor + swimSpeedMax);
+                        swimSpeedWaterMult = 0f;
                     }
-                }
-                else if(swimVector.X == 0f)
-                {
-                    if(swimSpeedHor != 0f)
+                    if(swimSpeedWaterMult > 0f)
                     {
-                        swimSpeedHor -= Math.Sign(swimSpeedHor) * Math.Min(Math.Abs(swimSpeedHor), swimSpeedAcc);
+                        swimSpeedWaterMult -= Math.Min(swimSpeedWaterMultAcc, swimSpeedWaterMult.Value);
                     }
-                }
-                if(swimVector.Y == 1f)
-                {
-                    if(swimSpeedVer < swimSpeedMax)
-                    {
-                        swimSpeedVer += Math.Min(swimSpeedAcc, swimSpeedMax - swimSpeedVer);
-                    }
-                }
-                else if(swimVector.Y == -1f)
-                {
-                    if(swimSpeedVer > -swimSpeedMax)
-                    {
-                        swimSpeedVer -= Math.Min(swimSpeedAcc, swimSpeedVer + swimSpeedMax);
-                    }
-                }
-                else if(swimVector.Y == 0f)
-                {
-                    if(swimSpeedVer != 0f)
-                    {
-                        swimSpeedVer -= Math.Sign(swimSpeedVer) * Math.Min(Math.Abs(swimSpeedVer), swimSpeedAcc);
-                    }
-                }
-                if(swimSpeedWaterMult < 1f)
-                {
-                    swimSpeedWaterMult += Math.Min(swimSpeedWaterMultAcc, 1f - swimSpeedWaterMult);
                 }
             }
-            else
-            {
-                if(swimSpeedWaterMult > 0f)
-                {
-                    swimSpeedWaterMult -= Math.Min(swimSpeedWaterMultAcc, swimSpeedWaterMult);
-                }
-            }
-            velocity = new Vector2(swimSpeedHor, swimSpeedVer) * swimSpeedWaterMult;
+            velocity = new Vector2(swimSpeedHor, swimSpeedVer) * (swimSpeedWaterMult ?? 0f);
             angleOffset = MathHelper.Pi / 2f;
-            if(new Vector2(swimSpeedHor, swimSpeedVer).Length() * swimSpeedWaterMult > 0f)
+            if(new Vector2(swimSpeedHor, swimSpeedVer).Length() * (swimSpeedWaterMult ?? 0f) > 0f)
             {
                 swimAngleTo = MathUtilities.PointDirection(Vector2.Zero, velocity);
                 swimAngleTo += angleOffset;
@@ -243,9 +254,9 @@
             position += velocity;
             LockInWorld();
             bool idle = true;
-            if(inWater)
+            if(inWater && life > 0)
             {
-                float distance = new Vector2(swimSpeedHor, swimSpeedVer).Length() * swimSpeedWaterMult;
+                float distance = new Vector2(swimSpeedHor, swimSpeedVer).Length() * (swimSpeedWaterMult ?? 0f);
                 if(distance > 0f)
                 {
                     if(bubbleTime < bubbleTimeMax)

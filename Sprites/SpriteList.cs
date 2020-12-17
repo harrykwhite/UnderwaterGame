@@ -6,10 +6,8 @@
     {
         public static List<Sprite> sprites = new List<Sprite>();
 
-        public static Sprite bigSeaweed;
+        public static Sprite seaweed;
 
-        public static Sprite smallSeaweed;
-        
         public static Sprite spawnStatue;
 
         public static Sprite jellyfish;
@@ -40,8 +38,6 @@
 
         public static Sprite hotspotParticle;
 
-        public static Sprite fish;
-
         public static Sprite woodenArrow;
 
         public static Sprite flareMagic;
@@ -62,26 +58,25 @@
 
         public static Sprite magicKelp;
 
-        public static Sprite woodenHelmet;
+        public static Sprite stoneHelmet;
 
-        public static Sprite woodenHelmetWear;
+        public static Sprite stoneHelmetWear;
 
-        public static Sprite woodenChestplate;
+        public static Sprite stoneChestplate;
 
-        public static Sprite woodenChestplateWear;
+        public static Sprite stoneChestplateWear;
 
-        public static Sprite woodenLeggings;
+        public static Sprite stoneLeggings;
 
-        public static Sprite woodenLeggingsWear;
+        public static Sprite stoneLeggingsWear;
 
-        public static Sprite woodenBoots;
+        public static Sprite stoneBoots;
 
-        public static Sprite woodenBootsWear;
+        public static Sprite stoneBootsWear;
 
         public static void LoadAll()
         {
-            bigSeaweed = Load(Main.textureLibrary.ENVIRONMENTALS_SEAWEED_BIGSEAWEED);
-            smallSeaweed = Load(Main.textureLibrary.ENVIRONMENTALS_SEAWEED_SMALLSEAWEED);
+            seaweed = Load(Main.textureLibrary.ENVIRONMENTALS_SEAWEED_SEAWEED);
             spawnStatue = Load(Main.textureLibrary.ENVIRONMENTALS_STATUES_SPAWNSTATUE);
             jellyfish = Load(Main.textureLibrary.CHARACTERS_ENEMIES_JELLYFISH_JELLYFISH);
             tallJellyfish = Load(Main.textureLibrary.CHARACTERS_ENEMIES_JELLYFISH_TALLJELLYFISH);
@@ -97,7 +92,6 @@
             liquid = Load(Main.textureLibrary.PARTICLES_LIQUID);
             fire = Load(Main.textureLibrary.PARTICLES_FIRE);
             hotspotParticle = Load(Main.textureLibrary.PARTICLES_HOTSPOTPARTICLE);
-            fish = Load(Main.textureLibrary.PARTICLES_FISH);
             woodenArrow = Load(Main.textureLibrary.PROJECTILES_ARROWS_WOODENARROW);
             flareMagic = Load(Main.textureLibrary.PROJECTILES_MAGIC_FLAREMAGIC);
             woodenTrident = Load(Main.textureLibrary.ITEMS_WEAPONS_MELEE_TRIDENTS_WOODENTRIDENT);
@@ -108,14 +102,14 @@
             woodenWand = Load(Main.textureLibrary.ITEMS_WEAPONS_MAGIC_WANDS_WOODENWAND);
             healthKelp = Load(Main.textureLibrary.ITEMS_CONSUMABLES_HEALTHKELP);
             magicKelp = Load(Main.textureLibrary.ITEMS_CONSUMABLES_MAGICKELP);
-            woodenHelmet = Load(Main.textureLibrary.ITEMS_ARMOURS_HEADS_WOODENHELMET);
-            woodenHelmetWear = Load(Main.textureLibrary.ITEMS_ARMOURS_HEADS_WOODENHELMETWEAR);
-            woodenChestplate = Load(Main.textureLibrary.ITEMS_ARMOURS_CHESTS_WOODENCHESTPLATE);
-            woodenChestplateWear = Load(Main.textureLibrary.ITEMS_ARMOURS_CHESTS_WOODENCHESTPLATEWEAR);
-            woodenLeggings = Load(Main.textureLibrary.ITEMS_ARMOURS_LEGS_WOODENLEGGINGS);
-            woodenLeggingsWear = Load(Main.textureLibrary.ITEMS_ARMOURS_LEGS_WOODENLEGGINGSWEAR);
-            woodenBoots = Load(Main.textureLibrary.ITEMS_ARMOURS_FEET_WOODENBOOTS);
-            woodenBootsWear = Load(Main.textureLibrary.ITEMS_ARMOURS_FEET_WOODENBOOTSWEAR);
+            stoneHelmet = Load(Main.textureLibrary.ITEMS_ARMOURS_HEADS_STONEHELMET);
+            stoneHelmetWear = Load(Main.textureLibrary.ITEMS_ARMOURS_HEADS_STONEHELMETWEAR);
+            stoneChestplate = Load(Main.textureLibrary.ITEMS_ARMOURS_CHESTS_STONECHESTPLATE);
+            stoneChestplateWear = Load(Main.textureLibrary.ITEMS_ARMOURS_CHESTS_STONECHESTPLATEWEAR);
+            stoneLeggings = Load(Main.textureLibrary.ITEMS_ARMOURS_LEGS_STONELEGGINGS);
+            stoneLeggingsWear = Load(Main.textureLibrary.ITEMS_ARMOURS_LEGS_STONELEGGINGSWEAR);
+            stoneBoots = Load(Main.textureLibrary.ITEMS_ARMOURS_FEET_STONEBOOTS);
+            stoneBootsWear = Load(Main.textureLibrary.ITEMS_ARMOURS_FEET_STONEBOOTSWEAR);
         }
     }
 }

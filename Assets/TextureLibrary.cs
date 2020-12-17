@@ -12,9 +12,7 @@
 
         public readonly LibraryAsset TILES_LIQUIDS_WATER = new LibraryAsset("Textures/Tiles/Liquids/Water");
 
-        public readonly LibraryAsset ENVIRONMENTALS_SEAWEED_BIGSEAWEED = new LibraryAsset("Textures/Environmentals/Seaweed/BigSeaweed");
-
-        public readonly LibraryAsset ENVIRONMENTALS_SEAWEED_SMALLSEAWEED = new LibraryAsset("Textures/Environmentals/Seaweed/SmallSeaweed");
+        public readonly LibraryAsset ENVIRONMENTALS_SEAWEED_SEAWEED = new LibraryAsset("Textures/Environmentals/Seaweed/Seaweed");
 
         public readonly LibraryAsset ENVIRONMENTALS_STATUES_SPAWNSTATUE = new LibraryAsset("Textures/Environmentals/Statues/SpawnStatue");
 
@@ -46,8 +44,6 @@
 
         public readonly LibraryAsset PARTICLES_HOTSPOTPARTICLE = new LibraryAsset("Textures/Particles/HotspotParticle");
         
-        public readonly LibraryAsset PARTICLES_FISH = new LibraryAsset("Textures/Particles/Fish");
-
         public readonly LibraryAsset PROJECTILES_ARROWS_WOODENARROW = new LibraryAsset("Textures/Projectiles/Arrows/WoodenArrow");
 
         public readonly LibraryAsset PROJECTILES_MAGIC_FLAREMAGIC = new LibraryAsset("Textures/Projectiles/Magic/FlareMagic");
@@ -68,21 +64,21 @@
 
         public readonly LibraryAsset ITEMS_CONSUMABLES_MAGICKELP = new LibraryAsset("Textures/Items/Consumables/MagicKelp");
 
-        public readonly LibraryAsset ITEMS_ARMOURS_HEADS_WOODENHELMET = new LibraryAsset("Textures/Items/Armours/Heads/WoodenHelmet");
+        public readonly LibraryAsset ITEMS_ARMOURS_HEADS_STONEHELMET = new LibraryAsset("Textures/Items/Armours/Heads/StoneHelmet");
 
-        public readonly LibraryAsset ITEMS_ARMOURS_HEADS_WOODENHELMETWEAR = new LibraryAsset("Textures/Items/Armours/Heads/WoodenHelmetWear");
+        public readonly LibraryAsset ITEMS_ARMOURS_HEADS_STONEHELMETWEAR = new LibraryAsset("Textures/Items/Armours/Heads/StoneHelmetWear");
 
-        public readonly LibraryAsset ITEMS_ARMOURS_CHESTS_WOODENCHESTPLATE = new LibraryAsset("Textures/Items/Armours/Chests/WoodenChestplate");
+        public readonly LibraryAsset ITEMS_ARMOURS_CHESTS_STONECHESTPLATE = new LibraryAsset("Textures/Items/Armours/Chests/StoneChestplate");
 
-        public readonly LibraryAsset ITEMS_ARMOURS_CHESTS_WOODENCHESTPLATEWEAR = new LibraryAsset("Textures/Items/Armours/Chests/WoodenChestplateWear");
+        public readonly LibraryAsset ITEMS_ARMOURS_CHESTS_STONECHESTPLATEWEAR = new LibraryAsset("Textures/Items/Armours/Chests/StoneChestplateWear");
 
-        public readonly LibraryAsset ITEMS_ARMOURS_LEGS_WOODENLEGGINGS = new LibraryAsset("Textures/Items/Armours/Legs/WoodenLeggings");
+        public readonly LibraryAsset ITEMS_ARMOURS_LEGS_STONELEGGINGS = new LibraryAsset("Textures/Items/Armours/Legs/StoneLeggings");
 
-        public readonly LibraryAsset ITEMS_ARMOURS_LEGS_WOODENLEGGINGSWEAR = new LibraryAsset("Textures/Items/Armours/Legs/WoodenLeggingsWear");
+        public readonly LibraryAsset ITEMS_ARMOURS_LEGS_STONELEGGINGSWEAR = new LibraryAsset("Textures/Items/Armours/Legs/StoneLeggingsWear");
 
-        public readonly LibraryAsset ITEMS_ARMOURS_FEET_WOODENBOOTS = new LibraryAsset("Textures/Items/Armours/Feet/WoodenBoots");
+        public readonly LibraryAsset ITEMS_ARMOURS_FEET_STONEBOOTS = new LibraryAsset("Textures/Items/Armours/Feet/StoneBoots");
 
-        public readonly LibraryAsset ITEMS_ARMOURS_FEET_WOODENBOOTSWEAR = new LibraryAsset("Textures/Items/Armours/Feet/WoodenBootsWear");
+        public readonly LibraryAsset ITEMS_ARMOURS_FEET_STONEBOOTSWEAR = new LibraryAsset("Textures/Items/Armours/Feet/StoneBootsWear");
 
         public readonly LibraryAsset UI_BUTTONS_OTHER_BUTTON = new LibraryAsset("Textures/Ui/Buttons/Other/Button");
 

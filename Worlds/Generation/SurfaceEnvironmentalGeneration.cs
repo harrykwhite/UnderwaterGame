@@ -25,11 +25,7 @@
                         Tile tile = Tile.GetTileById(worldTile?.id ?? 0);
                         if(tile == Tile.sand)
                         {
-                            Environmental environmental = Environmental.smallSeaweed;
-                            if(Main.random.Next(4) == 0)
-                            {
-                                environmental = Environmental.bigSeaweed;
-                            }
+                            Environmental environmental = Environmental.seaweed;
                             if(World.AddEnvironmentalAt(x, y, environmental))
                             {
                                 x += (environmental.sprite.textures[0].Width / Tile.size) - 1;

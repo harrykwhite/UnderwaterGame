@@ -25,13 +25,13 @@
 
         public static WoodenSword woodenSword;
 
-        public static WoodenHelmet steelHelmet;
+        public static StoneHelmet steelHelmet;
 
-        public static WoodenChestplate steelChestplate;
+        public static StoneChestplate steelChestplate;
 
-        public static WoodenLeggings steelLeggings;
+        public static StoneLeggings steelLeggings;
 
-        public static WoodenBoots steelBoots;
+        public static StoneBoots steelBoots;
 
         public static CrabShuriken crabShuriken;
 
@@ -47,10 +47,10 @@
             woodenBow = Load<WoodenBow>(2);
             crabGrenade = Load<CrabGrenade>(3);
             woodenSword = Load<WoodenSword>(4);
-            steelHelmet = Load<WoodenHelmet>(5);
-            steelChestplate = Load<WoodenChestplate>(6);
-            steelLeggings = Load<WoodenLeggings>(7);
-            steelBoots = Load<WoodenBoots>(8);
+            steelHelmet = Load<StoneHelmet>(5);
+            steelChestplate = Load<StoneChestplate>(6);
+            steelLeggings = Load<StoneLeggings>(7);
+            steelBoots = Load<StoneBoots>(8);
             crabShuriken = Load<CrabShuriken>(9);
             healthKelp = Load<HealthKelp>(10);
             woodenWand = Load<WoodenWand>(11);
