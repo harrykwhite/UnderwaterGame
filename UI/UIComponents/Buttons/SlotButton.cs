@@ -61,7 +61,7 @@
                 {
                     return;
                 }
-                GameCursorElement gameCursor = (GameCursorElement)UiManager.GetElement<GameCursorElement>();
+                CursorElement cursor = (CursorElement)UiManager.GetElement<CursorElement>();
                 Inventory.InventorySlot slot = getInventory().groups[slotGroup].contents[slotX, slotY];
                 if(menuElement is PlayerMenu menu)
                 {
@@ -71,31 +71,31 @@
                 }
                 if(slot.item != null)
                 {
-                    gameCursor.text = slot.item.name;
+                    cursor.text = slot.item.name;
                 }
             };
             selectedInteractAction = delegate ()
             {
                 Inventory.InventorySlot slot = getInventory().groups[slotGroup].contents[slotX, slotY];
-                GameCursorElement gameCursor = (GameCursorElement)UiManager.GetElement<GameCursorElement>();
+                CursorElement cursor = (CursorElement)UiManager.GetElement<CursorElement>();
                 Item slotItemPrevious = slot.item;
                 int slotQuantityPrevious = slot.quantity;
-                if(gameCursor.dragItem != null)
+                if(cursor.dragItem != null)
                 {
-                    if(getInventory().groups[slotGroup].predicate(gameCursor.dragItem))
+                    if(getInventory().groups[slotGroup].predicate(cursor.dragItem))
                     {
-                        getInventory().AddItemAt(slotX, slotY, slotGroup, gameCursor.dragItem, gameCursor.dragQuantity);
-                        if(slot.item == gameCursor.dragItem && slot.item.stack)
+                        getInventory().AddItemAt(slotX, slotY, slotGroup, cursor.dragItem, cursor.dragQuantity);
+                        if(slot.item == cursor.dragItem && slot.item.stack)
                         {
-                            gameCursor.dragItem = null;
-                            gameCursor.dragQuantity = 0;
+                            cursor.dragItem = null;
+                            cursor.dragQuantity = 0;
                         }
                         else
                         {
-                            slot.item = gameCursor.dragItem;
-                            slot.quantity = gameCursor.dragQuantity;
-                            gameCursor.dragItem = slotItemPrevious;
-                            gameCursor.dragQuantity = slotQuantityPrevious;
+                            slot.item = cursor.dragItem;
+                            slot.quantity = cursor.dragQuantity;
+                            cursor.dragItem = slotItemPrevious;
+                            cursor.dragQuantity = slotQuantityPrevious;
                         }
                     }
                 }
@@ -103,8 +103,8 @@
                 {
                     slot.item = null;
                     slot.quantity = 0;
-                    gameCursor.dragItem = slotItemPrevious;
-                    gameCursor.dragQuantity = slotQuantityPrevious;
+                    cursor.dragItem = slotItemPrevious;
+                    cursor.dragQuantity = slotQuantityPrevious;
                 }
             };
         }
@@ -122,7 +122,7 @@
             }
             Shape shape = this.shape;
             shape.position = getPosition() - new Vector2((int)Math.Ceiling(texture.Width / 2f), (int)Math.Ceiling(texture.Height / 2f));
-            return shape.Intersects(((GameCursorElement)UiManager.GetElement<GameCursorElement>()).GetShape());
+            return shape.Intersects(((CursorElement)UiManager.GetElement<CursorElement>()).GetShape());
         }
     }
 }

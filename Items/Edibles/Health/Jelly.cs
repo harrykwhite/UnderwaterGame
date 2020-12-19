@@ -2,18 +2,18 @@
 {
     using UnderwaterGame.Sprites;
 
-    public class HealthKelp : HealthEdible
+    public class Jelly : HealthEdible
     {
         protected override void Init()
         {
-            name = "Health Kelp";
-            sprite = Sprite.healthKelp;
+            name = "Jelly";
+            sprite = Sprite.jelly;
             stack = true;
             useTime = 10;
             useAngleUpdate = false;
             usePress = true;
             useHide = true;
-            healthAmount = 8f;
+            healthAmount = 4f;
         }
     }
 }

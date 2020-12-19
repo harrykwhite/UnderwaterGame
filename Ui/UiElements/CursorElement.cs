@@ -6,7 +6,7 @@
     using UnderwaterGame.Items;
     using UnderwaterGame.Utilities;
 
-    public class GameCursorElement : UiElement
+    public class CursorElement : UiElement
     {
         public string text = "";
 

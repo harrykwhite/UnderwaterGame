@@ -60,9 +60,11 @@
 
         public readonly LibraryAsset ITEMS_WEAPONS_MAGIC_WANDS_WOODENWAND = new LibraryAsset("Textures/Items/Weapons/Magic/Wands/WoodenWand");
 
-        public readonly LibraryAsset ITEMS_CONSUMABLES_HEALTHKELP = new LibraryAsset("Textures/Items/Consumables/HealthKelp");
+        public readonly LibraryAsset ITEMS_EDIBLES_HEALTHKELP = new LibraryAsset("Textures/Items/Edibles/HealthKelp");
 
-        public readonly LibraryAsset ITEMS_CONSUMABLES_MAGICKELP = new LibraryAsset("Textures/Items/Consumables/MagicKelp");
+        public readonly LibraryAsset ITEMS_EDIBLES_MAGICKELP = new LibraryAsset("Textures/Items/Edibles/MagicKelp");
+        
+        public readonly LibraryAsset ITEMS_EDIBLES_JELLY = new LibraryAsset("Textures/Items/Edibles/Jelly");
 
         public readonly LibraryAsset ITEMS_ARMOURS_HEADS_STONEHELMET = new LibraryAsset("Textures/Items/Armours/Heads/StoneHelmet");
 

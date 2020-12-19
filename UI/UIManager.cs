@@ -41,18 +41,18 @@
 
         public static void LoadElements()
         {
-            AddElement<HotspotCountElement>();
-            AddElement<CharacterHealthElement>();
-            AddElement<FloatingTextElement>();
+            AddElement<HotspotElement>();
+            AddElement<HealthElement>();
+            AddElement<TextEntityElement>();
+            AddElement(vignetteElements[0] = new VignetteElement { getActive = () => World.hotspotCurrent != null });
+            AddElement(vignetteElements[1] = new VignetteElement { alphaAcc = 0.1f, alphaMax = 1f, big = true, getActive = () => false });
             AddElement(fadeElements[0] = new FadeElement { getActive = () => menuCurrent != null }, true);
             AddElement<PlayerMenu>();
             AddElement(fadeElements[1] = new FadeElement { getActive = delegate () { OptionsMenu optionsMenu = (OptionsMenu)GetElement<OptionsMenu>(); return optionsMenu.open; } }, true);
             AddElement<OptionsMenu>();
             AddElement(fadeElements[2] = new FadeElement { alphaMax = 1f, getActive = () => Main.loading != null }, true);
             AddElement<LoadingElement>(true);
-            AddElement<GameCursorElement>(true);
-            AddElement(vignetteElements[0] = new VignetteElement { getActive = () => World.hotspotCurrent != null } );
-            AddElement(vignetteElements[1] = new VignetteElement { alphaAcc = 0.1f, alphaMax = 1f, big = true, getActive = () => false } );
+            AddElement<CursorElement>(true);
         }
 
         public static void UpdateElements()

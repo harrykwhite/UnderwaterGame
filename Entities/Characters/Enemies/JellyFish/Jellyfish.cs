@@ -1,6 +1,7 @@
 ﻿namespace UnderwaterGame.Entities.Characters.Enemies.Jellyfish
 {
     using Microsoft.Xna.Framework;
+    using UnderwaterGame.Items;
     using UnderwaterGame.Sprites;
 
     public class Jellyfish : JellyfishEnemy
@@ -20,6 +21,8 @@
             touchDamage = 6f;
             touchDamagePlayer = true;
             bloodParticleColor = new Color(216, 143, 172);
+            itemDropType = Item.jelly;
+            itemDropQuantity = 1;
         }
 
         public override void Update()

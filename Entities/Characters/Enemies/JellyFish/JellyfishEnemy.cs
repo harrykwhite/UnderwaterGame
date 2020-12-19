@@ -24,8 +24,6 @@
 
         protected float swimDirection;
 
-        protected bool swimTargeted;
-
         protected void JellyfishUpdate()
         {
             if(swimTime > 0)

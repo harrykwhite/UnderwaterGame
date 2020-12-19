@@ -41,6 +41,8 @@
 
         public static MagicKelp magicKelp;
 
+        public static Jelly jelly;
+
         public static void LoadAll()
         {
             woodenTrident = Load<WoodenTrident>(1);
@@ -55,6 +57,7 @@
             healthKelp = Load<HealthKelp>(10);
             woodenWand = Load<WoodenWand>(11);
             magicKelp = Load<MagicKelp>(12);
+            jelly = Load<Jelly>(13);
         }
     }
 }

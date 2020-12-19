@@ -57,7 +57,7 @@
             ballShape.position = ballPosition - new Vector2((int)Math.Ceiling(Main.textureLibrary.UI_SLIDER_BALL.asset.Width / 2f), (int)Math.Ceiling(Main.textureLibrary.UI_SLIDER_BALL.asset.Height / 2f) - (textGap / 2f));
             if(getAlpha() > 0f && UiManager.menuCurrent == menuElement)
             {
-                if(ballShape.Intersects(((GameCursorElement)UiManager.GetElement<GameCursorElement>()).GetShape()))
+                if(ballShape.Intersects(((CursorElement)UiManager.GetElement<CursorElement>()).GetShape()))
                 {
                     if(locked == null)
                     {

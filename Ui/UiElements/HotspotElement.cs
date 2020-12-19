@@ -4,7 +4,7 @@
     using UnderwaterGame.Utilities;
     using UnderwaterGame.Worlds;
 
-    public class HotspotCountElement : UiElement
+    public class HotspotElement : UiElement
     {
         public override void Draw()
         {

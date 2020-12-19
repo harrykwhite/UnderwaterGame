@@ -456,7 +456,7 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Items/Armours/Legs/StoneLeggingsWear.png
 
-#begin Textures/Items/Consumables/HealthKelp.png
+#begin Textures/Items/Edibles/HealthKelp.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -466,9 +466,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Items/Consumables/HealthKelp.png
+/build:Textures/Items/Edibles/HealthKelp.png
 
-#begin Textures/Items/Consumables/MagicKelp.png
+#begin Textures/Items/Edibles/Jelly.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -478,7 +478,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Items/Consumables/MagicKelp.png
+/build:Textures/Items/Edibles/Jelly.png
+
+#begin Textures/Items/Edibles/MagicKelp.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Items/Edibles/MagicKelp.png
 
 #begin Textures/Items/Weapons/Magic/Wands/WoodenWand.png
 /importer:TextureImporter

@@ -9,7 +9,7 @@
         public override void Generate()
         {
             int interval = 0;
-            int intervalMax = 4;
+            int intervalMax = 8;
             int intervalOffset = 2;
             for(int x = 0; x < World.width; x++)
             {

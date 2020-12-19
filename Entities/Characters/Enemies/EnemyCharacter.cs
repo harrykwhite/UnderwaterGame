@@ -12,6 +12,10 @@ namespace UnderwaterGame.Entities.Characters.Enemies
 
         public bool touchDamagePlayer;
 
+        protected Item itemDropType;
+
+        protected int itemDropQuantity;
+
         public HitData HitCharacter(Entity target)
         {
             return new HitData { damage = touchDamage, at = target.position, hitPlayer = touchDamagePlayer, hitEnemy = touchDamageEnemy };
@@ -27,6 +31,11 @@ namespace UnderwaterGame.Entities.Characters.Enemies
                     hotspot.count--;
                     hotspot.countScale = hotspot.countScaleMax;
                 }
+            }
+            if(itemDropType != null)
+            {
+                ItemDropEntity itemDrop = (ItemDropEntity)EntityManager.AddEntity<ItemDropEntity>(position);
+                itemDrop.SetItem(itemDropType, itemDropQuantity);
             }
         }
     }

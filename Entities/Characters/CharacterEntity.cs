@@ -12,7 +12,7 @@
     {
         public int flashTime;
 
-        public int flashTimeMax = 16;
+        public int flashTimeMax = 20;
 
         protected SoundEffect hurtSound;
 
@@ -100,10 +100,10 @@
             {
                 SoundUtilities.PlaySound(hurtSound);
             }
-            FloatingTextEntity floatingTextEntity = (FloatingTextEntity)EntityManager.AddEntity<FloatingTextEntity>(position);
-            floatingTextEntity.text = "-" + amount.ToString();
-            floatingTextEntity.speed = 4f;
-            floatingTextEntity.direction = -MathHelper.Pi / 2f;
+            TextEntity textEntity = (TextEntity)EntityManager.AddEntity<TextEntity>(position);
+            textEntity.text = "-" + amount.ToString();
+            textEntity.speed = 4f;
+            textEntity.direction = -MathHelper.Pi / 2f;
             if(health > 0f)
             {
                 for(int i = 0; i < bloodParticleCount; i++)
@@ -126,10 +126,10 @@
             health += amount;
             health = MathUtilities.Clamp(health, 0f, healthMax);
             flashTime = flashTimeMax;
-            FloatingTextEntity floatingTextEntity = (FloatingTextEntity)EntityManager.AddEntity<FloatingTextEntity>(position);
-            floatingTextEntity.text = "+" + amount.ToString();
-            floatingTextEntity.speed = 4f;
-            floatingTextEntity.direction = -MathHelper.Pi / 2f;
+            TextEntity textEntity = (TextEntity)EntityManager.AddEntity<TextEntity>(position);
+            textEntity.text = "+" + amount.ToString();
+            textEntity.speed = 4f;
+            textEntity.direction = -MathHelper.Pi / 2f;
             for(int i = 0; i < bloodParticleCount; i++)
             {
                 Blood blood = (Blood)EntityManager.AddEntity<Blood>(position);

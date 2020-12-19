@@ -34,7 +34,7 @@
             World.player.heldItem.SetSwingEffect(swingSprite, hitboxOffset);
             World.player.knockbackSpeed += useStrength;
             World.player.knockbackDirection = World.player.heldItem.angleBase;
-            ((GameCursorElement)UiManager.GetElement<GameCursorElement>()).scale += new Vector2(0.5f);
+            ((CursorElement)UiManager.GetElement<CursorElement>()).scale += new Vector2(0.5f);
             return hitEntity;
         }
 

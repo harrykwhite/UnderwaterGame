@@ -7,7 +7,7 @@
     using UnderwaterGame.Utilities;
     using UnderwaterGame.Worlds;
 
-    public class CharacterHealthElement : UiElement
+    public class HealthElement : UiElement
     {
         public override void Draw()
         {

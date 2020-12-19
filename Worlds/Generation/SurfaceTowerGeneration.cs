@@ -12,8 +12,8 @@
             int towerPositionsGap = 128;
             for(int i = 0; i < towerPositions.Length; i++)
             {
-                int levelWidth = Main.random.Next(8, 12);
-                int levelHeight = levelWidth * 2;
+                int levelWidth = 8;
+                int levelHeight = 16;
                 int levelCount = Main.random.Next(6, 8);
                 int levelOffset = Main.random.Next(2) - levelCount + 1;
                 int topOffset = Main.random.Next(3);

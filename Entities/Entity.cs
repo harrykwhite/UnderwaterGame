@@ -32,7 +32,7 @@
 
         public int gravityWaterTime;
 
-        public int gravityWaterTimeMax = 4;
+        public int gravityWaterTimeMax = 5;
 
         public Vector2 position;
 

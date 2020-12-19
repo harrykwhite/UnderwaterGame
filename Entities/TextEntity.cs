@@ -4,7 +4,7 @@
     using System;
     using UnderwaterGame.Utilities;
 
-    public class FloatingTextEntity : Entity
+    public class TextEntity : Entity
     {
         public float speed;
 
@@ -13,6 +13,8 @@
         public float direction;
 
         public string text;
+
+        public int lifeMax = 90;
 
         public override void Draw()
         {
@@ -24,15 +26,18 @@
 
         public override void Update()
         {
-            if(life > 90)
+            if(lifeMax != -1)
             {
-                if(alpha > 0f)
+                if(life > lifeMax)
                 {
-                    alpha -= Math.Min(0.1f, alpha);
-                }
-                else
-                {
-                    Destroy();
+                    if(alpha > 0f)
+                    {
+                        alpha -= Math.Min(0.1f, alpha);
+                    }
+                    else
+                    {
+                        Destroy();
+                    }
                 }
             }
             if(speed > 0f)

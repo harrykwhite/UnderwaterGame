@@ -38,7 +38,7 @@
             }
             Shape shape = this.shape;
             shape.position = getPosition() - new Vector2((int)Math.Ceiling(texture.Width / 2f), (int)Math.Ceiling(texture.Height / 2f));
-            return shape.Intersects(((GameCursorElement)UiManager.GetElement<GameCursorElement>()).GetShape());
+            return shape.Intersects(((CursorElement)UiManager.GetElement<CursorElement>()).GetShape());
         }
     }
 }

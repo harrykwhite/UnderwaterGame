@@ -59,7 +59,7 @@
 
         public static bool restartSave;
 
-        public static int version = 1;
+        public static int version = 2;
 
         public Main()
         {

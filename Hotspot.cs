@@ -47,7 +47,7 @@
 
         private int particleTime;
 
-        private int particleTimeMax = 4;
+        private int particleTimeMax = 5;
 
         public Hotspot(Vector2 position, Spawn[] spawns, int spawnMax, int spawnTimeMax, int count)
         {

@@ -39,7 +39,7 @@
 
         private float bubbleTime;
 
-        private float bubbleTimeMax = 8f;
+        private float bubbleTimeMax = 10f;
 
         private float swimAngleTo;
 
@@ -120,14 +120,14 @@
             inventory.groups[(int)InventoryGroup.ArmourLegs].predicate = (Item item) => item is LegArmour;
             inventory.groups[(int)InventoryGroup.ArmourFeet].predicate = (Item item) => item is FeetArmour;
             heldItem = (ItemEntity)EntityManager.AddEntity<ItemEntity>(position);
-            healthMax = 100f;
+            healthMax = 60f;
             health = healthMax;
-            magicMax = 100f;
+            magicMax = 60f;
             magic = magicMax;
             Item[] items = Item.items.ToArray();
             for(int i = 0; i < items.Length; i++)
             {
-                inventory.AddItem(items[i], 99);
+                inventory.AddItem(items[i], 1);
             }
         }
 

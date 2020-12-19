@@ -416,6 +416,9 @@
                 EnvironmentalEntity environmentalEntity = (EnvironmentalEntity)EntityManager.AddEntity<EnvironmentalEntity>(GetEnvironmentalWorldPosition(worldEnvironmental.x, worldEnvironmental.y, Environmental.GetEnvironmentalById(worldEnvironmental.id)));
                 environmentalEntity.SetEnvironmental(Environmental.GetEnvironmentalById(worldEnvironmental.id), worldEnvironmental);
             }
+            TextEntity text = (TextEntity)EntityManager.AddEntity<TextEntity>(playerSpawnPosition + new Vector2(0f, 64f));
+            text.text = "Use the WASD keys to move the player\nUse the F key to change the hotbar\nUse the ESCAPE key to open the inventory";
+            text.lifeMax = -1;
         }
 
         private static void SetTileTexture(int x, int y, Tilemap tilemap)

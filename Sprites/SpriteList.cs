@@ -58,6 +58,8 @@
 
         public static Sprite magicKelp;
 
+        public static Sprite jelly;
+
         public static Sprite stoneHelmet;
 
         public static Sprite stoneHelmetWear;
@@ -100,8 +102,9 @@
             crabGrenade = Load(Main.textureLibrary.ITEMS_WEAPONS_RANGED_THROWABLES_CRABGRENADE);
             crabShuriken = Load(Main.textureLibrary.ITEMS_WEAPONS_RANGED_THROWABLES_CRABSHURIKEN);
             woodenWand = Load(Main.textureLibrary.ITEMS_WEAPONS_MAGIC_WANDS_WOODENWAND);
-            healthKelp = Load(Main.textureLibrary.ITEMS_CONSUMABLES_HEALTHKELP);
-            magicKelp = Load(Main.textureLibrary.ITEMS_CONSUMABLES_MAGICKELP);
+            healthKelp = Load(Main.textureLibrary.ITEMS_EDIBLES_HEALTHKELP);
+            magicKelp = Load(Main.textureLibrary.ITEMS_EDIBLES_MAGICKELP);
+            jelly = Load(Main.textureLibrary.ITEMS_EDIBLES_JELLY);
             stoneHelmet = Load(Main.textureLibrary.ITEMS_ARMOURS_HEADS_STONEHELMET);
             stoneHelmetWear = Load(Main.textureLibrary.ITEMS_ARMOURS_HEADS_STONEHELMETWEAR);
             stoneChestplate = Load(Main.textureLibrary.ITEMS_ARMOURS_CHESTS_STONECHESTPLATE);
