@@ -2,7 +2,6 @@
 {
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
-    using System;
     using UnderwaterGame.Items;
     using UnderwaterGame.Utilities;
 
@@ -16,21 +15,19 @@
 
         public Vector2 scale = Vector2.One;
 
-        public Shape shape;
-
         public override void Draw()
         {
-            Vector2 mousePosition = Control.GetMousePositionUi();
-            Main.spriteBatch.Draw(Main.textureLibrary.UI_OTHER_CURSOR.asset, mousePosition, null, Color.White, 0f, new Vector2(Main.textureLibrary.UI_OTHER_CURSOR.asset.Width, Main.textureLibrary.UI_OTHER_CURSOR.asset.Height) / 2f, scale, SpriteEffects.None, 1f);
+            Vector2 mousePosition = Control.GetMousePosition();
+            Main.spriteBatch.Draw(Main.textureLibrary.UI_OTHER_CURSOR.asset, mousePosition, null, Color.White, 0f, new Vector2(Main.textureLibrary.UI_OTHER_CURSOR.asset.Width, Main.textureLibrary.UI_OTHER_CURSOR.asset.Height) / 2f, scale * UiManager.scale, SpriteEffects.None, 1f);
             scale += (Vector2.One - scale) * 0.2f;
             if(dragItem != null)
             {
                 Texture2D itemTextureOutlined = dragItem.sprite.texturesOutlined[0];
-                Vector2 itemPosition = mousePosition + new Vector2(8f);
-                Main.spriteBatch.Draw(itemTextureOutlined, itemPosition, null, Color.White, 0f, new Vector2(dragItem.sprite.bound.X + (dragItem.sprite.bound.Width / 2f), dragItem.sprite.bound.Y + (dragItem.sprite.bound.Height / 2f)) + Vector2.One, 1f, SpriteEffects.None, 1f);
+                Vector2 itemPosition = mousePosition + new Vector2(16f);
+                Main.spriteBatch.Draw(itemTextureOutlined, itemPosition, null, Color.White, 0f, new Vector2(dragItem.sprite.bound.X + (dragItem.sprite.bound.Width / 2f), dragItem.sprite.bound.Y + (dragItem.sprite.bound.Height / 2f)) + Vector2.One, UiManager.scale, SpriteEffects.None, 1f);
                 if(dragItem.stack)
                 {
-                    DrawUtilities.DrawString(Main.fontLibrary.ARIALMEDIUM.asset, new DrawUtilities.Text(dragQuantity.ToString()), itemPosition + new Vector2(12f, 14f), Color.White, DrawUtilities.HorizontalAlign.Right, DrawUtilities.VerticalAlign.Bottom);
+                    DrawUtilities.DrawString(Main.fontLibrary.ARIALMEDIUM.asset, new DrawUtilities.Text(dragQuantity.ToString()), itemPosition + new Vector2(24f, 28f), Color.White, DrawUtilities.HorizontalAlign.Right, DrawUtilities.VerticalAlign.Bottom);
                 }
             }
             else
@@ -45,18 +42,10 @@
 
         public override void Init()
         {
-            shape = new Shape(Shape.Fill.Circle, Main.textureLibrary.UI_OTHER_CURSOR.asset.Width, Main.textureLibrary.UI_OTHER_CURSOR.asset.Height);
         }
 
         public override void Update()
         {
-        }
-
-        public Shape GetShape()
-        {
-            Shape shape = this.shape;
-            shape.position = Control.GetMousePositionUi() - new Vector2((int)Math.Ceiling(Main.textureLibrary.UI_OTHER_CURSOR.asset.Width / 2f), (int)Math.Ceiling(Main.textureLibrary.UI_OTHER_CURSOR.asset.Height / 2f));
-            return shape;
         }
     }
 }

@@ -25,7 +25,7 @@
 
         public static Vector2 positionTo;
 
-        public static int scale = 2;
+        public static int scale = 3;
 
         public static void Init()
         {

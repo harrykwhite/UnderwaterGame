@@ -132,12 +132,12 @@
 
         public static Vector2 WorldToUi(Vector2 world)
         {
-            return ((world - (Camera.position - (new Vector2(Camera.GetWidth(), Camera.GetHeight()) / 2f))) * Camera.scale) / scale;
+            return (world - (Camera.position - (new Vector2(Camera.GetWidth(), Camera.GetHeight()) / 2f))) * Camera.scale;
         }
 
         public static Vector2 UiToWorld(Vector2 ui)
         {
-            return ((ui * scale) / Camera.scale) + Camera.position - (new Vector2(Camera.GetWidth(), Camera.GetHeight()) / 2f);
+            return (ui / Camera.scale) + Camera.position - (new Vector2(Camera.GetWidth(), Camera.GetHeight()) / 2f);
         }
 
         private static void CheckMenu()
@@ -153,11 +153,6 @@
                     }
                 }
             }
-        }
-
-        public static Vector2 GetSize()
-        {
-            return new Vector2(Main.GetBufferWidth(), Main.GetBufferHeight()) / scale;
         }
     }
 }

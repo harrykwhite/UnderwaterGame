@@ -11,7 +11,7 @@
             int surfaceCount = 4;
             for(int i = 0; i < surfaceCount; i++)
             {
-                World.AddHotspotAt(new Vector2(((World.width * Tile.size) / (surfaceCount + 1f)) * (i + 1f), 80f * Tile.size), new Hotspot.Spawn[2] { new Hotspot.Spawn(typeof(Jellyfish).FullName, 0.5f), new Hotspot.Spawn(typeof(TallJellyfish).FullName, 0.25f) }, 8, 300, 100);
+                World.AddHotspotAt(new Vector2(((World.width * Tile.size) / (surfaceCount + 1f)) * (i + 1f), 80f * Tile.size), new Spawn[2] { new Spawn(typeof(Jellyfish).FullName, 0.5f), new Spawn(typeof(TallJellyfish).FullName, 0.25f) }, 100);
             }
         }
     }

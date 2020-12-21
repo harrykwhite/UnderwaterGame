@@ -15,18 +15,18 @@
             foreach(Entity characterEntity in characterEntities)
             {
                 CharacterEntity character = (CharacterEntity)characterEntity;
-                Shape barShape = new Shape(Shape.Fill.Rectangle, 16, 1);
+                Shape barShape = new Shape(Shape.Fill.Rectangle, 24 * UiManager.scale, UiManager.scale);
                 Vector2 barPosition = UiManager.WorldToUi(character.position - new Vector2(0f, character.sprite.origin.Y));
                 if(character.sprite?.textures[0] != null)
                 {
-                    barPosition.Y += (((character.sprite.bound.Y + character.sprite.bound.Height) * Camera.scale) / UiManager.scale) + 8f;
+                    barPosition.Y += ((character.sprite.bound.Y + character.sprite.bound.Height) * Camera.scale) + 16f;
                 }
                 barShape.position.X = (int)(barPosition.X - (barShape.width / 2f));
                 barShape.position.Y = (int)(barPosition.Y - (barShape.height / 2f));
                 DrawUtilities.DrawBar(barShape, character.health / character.healthMax, Color.White, Color.White * 0.25f, 0);
                 if(World.player == character)
                 {
-                    barShape.position.Y += 4f;
+                    barShape.position.Y += 8f;
                     DrawUtilities.DrawBar(barShape, World.player.magic / World.player.magicMax, Color.White, Color.White * 0.25f, 0);
                 }
             }

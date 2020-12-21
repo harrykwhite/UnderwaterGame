@@ -45,10 +45,6 @@
                 knockbackSpeed -= Math.Min(knockbackSpeedAcc, knockbackSpeed);
             }
             velocity += MathUtilities.LengthDirection(knockbackSpeed, knockbackDirection);
-            if(health <= 0f)
-            {
-                Kill();
-            }
         }
 
         protected void DrawFlash()
@@ -112,6 +108,10 @@
                     blood.direction = hitData.direction == null ? ((MathHelper.Pi * 2f) / bloodParticleCount) * i : hitData.direction.Value - MathHelper.Pi + ((MathHelper.Pi / 12f) * (i - ((bloodParticleCount - 1f) / 2f)));
                     blood.blend = bloodParticleColor;
                 }
+            }
+            else
+            {
+                Kill();
             }
             return true;
         }

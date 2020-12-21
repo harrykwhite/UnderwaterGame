@@ -185,7 +185,7 @@
                 World.Draw();
             }
             spriteBatch.End();
-            spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend, transformMatrix: Matrix.CreateScale(UiManager.scale, UiManager.scale, 0f));
+            spriteBatch.Begin(samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend);
             UiManager.Draw();
             spriteBatch.End();
             base.Draw(gameTime);

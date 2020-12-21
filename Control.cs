@@ -105,10 +105,5 @@
         {
             return (GetMousePosition() / Camera.scale) + Camera.GetShape().position;
         }
-
-        public static Vector2 GetMousePositionUi()
-        {
-            return GetMousePosition() / UiManager.scale;
-        }
     }
 }

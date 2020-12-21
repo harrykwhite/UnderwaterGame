@@ -4,14 +4,11 @@
     using Microsoft.Xna.Framework.Graphics;
     using System;
     using UnderwaterGame.Options;
-    using UnderwaterGame.Ui.UiElements;
     using UnderwaterGame.Utilities;
 
     public class SliderComponent : UiComponent
     {
         private Vector2 ballPosition;
-
-        private Shape ballShape;
 
         private Vector2 ballScale = Vector2.One;
 
@@ -21,14 +18,14 @@
 
         public Option option;
 
-        public float textGap = 16f;
+        public float textGap = 32f;
 
         public static SliderComponent locked;
 
         public override void Draw()
         {
-            Main.spriteBatch.Draw(Main.textureLibrary.UI_SLIDER_BAR.asset, getPosition() + new Vector2(0f, textGap / 2f), null, Color.White * 0.25f * getAlpha(), 0f, new Vector2(Main.textureLibrary.UI_SLIDER_BAR.asset.Width, Main.textureLibrary.UI_SLIDER_BAR.asset.Height) / 2f, scale, SpriteEffects.None, 1f);
-            Main.spriteBatch.Draw(Main.textureLibrary.UI_SLIDER_BALL.asset, ballPosition + new Vector2(0f, textGap / 2f), null, Color.White * getAlpha(), 0f, new Vector2(Main.textureLibrary.UI_SLIDER_BALL.asset.Width, Main.textureLibrary.UI_SLIDER_BALL.asset.Height) / 2f, scale * ballScale, SpriteEffects.None, 1f);
+            Main.spriteBatch.Draw(Main.textureLibrary.UI_SLIDER_BAR.asset, getPosition() + new Vector2(0f, textGap / 2f), null, Color.White * 0.25f * getAlpha(), 0f, new Vector2(Main.textureLibrary.UI_SLIDER_BAR.asset.Width, Main.textureLibrary.UI_SLIDER_BAR.asset.Height) / 2f, scale * UiManager.scale, SpriteEffects.None, 1f);
+            Main.spriteBatch.Draw(Main.textureLibrary.UI_SLIDER_BALL.asset, ballPosition + new Vector2(0f, textGap / 2f), null, Color.White * getAlpha(), 0f, new Vector2(Main.textureLibrary.UI_SLIDER_BALL.asset.Width, Main.textureLibrary.UI_SLIDER_BALL.asset.Height) / 2f, scale * ballScale * UiManager.scale, SpriteEffects.None, 1f);
             string optionText = option.name;
             string optionTextValue = option.value.ToString();
             switch(option.valueFormat)
@@ -46,18 +43,15 @@
 
         public override void Init()
         {
-            ballShape = new Shape(Shape.Fill.Circle, Main.textureLibrary.UI_SLIDER_BALL.asset.Width, Main.textureLibrary.UI_SLIDER_BALL.asset.Height);
         }
 
         public override void Update()
         {
             bool ballSelectedPrevious = ballSelected;
             ballSelected = locked == this;
-            Shape ballShape = this.ballShape;
-            ballShape.position = ballPosition - new Vector2((int)Math.Ceiling(Main.textureLibrary.UI_SLIDER_BALL.asset.Width / 2f), (int)Math.Ceiling(Main.textureLibrary.UI_SLIDER_BALL.asset.Height / 2f) - (textGap / 2f));
             if(getAlpha() > 0f && UiManager.menuCurrent == menuElement)
             {
-                if(ballShape.Intersects(((CursorElement)UiManager.GetElement<CursorElement>()).GetShape()))
+                if(Vector2.Distance(ballPosition + new Vector2(0f, textGap / 2f), Control.GetMousePosition()) <= (Main.textureLibrary.UI_SLIDER_BALL.asset.Width + Main.textureLibrary.UI_OTHER_CURSOR.asset.Width) * 0.5f * UiManager.scale)
                 {
                     if(locked == null)
                     {
@@ -92,12 +86,12 @@
 
         private void UpdateBall()
         {
-            int width = Main.textureLibrary.UI_SLIDER_BAR.asset.Width - Main.textureLibrary.UI_SLIDER_BALL.asset.Width;
+            int width = (Main.textureLibrary.UI_SLIDER_BAR.asset.Width - Main.textureLibrary.UI_SLIDER_BALL.asset.Width) * UiManager.scale;
             float rawValue = option.value - option.valueMin;
             float rawSpan = option.valueMax - option.valueMin;
             if(locked == this)
             {
-                float mouse = MathHelper.Clamp(Control.GetMousePositionUi().X, getPosition().X - (width / 2f), getPosition().X + (width / 2f));
+                float mouse = MathHelper.Clamp(Control.GetMousePosition().X, getPosition().X - (width / 2f), getPosition().X + (width / 2f));
                 float valuePrevious = option.value;
                 option.value = ((mouse - (getPosition().X - (width / 2f))) / width) * rawSpan;
                 option.value += option.valueMin;

@@ -20,7 +20,7 @@
             {
                 text += ".";
             }
-            DrawUtilities.DrawString(Main.fontLibrary.ARIALMEDIUM.asset, new DrawUtilities.Text(text), UiManager.GetSize() / 2f, Color.White * (UiManager.fadeElements[2]?.alpha ?? 0f), DrawUtilities.HorizontalAlign.Middle, DrawUtilities.VerticalAlign.Middle);
+            DrawUtilities.DrawString(Main.fontLibrary.ARIALMEDIUM.asset, new DrawUtilities.Text(text), new Vector2(Main.GetBufferWidth(), Main.GetBufferHeight()) / 2f, Color.White * (UiManager.fadeElements[2]?.alpha ?? 0f), DrawUtilities.HorizontalAlign.Middle, DrawUtilities.VerticalAlign.Middle);
         }
 
         public override void Init()

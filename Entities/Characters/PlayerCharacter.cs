@@ -264,7 +264,7 @@
                         bubbleTime += distance / swimSpeedMax;
                     }else{
                         Bubble bubble = (Bubble)EntityManager.AddEntity<Bubble>(position);
-                        bubble.position += MathUtilities.LengthDirection(10f, angle + angleOffset);
+                        bubble.position += MathUtilities.LengthDirection(10.5f, angle + angleOffset);
                         bubble.direction = angle + angleOffset;
                         bubbleTime = 0f;
                     }

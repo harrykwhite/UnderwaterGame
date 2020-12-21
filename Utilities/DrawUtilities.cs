@@ -73,7 +73,7 @@
             }
         }
 
-        public static void DrawStringExt(SpriteFont font, Text text, Vector2 at, Color color, float rotation, Vector2 scale, HorizontalAlign horizontalAlign, VerticalAlign verticalAlign)
+        public static void DrawStringExtension(SpriteFont font, Text text, Vector2 at, Color color, float rotation, Vector2 scale, HorizontalAlign horizontalAlign, VerticalAlign verticalAlign)
         {
             Vector2 totalSize = font.MeasureString(text.text);
             string[] lines = text.text.Split('\n');

@@ -36,7 +36,7 @@
             hotspots = new WorldHotspot[World.hotspots.Count];
             for(int i = 0; i < hotspots.Length; i++)
             {
-                hotspots[i] = new WorldHotspot(World.hotspots[i].position.X, World.hotspots[i].position.Y, World.hotspots[i].spawns, World.hotspots[i].spawnMax, World.hotspots[i].spawnTimeMax, World.hotspots[i].count);
+                hotspots[i] = new WorldHotspot(World.hotspots[i].position.X, World.hotspots[i].position.Y, World.hotspots[i].spawns, World.hotspots[i].count);
             }
             playerSpawnX = World.playerSpawnPosition.X;
             playerSpawnY = World.playerSpawnPosition.Y;

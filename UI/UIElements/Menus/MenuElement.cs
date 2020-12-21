@@ -19,7 +19,7 @@
 
         protected float alphaTo;
 
-        protected float alphaSpeed = 0.1f;
+        protected float alphaAcc = 0.1f;
 
         public bool open;
 
@@ -39,14 +39,14 @@
             {
                 if(alpha < 1f)
                 {
-                    alpha += Math.Min(alphaSpeed, 1f - alpha);
+                    alpha += Math.Min(alphaAcc, 1f - alpha);
                 }
             }
             else
             {
                 if(alpha > 0f)
                 {
-                    alpha -= Math.Min(alphaSpeed, alpha);
+                    alpha -= Math.Min(alphaAcc, alpha);
                 }
             }
         }
@@ -90,9 +90,9 @@
                 return corner switch
                 {
                     0 => new Vector2(UiComponent.gap * (count + 1), UiComponent.gap),
-                    1 => new Vector2(UiManager.GetSize().X - (UiComponent.gap * (count + 1)), UiComponent.gap),
-                    2 => new Vector2(UiComponent.gap * (count + 1), UiManager.GetSize().Y - UiComponent.gap),
-                    3 => new Vector2(UiManager.GetSize().X - (UiComponent.gap * (count + 1)), UiManager.GetSize().Y - UiComponent.gap),
+                    1 => new Vector2(Main.GetBufferWidth() - (UiComponent.gap * (count + 1)), UiComponent.gap),
+                    2 => new Vector2(UiComponent.gap * (count + 1), Main.GetBufferHeight() - UiComponent.gap),
+                    3 => new Vector2(Main.GetBufferWidth() - (UiComponent.gap * (count + 1)), Main.GetBufferHeight() - UiComponent.gap),
                     _ => Vector2.Zero,
                 };
             };

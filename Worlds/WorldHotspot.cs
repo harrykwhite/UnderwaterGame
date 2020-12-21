@@ -9,21 +9,15 @@
 
         public float y;
 
-        public Hotspot.Spawn[] spawns;
-
-        public int spawnMax;
-
-        public int spawnTimeMax;
+        public Spawn[] spawns;
 
         public int count;
 
-        public WorldHotspot(float x, float y, Hotspot.Spawn[] spawns, int spawnMax, int spawnTimeMax, int count)
+        public WorldHotspot(float x, float y, Spawn[] spawns, int count)
         {
             this.x = x;
             this.y = y;
             this.spawns = spawns;
-            this.spawnMax = spawnMax;
-            this.spawnTimeMax = spawnTimeMax;
             this.count = count;
         }
     }

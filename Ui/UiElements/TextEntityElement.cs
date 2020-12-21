@@ -12,7 +12,7 @@
             foreach(Entity textEntity in textEntities)
             {
                 TextEntity text = (TextEntity)textEntity;
-                DrawUtilities.DrawStringExt(Main.fontLibrary.ARIALMEDIUM.asset, new DrawUtilities.Text(text.text), UiManager.WorldToUi(text.position), text.blend * text.alpha, text.angle, text.scale, DrawUtilities.HorizontalAlign.Middle, DrawUtilities.VerticalAlign.Middle);
+                DrawUtilities.DrawStringExtension(Main.fontLibrary.ARIALLARGE.asset, new DrawUtilities.Text(text.text), UiManager.WorldToUi(text.position), text.blend * text.alpha, text.angle, text.scale, DrawUtilities.HorizontalAlign.Middle, DrawUtilities.VerticalAlign.Middle);
             }
         }
 

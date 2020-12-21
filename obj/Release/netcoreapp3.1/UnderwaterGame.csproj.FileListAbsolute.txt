@@ -166,3 +166,15 @@ C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Environmentals\Statues\SpawnStatue.xnb
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Other\Fish.xnb
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Particles\Fish.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Items\Armours\Chests\StoneChestplate.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Items\Armours\Chests\StoneChestplateWear.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Items\Armours\Feet\StoneBoots.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Items\Armours\Feet\StoneBootsWear.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Items\Armours\Heads\StoneHelmet.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Items\Armours\Heads\StoneHelmetWear.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Items\Armours\Legs\StoneLeggings.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Items\Armours\Legs\StoneLeggingsWear.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Items\Consumables\Jelly.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Items\Edibles\HealthKelp.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Items\Edibles\Jelly.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Items\Edibles\MagicKelp.xnb

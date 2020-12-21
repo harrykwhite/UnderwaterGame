@@ -9,8 +9,6 @@
         {
             Rectangle,
 
-            Circle,
-
             TopLeftSlope,
 
             TopRightSlope,
@@ -49,10 +47,6 @@
                     {
                         case Fill.Rectangle:
                             data[x, y] = true;
-                            break;
-
-                        case Fill.Circle:
-                            data[x, y] = Vector2.Distance(new Vector2(x, y), new Vector2(width, height) / 2f) <= Math.Min(width, height) / 2f;
                             break;
 
                         case Fill.TopLeftSlope:

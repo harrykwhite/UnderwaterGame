@@ -16,8 +16,6 @@
 
         public Texture2D icon;
 
-        public Shape shape;
-
         public int slotX;
 
         public int slotY;
@@ -33,20 +31,20 @@
             float slotWidth = texture.Width * scale.X;
             float slotHeight = texture.Height * scale.Y;
             Inventory.InventorySlot slot = getInventory().groups[slotGroup].contents[slotX, slotY];
-            Main.spriteBatch.Draw(texture, getPosition(), null, Color.White * getAlpha(), 0f, new Vector2(texture.Width, texture.Height) / 2f, scale * 1f, SpriteEffects.None, 1f);
+            Main.spriteBatch.Draw(texture, getPosition(), null, Color.White * getAlpha(), 0f, new Vector2(texture.Width, texture.Height) / 2f, scale * UiManager.scale, SpriteEffects.None, 1f);
             if(slot.item != null)
             {
-                Main.spriteBatch.Draw(slot.item.sprite.texturesOutlined[0], getPosition(), null, Color.White * getAlpha(), 0f, new Vector2(slot.item.sprite.bound.X + (slot.item.sprite.bound.Width / 2f), slot.item.sprite.bound.Y + (slot.item.sprite.bound.Height / 2f)) + Vector2.One, 1f, SpriteEffects.None, 1f);
+                Main.spriteBatch.Draw(slot.item.sprite.texturesOutlined[0], getPosition(), null, Color.White * getAlpha(), 0f, new Vector2(slot.item.sprite.bound.X + (slot.item.sprite.bound.Width / 2f), slot.item.sprite.bound.Y + (slot.item.sprite.bound.Height / 2f)) + Vector2.One, UiManager.scale, SpriteEffects.None, 1f);
                 if(slot.item.stack)
                 {
-                    DrawUtilities.DrawString(Main.fontLibrary.ARIALMEDIUM.asset, new DrawUtilities.Text(slot.quantity.ToString()), getPosition() + new Vector2(12f, 14f), Color.White * getAlpha(), DrawUtilities.HorizontalAlign.Right, DrawUtilities.VerticalAlign.Bottom);
+                    DrawUtilities.DrawString(Main.fontLibrary.ARIALMEDIUM.asset, new DrawUtilities.Text(slot.quantity.ToString()), getPosition() + new Vector2(24f, 28f), Color.White * getAlpha(), DrawUtilities.HorizontalAlign.Right, DrawUtilities.VerticalAlign.Bottom);
                 }
             }
             else
             {
                 if(icon != null)
                 {
-                    Main.spriteBatch.Draw(icon, getPosition(), null, Color.White * getAlpha() * 0.5f, 0f, new Vector2(icon.Width, icon.Height) / 2f, scale, SpriteEffects.None, 1f);
+                    Main.spriteBatch.Draw(icon, getPosition(), null, Color.White * getAlpha() * 0.5f, 0f, new Vector2(icon.Width, icon.Height) / 2f, scale * UiManager.scale, SpriteEffects.None, 1f);
                 }
             }
         }
@@ -54,7 +52,6 @@
         public override void Init()
         {
             texture = Main.textureLibrary.UI_BUTTONS_OTHER_BUTTON.asset;
-            shape = new Shape(Shape.Fill.Circle, texture.Width, texture.Height);
             selectedAction = delegate ()
             {
                 if(!touching)
@@ -116,13 +113,7 @@
 
         protected override bool IsTouching()
         {
-            if(!GetCanTouch())
-            {
-                return false;
-            }
-            Shape shape = this.shape;
-            shape.position = getPosition() - new Vector2((int)Math.Ceiling(texture.Width / 2f), (int)Math.Ceiling(texture.Height / 2f));
-            return shape.Intersects(((CursorElement)UiManager.GetElement<CursorElement>()).GetShape());
+            return GetCanTouch() && Vector2.Distance(getPosition(), Control.GetMousePosition()) <= (texture.Width + Main.textureLibrary.UI_OTHER_CURSOR.asset.Width) * 0.5f * UiManager.scale;
         }
     }
 }

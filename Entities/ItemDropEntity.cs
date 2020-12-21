@@ -18,13 +18,15 @@ namespace UnderwaterGame.Entities
             if(this.itemType != null)
             {
                 SetSprite(this.itemType.sprite, true);
+                collider.shape.width += 2;
+                collider.shape.height += 2;
                 animator = new Animator(sprite);
             }
         }
 
         public override void Draw()
         {
-            DrawSelf(origin: new Vector2(sprite.textures[(int)animator.index].Width, sprite.textures[(int)animator.index].Height) / 2f);
+            DrawSelf(texture: sprite.texturesOutlined[(int)animator.index], origin: new Vector2(sprite.texturesOutlined[(int)animator.index].Width, sprite.texturesOutlined[(int)animator.index].Height) / 2f);
         }
 
         public override void Init()

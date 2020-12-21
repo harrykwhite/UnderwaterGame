@@ -22,7 +22,7 @@
 
         public Func<bool> getActive = () => true;
 
-        public static float gap = 44f;
+        public static float gap = 96f;
 
         public abstract void Init();
 

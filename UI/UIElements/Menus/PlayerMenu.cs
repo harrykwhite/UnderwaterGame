@@ -173,11 +173,11 @@
 
         protected void LoadSlotGroups()
         {
-            Func<Vector2> getPosition = () => UiManager.GetSize() / 2f;
-            Func<int, Vector2> getWieldPosition = (int count) => new Vector2(getPosition().X + (UiComponent.gap * 2.5f * (count == 0 ? -1f : 1f)), UiManager.GetSize().Y - UiComponent.gap);
+            Func<Vector2> getPosition = () => new Vector2(Main.GetBufferWidth(), Main.GetBufferHeight()) / 2f;
+            Func<int, Vector2> getWieldPosition = (int count) => new Vector2(getPosition().X + (UiComponent.gap * 2.5f * (count == 0 ? -1f : 1f)), Main.GetBufferHeight() - UiComponent.gap);
             Func<int, Vector2> getArmourPosition = (int count) => getPosition() - ((new Vector2(GetInventoryWidth(), GetInventoryHeight()) - Vector2.One) * UiComponent.gap * 0.5f) + new Vector2(0f, UiComponent.gap * count);
             LoadSlotGroup((int)PlayerCharacter.InventoryGroup.Wield, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_WIELDICON.asset, () => Vector2.Zero, () => 1f);
-            LoadSlotGroup((int)PlayerCharacter.InventoryGroup.Hotbar, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_HOTBARICON.asset, () => new Vector2(getPosition().X - (2f * UiComponent.gap * 0.5f), UiManager.GetSize().Y - UiComponent.gap), () => 1f);
+            LoadSlotGroup((int)PlayerCharacter.InventoryGroup.Hotbar, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_HOTBARICON.asset, () => new Vector2(getPosition().X - (2f * UiComponent.gap * 0.5f), Main.GetBufferHeight() - UiComponent.gap), () => 1f);
             LoadSlotGroup((int)PlayerCharacter.InventoryGroup.ArmourHead, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_ARMOURICON.asset, () => getArmourPosition(0), () => alpha);
             LoadSlotGroup((int)PlayerCharacter.InventoryGroup.ArmourChest, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_ARMOURICON.asset, () => getArmourPosition(1), () => alpha);
             LoadSlotGroup((int)PlayerCharacter.InventoryGroup.ArmourLegs, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_ARMOURICON.asset, () => getArmourPosition(2), () => alpha);

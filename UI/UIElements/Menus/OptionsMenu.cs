@@ -19,7 +19,7 @@
                 sliders[i].menuElement = this;
                 sliders[i].option = Option.GetOptionById((byte)(i + 1));
                 sliders[i].getAlpha = () => alpha;
-                sliders[i].getPosition = () => (UiManager.GetSize() / 2f) + new Vector2(0f, (tempI - ((sliders.Length - 1f) / 2f)) * UiComponent.gap);
+                sliders[i].getPosition = () => (new Vector2(Main.GetBufferWidth(), Main.GetBufferHeight()) / 2f) + new Vector2(0f, (tempI - ((sliders.Length - 1f) / 2f)) * UiComponent.gap);
             }
             InitIconButtons();
             AddBackIconButton(() => true);

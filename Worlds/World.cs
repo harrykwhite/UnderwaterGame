@@ -7,6 +7,8 @@
     using System.Threading;
     using UnderwaterGame.Entities;
     using UnderwaterGame.Entities.Characters;
+    using UnderwaterGame.Entities.Characters.Enemies;
+    using UnderwaterGame.Entities.Characters.Enemies.Jellyfish;
     using UnderwaterGame.Entities.Particles;
     using UnderwaterGame.Environmentals;
     using UnderwaterGame.Tiles;
@@ -56,8 +58,16 @@
         public static int bubbleTimeMax = 60;
 
         public static Hotspot hotspotCurrent;
-
+        
         public static Hotspot hotspotPrevious;
+        
+        public static Spawn[] spawns = new Spawn[1] { new Spawn(typeof(Jellyfish).FullName, 1f) };
+
+        public static int spawnMax = 2;
+
+        public static int spawnTime;
+
+        public static int spawnTimeMax = 600;
 
         public static void Init()
         {
@@ -91,6 +101,7 @@
             bubbleTime = 0;
             hotspotCurrent = null;
             hotspotPrevious = null;
+            spawnTime = 0;
         }
 
         public static void Update()
@@ -135,6 +146,49 @@
                         playerSpawned = true;
                     }
                 }
+            }
+            if(spawnTime < spawnTimeMax)
+            {
+                spawnTime += Math.Min(hotspotCurrent == null ? 1 : 2, spawnTimeMax - spawnTime);
+            }
+            else
+            {
+                if(EntityManager.entities.FindAll((Entity entity) => entity is EnemyCharacter enemyCharacter && (enemyCharacter.hotspot == hotspotCurrent)).Count < spawnMax * (hotspotCurrent == null ? 1 : 2))
+                {
+                    int trials = 100;
+                    Type enemyType = null;
+                    Spawn[] enemySpawns = hotspotCurrent?.spawns ?? spawns;
+                    do
+                    {
+                        for(int i = 0; i < enemySpawns.Length; i++)
+                        {
+                            if(Main.random.Next(100) <= (enemySpawns[i].chance * 100f))
+                            {
+                                enemyType = Type.GetType(enemySpawns[i].type);
+                            }
+                        }
+                    } while(enemyType == null);
+                    EnemyCharacter enemy = (EnemyCharacter)EntityManager.AddEntity(enemyType, Vector2.Zero);
+                    do
+                    {
+                        enemy.position = hotspotCurrent == null ? Camera.position + new Vector2(Main.random.Next(-Camera.GetWidth() / 2, Camera.GetWidth() / 2), Main.random.Next(-Camera.GetHeight() / 2, Camera.GetHeight() / 2)) : hotspotCurrent.position + MathUtilities.LengthDirection(RandomUtilities.Range(0f, Main.textureLibrary.OTHER_HOTSPOT.asset.Width / 2f), MathHelper.ToRadians(Main.random.Next(360)));
+                        trials--;
+                    } while((enemy.TileCollision(enemy.position, Tilemap.Solids) || !enemy.TileCollision(enemy.position, Tilemap.Liquids)) && trials > 0);
+                    if(trials > 0)
+                    {
+                        int smokeCount = 6;
+                        for(int i = 0; i < smokeCount; i++)
+                        {
+                            Smoke smoke = (Smoke)EntityManager.AddEntity<Smoke>(enemy.position);
+                            smoke.direction = ((MathHelper.Pi * 2f) / smokeCount) * i;
+                        }
+                    }
+                    else
+                    {
+                        enemy.Destroy();
+                    }
+                }
+                spawnTime = 0;
             }
             foreach(Hotspot hotspot in hotspots)
             {
@@ -341,9 +395,9 @@
             return (new Vector2(x, y) * Tile.size) - new Vector2(0f, environmental.sprite.origin.Y - environmental.sprite.bound.Y);
         }
 
-        public static void AddHotspotAt(Vector2 position, Hotspot.Spawn[] spawns, int spawnMax, int spawnTimeMax, int count)
+        public static void AddHotspotAt(Vector2 position, Spawn[] spawns, int count)
         {
-            hotspots.Add(new Hotspot(position, spawns, spawnMax, spawnTimeMax, count));
+            hotspots.Add(new Hotspot(position, spawns, count));
         }
 
         public static void Generate()
@@ -384,7 +438,7 @@
                 }
                 foreach(WorldHotspot hotspot in Main.save.hotspots)
                 {
-                    hotspots.Add(new Hotspot(new Vector2(hotspot.x, hotspot.y), hotspot.spawns, hotspot.spawnMax, hotspot.spawnTimeMax, hotspot.count));
+                    hotspots.Add(new Hotspot(new Vector2(hotspot.x, hotspot.y), hotspot.spawns, hotspot.count));
                 }
                 playerSpawnPosition = new Vector2(Main.save.playerSpawnX, Main.save.playerSpawnY);
             }
@@ -405,6 +459,18 @@
                                 }
                                 SetTileTexture(x, y, (Tilemap)m);
                             }
+                        }
+                    }
+                }
+                WorldEnvironmental[] tempEnvironmentals = environmentals.ToArray();
+                foreach(WorldEnvironmental worldEnvironmental in tempEnvironmentals)
+                {
+                    Environmental environmental = Environmental.GetEnvironmentalById(worldEnvironmental.id);
+                    for(int ex = 0; ex < environmental.sprite.textures[0].Width / Tile.size; ex++)
+                    {
+                        if(GetTileDataAt(worldEnvironmental.x + ex - (int)Math.Ceiling(environmental.sprite.textures[0].Width / (Tile.size * 2f)), worldEnvironmental.y, Tilemap.Solids)?.shape.fill != Shape.Fill.Rectangle)
+                        {
+                            environmentals.Remove(worldEnvironmental);
                         }
                     }
                 }
