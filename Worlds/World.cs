@@ -47,7 +47,7 @@
 
         public static int width = 1200;
 
-        public static int height = 400;
+        public static int height = 300;
 
         public static float gravityAcc = 0.15f;
 
@@ -92,9 +92,9 @@
             generations = new List<WorldGeneration> {
                 new SurfaceTerrainGeneration(),
                 new SurfaceSpawnGeneration(),
+                new SurfaceCaveGeneration(),
                 new SurfaceTowerGeneration(),
                 new SurfaceEnvironmentalGeneration(),
-                new CleaningGeneration(),
                 new HotspotGeneration()
             };
             hotspots = new List<Hotspot>();
@@ -350,7 +350,7 @@
             }
             for(int ey = 0; ey <= eh; ey++)
             {
-                for(int ex = 0; ex < ew; ex++)
+                for(int ex = -1; ex <= ew; ex++)
                 {
                     int tx = x + ex - (int)Math.Ceiling(ew / 2f);
                     int ty = y + ey - eh;
@@ -459,18 +459,6 @@
                                 }
                                 SetTileTexture(x, y, (Tilemap)m);
                             }
-                        }
-                    }
-                }
-                WorldEnvironmental[] tempEnvironmentals = environmentals.ToArray();
-                foreach(WorldEnvironmental worldEnvironmental in tempEnvironmentals)
-                {
-                    Environmental environmental = Environmental.GetEnvironmentalById(worldEnvironmental.id);
-                    for(int ex = 0; ex < environmental.sprite.textures[0].Width / Tile.size; ex++)
-                    {
-                        if(GetTileDataAt(worldEnvironmental.x + ex - (int)Math.Ceiling(environmental.sprite.textures[0].Width / (Tile.size * 2f)), worldEnvironmental.y, Tilemap.Solids)?.shape.fill != Shape.Fill.Rectangle)
-                        {
-                            environmentals.Remove(worldEnvironmental);
                         }
                     }
                 }

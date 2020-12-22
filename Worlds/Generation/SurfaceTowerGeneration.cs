@@ -8,8 +8,8 @@
     {
         public override void Generate()
         {
-            Point[] towerPositions = new Point[2];
-            int towerPositionsGap = 128;
+            Point[] towerPositions = new Point[4];
+            int towerPositionsGap = 32;
             for(int i = 0; i < towerPositions.Length; i++)
             {
                 int levelWidth = 8;
@@ -41,7 +41,7 @@
                     {
                         towerPositions[i].Y++;
                     }
-                } while(!ValidTowerPosition(i));
+                } while(!ValidTowerPosition());
                 for(int l = 0; l < levelCount; l++)
                 {
                     int xStart = towerPositions[i].X - (levelWidth / 2);
@@ -89,18 +89,22 @@
                         }
                     }
                 }
-            }
-            bool ValidTowerPosition(int index)
-            {
-                SurfaceSpawnGeneration surfaceSpawnGeneration = (SurfaceSpawnGeneration)World.generations.Find((WorldGeneration worldGeneration) => worldGeneration is SurfaceSpawnGeneration);
-                for(int i = index - 1; i >= 0; i--)
+                bool ValidTowerPosition()
                 {
-                    if(Math.Abs(towerPositions[i].X - towerPositions[index].X) < towerPositionsGap || ((towerPositions[i].X >= (World.width - surfaceSpawnGeneration.width) / 2) && (towerPositions[i].X <= (World.width + surfaceSpawnGeneration.width) / 2)))
+                    SurfaceSpawnGeneration surfaceSpawnGeneration = (SurfaceSpawnGeneration)World.generations.Find((WorldGeneration worldGeneration) => worldGeneration is SurfaceSpawnGeneration);
+                    if((towerPositions[i].X >= (World.width - surfaceSpawnGeneration.width - levelWidth) / 2) && (towerPositions[i].X <= (World.width + surfaceSpawnGeneration.width + levelWidth) / 2))
                     {
                         return false;
                     }
+                    for(int ii = i - 1; ii >= 0; ii--)
+                    {
+                        if(Math.Abs(towerPositions[ii].X - towerPositions[i].X) < towerPositionsGap)
+                        {
+                            return false;
+                        }
+                    }
+                    return true;
                 }
-                return true;
             }
         }
     }
