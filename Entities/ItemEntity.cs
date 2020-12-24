@@ -155,7 +155,7 @@
             position += MathUtilities.LengthDirection(outLength, angleBase);
             position += positionOffset;
             flipVer = MathUtilities.AngleLeftHalf(angleBaseRelative);
-            depth = World.player.depth + 0.001f;
+            depth = World.player.depth + 0.003f;
         }
 
         public void SetSwingEffect(Sprite sprite, float length)

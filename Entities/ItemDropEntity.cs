@@ -31,6 +31,7 @@ namespace UnderwaterGame.Entities
 
         public override void Init()
         {
+            depth = 0.45f;
         }
 
         public override void Update()

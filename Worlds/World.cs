@@ -153,11 +153,11 @@
             }
             if(spawnTime < spawnTimeMax)
             {
-                spawnTime += Math.Min(hotspotCurrent == null ? 1 : 2, spawnTimeMax - spawnTime);
+                spawnTime += Math.Min(hotspotCurrent == null ? 1 : 4, spawnTimeMax - spawnTime);
             }
             else
             {
-                if(EntityManager.entities.FindAll((Entity entity) => entity is EnemyCharacter enemyCharacter && (enemyCharacter.hotspot == hotspotCurrent)).Count < spawnMax * (hotspotCurrent == null ? 1 : 2))
+                if(EntityManager.entities.FindAll((Entity entity) => entity is EnemyCharacter enemyCharacter && (enemyCharacter.hotspot == hotspotCurrent)).Count < spawnMax * (hotspotCurrent == null ? 1 : 4))
                 {
                     int trials = 100;
                     Type enemyType = null;
@@ -173,6 +173,7 @@
                         }
                     } while(enemyType == null);
                     EnemyCharacter enemy = (EnemyCharacter)EntityManager.AddEntity(enemyType, Vector2.Zero);
+                    enemy.hotspot = hotspotCurrent;
                     do
                     {
                         enemy.position = hotspotCurrent == null ? Camera.position + new Vector2(Main.random.Next(-Camera.GetWidth() / 2, Camera.GetWidth() / 2), Main.random.Next(-Camera.GetHeight() / 2, Camera.GetHeight() / 2)) : hotspotCurrent.position + MathUtilities.LengthDirection(RandomUtilities.Range(0f, Main.textureLibrary.OTHER_HOTSPOT.asset.Width / 2f), MathHelper.ToRadians(Main.random.Next(360)));

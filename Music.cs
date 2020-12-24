@@ -3,12 +3,11 @@
     using Microsoft.Xna.Framework.Audio;
     using System;
     using UnderwaterGame.Options;
+    using UnderwaterGame.Ui;
     using UnderwaterGame.Worlds;
 
     public static class Music
     {
-        public static bool layer;
-
         public static int layerLoop;
 
         public static float layerLoopVolume;
@@ -55,65 +54,43 @@
 
         public static void Update()
         {
-            if(layer)
+            bool loading = Main.loading != null && (UiManager.fadeElements[2]?.alpha ?? 0f) >= (UiManager.fadeElements[2]?.alphaMax ?? 0f);
+            if(!loading)
             {
-                if(Main.loading == null)
+                int layerLoopPrevious = layerLoop;
+                layerLoop = 1;
+                if(World.player != null)
                 {
-                    int layerLoopPrevious = layerLoop;
-                    layerLoop = 1;
-                    if(!(World.player?.inWater ?? true))
+                    if(!World.player.inWater && World.player.life > 0)
                     {
                         layerLoop = 0;
                     }
-                    if(layerLoopInstance == null || layerLoopPrevious != layerLoop)
-                    {
-                        SoundEffect soundEffect = layerLoop switch
-                        {
-                            1 => Main.soundLibrary.MUSIC_LAYER0_LOOP1.asset,
-                            2 => Main.soundLibrary.MUSIC_LAYER0_LOOP2.asset,
-                            3 => Main.soundLibrary.MUSIC_LAYER0_LOOP3.asset,
-                            4 => Main.soundLibrary.MUSIC_LAYER0_LOOP4.asset,
-                            5 => Main.soundLibrary.MUSIC_LAYER0_LOOP5.asset,
-                            _ => Main.soundLibrary.MUSIC_LAYER0_LOOP0.asset,
-                        };
-                        layerLoopInstancePrevious = layerLoopInstance;
-                        layerLoopInstance = soundEffect.CreateInstance();
-                        layerLoopInstance.IsLooped = true;
-                        layerLoopInstance.Play();
-                        layerLoopPreviousVolume = layerLoopVolume;
-                        layerLoopVolume = 0f;
-                    }
-                    if(layerLoopVolume < 1f)
-                    {
-                        layerLoopVolume += Math.Min(layerLoopVolumeAcc, 1f - layerLoopVolume);
-                    }
-                    if(layerLoopPreviousVolume > 0f)
-                    {
-                        layerLoopPreviousVolume -= Math.Min(layerLoopVolumeAcc, layerLoopPreviousVolume);
-                    }
                 }
-                else
+                if(layerLoopInstance == null || layerLoopPrevious != layerLoop)
                 {
-                    layer = false;
-                    if(layerLoopVolume > 0f)
+                    SoundEffect soundEffect = layerLoop switch
                     {
-                        layerLoopVolume -= Math.Min(layerLoopVolumeAcc, layerLoopVolume);
-                        layer = true;
-                    }
-                    if(layerLoopPreviousVolume > 0f)
-                    {
-                        layerLoopPreviousVolume -= Math.Min(layerLoopVolumeAcc, layerLoopPreviousVolume);
-                        layer = true;
-                    }
+                        1 => Main.soundLibrary.MUSIC_LAYER0_LOOP1.asset,
+                        2 => Main.soundLibrary.MUSIC_LAYER0_LOOP2.asset,
+                        3 => Main.soundLibrary.MUSIC_LAYER0_LOOP3.asset,
+                        4 => Main.soundLibrary.MUSIC_LAYER0_LOOP4.asset,
+                        5 => Main.soundLibrary.MUSIC_LAYER0_LOOP5.asset,
+                        _ => Main.soundLibrary.MUSIC_LAYER0_LOOP0.asset,
+                    };
+                    layerLoopInstancePrevious = layerLoopInstance;
+                    layerLoopInstance = soundEffect.CreateInstance();
+                    layerLoopInstance.IsLooped = true;
+                    layerLoopInstance.Play();
+                    layerLoopPreviousVolume = layerLoopVolume;
+                    layerLoopVolume = 0f;
                 }
-            }
-            else
-            {
-                layerLoopInstance = null;
-                layerLoopInstancePrevious = null;
-                if(Main.loading == null)
+                if(layerLoopVolume < 1f)
                 {
-                    layer = true;
+                    layerLoopVolume += Math.Min(layerLoopVolumeAcc, 1f - layerLoopVolume);
+                }
+                if(layerLoopPreviousVolume > 0f)
+                {
+                    layerLoopPreviousVolume -= Math.Min(layerLoopVolumeAcc, layerLoopPreviousVolume);
                 }
             }
             if(combat)
@@ -122,7 +99,7 @@
                 {
                     combatLoopVolume += Math.Min(combatLoopVolumeInAcc, 1f - combatLoopVolume);
                 }
-                if(Main.loading == null && World.hotspotCurrent == null)
+                if(!loading && World.hotspotCurrent == null)
                 {
                     if(World.hotspotPrevious != null)
                     {
@@ -147,7 +124,7 @@
                 {
                     combatLoopVolume -= Math.Min(combatLoopVolumeOutAcc, combatLoopVolume);
                 }
-                if(Main.loading == null && World.hotspotCurrent != null)
+                if(!loading && World.hotspotCurrent != null)
                 {
                     if(combatLoopVolume == 0f && (combatIntroStingerInstance == null || combatLoopIntroStingerTime == combatLoopIntroStingerTimeMax))
                     {

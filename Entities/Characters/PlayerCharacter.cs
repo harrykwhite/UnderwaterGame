@@ -67,7 +67,7 @@
 
         public ItemEntity heldItem;
 
-        public bool wielding;
+        public bool wielding = true;
 
         public override void Draw()
         {
