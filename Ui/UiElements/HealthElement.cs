@@ -1,10 +1,11 @@
 ﻿namespace UnderwaterGame.Ui.UiElements
 {
     using Microsoft.Xna.Framework;
+    using Microsoft.Xna.Framework.Graphics;
+    using System;
     using System.Collections.Generic;
     using UnderwaterGame.Entities;
     using UnderwaterGame.Entities.Characters;
-    using UnderwaterGame.Utilities;
     using UnderwaterGame.Worlds;
 
     public class HealthElement : UiElement
@@ -15,19 +16,14 @@
             foreach(Entity characterEntity in characterEntities)
             {
                 CharacterEntity character = (CharacterEntity)characterEntity;
-                Shape barShape = new Shape(Shape.Fill.Rectangle, 24 * UiManager.scale, UiManager.scale);
-                Vector2 barPosition = UiManager.WorldToUi(character.position - new Vector2(0f, character.sprite.origin.Y));
-                if(character.sprite?.textures[0] != null)
+                int height = (int)Math.Ceiling(character.healthMax / 3f);
+                for(int y = 0; y < height; y++)
                 {
-                    barPosition.Y += ((character.sprite.bound.Y + character.sprite.bound.Height) * Camera.scale) + 16f;
-                }
-                barShape.position.X = (int)(barPosition.X - (barShape.width / 2f));
-                barShape.position.Y = (int)(barPosition.Y - (barShape.height / 2f));
-                DrawUtilities.DrawBar(barShape, character.health / character.healthMax, Color.White, Color.White * 0.25f, 0);
-                if(World.player == character)
-                {
-                    barShape.position.Y += 8f;
-                    DrawUtilities.DrawBar(barShape, World.player.magic / World.player.magicMax, Color.White, Color.White * 0.25f, 0);
+                    int width = Math.Min(character.healthMax - (y * 3), 3);
+                    for(int x = 0; x < width; x++)
+                    {
+                        Main.spriteBatch.Draw(Main.textureLibrary.UI_OTHER_HEALTH.asset, UiManager.WorldToUi(character.position) + new Vector2((Main.textureLibrary.UI_OTHER_HEALTH.asset.Width + 1f) * 2f * (x - ((width - 1f) / 2f)), ((Main.textureLibrary.UI_OTHER_HEALTH.asset.Height + 1f) * 2f * y) + character.healthOffset), null, Color.White * (character.health > (y * 3) + x ? 1f : 0.5f), 0f, new Vector2(Main.textureLibrary.UI_OTHER_HEALTH.asset.Width, Main.textureLibrary.UI_OTHER_HEALTH.asset.Height) / 2f, UiManager.scale, SpriteEffects.None, 1f);
+                    }
                 }
             }
         }

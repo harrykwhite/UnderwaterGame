@@ -41,8 +41,6 @@
 
         public static SpriteBatch spriteBatch;
 
-        public static Point windowStartingPosition;
-
         public static Random random;
 
         public static List<Texture2D> unloadTextures = new List<Texture2D>();
@@ -59,7 +57,7 @@
 
         public static bool restartSave;
 
-        public static int version = 2;
+        public static int version = 3;
 
         public Main()
         {
@@ -69,17 +67,16 @@
 
         protected override void Initialize()
         {
+            Window.Title = "Underwater Game";
+            Window.AllowAltF4 = true;
             graphicsDevice = GraphicsDevice;
             graphicsDeviceManager.PreferredBackBufferWidth = resolutionWidth;
             graphicsDeviceManager.PreferredBackBufferHeight = resolutionHeight;
             graphicsDeviceManager.ApplyChanges();
             Control.Refresh();
-            Window.Title = "Underwater Game";
-            Window.AllowAltF4 = true;
             textureLibrary = new TextureLibrary();
             fontLibrary = new FontLibrary();
             soundLibrary = new SoundLibrary();
-            windowStartingPosition = Window.Position;
             random = new Random();
             base.Initialize();
         }
@@ -171,6 +168,7 @@
             }
             UiManager.Update();
             Music.Update();
+            
             base.Update(gameTime);
         }
 

@@ -6,7 +6,7 @@ namespace UnderwaterGame.Entities.Characters.Enemies
     {
         public Hotspot hotspot;
 
-        public float touchDamage;
+        public int touchDamage;
 
         public bool touchDamageEnemy;
 

@@ -10,7 +10,7 @@
             sprite = Sprite.woodenSword;
             useTime = 24;
             useStrength = 2f;
-            damage = 8f;
+            damage = 2;
             strength = 4f;
             hitboxOffset = 24f;
             swingSprite = Sprite.wideSwing;

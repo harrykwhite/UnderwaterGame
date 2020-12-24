@@ -12,7 +12,7 @@
             useTime = 15;
             useStrength = 1f;
             useHide = true;
-            damage = 2f;
+            damage = 1;
             strength = 2f;
         }
 

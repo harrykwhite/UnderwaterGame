@@ -9,7 +9,7 @@
             name = "Stone Leggings";
             sprite = Sprite.stoneLeggings;
             wearSprite = Sprite.stoneLeggingsWear;
-            wearDefense = 2f;
+            wearDefense = 1;
         }
     }
 }

@@ -2,14 +2,15 @@
 {
     using Microsoft.Xna.Framework;
     using UnderwaterGame.Environmentals;
+    using UnderwaterGame.Items;
     using UnderwaterGame.Tiles;
 
     public class SurfaceEnvironmentalGeneration : WorldGeneration
     {
         public override void Generate()
         {
-            int interval = 0;
             int intervalMax = 8;
+            int interval = intervalMax / 2;
             int intervalOffset = 2;
             for(int x = 0; x < World.width; x++)
             {
@@ -51,6 +52,7 @@
                     }
                 }
             } while(!World.AddEnvironmentalAt(spawnStatueX, spawnStatueY, Environmental.spawnStatue));
+            World.AddItemDropAt(spawnStatueX * Tile.size, (spawnStatueY - 8f) * Tile.size, Item.woodenTrident, 1);
             World.playerSpawnPosition = new Vector2(spawnStatueX, spawnStatueY - 1.5f) * Tile.size;
         }
     }

@@ -28,8 +28,6 @@
 
         public bool usePress;
 
-        public List<Item> ingredients = new List<Item>();
-
         public Item()
         {
             items.Add(this);

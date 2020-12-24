@@ -2,6 +2,7 @@
 {
     using Microsoft.Xna.Framework;
     using System;
+    using System.Diagnostics;
     using UnderwaterGame.Entities;
     using UnderwaterGame.Entities.Characters;
     using UnderwaterGame.Tiles;
@@ -41,16 +42,16 @@
                     positionTo = World.player.position + (Vector2.Normalize(Control.GetMousePositionWorld() - World.player.position) * look);
                 }
             }
-            positionTo.X = MathUtilities.Clamp(positionTo.X, (float)Math.Floor(GetWidth() / 2f), (World.width * Tile.size) - (float)Math.Ceiling(GetWidth() / 2f));
-            positionTo.Y = MathUtilities.Clamp(positionTo.Y, (float)Math.Floor(GetHeight() / 2f), (World.height * Tile.size) - (float)Math.Ceiling(GetHeight() / 2f));
+            positionTo.X = MathUtilities.Clamp(positionTo.X, (float)Math.Ceiling(GetWidth() / 2f), (World.width * Tile.size) - (float)Math.Ceiling(GetWidth() / 2f));
+            positionTo.Y = MathUtilities.Clamp(positionTo.Y, (float)Math.Ceiling(GetHeight() / 2f), (World.height * Tile.size) - (float)Math.Ceiling(GetHeight() / 2f));
             position.X += (float)(positionTo.X - position.X) * speed;
             position.Y += (float)(positionTo.Y - position.Y) * speed;
             shake *= 0.9f;
             shakeTime += shakeSpeed;
             shakeTime %= MathHelper.Pi * 2f;
             position += shake * (float)Math.Sin(shakeTime);
-            position.X = MathUtilities.Clamp(position.X, (float)Math.Floor(GetWidth() / 2f), (World.width * Tile.size) - (float)Math.Ceiling(GetWidth() / 2f));
-            position.Y = MathUtilities.Clamp(position.Y, (float)Math.Floor(GetHeight() / 2f), (World.height * Tile.size) - (float)Math.Ceiling(GetHeight() / 2f));
+            position.X = MathUtilities.Clamp(position.X, (float)Math.Ceiling(GetWidth() / 2f), (World.width * Tile.size) - (float)Math.Ceiling(GetWidth() / 2f));
+            position.Y = MathUtilities.Clamp(position.Y, (float)Math.Ceiling(GetHeight() / 2f), (World.height * Tile.size) - (float)Math.Ceiling(GetHeight() / 2f));
         }
 
         public static void Shake(float amount, float direction)

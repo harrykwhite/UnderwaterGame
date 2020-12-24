@@ -22,11 +22,13 @@
 
         protected Color bloodParticleColor = new Color(204, 81, 81);
 
-        public float health;
+        public int health;
 
-        public float healthMax;
+        public int healthMax;
 
-        public float defense;
+        public float healthOffset = 32f;
+
+        public int defense;
 
         public float knockbackSpeed;
 
@@ -76,13 +78,13 @@
 
         public virtual bool Hurt(HitData hitData)
         {
-            if(flashTime > 0 || health <= 0f)
+            if(flashTime > 0 || health <= 0)
             {
                 return false;
             }
-            float amount = Math.Max(hitData.damage - defense, 1f);
+            int amount = Math.Max(hitData.damage - defense, 1);
             health -= amount;
-            health = MathUtilities.Clamp(health, 0f, healthMax);
+            health = MathUtilities.Clamp(health, 0, healthMax);
             flashTime = flashTimeMax;
             knockbackSpeedAcc = 0.1f;
             if(hitData.direction != null)
@@ -96,16 +98,13 @@
             {
                 SoundUtilities.PlaySound(hurtSound);
             }
-            TextEntity textEntity = (TextEntity)EntityManager.AddEntity<TextEntity>(position);
-            textEntity.text = "-" + amount.ToString();
-            textEntity.speed = 4f;
-            textEntity.direction = -MathHelper.Pi / 2f;
-            if(health > 0f)
+            if(health > 0)
             {
+                float bloodParticleDirectionOffset = MathHelper.ToRadians(Main.random.Next(360));
                 for(int i = 0; i < bloodParticleCount; i++)
                 {
                     Blood blood = (Blood)EntityManager.AddEntity<Blood>(position);
-                    blood.direction = hitData.direction == null ? ((MathHelper.Pi * 2f) / bloodParticleCount) * i : hitData.direction.Value - MathHelper.Pi + ((MathHelper.Pi / 12f) * (i - ((bloodParticleCount - 1f) / 2f)));
+                    blood.direction = hitData.direction == null ? (((MathHelper.Pi * 2f) / bloodParticleCount) * i) + bloodParticleDirectionOffset : hitData.direction.Value - MathHelper.Pi + ((MathHelper.Pi / 12f) * (i - ((bloodParticleCount - 1f) / 2f)));
                     blood.blend = bloodParticleColor;
                 }
             }
@@ -116,24 +115,20 @@
             return true;
         }
 
-        public virtual bool Heal(float amount)
+        public virtual bool Heal(int amount)
         {
             if(flashTime > 0 || health >= healthMax)
             {
                 return false;
             }
-            amount = Math.Max(amount, 0f);
             health += amount;
-            health = MathUtilities.Clamp(health, 0f, healthMax);
+            health = MathUtilities.Clamp(health, 0, healthMax);
             flashTime = flashTimeMax;
-            TextEntity textEntity = (TextEntity)EntityManager.AddEntity<TextEntity>(position);
-            textEntity.text = "+" + amount.ToString();
-            textEntity.speed = 4f;
-            textEntity.direction = -MathHelper.Pi / 2f;
+            float bloodParticleDirectionOffset = MathHelper.ToRadians(Main.random.Next(360));
             for(int i = 0; i < bloodParticleCount; i++)
             {
                 Blood blood = (Blood)EntityManager.AddEntity<Blood>(position);
-                blood.direction = ((MathHelper.Pi * 2f) / bloodParticleCount) * i;
+                blood.direction = (((MathHelper.Pi * 2f) / bloodParticleCount) * i) + bloodParticleDirectionOffset;
             }
             return true;
         }
@@ -143,10 +138,11 @@
             Destroy();
             Camera.Shake(4f, position);
             int particleCount = bloodParticleCount * 2;
+            float particleDirectionOffset = MathHelper.ToRadians(Main.random.Next(360));
             for(int i = 0; i < particleCount; i++)
             {
                 Blood blood = (Blood)EntityManager.AddEntity<Blood>(position);
-                blood.direction = ((MathHelper.Pi * 2f) / particleCount) * i;
+                blood.direction = (((MathHelper.Pi * 2f) / particleCount) * i) + particleDirectionOffset;
                 blood.blend = bloodParticleColor;
             }
             if(deathSound != null)

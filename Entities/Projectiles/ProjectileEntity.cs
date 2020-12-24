@@ -8,7 +8,7 @@
 
     public abstract class ProjectileEntity : Entity, IHitCharacter
     {
-        public float damage;
+        public int damage;
 
         public float strength;
 

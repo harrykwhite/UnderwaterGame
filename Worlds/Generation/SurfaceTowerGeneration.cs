@@ -2,6 +2,7 @@
 {
     using Microsoft.Xna.Framework;
     using System;
+    using UnderwaterGame.Items;
     using UnderwaterGame.Tiles;
 
     public class SurfaceTowerGeneration : WorldGeneration
@@ -18,11 +19,16 @@
                 int levelOffset = Main.random.Next(2) - levelCount + 1;
                 int topOffset = Main.random.Next(3);
                 int topOffsetMax = 2;
-                int topInterval = 2;
+                int topIntervalMax = 4;
+                int topInterval = topIntervalMax / 2;
                 int[] tops = new int[levelWidth + 1];
                 for(int t = 0; t < tops.Length; t++)
                 {
-                    if(t > 0 && t % topInterval == 0)
+                    if(topInterval > 0)
+                    {
+                        topInterval--;
+                    }
+                    else
                     {
                         int offset = topOffset;
                         do
@@ -30,6 +36,7 @@
                             offset += Main.random.Next(2) == 0 ? 1 : -1;
                         } while(offset == topOffset || offset < 0 || offset > topOffsetMax);
                         topOffset = offset;
+                        topInterval = topIntervalMax;
                     }
                     tops[t] = topOffset;
                 }
@@ -89,6 +96,21 @@
                         }
                     }
                 }
+                Item item = Item.healthKelp;
+                int quantity = 5;
+                switch(i)
+                {
+                    case 1:
+                        item = Item.woodenBow;
+                        quantity = 1;
+                        break;
+
+                    case 2:
+                        item = Item.woodenSword;
+                        quantity = 1;
+                        break;
+                }
+                World.AddItemDropAt((towerPositions[i].X + 0.5f) * Tile.size, (towerPositions[i].Y - (levelHeight * (levelOffset + 0.5f)) + 0.5f) * Tile.size, item, quantity);
                 bool ValidTowerPosition()
                 {
                     SurfaceSpawnGeneration surfaceSpawnGeneration = (SurfaceSpawnGeneration)World.generations.Find((WorldGeneration worldGeneration) => worldGeneration is SurfaceSpawnGeneration);

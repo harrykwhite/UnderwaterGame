@@ -12,9 +12,9 @@
             int stoneLevel = sandLevel + 8;
             int levelOffset = 0;
             int levelOffsetMax = 4;
-            int levelInterval = 0;
-            int levelIntervalMax = 8;
-            int levelIntervalMaxOffset = 2;
+            int levelIntervalMax = 16;
+            int levelInterval = levelIntervalMax / 2;
+            int levelIntervalMaxOffset = 4;
             int levelIntervalCount = 0;
             for(int x = 0; x < World.width; x++)
             {

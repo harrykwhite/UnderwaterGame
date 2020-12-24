@@ -11,6 +11,7 @@
     using UnderwaterGame.Entities.Characters.Enemies.Jellyfish;
     using UnderwaterGame.Entities.Particles;
     using UnderwaterGame.Environmentals;
+    using UnderwaterGame.Items;
     using UnderwaterGame.Tiles;
     using UnderwaterGame.Ui;
     using UnderwaterGame.Utilities;
@@ -41,6 +42,8 @@
 
         public static List<WorldEnvironmental> environmentals;
 
+        public static List<WorldItemDrop> itemDrops;
+        
         public static List<WorldGeneration> generations;
 
         public static List<Hotspot> hotspots;
@@ -89,6 +92,7 @@
                 }
             }
             environmentals = new List<WorldEnvironmental>();
+            itemDrops = new List<WorldItemDrop>();
             generations = new List<WorldGeneration> {
                 new SurfaceTerrainGeneration(),
                 new SurfaceSpawnGeneration(),
@@ -177,10 +181,11 @@
                     if(trials > 0)
                     {
                         int smokeCount = 6;
+                        float smokeDirectionOffset = MathHelper.ToRadians(Main.random.Next(360));
                         for(int i = 0; i < smokeCount; i++)
                         {
                             Smoke smoke = (Smoke)EntityManager.AddEntity<Smoke>(enemy.position);
-                            smoke.direction = ((MathHelper.Pi * 2f) / smokeCount) * i;
+                            smoke.direction = (((MathHelper.Pi * 2f) / smokeCount) * i) + smokeDirectionOffset;
                         }
                     }
                     else
@@ -201,21 +206,38 @@
             else
             {
                 int trials = 100;
-                Bubble bubble = (Bubble)EntityManager.AddEntity<Bubble>(Vector2.Zero);
-                do
+                int bubbleParticleCount = 3;
+                Vector2[] bubblePositions = new Vector2[bubbleParticleCount];
+                for(int i = 0; i < bubbleParticleCount; i++)
                 {
-                    bubble.position = new Vector2(RandomUtilities.Range(Camera.position.X - (Camera.GetWidth() / 2f), Camera.position.X + (Camera.GetWidth() / 2f)), RandomUtilities.Range(Camera.position.Y - (Camera.GetHeight() / 2f), Camera.position.Y + (Camera.GetHeight() / 2f)));
-                    trials--;
-                } while(!bubble.TileTypeCollision(bubble.position, Tile.water, Tilemap.Liquids) && trials > 0);
-                if(trials > 0)
-                {
-                    bubble.direction = -MathHelper.Pi / 2f;
-                    bubble.alpha = 0f;
-                    bubble.life = -30;
-                }
-                else
-                {
-                    bubble.Destroy();
+                    Bubble bubble = (Bubble)EntityManager.AddEntity<Bubble>(Vector2.Zero);
+                    bool valid;
+                    do
+                    {
+                        valid = true;
+                        bubble.position = Camera.position + new Vector2(RandomUtilities.Range(-Camera.GetWidth() / 2f, Camera.GetWidth() / 2f), RandomUtilities.Range(-Camera.GetHeight() / 2f, Camera.GetHeight() / 2f));
+                        for(int ii = i - 1; ii >= 0; ii--)
+                        {
+                            if(Vector2.Distance(bubble.position, bubblePositions[ii]) < 128)
+                            {
+                                valid = false;
+                                break;
+                            }
+                        }
+                        trials--;
+                    } while(!valid || !bubble.TileTypeCollision(bubble.position, Tile.water, Tilemap.Liquids) && trials > 0);
+                    if(trials > 0)
+                    {
+                        bubble.direction = -MathHelper.Pi / 2f;
+                        bubble.alpha = 0f;
+                        bubble.life = -30;
+                        bubblePositions[i] = bubble.position;
+                    }
+                    else
+                    {
+                        bubble.Destroy();
+                        break;
+                    }
                 }
                 bubbleTime = 0;
             }
@@ -364,20 +386,6 @@
             return true;
         }
 
-        public static void RemoveEnvironmentalAt(int x, int y)
-        {
-            List<Entity> environmentalEntities = EntityManager.entities.FindAll((Entity entity) => entity is EnvironmentalEntity);
-            foreach(Entity environmentalEntity in environmentalEntities)
-            {
-                EnvironmentalEntity environmental = (EnvironmentalEntity)environmentalEntity;
-                if(environmental.worldEnvironmental.x == x && environmental.worldEnvironmental.y == y)
-                {
-                    environmentals.Remove(environmental.worldEnvironmental);
-                    environmental.Destroy();
-                }
-            }
-        }
-
         public static WorldEnvironmental GetEnvironmentalAt(int x, int y)
         {
             foreach(WorldEnvironmental worldEnvironmental in environmentals)
@@ -393,6 +401,12 @@
         public static Vector2 GetEnvironmentalWorldPosition(int x, int y, Environmental environmental)
         {
             return (new Vector2(x, y) * Tile.size) - new Vector2(0f, environmental.sprite.origin.Y - environmental.sprite.bound.Y);
+        }
+
+        public static bool AddItemDropAt(float x, float y, Item item, int quantity)
+        {
+            itemDrops.Add(new WorldItemDrop(item.id, quantity, x, y));
+            return true;
         }
 
         public static void AddHotspotAt(Vector2 position, Spawn[] spawns, int count)
@@ -436,6 +450,10 @@
                 {
                     environmentals.Add(environmental);
                 }
+                foreach(WorldItemDrop itemDrop in Main.save.itemDrops)
+                {
+                    itemDrops.Add(itemDrop);
+                }
                 foreach(WorldHotspot hotspot in Main.save.hotspots)
                 {
                     hotspots.Add(new Hotspot(new Vector2(hotspot.x, hotspot.y), hotspot.spawns, hotspot.count));
@@ -470,9 +488,11 @@
                 EnvironmentalEntity environmentalEntity = (EnvironmentalEntity)EntityManager.AddEntity<EnvironmentalEntity>(GetEnvironmentalWorldPosition(worldEnvironmental.x, worldEnvironmental.y, Environmental.GetEnvironmentalById(worldEnvironmental.id)));
                 environmentalEntity.SetEnvironmental(Environmental.GetEnvironmentalById(worldEnvironmental.id), worldEnvironmental);
             }
-            TextEntity text = (TextEntity)EntityManager.AddEntity<TextEntity>(playerSpawnPosition + new Vector2(0f, 64f));
-            text.text = "Use the WASD keys to move the player\nUse the F key to change the hotbar\nUse the ESCAPE key to open the inventory";
-            text.lifeMax = -1;
+            foreach(WorldItemDrop worldItemDrop in itemDrops)
+            {
+                ItemDropEntity itemDropEntity = (ItemDropEntity)EntityManager.AddEntity<ItemDropEntity>(new Vector2(worldItemDrop.x, worldItemDrop.y));
+                itemDropEntity.SetItem(Item.GetItemById(worldItemDrop.id), worldItemDrop.quantity);
+            }
         }
 
         private static void SetTileTexture(int x, int y, Tilemap tilemap)

@@ -6,7 +6,7 @@
 
     public class HitData
     {
-        public float damage;
+        public int damage;
 
         public float strength;
 

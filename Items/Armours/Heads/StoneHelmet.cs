@@ -9,7 +9,7 @@
             name = "Stone Helmet";
             sprite = Sprite.stoneHelmet;
             wearSprite = Sprite.stoneHelmetWear;
-            wearDefense = 3f;
+            wearDefense = 1;
         }
     }
 }

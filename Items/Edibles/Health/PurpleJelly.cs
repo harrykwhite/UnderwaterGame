@@ -1,19 +1,19 @@
-﻿namespace UnderwaterGame.Items.Edibles.Magic
+﻿namespace UnderwaterGame.Items.Edibles.Health
 {
     using UnderwaterGame.Sprites;
 
-    public class MagicKelp : MagicEdible
+    public class PurpleJelly : HealthEdible
     {
         protected override void Init()
         {
-            name = "Magic Kelp";
-            sprite = Sprite.magicKelp;
+            name = "Purple Jelly";
+            sprite = Sprite.purpleJelly;
             stack = true;
             useTime = 10;
             useAngleUpdate = false;
             usePress = true;
             useHide = true;
-            magicAmount = 10f;
+            healthAmount = 1;
         }
     }
 }

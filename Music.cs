@@ -60,13 +60,10 @@
                 if(Main.loading == null)
                 {
                     int layerLoopPrevious = layerLoop;
-                    layerLoop = 0;
-                    if(World.player != null)
+                    layerLoop = 1;
+                    if(!(World.player?.inWater ?? true))
                     {
-                        if(World.player.inWater && World.player.life > 0)
-                        {
-                            layerLoop = 1;
-                        }
+                        layerLoop = 0;
                     }
                     if(layerLoopInstance == null || layerLoopPrevious != layerLoop)
                     {

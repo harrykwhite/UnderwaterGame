@@ -10,7 +10,7 @@
 
     public abstract class WeaponItem : Item
     {
-        public float damage;
+        public int damage;
         public float strength;
 
         protected void Shoot<T>(float direction, float outLength) where T : ProjectileEntity

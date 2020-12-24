@@ -36,11 +36,7 @@
 
         public static Sprite fire;
 
-        public static Sprite hotspotParticle;
-
         public static Sprite woodenArrow;
-
-        public static Sprite flareMagic;
 
         public static Sprite woodenTrident;
 
@@ -52,13 +48,11 @@
 
         public static Sprite crabShuriken;
 
-        public static Sprite woodenWand;
-
         public static Sprite healthKelp;
 
-        public static Sprite magicKelp;
+        public static Sprite pinkJelly;
 
-        public static Sprite jelly;
+        public static Sprite purpleJelly;
 
         public static Sprite stoneHelmet;
 
@@ -93,18 +87,15 @@
             crabShell = Load(Main.textureLibrary.PARTICLES_CRABSHELL);
             liquid = Load(Main.textureLibrary.PARTICLES_LIQUID);
             fire = Load(Main.textureLibrary.PARTICLES_FIRE);
-            hotspotParticle = Load(Main.textureLibrary.PARTICLES_HOTSPOTPARTICLE);
             woodenArrow = Load(Main.textureLibrary.PROJECTILES_ARROWS_WOODENARROW);
-            flareMagic = Load(Main.textureLibrary.PROJECTILES_MAGIC_FLAREMAGIC);
             woodenTrident = Load(Main.textureLibrary.ITEMS_WEAPONS_MELEE_TRIDENTS_WOODENTRIDENT);
             woodenSword = Load(Main.textureLibrary.ITEMS_WEAPONS_MELEE_SWORDS_WOODENSWORD);
             woodenBow = Load(Main.textureLibrary.ITEMS_WEAPONS_RANGED_BOWS_WOODENBOW);
             crabGrenade = Load(Main.textureLibrary.ITEMS_WEAPONS_RANGED_THROWABLES_CRABGRENADE);
             crabShuriken = Load(Main.textureLibrary.ITEMS_WEAPONS_RANGED_THROWABLES_CRABSHURIKEN);
-            woodenWand = Load(Main.textureLibrary.ITEMS_WEAPONS_MAGIC_WANDS_WOODENWAND);
             healthKelp = Load(Main.textureLibrary.ITEMS_EDIBLES_HEALTHKELP);
-            magicKelp = Load(Main.textureLibrary.ITEMS_EDIBLES_MAGICKELP);
-            jelly = Load(Main.textureLibrary.ITEMS_EDIBLES_JELLY);
+            pinkJelly = Load(Main.textureLibrary.ITEMS_EDIBLES_PINKJELLY);
+            purpleJelly = Load(Main.textureLibrary.ITEMS_EDIBLES_PURPLEJELLY);
             stoneHelmet = Load(Main.textureLibrary.ITEMS_ARMOURS_HEADS_STONEHELMET);
             stoneHelmetWear = Load(Main.textureLibrary.ITEMS_ARMOURS_HEADS_STONEHELMETWEAR);
             stoneChestplate = Load(Main.textureLibrary.ITEMS_ARMOURS_CHESTS_STONECHESTPLATE);

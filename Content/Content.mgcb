@@ -468,7 +468,7 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Items/Edibles/HealthKelp.png
 
-#begin Textures/Items/Edibles/Jelly.png
+#begin Textures/Items/Edibles/PinkJelly.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -478,9 +478,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Items/Edibles/Jelly.png
+/build:Textures/Items/Edibles/PinkJelly.png
 
-#begin Textures/Items/Edibles/MagicKelp.png
+#begin Textures/Items/Edibles/PurpleJelly.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -490,19 +490,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Items/Edibles/MagicKelp.png
-
-#begin Textures/Items/Weapons/Magic/Wands/WoodenWand.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Items/Weapons/Magic/Wands/WoodenWand.png
+/build:Textures/Items/Edibles/PurpleJelly.png
 
 #begin Textures/Items/Weapons/Melee/Swords/WoodenSword.png
 /importer:TextureImporter
@@ -624,30 +612,6 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Particles/CrabShell.png
 
-#begin Textures/Particles/Fire.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Particles/Fire.png
-
-#begin Textures/Particles/HotspotParticle.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Particles/HotspotParticle.png
-
 #begin Textures/Particles/Liquid.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -695,18 +659,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/Projectiles/Arrows/WoodenArrow.png
-
-#begin Textures/Projectiles/Magic/FlareMagic.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Projectiles/Magic/FlareMagic.png
 
 #begin Textures/Tiles/Liquids/Water.png
 /importer:TextureImporter
@@ -767,18 +719,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/Ui/Buttons/Icons/Inventory/ArmourIcon.png
-
-#begin Textures/Ui/Buttons/Icons/Inventory/CraftingIcon.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Ui/Buttons/Icons/Inventory/CraftingIcon.png
 
 #begin Textures/Ui/Buttons/Icons/Inventory/HotbarIcon.png
 /importer:TextureImporter
@@ -899,6 +839,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/Ui/Other/Cursor.png
+
+#begin Textures/Ui/Other/Health.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Ui/Other/Health.png
 
 #begin Textures/Ui/Other/SmallVignette.png
 /importer:TextureImporter

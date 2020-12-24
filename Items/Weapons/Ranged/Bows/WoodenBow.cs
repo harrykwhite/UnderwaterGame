@@ -13,7 +13,7 @@
             useTime = 35;
             useStrength = 1f;
             useAngleUpdate = true;
-            damage = 4f;
+            damage = 2;
             strength = 2f;
         }
 

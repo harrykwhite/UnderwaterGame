@@ -10,7 +10,7 @@
             sprite = Sprite.woodenTrident;
             useTime = 28;
             useStrength = 2f;
-            damage = 6f;
+            damage = 2;
             strength = 4f;
             swingSpeed = 1.5f;
             swingLength = 6f;

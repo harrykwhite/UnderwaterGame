@@ -74,7 +74,7 @@
                 sprite.origin = new Vector2(6f, sprite.textures[0].Height / 2f);
                 return true;
             }
-            if(libraryAsset == Main.textureLibrary.ITEMS_WEAPONS_MELEE_TRIDENTS_WOODENTRIDENT || libraryAsset == Main.textureLibrary.ITEMS_WEAPONS_MELEE_SWORDS_WOODENSWORD || libraryAsset == Main.textureLibrary.ITEMS_WEAPONS_MAGIC_WANDS_WOODENWAND)
+            if(libraryAsset == Main.textureLibrary.ITEMS_WEAPONS_MELEE_TRIDENTS_WOODENTRIDENT || libraryAsset == Main.textureLibrary.ITEMS_WEAPONS_MELEE_SWORDS_WOODENSWORD)
             {
                 sprite.origin = new Vector2(1f, sprite.textures[0].Height / 2f);
                 return true;

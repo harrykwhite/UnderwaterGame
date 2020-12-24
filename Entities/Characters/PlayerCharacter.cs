@@ -32,8 +32,6 @@
 
             ArmourFeet,
 
-            Crafting,
-
             Other
         }
 
@@ -56,10 +54,6 @@
         private float? swimSpeedWaterMult;
 
         private float swimSpeedWaterMultAcc = 0.01f;
-
-        public float magic;
-
-        public float magicMax;
 
         public ArmourItem armourHead;
 
@@ -111,7 +105,6 @@
             inventory.groups[(int)InventoryGroup.ArmourChest] = new Inventory.InventoryGroup(1, 1, false);
             inventory.groups[(int)InventoryGroup.ArmourLegs] = new Inventory.InventoryGroup(1, 1, false);
             inventory.groups[(int)InventoryGroup.ArmourFeet] = new Inventory.InventoryGroup(1, 1, false);
-            inventory.groups[(int)InventoryGroup.Crafting] = new Inventory.InventoryGroup(5, 1, false);
             inventory.groups[(int)InventoryGroup.Other] = new Inventory.InventoryGroup(5, 4, true);
             inventory.groups[(int)InventoryGroup.Wield].predicate = (Item item) => item is WeaponItem;
             inventory.groups[(int)InventoryGroup.Hotbar].predicate = (Item item) => !inventory.groups[(int)InventoryGroup.Wield].predicate(item);
@@ -120,15 +113,8 @@
             inventory.groups[(int)InventoryGroup.ArmourLegs].predicate = (Item item) => item is LegArmour;
             inventory.groups[(int)InventoryGroup.ArmourFeet].predicate = (Item item) => item is FeetArmour;
             heldItem = (ItemEntity)EntityManager.AddEntity<ItemEntity>(position);
-            healthMax = 60f;
+            healthMax = 6;
             health = healthMax;
-            magicMax = 60f;
-            magic = magicMax;
-            Item[] items = Item.items.ToArray();
-            for(int i = 0; i < items.Length; i++)
-            {
-                inventory.AddItem(items[i], 1);
-            }
         }
 
         public override void Update()
@@ -291,7 +277,7 @@
                     wielding = !wielding;
                 }
             }
-            RefreshDefense();
+            defense = 0;
             RefreshArmour();
             RefreshHeldItem();
             velocity = Vector2.Zero;
@@ -320,11 +306,6 @@
             Main.restart = true;
             Main.restartTime = 60;
             Main.restartSave = true;
-        }
-
-        public void RefreshDefense()
-        {
-            defense = 0f;
         }
 
         public void RefreshArmour()
@@ -367,36 +348,6 @@
             {
                 heldItem.SetItem(item);
             }
-        }
-
-        public bool HurtMagic(float damage)
-        {
-            damage = Math.Max(damage, 0f);
-            if(magic <= 0f)
-            {
-                return false;
-            }
-            magic -= damage;
-            magic = MathUtilities.Clamp(magic, 0f, magicMax);
-            return true;
-        }
-
-        public bool HealMagic(float amount)
-        {
-            if(flashTime > 0 || magic >= magicMax)
-            {
-                return false;
-            }
-            amount = Math.Max(amount, 0f);
-            magic += amount;
-            magic = MathUtilities.Clamp(magic, 0f, magicMax);
-            flashTime = flashTimeMax;
-            for(int i = 0; i < bloodParticleCount; i++)
-            {
-                Blood blood = (Blood)EntityManager.AddEntity<Blood>(position);
-                blood.direction = ((MathHelper.Pi * 2f) / bloodParticleCount) * i;
-            }
-            return true;
         }
     }
 }

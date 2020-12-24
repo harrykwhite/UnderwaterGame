@@ -6,6 +6,6 @@
     {
         public Sprite wearSprite;
 
-        public float wearDefense;
+        public int wearDefense;
     }
 }

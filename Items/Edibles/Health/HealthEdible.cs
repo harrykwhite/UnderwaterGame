@@ -4,7 +4,7 @@
 
     public abstract class HealthEdible : EdibleItem
     {
-        protected float healthAmount;
+        protected int healthAmount;
 
         public override bool CanUse()
         {

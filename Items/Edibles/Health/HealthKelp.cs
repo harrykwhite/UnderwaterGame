@@ -13,7 +13,7 @@
             useAngleUpdate = false;
             usePress = true;
             useHide = true;
-            healthAmount = 8f;
+            healthAmount = 2;
         }
     }
 }

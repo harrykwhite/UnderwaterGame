@@ -30,7 +30,7 @@
             return hitData;
         }
 
-        public void SetHitData(float damage, float strength, Vector2 at, float direction, bool hitPlayer, bool hitEnemy, Action<CharacterEntity> hitAction = null)
+        public void SetHitData(int damage, float strength, Vector2 at, float direction, bool hitPlayer, bool hitEnemy, Action<CharacterEntity> hitAction = null)
         {
             hitData.damage = damage;
             hitData.strength = strength;

@@ -6,8 +6,6 @@
     using UnderwaterGame.Items.Armours.Heads;
     using UnderwaterGame.Items.Armours.Legs;
     using UnderwaterGame.Items.Edibles.Health;
-    using UnderwaterGame.Items.Edibles.Magic;
-    using UnderwaterGame.Items.Weapons.Magic.Wands;
     using UnderwaterGame.Items.Weapons.Melee.Swords;
     using UnderwaterGame.Items.Weapons.Melee.Tridents;
     using UnderwaterGame.Items.Weapons.Ranged.Bows;
@@ -37,11 +35,9 @@
 
         public static HealthKelp healthKelp;
 
-        public static WoodenWand woodenWand;
+        public static PinkJelly pinkJelly;
 
-        public static MagicKelp magicKelp;
-
-        public static Jelly jelly;
+        public static PurpleJelly purpleJelly;
 
         public static void LoadAll()
         {
@@ -55,9 +51,8 @@
             steelBoots = Load<StoneBoots>(8);
             crabShuriken = Load<CrabShuriken>(9);
             healthKelp = Load<HealthKelp>(10);
-            woodenWand = Load<WoodenWand>(11);
-            magicKelp = Load<MagicKelp>(12);
-            jelly = Load<Jelly>(13);
+            pinkJelly = Load<PinkJelly>(11);
+            purpleJelly = Load<PurpleJelly>(12);
         }
     }
 }

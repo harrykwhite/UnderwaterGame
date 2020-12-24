@@ -35,17 +35,21 @@ namespace UnderwaterGame.Entities
 
         public override void Update()
         {
-            if(collider.IsTouching(position, World.player.collider))
+            if(World.player != null)
             {
-                if(World.player.inventory.AddItem(itemType, quantity))
+                if(collider.IsTouching(position, World.player.collider))
                 {
-                    int particleCount = 3;
-                    for(int i = 0; i < particleCount; i++)
+                    if(World.player.inventory.AddItem(itemType, quantity))
                     {
-                        Blood blood = (Blood)EntityManager.AddEntity<Blood>(position);
-                        blood.direction = ((MathHelper.Pi * 2f) / particleCount) * i;
+                        int particleCount = 3;
+                        float particleDirectionOffset = MathHelper.ToRadians(Main.random.Next(360));
+                        for(int i = 0; i < particleCount; i++)
+                        {
+                            Blood blood = (Blood)EntityManager.AddEntity<Blood>(position);
+                            blood.direction = (((MathHelper.Pi * 2f) / particleCount) * i) + particleDirectionOffset;
+                        }
+                        Destroy();
                     }
-                    Destroy();
                 }
             }
         }

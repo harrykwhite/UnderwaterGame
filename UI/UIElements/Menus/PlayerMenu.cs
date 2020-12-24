@@ -182,53 +182,9 @@
             LoadSlotGroup((int)PlayerCharacter.InventoryGroup.ArmourChest, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_ARMOURICON.asset, () => getArmourPosition(1), () => alpha);
             LoadSlotGroup((int)PlayerCharacter.InventoryGroup.ArmourLegs, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_ARMOURICON.asset, () => getArmourPosition(2), () => alpha);
             LoadSlotGroup((int)PlayerCharacter.InventoryGroup.ArmourFeet, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_ARMOURICON.asset, () => getArmourPosition(3), () => alpha);
-            LoadSlotGroup((int)PlayerCharacter.InventoryGroup.Crafting, Main.textureLibrary.UI_BUTTONS_ICONS_INVENTORY_CRAFTINGICON.asset, () => getPosition() - ((new Vector2(GetInventoryWidth(), GetInventoryHeight()) - Vector2.One) * UiComponent.gap * 0.5f) + new Vector2(0f, (GetInventoryHeight() - 1f) * UiComponent.gap), () => alpha);
             LoadSlotGroup((int)PlayerCharacter.InventoryGroup.Other, null, () => getPosition() - ((new Vector2(GetInventoryWidth(), GetInventoryHeight()) - Vector2.One) * UiComponent.gap * 0.5f) + new Vector2(UiComponent.gap, 0f), () => alpha);
             slots[(int)PlayerCharacter.InventoryGroup.Wield][0, 0].getPosition = () => getWieldPosition(0);
             slots[(int)PlayerCharacter.InventoryGroup.Wield][1, 0].getPosition = () => getWieldPosition(1);
-            IconButton produceButton = (IconButton)AddComponent<IconButton>();
-            produceButton.menuElement = this;
-            produceButton.icon = Main.textureLibrary.UI_BUTTONS_ICONS_OTHER_PRODUCEICON.asset;
-            produceButton.getAlpha = () => alpha;
-            produceButton.getActive = () => true;
-            produceButton.getPosition = () => getPosition() - ((new Vector2(GetInventoryWidth(), GetInventoryHeight()) - Vector2.One) * UiComponent.gap * 0.5f) + ((new Vector2(GetInventoryWidth(), GetInventoryHeight()) - Vector2.One) * UiComponent.gap);
-            produceButton.selectedInteractAction = delegate ()
-            {
-                List<Item> ingredients = new List<Item>();
-                for(int y = 0; y < World.player.inventory.groups[(int)PlayerCharacter.InventoryGroup.Crafting].contents.GetLength(1); y++)
-                {
-                    for(int x = 0; x < World.player.inventory.groups[(int)PlayerCharacter.InventoryGroup.Crafting].contents.GetLength(0); x++)
-                    {
-                        ingredients.Add(World.player.inventory.groups[(int)PlayerCharacter.InventoryGroup.Crafting].contents[x, y].item);
-                    }
-                }
-                foreach(Item item in Item.items)
-                {
-                    bool match = true;
-                    if(item.ingredients.Count <= 0)
-                    {
-                        continue;
-                    }
-                    foreach(Item ingredient in item.ingredients)
-                    {
-                        if(!ingredients.Contains(ingredient))
-                        {
-                            match = false;
-                            break;
-                        }
-                    }
-                    if(match)
-                    {
-                        if(World.player.inventory.AddItem(item, 1))
-                        {
-                            foreach(Item ingredient in item.ingredients)
-                            {
-                                World.player.inventory.RemoveItemAt((int)PlayerCharacter.InventoryGroup.Crafting, ingredient, 1);
-                            }
-                        }
-                    }
-                }
-            };
         }
 
         private int GetInventoryWidth()
@@ -238,7 +194,7 @@
 
         private int GetInventoryHeight()
         {
-            return World.player.inventory.groups[(int)PlayerCharacter.InventoryGroup.Other].contents.GetLength(1) + World.player.inventory.groups[(int)PlayerCharacter.InventoryGroup.Crafting].contents.GetLength(1) + 1;
+            return World.player.inventory.groups[(int)PlayerCharacter.InventoryGroup.Other].contents.GetLength(1);
         }
 
         public bool GetSelected()

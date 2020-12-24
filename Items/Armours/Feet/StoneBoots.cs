@@ -9,7 +9,7 @@
             name = "Stone Boots";
             sprite = Sprite.stoneBoots;
             wearSprite = Sprite.stoneBootsWear;
-            wearDefense = 1f;
+            wearDefense = 1;
         }
     }
 }

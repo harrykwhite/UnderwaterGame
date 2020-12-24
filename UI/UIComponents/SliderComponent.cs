@@ -24,7 +24,7 @@
 
         public override void Draw()
         {
-            Main.spriteBatch.Draw(Main.textureLibrary.UI_SLIDER_BAR.asset, getPosition() + new Vector2(0f, textGap / 2f), null, Color.White * 0.25f * getAlpha(), 0f, new Vector2(Main.textureLibrary.UI_SLIDER_BAR.asset.Width, Main.textureLibrary.UI_SLIDER_BAR.asset.Height) / 2f, scale * UiManager.scale, SpriteEffects.None, 1f);
+            Main.spriteBatch.Draw(Main.textureLibrary.UI_SLIDER_BAR.asset, getPosition() + new Vector2(0f, textGap / 2f), null, Color.White * 0.5f * getAlpha(), 0f, new Vector2(Main.textureLibrary.UI_SLIDER_BAR.asset.Width, Main.textureLibrary.UI_SLIDER_BAR.asset.Height) / 2f, scale * UiManager.scale, SpriteEffects.None, 1f);
             Main.spriteBatch.Draw(Main.textureLibrary.UI_SLIDER_BALL.asset, ballPosition + new Vector2(0f, textGap / 2f), null, Color.White * getAlpha(), 0f, new Vector2(Main.textureLibrary.UI_SLIDER_BALL.asset.Width, Main.textureLibrary.UI_SLIDER_BALL.asset.Height) / 2f, scale * ballScale * UiManager.scale, SpriteEffects.None, 1f);
             string optionText = option.name;
             string optionTextValue = option.value.ToString();

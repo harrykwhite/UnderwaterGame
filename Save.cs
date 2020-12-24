@@ -10,6 +10,8 @@
 
         public WorldEnvironmental[] environmentals;
 
+        public WorldItemDrop[] itemDrops;
+        
         public WorldHotspot[] hotspots;
 
         public float playerSpawnX;
@@ -33,6 +35,7 @@
                 }
             }
             environmentals = World.environmentals.ToArray();
+            itemDrops = World.itemDrops.ToArray();
             hotspots = new WorldHotspot[World.hotspots.Count];
             for(int i = 0; i < hotspots.Length; i++)
             {

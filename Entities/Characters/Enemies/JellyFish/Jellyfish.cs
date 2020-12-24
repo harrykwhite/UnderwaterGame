@@ -16,13 +16,14 @@
         {
             SetSprite(Sprite.jellyfish, true);
             animator = new Animator(sprite);
-            healthMax = 16f;
+            healthMax = 3;
             health = healthMax;
-            touchDamage = 6f;
+            healthOffset = 23f;
+            touchDamage = 1;
             touchDamagePlayer = true;
             bloodParticleColor = new Color(216, 143, 172);
-            itemDropType = Item.jelly;
-            itemDropQuantity = 1;
+            itemDropType = Item.pinkJelly;
+            itemDropQuantity = Main.random.Next(2) + 1;
         }
 
         public override void Update()

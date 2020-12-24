@@ -41,9 +41,9 @@
 
         public static void LoadElements()
         {
-            AddElement<HotspotElement>();
             AddElement<HealthElement>();
-            AddElement<TextEntityElement>();
+            AddElement<TutorialElement>();
+            AddElement<HotspotElement>();
             AddElement(vignetteElements[0] = new VignetteElement { getActive = () => World.hotspotCurrent != null });
             AddElement(vignetteElements[1] = new VignetteElement { alphaAcc = 0.1f, alphaMax = 1f, big = true, getActive = () => false });
             AddElement(fadeElements[0] = new FadeElement { getActive = () => menuCurrent != null }, true);

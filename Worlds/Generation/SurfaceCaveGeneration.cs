@@ -6,13 +6,15 @@
 
     public class SurfaceCaveGeneration : WorldGeneration
     {
+        public Vector2[] cavePositions = new Vector2[2];
+        
         public override void Generate()
         {
-            Vector2[] cavePositions = new Vector2[2];
+            return;
             int cavePositionsGap = 64;
             for(int i = 0; i < cavePositions.Length; i++)
             {
-                int caveRadius = 4;
+                int caveRadius = 8;
                 float caveDirection = MathHelper.Pi / 2f;
                 float caveDirectionAcc = MathHelper.Pi / 32f;
                 float caveDirectionTo = 0f;

@@ -9,7 +9,7 @@
             name = "Stone Chestplate";
             sprite = Sprite.stoneChestplate;
             wearSprite = Sprite.stoneChestplateWear;
-            wearDefense = 3f;
+            wearDefense = 1;
         }
     }
 }
