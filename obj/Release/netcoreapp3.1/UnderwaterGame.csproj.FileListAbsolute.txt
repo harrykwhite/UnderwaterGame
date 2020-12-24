@@ -178,3 +178,7 @@ C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Items\Edibles\HealthKelp.xnb
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Items\Edibles\Jelly.xnb
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Items\Edibles\MagicKelp.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Items\Edibles\PinkJelly.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Items\Edibles\PurpleJelly.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\UI\Other\Health.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\UI\Other\Magic.xnb
