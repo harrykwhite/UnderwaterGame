@@ -804,18 +804,6 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Ui/Buttons/Other/Button.png
 
-#begin Textures/Ui/Other/BigVignette.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Ui/Other/BigVignette.png
-
 #begin Textures/Ui/Other/Cursor.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -839,18 +827,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/Ui/Other/Health.png
-
-#begin Textures/Ui/Other/SmallVignette.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Ui/Other/SmallVignette.png
 
 #begin Textures/Ui/Slider/Ball.png
 /importer:TextureImporter

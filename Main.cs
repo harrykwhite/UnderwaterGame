@@ -23,12 +23,6 @@
 
         public static Config config;
 
-        public static bool configCheck;
-
-        public static Save save;
-
-        public static bool saveCheck;
-
         public static TextureLibrary textureLibrary;
 
         public static FontLibrary fontLibrary;
@@ -54,10 +48,6 @@
         public static bool restart;
 
         public static int restartTime;
-
-        public static bool restartSave;
-
-        public static int version = 3;
 
         public Main()
         {
@@ -105,7 +95,6 @@
         {
             if(loading == null)
             {
-                WriteSave();
                 WriteConfig();
             }
             Content.Unload();
@@ -128,7 +117,7 @@
                 {
                     loading = new Thread(delegate ()
                     {
-                        RestartGame(restartSave);
+                        RestartGame();
                         loading = null;
                     });
                     loading.Start();
@@ -137,34 +126,22 @@
             }
             if(loading == null)
             {
-                if(!configCheck)
+                if(!World.generated)
                 {
-                    if(config != null)
-                    {
-                        for(int i = 0; i < Option.options.Count; i++)
-                        {
-                            Option.GetOptionById((byte)(i + 1)).value = config.values[i];
-                        }
-                    }
-                    configCheck = true;
-                }
-                if(!saveCheck)
-                {
-                    if(save?.version != version)
-                    {
-                        save = null;
-                    }
                     World.Generate();
-                    saveCheck = true;
                 }
             }
             Control.Refresh();
             Control.Update();
-            if(loading == null || (UiManager.fadeElements[2]?.alpha ?? 0f) < (UiManager.fadeElements[2]?.alphaMax ?? 0f))
+            if(loading == null || (UiManager.fadeElements[3]?.alpha ?? 0f) < (UiManager.fadeElements[3]?.alphaMax ?? 0f))
             {
                 EntityManager.Update();
                 Camera.Update();
                 World.Update();
+                if(UiManager.menuCurrent == null)
+                {
+                    World.life++;
+                }
             }
             UiManager.Update();
             Music.Update();
@@ -175,7 +152,7 @@
         {
             GraphicsDevice.Clear(new Color(107, 205, 255));
             spriteBatch.Begin(sortMode: SpriteSortMode.FrontToBack, samplerState: SamplerState.PointClamp, blendState: BlendState.AlphaBlend, transformMatrix: Matrix.CreateTranslation(-Camera.position.X + (Camera.GetWidth() / 2f), -Camera.position.Y + (Camera.GetHeight() / 2f), 0f) * Matrix.CreateScale(Camera.scale, Camera.scale, 0f));
-            if(loading == null || UiManager.fadeElements[2]?.alpha != UiManager.fadeElements[2]?.alphaMax)
+            if(loading == null || UiManager.fadeElements[3]?.alpha != UiManager.fadeElements[3]?.alphaMax)
             {
                 EntityManager.Draw();
                 Lighting.Draw();
@@ -192,13 +169,16 @@
         {
             loading = new Thread(delegate ()
             {
-                if(File.Exists(GetGameDirectory() + "Config.dat"))
+                if(File.Exists(GetGameDirectory() + "Config"))
                 {
                     ReadConfig();
                 }
-                if(File.Exists(GetGameDirectory() + "Save.dat"))
+                if(config != null)
                 {
-                    ReadSave();
+                    for(int i = 0; i < Option.options.Count; i++)
+                    {
+                        Option.GetOptionById((byte)(i + 1)).value = config.values[i];
+                    }
                 }
                 loading = null;
             });
@@ -210,33 +190,18 @@
             loading = new Thread(delegate ()
             {
                 WriteConfig();
-                WriteSave();
                 loading = null;
             });
             loading.Start();
         }
 
-        private static void RestartGame(bool restartSave = false)
+        private static void RestartGame()
         {
-            while((UiManager.fadeElements[2]?.alpha ?? 0f) < (UiManager.fadeElements[2]?.alphaMax ?? 0f))
+            while((UiManager.fadeElements[3]?.alpha ?? 0f) < (UiManager.fadeElements[3]?.alphaMax ?? 0f))
             {
                 continue;
             }
             WriteConfig();
-            configCheck = false;
-            if(restartSave)
-            {
-                if(File.Exists(GetGameDirectory() + "Save.dat"))
-                {
-                    File.Delete(GetGameDirectory() + "Save.dat");
-                }
-                save = null;
-            }
-            else
-            {
-                WriteSave();
-            }
-            saveCheck = false;
             EntityManager.Init();
             UiManager.Init();
             Camera.Init();
@@ -250,7 +215,7 @@
         private static void ReadConfig()
         {
             Directory.CreateDirectory(GetGameDirectory());
-            FileStream fileStream = new FileStream(GetGameDirectory() + "Config.dat", FileMode.Open);
+            FileStream fileStream = new FileStream(GetGameDirectory() + "Config", FileMode.Open);
             try
             {
                 config = (Config)new BinaryFormatter().Deserialize(fileStream);
@@ -264,38 +229,10 @@
         private static void WriteConfig()
         {
             Directory.CreateDirectory(GetGameDirectory());
-            FileStream fileStream = new FileStream(GetGameDirectory() + "Config.dat", FileMode.Create);
+            FileStream fileStream = new FileStream(GetGameDirectory() + "Config", FileMode.Create);
             try
             {
                 new BinaryFormatter().Serialize(fileStream, config = new Config());
-            }
-            finally
-            {
-                fileStream.Close();
-            }
-        }
-
-        private static void ReadSave()
-        {
-            Directory.CreateDirectory(GetGameDirectory());
-            FileStream fileStream = new FileStream(GetGameDirectory() + "Save.dat", FileMode.Open);
-            try
-            {
-                save = (Save)new BinaryFormatter().Deserialize(fileStream);
-            }
-            finally
-            {
-                fileStream.Close();
-            }
-        }
-
-        private static void WriteSave()
-        {
-            Directory.CreateDirectory(GetGameDirectory());
-            FileStream fileStream = new FileStream(GetGameDirectory() + "Save.dat", FileMode.Create);
-            try
-            {
-                new BinaryFormatter().Serialize(fileStream, save = new Save());
             }
             finally
             {

@@ -221,7 +221,6 @@
             }
             float angleDifference = MathUtilities.AngleDifference(angle, swimAngleTo);
             angle += Math.Abs(angleDifference * swimAngleToMult) * Math.Sign(angleDifference);
-            CheckForDamage(collider);
             UpdateStatus();
             UpdateGravity();
             velocity.Y += gravity;
@@ -255,7 +254,7 @@
                         bubbleTime = 0f;
                     }
                     animator.sprite = Sprite.playerSwim;
-                    animator.speed = 0.25f;
+                    animator.speed = 0.2f;
                     idle = false;
                 }
             }
@@ -283,6 +282,11 @@
             velocity = Vector2.Zero;
         }
 
+        public override void EndUpdate()
+        {
+            CheckForDamage();
+        }
+
         public override void Destroy()
         {
             base.Destroy();
@@ -291,13 +295,12 @@
 
         public override bool Hurt(HitData hitData)
         {
-            bool damaged = base.Hurt(hitData);
-            if(damaged)
+            bool hurt = base.Hurt(hitData);
+            if(hurt)
             {
-                UiManager.vignetteElements[1].color = bloodParticleColor;
-                UiManager.vignetteElements[1].alpha = UiManager.vignetteElements[1].alphaMax;
+                UiManager.fadeElements[0].alpha = UiManager.fadeElements[0].alphaMax;
             }
-            return damaged;
+            return hurt;
         }
 
         public override void Kill()
@@ -305,7 +308,6 @@
             base.Kill();
             Main.restart = true;
             Main.restartTime = 60;
-            Main.restartSave = true;
         }
 
         public void RefreshArmour()

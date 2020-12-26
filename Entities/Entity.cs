@@ -199,12 +199,12 @@
             {
                 if(inWater ^ inWaterPrevious)
                 {
-                    int liquidParticleCount = 3;
-                    for(int i = 0; i < liquidParticleCount; i++)
+                    int particleCount = 3;
+                    for(int i = 0; i < particleCount; i++)
                     {
                         Liquid liquid = (Liquid)EntityManager.AddEntity<Liquid>(position);
                         liquid.position = position;
-                        liquid.direction = (-MathHelper.Pi / 2f) + ((MathHelper.Pi / 18f) * (i - ((liquidParticleCount - 1f) / 2f)));
+                        liquid.direction = (-MathHelper.Pi / 2f) + ((MathHelper.Pi / 18f) * (i - ((particleCount - 1f) / 2f)));
                         liquid.blend = new Color(16, 103, 153);
                     }
                 }

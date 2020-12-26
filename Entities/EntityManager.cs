@@ -8,10 +8,12 @@
     public static class EntityManager
     {
         public static List<Entity> entities;
+        public static Entity[] tempEntities;
 
         public static void Init()
         {
             entities = new List<Entity>();
+            tempEntities = null;
         }
 
         public static void Update()
@@ -30,7 +32,7 @@
 
         public static void UpdateEntities()
         {
-            Entity[] tempEntities = entities.ToArray();
+            tempEntities = entities.ToArray();
             foreach(Entity entity in tempEntities)
             {
                 entity.BeginUpdate();
@@ -48,7 +50,6 @@
 
         public static void DrawEntities()
         {
-            Entity[] tempEntities = entities.ToArray();
             foreach(Entity entity in tempEntities)
             {
                 entity.BeginDraw();
@@ -85,26 +86,6 @@
             newEntity.position = position;
             entities.Add(newEntity);
             return newEntity;
-        }
-
-        public static bool GetEntityExists<T>() where T : Entity
-        {
-            return entities.Find((Entity entity) => entity is T) != null;
-        }
-
-        public static bool GetEntityExists(Type type)
-        {
-            return entities.Find((Entity entity) => entity.GetType() == type) != null;
-        }
-
-        public static int GetEntityCount<T>() where T : Entity
-        {
-            return entities.FindAll((Entity entity) => entity is T).Count;
-        }
-
-        public static int GetEntityCount(Type type)
-        {
-            return entities.FindAll((Entity entity) => entity.GetType() == type).Count;
         }
     }
 }

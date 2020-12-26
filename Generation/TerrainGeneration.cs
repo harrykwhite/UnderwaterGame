@@ -1,8 +1,9 @@
-﻿namespace UnderwaterGame.Worlds.Generation
+﻿namespace UnderwaterGame.Generation
 {
     using UnderwaterGame.Tiles;
+    using UnderwaterGame.Worlds;
 
-    public class SurfaceTerrainGeneration : WorldGeneration
+    public class TerrainGeneration : Generation
     {
         public override void Generate()
         {

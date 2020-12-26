@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Items/Weapons/Ranged/Throwables/PurpleJellyShuriken.png</SourceFile>
-  <SourceTime>2020-12-26T09:59:36.7279545+10:00</SourceTime>
+  <SourceTime>2020-12-26T18:09:18.8782187+10:00</SourceTime>
   <DestFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/bin/DesktopGL/Textures/Items/Weapons/Ranged/Throwables/PurpleJellyShuriken.xnb</DestFile>
-  <DestTime>2020-12-26T10:01:56.7684745+10:00</DestTime>
+  <DestTime>2020-12-26T21:01:04.2188786+10:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+10:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

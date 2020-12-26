@@ -31,7 +31,6 @@
         public override void Update()
         {
             JellyfishUpdate();
-            CheckForDamage(collider);
             UpdateStatus();
             UpdateGravity();
             velocity.Y += gravity;
@@ -42,6 +41,11 @@
             animator.Update();
             UpdateWater();
             velocity = Vector2.Zero;
+        }
+
+        public override void EndUpdate()
+        {
+            CheckForDamage();
         }
     }
 }

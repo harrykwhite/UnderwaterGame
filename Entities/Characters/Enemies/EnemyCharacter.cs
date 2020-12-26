@@ -26,14 +26,6 @@ namespace UnderwaterGame.Entities.Characters.Enemies
         public override void Kill()
         {
             base.Kill();
-            if(hotspot != null)
-            {
-                if(hotspot.count > 0)
-                {
-                    hotspot.count--;
-                    hotspot.countScale = hotspot.countScaleMax;
-                }
-            }
             if(itemDropType != null)
             {
                 int? index = null;

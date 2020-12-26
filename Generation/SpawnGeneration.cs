@@ -1,8 +1,9 @@
 ﻿using System;
+using UnderwaterGame.Worlds;
 
-namespace UnderwaterGame.Worlds.Generation
+namespace UnderwaterGame.Generation
 {
-    public class SurfaceSpawnGeneration : WorldGeneration
+    public class SpawnGeneration : Generation
     {
         public int width = 32;
 

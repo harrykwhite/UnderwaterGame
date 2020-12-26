@@ -30,28 +30,30 @@
 
         public static void Init()
         {
-            position = new Vector2(GetWidth(), GetHeight()) / 2f;
+            positionTo = new Vector2(GetWidth(), GetHeight()) / 2f;
+            position = positionTo;
+            shake = Vector2.Zero;
         }
 
         public static void Update()
         {
             if(UiManager.menuCurrent == null)
             {
-                if(EntityManager.GetEntityExists<PlayerCharacter>())
+                if(World.player?.GetExists() ?? false)
                 {
                     positionTo = World.player.position + (Vector2.Normalize(Control.GetMousePositionWorld() - World.player.position) * look);
                 }
+                positionTo.X = MathUtilities.Clamp(positionTo.X, (float)Math.Ceiling(GetWidth() / 2f), (World.width * Tile.size) - (float)Math.Ceiling(GetWidth() / 2f));
+                positionTo.Y = MathUtilities.Clamp(positionTo.Y, (float)Math.Ceiling(GetHeight() / 2f), (World.height * Tile.size) - (float)Math.Ceiling(GetHeight() / 2f));
+                position.X += (float)(positionTo.X - position.X) * speed;
+                position.Y += (float)(positionTo.Y - position.Y) * speed;
+                shake *= 0.9f;
+                shakeTime += shakeSpeed;
+                shakeTime %= MathHelper.Pi * 2f;
+                position += shake * (float)Math.Sin(shakeTime);
+                position.X = MathUtilities.Clamp(position.X, (float)Math.Ceiling(GetWidth() / 2f), (World.width * Tile.size) - (float)Math.Ceiling(GetWidth() / 2f));
+                position.Y = MathUtilities.Clamp(position.Y, (float)Math.Ceiling(GetHeight() / 2f), (World.height * Tile.size) - (float)Math.Ceiling(GetHeight() / 2f));
             }
-            positionTo.X = MathUtilities.Clamp(positionTo.X, (float)Math.Ceiling(GetWidth() / 2f), (World.width * Tile.size) - (float)Math.Ceiling(GetWidth() / 2f));
-            positionTo.Y = MathUtilities.Clamp(positionTo.Y, (float)Math.Ceiling(GetHeight() / 2f), (World.height * Tile.size) - (float)Math.Ceiling(GetHeight() / 2f));
-            position.X += (float)(positionTo.X - position.X) * speed;
-            position.Y += (float)(positionTo.Y - position.Y) * speed;
-            shake *= 0.9f;
-            shakeTime += shakeSpeed;
-            shakeTime %= MathHelper.Pi * 2f;
-            position += shake * (float)Math.Sin(shakeTime);
-            position.X = MathUtilities.Clamp(position.X, (float)Math.Ceiling(GetWidth() / 2f), (World.width * Tile.size) - (float)Math.Ceiling(GetWidth() / 2f));
-            position.Y = MathUtilities.Clamp(position.Y, (float)Math.Ceiling(GetHeight() / 2f), (World.height * Tile.size) - (float)Math.Ceiling(GetHeight() / 2f));
         }
 
         public static void Shake(float amount, float direction)

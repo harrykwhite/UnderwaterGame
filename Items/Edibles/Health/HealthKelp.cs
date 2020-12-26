@@ -9,7 +9,7 @@
             name = "Health Kelp";
             sprite = Sprite.healthKelp;
             stack = true;
-            useTime = 10;
+            useTime = 5;
             useAngleUpdate = false;
             usePress = true;
             useHide = true;

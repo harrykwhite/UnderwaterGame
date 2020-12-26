@@ -1,11 +1,13 @@
-﻿namespace UnderwaterGame.Worlds.Generation
+﻿namespace UnderwaterGame.Generation
 {
     using Microsoft.Xna.Framework;
     using System;
+    using UnderwaterGame.Entities;
     using UnderwaterGame.Items;
     using UnderwaterGame.Tiles;
+    using UnderwaterGame.Worlds;
 
-    public class SurfaceTowerGeneration : WorldGeneration
+    public class TowerGeneration : Generation
     {
         public override void Generate()
         {
@@ -110,11 +112,12 @@
                         quantity = 1;
                         break;
                 }
-                World.AddItemDropAt((towerPositions[i].X + 0.5f) * Tile.size, (towerPositions[i].Y - (levelHeight * (levelOffset + 0.5f)) + 0.5f) * Tile.size, item, quantity);
+                ItemDropEntity itemDrop = (ItemDropEntity)EntityManager.AddEntity<ItemDropEntity>(new Vector2((towerPositions[i].X + 0.5f) * Tile.size, (towerPositions[i].Y - (levelHeight * (levelOffset + 0.5f)) + 0.5f) * Tile.size));
+                itemDrop.SetItem(item, quantity);
                 bool ValidTowerPosition()
                 {
-                    SurfaceSpawnGeneration surfaceSpawnGeneration = (SurfaceSpawnGeneration)World.generations.Find((WorldGeneration worldGeneration) => worldGeneration is SurfaceSpawnGeneration);
-                    if((towerPositions[i].X >= (World.width - surfaceSpawnGeneration.width - levelWidth) / 2) && (towerPositions[i].X <= (World.width + surfaceSpawnGeneration.width + levelWidth) / 2))
+                    SpawnGeneration spawnGeneration = (SpawnGeneration)World.generations.Find((Generation generation) => generation is SpawnGeneration);
+                    if((towerPositions[i].X >= (World.width - spawnGeneration.width - levelWidth) / 2) && (towerPositions[i].X <= (World.width + spawnGeneration.width + levelWidth) / 2))
                     {
                         return false;
                     }

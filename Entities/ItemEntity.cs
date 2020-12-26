@@ -114,7 +114,7 @@
                 }
                 if(swingEffect)
                 {
-                    swingEffectAnimator.speed = 0.25f;
+                    swingEffectAnimator.speed = 0.2f;
                 }
             }
             if(useTimeCurrent >= useTimeMax)

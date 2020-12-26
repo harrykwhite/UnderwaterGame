@@ -90,16 +90,12 @@
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Ui/Buttons/Icons/Other/ProduceIcon.png</File>
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Ui/Buttons/Icons/Other/RestartIcon.png</File>
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Ui/Buttons/Other/Button.png</File>
-    <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Ui/Other/BigVignette.png</File>
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Ui/Other/Cursor.png</File>
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Ui/Other/Health.png</File>
-    <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Ui/Other/SmallVignette.png</File>
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Ui/Slider/Ball.png</File>
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Ui/Slider/Bar.png</File>
   </SourceFiles>
   <DestFiles>
-    <File xsi:nil="true" />
-    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

@@ -1,11 +1,13 @@
-﻿namespace UnderwaterGame.Worlds.Generation
+﻿namespace UnderwaterGame.Generation
 {
     using Microsoft.Xna.Framework;
+    using UnderwaterGame.Entities;
     using UnderwaterGame.Environmentals;
     using UnderwaterGame.Items;
     using UnderwaterGame.Tiles;
+    using UnderwaterGame.Worlds;
 
-    public class SurfaceEnvironmentalGeneration : WorldGeneration
+    public class EnvironmentalGeneration : Generation
     {
         public override void Generate()
         {
@@ -37,11 +39,11 @@
                     interval = intervalMax + Main.random.Next(-intervalOffset, intervalOffset);
                 }
             }
-            SurfaceSpawnGeneration surfaceSpawnGeneration = (SurfaceSpawnGeneration)World.generations.Find((WorldGeneration worldGeneration) => worldGeneration is SurfaceSpawnGeneration);
+            SpawnGeneration spawnGeneration = (SpawnGeneration)World.generations.Find((Generation generation) => generation is SpawnGeneration);
             int spawnStatueX, spawnStatueY;
             do
             {
-                spawnStatueX = ((World.width - surfaceSpawnGeneration.width) / 2) + Main.random.Next(surfaceSpawnGeneration.width);
+                spawnStatueX = ((World.width - spawnGeneration.width) / 2) + Main.random.Next(spawnGeneration.width);
                 spawnStatueY = 0;
                 for(int y = 0; y < World.height; y++)
                 {
@@ -52,7 +54,8 @@
                     }
                 }
             } while(!World.AddEnvironmentalAt(spawnStatueX, spawnStatueY, Environmental.spawnStatue));
-            World.AddItemDropAt(spawnStatueX * Tile.size, (spawnStatueY - 8f) * Tile.size, Item.woodenTrident, 1);
+            ItemDropEntity itemDrop = (ItemDropEntity)EntityManager.AddEntity<ItemDropEntity>(new Vector2(spawnStatueX * Tile.size, (spawnStatueY - 8f) * Tile.size));
+            itemDrop.SetItem(Item.woodenTrident, 1);
             World.playerSpawnPosition = new Vector2(spawnStatueX, spawnStatueY - 1.5f) * Tile.size;
         }
     }

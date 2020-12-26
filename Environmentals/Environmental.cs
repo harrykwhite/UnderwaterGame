@@ -9,10 +9,6 @@
 
         public Sprite sprite;
 
-        public static float speed = 0.025f;
-
-        public static float depth = 0.35f;
-
         public Environmental()
         {
             environmentals.Add(this);

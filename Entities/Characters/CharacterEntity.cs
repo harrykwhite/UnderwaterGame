@@ -54,7 +54,7 @@
             DrawSelf(sprite.texturesFilled[(int)animator.index], color: Color.White * ((float)(flashTime * 2f) / (float)flashTimeMax), depth: depth + 0.001f);
         }
 
-        protected void CheckForDamage(Collider hit)
+        protected void CheckForDamage()
         {
             List<Entity> hitCharacterEntities = EntityManager.entities.FindAll((Entity entity) => entity is IHitCharacter);
             foreach(Entity hitCharacterEntity in hitCharacterEntities)
@@ -69,9 +69,14 @@
                 {
                     continue;
                 }
-                if(hitCharacterEntity.collider.IsTouching(hitCharacterEntity.position, hit))
+                if(hitCharacterEntity.collider.IsTouching(hitCharacterEntity.position, collider))
                 {
                     Hurt(hitData);
+                    if(health <= 0)
+                    {
+                        Kill();
+                        break;
+                    }
                 }
             }
         }
@@ -107,10 +112,6 @@
                     blood.direction = hitData.direction == null ? (((MathHelper.Pi * 2f) / bloodParticleCount) * i) + bloodParticleDirectionOffset : hitData.direction.Value - MathHelper.Pi + ((MathHelper.Pi / 12f) * (i - ((bloodParticleCount - 1f) / 2f)));
                     blood.blend = bloodParticleColor;
                 }
-            }
-            else
-            {
-                Kill();
             }
             return true;
         }

@@ -100,10 +100,6 @@
 
         public readonly LibraryAsset UI_OTHER_HEALTH = new LibraryAsset("Textures/Ui/Other/Health");
         
-        public readonly LibraryAsset UI_OTHER_BIGVIGNETTE = new LibraryAsset("Textures/Ui/Other/BigVignette");
-
-        public readonly LibraryAsset UI_OTHER_SMALLVIGNETTE = new LibraryAsset("Textures/Ui/Other/SmallVignette");
-        
         public readonly LibraryAsset OTHER_HOTSPOT = new LibraryAsset("Textures/Other/Hotspot");
         
         public readonly LibraryAsset OTHER_PIXEL = new LibraryAsset("Textures/Other/Pixel");

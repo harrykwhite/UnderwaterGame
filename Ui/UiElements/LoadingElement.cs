@@ -20,7 +20,7 @@
             {
                 text += ".";
             }
-            DrawUtilities.DrawString(Main.fontLibrary.ARIALMEDIUM.asset, new DrawUtilities.Text(text), new Vector2(Main.GetBufferWidth(), Main.GetBufferHeight()) / 2f, Color.White * (UiManager.fadeElements[2]?.alpha ?? 0f), DrawUtilities.HorizontalAlign.Middle, DrawUtilities.VerticalAlign.Middle);
+            DrawUtilities.DrawString(Main.fontLibrary.ARIALMEDIUM.asset, new DrawUtilities.Text(text), new Vector2(Main.GetBufferWidth(), Main.GetBufferHeight()) / 2f, Color.White * (UiManager.fadeElements[3]?.alpha ?? 0f), DrawUtilities.HorizontalAlign.Middle, DrawUtilities.VerticalAlign.Middle);
         }
 
         public override void Init()
@@ -29,7 +29,7 @@
 
         public override void Update()
         {
-            if(Main.loading == null && (UiManager.fadeElements[2]?.alpha ?? 0f) <= 0f)
+            if(Main.loading == null && (UiManager.fadeElements[3]?.alpha ?? 0f) <= 0f)
             {
                 ellipsisCount = 0;
                 ellipsisTime = 0;

@@ -1,8 +1,5 @@
 ﻿namespace UnderwaterGame
 {
-    using System;
-
-    [Serializable]
     public class Spawn
     {
         public string type;

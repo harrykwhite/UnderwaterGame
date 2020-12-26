@@ -9,7 +9,7 @@
             name = "Purple Jelly";
             sprite = Sprite.purpleJelly;
             stack = true;
-            useTime = 10;
+            useTime = 5;
             useAngleUpdate = false;
             usePress = true;
             useHide = true;

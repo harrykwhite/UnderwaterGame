@@ -18,8 +18,6 @@ namespace UnderwaterGame.Entities
             if(this.itemType != null)
             {
                 SetSprite(this.itemType.sprite, true);
-                collider.shape.width += 2;
-                collider.shape.height += 2;
                 animator = new Animator(sprite);
             }
         }

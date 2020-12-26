@@ -42,7 +42,6 @@
             {
                 Main.restart = true;
                 Main.restartTime = 0;
-                Main.restartSave = true;
             };
         }
 

@@ -16,9 +16,11 @@
 
         public float alphaTo;
 
+        public Color color = Color.Black;
+
         public override void Draw()
         {
-            Main.spriteBatch.Draw(Main.textureLibrary.OTHER_PIXEL.asset, Vector2.Zero, null, Color.Black * alpha, 0f, Vector2.Zero, new Vector2(Main.GetBufferWidth(), Main.GetBufferHeight()), SpriteEffects.None, 1f);
+            Main.spriteBatch.Draw(Main.textureLibrary.OTHER_PIXEL.asset, Vector2.Zero, null, color * alpha, 0f, Vector2.Zero, new Vector2(Main.GetBufferWidth(), Main.GetBufferHeight()), SpriteEffects.None, 1f);
         }
 
         public override void Init()

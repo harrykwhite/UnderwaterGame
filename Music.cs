@@ -54,7 +54,7 @@
 
         public static void Update()
         {
-            bool loading = Main.loading != null && (UiManager.fadeElements[2]?.alpha ?? 0f) >= (UiManager.fadeElements[2]?.alphaMax ?? 0f);
+            bool loading = Main.loading != null && (UiManager.fadeElements[3]?.alpha ?? 0f) >= (UiManager.fadeElements[3]?.alphaMax ?? 0f);
             if(!loading)
             {
                 int layerLoopPrevious = layerLoop;
@@ -103,7 +103,7 @@
                 {
                     if(World.hotspotPrevious != null)
                     {
-                        if(World.hotspotPrevious.count <= 0)
+                        /*if(World.hotspotPrevious.count <= 0)
                         {
                             SoundEffect soundEffect = Main.random.Next(3) switch
                             {
@@ -113,7 +113,7 @@
                             };
                             combatOutroStingerInstance = soundEffect.CreateInstance();
                             combatOutroStingerInstance.Play();
-                        }
+                        }*/
                     }
                     combat = false;
                 }

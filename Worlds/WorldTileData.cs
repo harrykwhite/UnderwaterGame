@@ -5,21 +5,21 @@
 
     public class WorldTileData
     {
+        public WorldTile worldTile;
+
         public int x;
 
         public int y;
-
-        public WorldTile worldTile;
 
         public World.Tilemap tilemap;
 
         public Shape shape;
 
-        public WorldTileData(int x, int y, WorldTile worldTile, World.Tilemap tilemap)
+        public WorldTileData(WorldTile worldTile, int x, int y, World.Tilemap tilemap)
         {
+            this.worldTile = worldTile;
             this.x = x;
             this.y = y;
-            this.worldTile = worldTile;
             this.tilemap = tilemap;
             Shape.Fill fill = Shape.Fill.Rectangle;
             switch(this.worldTile.texture)
@@ -40,7 +40,7 @@
                     fill = Shape.Fill.BottomRightSlope;
                     break;
             }
-            shape = new Shape(fill, Tile.size, Tile.size) { position = new Vector2(this.x, this.y) * Tile.size };
+            shape = new Shape(fill, Tile.size, Tile.size) { position = new Vector2(x, y) * Tile.size };
         }
     }
 }

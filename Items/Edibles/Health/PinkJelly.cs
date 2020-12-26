@@ -9,7 +9,7 @@
             name = "Pink Jelly";
             sprite = Sprite.pinkJelly;
             stack = true;
-            useTime = 10;
+            useTime = 5;
             useAngleUpdate = false;
             usePress = true;
             useHide = true;
