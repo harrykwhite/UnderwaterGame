@@ -36,8 +36,6 @@
 
         public readonly LibraryAsset PARTICLES_WOOD = new LibraryAsset("Textures/Particles/Wood");
 
-        public readonly LibraryAsset PARTICLES_CRABSHELL = new LibraryAsset("Textures/Particles/CrabShell");
-
         public readonly LibraryAsset PARTICLES_LIQUID = new LibraryAsset("Textures/Particles/Liquid");
 
         public readonly LibraryAsset PARTICLES_FIRE = new LibraryAsset("Textures/Particles/Fire");
@@ -50,9 +48,9 @@
 
         public readonly LibraryAsset ITEMS_WEAPONS_RANGED_BOWS_WOODENBOW = new LibraryAsset("Textures/Items/Weapons/Ranged/Bows/WoodenBow");
 
-        public readonly LibraryAsset ITEMS_WEAPONS_RANGED_THROWABLES_CRABGRENADE = new LibraryAsset("Textures/Items/Weapons/Ranged/Throwables/CrabGrenade");
-
-        public readonly LibraryAsset ITEMS_WEAPONS_RANGED_THROWABLES_CRABSHURIKEN = new LibraryAsset("Textures/Items/Weapons/Ranged/Throwables/CrabShuriken");
+        public readonly LibraryAsset ITEMS_WEAPONS_RANGED_THROWABLES_PINKJELLYSHURIKEN = new LibraryAsset("Textures/Items/Weapons/Ranged/Throwables/PinkJellyShuriken");
+        
+        public readonly LibraryAsset ITEMS_WEAPONS_RANGED_THROWABLES_PURPLEJELLYSHURIKEN = new LibraryAsset("Textures/Items/Weapons/Ranged/Throwables/PurpleJellyShuriken");
 
         public readonly LibraryAsset ITEMS_EDIBLES_HEALTHKELP = new LibraryAsset("Textures/Items/Edibles/HealthKelp");
 

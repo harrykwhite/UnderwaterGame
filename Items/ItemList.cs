@@ -19,8 +19,6 @@
 
         public static WoodenBow woodenBow;
 
-        public static CrabGrenade crabGrenade;
-
         public static WoodenSword woodenSword;
 
         public static StoneHelmet steelHelmet;
@@ -31,7 +29,9 @@
 
         public static StoneBoots steelBoots;
 
-        public static CrabShuriken crabShuriken;
+        public static PinkJellyShuriken pinkJellyShuriken;
+
+        public static PurpleJellyShuriken purpleJellyShuriken;
 
         public static HealthKelp healthKelp;
 
@@ -43,13 +43,13 @@
         {
             woodenTrident = Load<WoodenTrident>(1);
             woodenBow = Load<WoodenBow>(2);
-            crabGrenade = Load<CrabGrenade>(3);
-            woodenSword = Load<WoodenSword>(4);
-            steelHelmet = Load<StoneHelmet>(5);
-            steelChestplate = Load<StoneChestplate>(6);
-            steelLeggings = Load<StoneLeggings>(7);
-            steelBoots = Load<StoneBoots>(8);
-            crabShuriken = Load<CrabShuriken>(9);
+            woodenSword = Load<WoodenSword>(3);
+            steelHelmet = Load<StoneHelmet>(4);
+            steelChestplate = Load<StoneChestplate>(5);
+            steelLeggings = Load<StoneLeggings>(6);
+            steelBoots = Load<StoneBoots>(7);
+            pinkJellyShuriken = Load<PinkJellyShuriken>(8);
+            purpleJellyShuriken = Load<PurpleJellyShuriken>(9);
             healthKelp = Load<HealthKelp>(10);
             pinkJelly = Load<PinkJelly>(11);
             purpleJelly = Load<PurpleJelly>(12);

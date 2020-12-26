@@ -8,7 +8,7 @@
         {
             name = "Wooden Sword";
             sprite = Sprite.woodenSword;
-            useTime = 24;
+            useTime = 25;
             useStrength = 2f;
             damage = 2;
             strength = 4f;

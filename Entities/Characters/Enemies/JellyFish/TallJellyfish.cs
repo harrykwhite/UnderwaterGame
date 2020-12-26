@@ -23,8 +23,9 @@
             touchDamagePlayer = true;
             bloodParticleColor = new Color(164, 132, 183);
             swimBreakTimeMax = 30;
-            itemDropType = Item.purpleJelly;
-            itemDropQuantity = Main.random.Next(2) + 1;
+            itemDropType = new Item[2] { Item.purpleJelly, Item.purpleJellyShuriken };
+            itemDropQuantity = new int[2] { Main.random.Next(2) + 2, Main.random.Next(2) + 3 };
+            itemDropChance = new float[2] { 0.5f, 0.1f };
         }
 
         public override void Update()

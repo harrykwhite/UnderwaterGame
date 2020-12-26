@@ -30,8 +30,6 @@
 
         public static Sprite wood;
 
-        public static Sprite crabShell;
-
         public static Sprite liquid;
 
         public static Sprite fire;
@@ -44,9 +42,9 @@
 
         public static Sprite woodenBow;
 
-        public static Sprite crabGrenade;
+        public static Sprite pinkJellyShuriken;
 
-        public static Sprite crabShuriken;
+        public static Sprite purpleJellyShuriken;
 
         public static Sprite healthKelp;
 
@@ -84,15 +82,14 @@
             bubble = Load(Main.textureLibrary.PARTICLES_BUBBLE);
             smoke = Load(Main.textureLibrary.PARTICLES_SMOKE);
             wood = Load(Main.textureLibrary.PARTICLES_WOOD);
-            crabShell = Load(Main.textureLibrary.PARTICLES_CRABSHELL);
             liquid = Load(Main.textureLibrary.PARTICLES_LIQUID);
             fire = Load(Main.textureLibrary.PARTICLES_FIRE);
             woodenArrow = Load(Main.textureLibrary.PROJECTILES_ARROWS_WOODENARROW);
             woodenTrident = Load(Main.textureLibrary.ITEMS_WEAPONS_MELEE_TRIDENTS_WOODENTRIDENT);
             woodenSword = Load(Main.textureLibrary.ITEMS_WEAPONS_MELEE_SWORDS_WOODENSWORD);
             woodenBow = Load(Main.textureLibrary.ITEMS_WEAPONS_RANGED_BOWS_WOODENBOW);
-            crabGrenade = Load(Main.textureLibrary.ITEMS_WEAPONS_RANGED_THROWABLES_CRABGRENADE);
-            crabShuriken = Load(Main.textureLibrary.ITEMS_WEAPONS_RANGED_THROWABLES_CRABSHURIKEN);
+            pinkJellyShuriken = Load(Main.textureLibrary.ITEMS_WEAPONS_RANGED_THROWABLES_PINKJELLYSHURIKEN);
+            purpleJellyShuriken = Load(Main.textureLibrary.ITEMS_WEAPONS_RANGED_THROWABLES_PURPLEJELLYSHURIKEN);
             healthKelp = Load(Main.textureLibrary.ITEMS_EDIBLES_HEALTHKELP);
             pinkJelly = Load(Main.textureLibrary.ITEMS_EDIBLES_PINKJELLY);
             purpleJelly = Load(Main.textureLibrary.ITEMS_EDIBLES_PURPLEJELLY);

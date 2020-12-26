@@ -528,7 +528,7 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Items/Weapons/Ranged/Bows/WoodenBow.png
 
-#begin Textures/Items/Weapons/Ranged/Throwables/CrabGrenade.png
+#begin Textures/Items/Weapons/Ranged/Throwables/PinkJellyShuriken.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -538,9 +538,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Items/Weapons/Ranged/Throwables/CrabGrenade.png
+/build:Textures/Items/Weapons/Ranged/Throwables/PinkJellyShuriken.png
 
-#begin Textures/Items/Weapons/Ranged/Throwables/CrabShuriken.png
+#begin Textures/Items/Weapons/Ranged/Throwables/PurpleJellyShuriken.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -550,7 +550,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Items/Weapons/Ranged/Throwables/CrabShuriken.png
+/build:Textures/Items/Weapons/Ranged/Throwables/PurpleJellyShuriken.png
 
 #begin Textures/Other/Hotspot.png
 /importer:TextureImporter
@@ -599,18 +599,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/Particles/Bubble.png
-
-#begin Textures/Particles/CrabShell.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Particles/CrabShell.png
 
 #begin Textures/Particles/Liquid.png
 /importer:TextureImporter

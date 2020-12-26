@@ -160,7 +160,7 @@
             }
             Control.Refresh();
             Control.Update();
-            if(loading == null)
+            if(loading == null || (UiManager.fadeElements[2]?.alpha ?? 0f) < (UiManager.fadeElements[2]?.alphaMax ?? 0f))
             {
                 EntityManager.Update();
                 Camera.Update();
@@ -168,7 +168,6 @@
             }
             UiManager.Update();
             Music.Update();
-            
             base.Update(gameTime);
         }
 

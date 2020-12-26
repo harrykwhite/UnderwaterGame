@@ -10,7 +10,7 @@
         {
             name = "Wooden Bow";
             sprite = Sprite.woodenBow;
-            useTime = 35;
+            useTime = 40;
             useStrength = 1f;
             useAngleUpdate = true;
             damage = 2;

@@ -12,10 +12,12 @@ namespace UnderwaterGame.Entities.Characters.Enemies
 
         public bool touchDamagePlayer;
 
-        protected Item itemDropType;
+        protected Item[] itemDropType;
 
-        protected int itemDropQuantity;
+        protected int[] itemDropQuantity;
 
+        protected float[] itemDropChance;
+        
         public HitData HitCharacter(Entity target)
         {
             return new HitData { damage = touchDamage, at = target.position, hitPlayer = touchDamagePlayer, hitEnemy = touchDamageEnemy };
@@ -34,8 +36,19 @@ namespace UnderwaterGame.Entities.Characters.Enemies
             }
             if(itemDropType != null)
             {
+                int? index = null;
+                do
+                {
+                    for(int i = 0; i < itemDropType.Length; i++)
+                    {
+                        if(Main.random.Next(100) <= (itemDropChance[i] * 100f))
+                        {
+                            index = i;
+                        }
+                    }
+                } while(index == null);
                 ItemDropEntity itemDrop = (ItemDropEntity)EntityManager.AddEntity<ItemDropEntity>(position);
-                itemDrop.SetItem(itemDropType, itemDropQuantity);
+                itemDrop.SetItem(itemDropType[index.Value], itemDropQuantity[index.Value]);
             }
         }
     }

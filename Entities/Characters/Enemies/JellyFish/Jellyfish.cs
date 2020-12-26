@@ -22,8 +22,9 @@
             touchDamage = 1;
             touchDamagePlayer = true;
             bloodParticleColor = new Color(216, 143, 172);
-            itemDropType = Item.pinkJelly;
-            itemDropQuantity = Main.random.Next(2) + 1;
+            itemDropType = new Item[2] { Item.pinkJelly, Item.pinkJellyShuriken };
+            itemDropQuantity = new int[2] { Main.random.Next(2) + 1, Main.random.Next(2) + 2 };
+            itemDropChance = new float[2] { 0.5f, 0.1f };
         }
 
         public override void Update()

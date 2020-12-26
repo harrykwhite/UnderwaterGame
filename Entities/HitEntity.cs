@@ -10,6 +10,7 @@
 
         public override void Draw()
         {
+            //Main.spriteBatch.Draw(Main.textureLibrary.OTHER_PIXEL.asset, position, null, Color.Red, 0f, new Vector2(0.5f), new Vector2(collider.shape.width, collider.shape.height), SpriteEffects.None, 1f);
         }
 
         public override void Init()

@@ -182,3 +182,8 @@ C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Textures\Items\Edibles\PurpleJelly.xnb
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Textures\UI\Other\Health.xnb
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Textures\UI\Other\Magic.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Icon.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Textures\Items\Weapons\Ranged\Throwables\JellyGrenade.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Textures\Items\Weapons\Ranged\Throwables\JellyShuriken.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Textures\Items\Weapons\Ranged\Throwables\PinkJellyShuriken.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Textures\Items\Weapons\Ranged\Throwables\PurpleJellyShuriken.xnb

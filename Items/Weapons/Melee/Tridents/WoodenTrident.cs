@@ -8,11 +8,11 @@
         {
             name = "Wooden Trident";
             sprite = Sprite.woodenTrident;
-            useTime = 28;
+            useTime = 30;
             useStrength = 2f;
             damage = 2;
             strength = 4f;
-            swingSpeed = 1.5f;
+            swingSpeed = 1f;
             swingLength = 6f;
             hitboxOffset = 34f;
             swingSprite = Sprite.longSwing;

@@ -52,7 +52,7 @@
 
         public static int height = 300;
 
-        public static float gravityAcc = 0.15f;
+        public static float gravityAcc = 0.1f;
 
         public static float gravityMax = 8f;
 
@@ -114,10 +114,10 @@
             {
                 return;
             }
-            hotspotPrevious = hotspotCurrent;
-            hotspotCurrent = null;
             if(player?.GetExists() ?? false)
             {
+                hotspotPrevious = hotspotCurrent;
+                hotspotCurrent = null;
                 foreach(Hotspot hotspot in hotspots)
                 {
                     if(hotspot.count > 0)
@@ -127,6 +127,51 @@
                             hotspotCurrent = hotspot;
                         }
                     }
+                }
+                if(spawnTime < spawnTimeMax)
+                {
+                    spawnTime += Math.Min(hotspotCurrent == null ? 1 : 4, spawnTimeMax - spawnTime);
+                }
+                else
+                {
+                    if(EntityManager.entities.FindAll((Entity entity) => entity is EnemyCharacter enemyCharacter && (enemyCharacter.hotspot == hotspotCurrent)).Count < spawnMax * (hotspotCurrent == null ? 1 : 4))
+                    {
+                        int trials = 100;
+                        Type enemyType = null;
+                        Spawn[] enemySpawns = hotspotCurrent?.spawns ?? spawns;
+                        do
+                        {
+                            for(int i = 0; i < enemySpawns.Length; i++)
+                            {
+                                if(Main.random.Next(100) <= (enemySpawns[i].chance * 100f))
+                                {
+                                    enemyType = Type.GetType(enemySpawns[i].type);
+                                }
+                            }
+                        } while(enemyType == null);
+                        EnemyCharacter enemy = (EnemyCharacter)EntityManager.AddEntity(enemyType, Vector2.Zero);
+                        enemy.hotspot = hotspotCurrent;
+                        do
+                        {
+                            enemy.position = hotspotCurrent == null ? Camera.position + new Vector2(Main.random.Next(-Camera.GetWidth() / 2, Camera.GetWidth() / 2), Main.random.Next(-Camera.GetHeight() / 2, Camera.GetHeight() / 2)) : hotspotCurrent.position + MathUtilities.LengthDirection(RandomUtilities.Range(0f, Main.textureLibrary.OTHER_HOTSPOT.asset.Width / 2f), MathHelper.ToRadians(Main.random.Next(360)));
+                            trials--;
+                        } while((enemy.TileCollision(enemy.position, Tilemap.Solids) || !enemy.TileCollision(enemy.position, Tilemap.Liquids)) && trials > 0);
+                        if(trials > 0)
+                        {
+                            int smokeCount = 6;
+                            float smokeDirectionOffset = MathHelper.ToRadians(Main.random.Next(360));
+                            for(int i = 0; i < smokeCount; i++)
+                            {
+                                Smoke smoke = (Smoke)EntityManager.AddEntity<Smoke>(enemy.position);
+                                smoke.direction = (((MathHelper.Pi * 2f) / smokeCount) * i) + smokeDirectionOffset;
+                            }
+                        }
+                        else
+                        {
+                            enemy.Destroy();
+                        }
+                    }
+                    spawnTime = 0;
                 }
             }
             else
@@ -150,51 +195,6 @@
                         playerSpawned = true;
                     }
                 }
-            }
-            if(spawnTime < spawnTimeMax)
-            {
-                spawnTime += Math.Min(hotspotCurrent == null ? 1 : 4, spawnTimeMax - spawnTime);
-            }
-            else
-            {
-                if(EntityManager.entities.FindAll((Entity entity) => entity is EnemyCharacter enemyCharacter && (enemyCharacter.hotspot == hotspotCurrent)).Count < spawnMax * (hotspotCurrent == null ? 1 : 4))
-                {
-                    int trials = 100;
-                    Type enemyType = null;
-                    Spawn[] enemySpawns = hotspotCurrent?.spawns ?? spawns;
-                    do
-                    {
-                        for(int i = 0; i < enemySpawns.Length; i++)
-                        {
-                            if(Main.random.Next(100) <= (enemySpawns[i].chance * 100f))
-                            {
-                                enemyType = Type.GetType(enemySpawns[i].type);
-                            }
-                        }
-                    } while(enemyType == null);
-                    EnemyCharacter enemy = (EnemyCharacter)EntityManager.AddEntity(enemyType, Vector2.Zero);
-                    enemy.hotspot = hotspotCurrent;
-                    do
-                    {
-                        enemy.position = hotspotCurrent == null ? Camera.position + new Vector2(Main.random.Next(-Camera.GetWidth() / 2, Camera.GetWidth() / 2), Main.random.Next(-Camera.GetHeight() / 2, Camera.GetHeight() / 2)) : hotspotCurrent.position + MathUtilities.LengthDirection(RandomUtilities.Range(0f, Main.textureLibrary.OTHER_HOTSPOT.asset.Width / 2f), MathHelper.ToRadians(Main.random.Next(360)));
-                        trials--;
-                    } while((enemy.TileCollision(enemy.position, Tilemap.Solids) || !enemy.TileCollision(enemy.position, Tilemap.Liquids)) && trials > 0);
-                    if(trials > 0)
-                    {
-                        int smokeCount = 6;
-                        float smokeDirectionOffset = MathHelper.ToRadians(Main.random.Next(360));
-                        for(int i = 0; i < smokeCount; i++)
-                        {
-                            Smoke smoke = (Smoke)EntityManager.AddEntity<Smoke>(enemy.position);
-                            smoke.direction = (((MathHelper.Pi * 2f) / smokeCount) * i) + smokeDirectionOffset;
-                        }
-                    }
-                    else
-                    {
-                        enemy.Destroy();
-                    }
-                }
-                spawnTime = 0;
             }
             foreach(Hotspot hotspot in hotspots)
             {
