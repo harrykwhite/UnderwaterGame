@@ -14,13 +14,9 @@
 
         public int count;
 
-        public Vector2 countScale = Vector2.One;
-
-        public Vector2 countScaleMax = new Vector2(1.2f);
-
         public float alpha;
 
-        private float alphaAcc = 0.01f;
+        private float alphaAcc = 0.1f;
 
         public Hotspot(Vector2 position, Spawn[] spawns, int count)
         {
@@ -48,7 +44,6 @@
                     }
                 }
             }
-            countScale += (Vector2.One - countScale) * 0.2f;
         }
     }
 }

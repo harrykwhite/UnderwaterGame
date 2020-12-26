@@ -6,7 +6,6 @@
     using System.Collections.Generic;
     using UnderwaterGame.Entities;
     using UnderwaterGame.Entities.Characters;
-    using UnderwaterGame.Worlds;
 
     public class HealthElement : UiElement
     {

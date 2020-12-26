@@ -8,7 +8,7 @@
     {
         public Func<bool> getActive;
 
-        public float alphaAcc = 0.05f;
+        public float alphaAcc = 0.1f;
 
         public float alphaMax = 0.5f;
 
