@@ -28,11 +28,7 @@
 
         public static Sprite smoke;
 
-        public static Sprite wood;
-
         public static Sprite liquid;
-
-        public static Sprite fire;
 
         public static Sprite woodenArrow;
 
@@ -81,9 +77,7 @@
             blood = Load(Main.textureLibrary.PARTICLES_BLOOD);
             bubble = Load(Main.textureLibrary.PARTICLES_BUBBLE);
             smoke = Load(Main.textureLibrary.PARTICLES_SMOKE);
-            wood = Load(Main.textureLibrary.PARTICLES_WOOD);
             liquid = Load(Main.textureLibrary.PARTICLES_LIQUID);
-            fire = Load(Main.textureLibrary.PARTICLES_FIRE);
             woodenArrow = Load(Main.textureLibrary.PROJECTILES_ARROWS_WOODENARROW);
             woodenTrident = Load(Main.textureLibrary.ITEMS_WEAPONS_MELEE_TRIDENTS_WOODENTRIDENT);
             woodenSword = Load(Main.textureLibrary.ITEMS_WEAPONS_MELEE_SWORDS_WOODENSWORD);

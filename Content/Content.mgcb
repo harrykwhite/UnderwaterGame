@@ -624,18 +624,6 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Particles/Smoke.png
 
-#begin Textures/Particles/Wood.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Particles/Wood.png
-
 #begin Textures/Projectiles/Arrows/WoodenArrow.png
 /importer:TextureImporter
 /processor:TextureProcessor

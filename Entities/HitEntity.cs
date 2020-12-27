@@ -1,16 +1,19 @@
 ﻿namespace UnderwaterGame.Entities
 {
-    using Microsoft.Xna.Framework;
-    using System;
+    using System.Collections.Generic;
     using UnderwaterGame.Entities.Characters;
+    using UnderwaterGame.Entities.Characters.Enemies;
 
-    public class HitEntity : Entity, IHitCharacter
+    public class HitEntity : Entity
     {
-        public HitData hitData = new HitData();
+        public Hit hit;
+
+        public bool hitEnemy;
+
+        public bool hitPlayer;
 
         public override void Draw()
         {
-            //Main.spriteBatch.Draw(Main.textureLibrary.OTHER_PIXEL.asset, position, null, Color.Red, 0f, new Vector2(0.5f), new Vector2(collider.shape.width, collider.shape.height), SpriteEffects.None, 1f);
         }
 
         public override void Init()
@@ -20,26 +23,26 @@
 
         public override void Update()
         {
-            if(life > 0)
+            List<Entity> characterEntities = EntityManager.entities.FindAll((Entity entity) => entity is CharacterEntity);
+            foreach(Entity characterEntity in characterEntities)
             {
-                Destroy();
+                CharacterEntity character = (CharacterEntity)characterEntity;
+                if((hitEnemy && character is EnemyCharacter) || (hitPlayer && character is PlayerCharacter))
+                {
+                    if(collider.IsTouching(position, character.collider))
+                    {
+                        if(character.Hurt(hit))
+                        {
+                            if(character.health <= 0)
+                            {
+                                character.Kill();
+                            }
+                            break;
+                        }
+                    }
+                }
             }
-        }
-
-        public HitData HitCharacter(Entity target)
-        {
-            return hitData;
-        }
-
-        public void SetHitData(int damage, float strength, Vector2 at, float direction, bool hitPlayer, bool hitEnemy, Action<CharacterEntity> hitAction = null)
-        {
-            hitData.damage = damage;
-            hitData.strength = strength;
-            hitData.at = at;
-            hitData.direction = direction;
-            hitData.hitPlayer = hitPlayer;
-            hitData.hitEnemy = hitEnemy;
-            hitData.hitAction = hitAction;
+            Destroy();
         }
     }
 }

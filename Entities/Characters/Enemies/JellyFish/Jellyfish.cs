@@ -20,7 +20,6 @@
             health = healthMax;
             healthOffset = 23f;
             touchDamage = 1;
-            touchDamagePlayer = true;
             bloodParticleColor = new Color(216, 143, 172);
             itemDropType = new Item[2] { Item.pinkJelly, Item.pinkJellyShuriken };
             itemDropQuantity = new int[2] { Main.random.Next(2) + 1, Main.random.Next(2) + 2 };
@@ -39,12 +38,8 @@
             animator.speed = 0.1f;
             animator.Update();
             UpdateWater();
+            UpdateTouchDamage();
             velocity = Vector2.Zero;
-        }
-
-        public override void EndUpdate()
-        {
-            CheckForDamage();
         }
     }
 }

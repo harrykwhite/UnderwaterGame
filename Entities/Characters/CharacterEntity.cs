@@ -3,8 +3,6 @@
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Audio;
     using System;
-    using System.Collections.Generic;
-    using UnderwaterGame.Entities.Characters.Enemies;
     using UnderwaterGame.Entities.Particles;
     using UnderwaterGame.Utilities;
 
@@ -54,50 +52,22 @@
             DrawSelf(sprite.texturesFilled[(int)animator.index], color: Color.White * ((float)(flashTime * 2f) / (float)flashTimeMax), depth: depth + 0.001f);
         }
 
-        protected void CheckForDamage()
-        {
-            List<Entity> hitCharacterEntities = EntityManager.entities.FindAll((Entity entity) => entity is IHitCharacter);
-            foreach(Entity hitCharacterEntity in hitCharacterEntities)
-            {
-                IHitCharacter hitCharacter = (IHitCharacter)hitCharacterEntity;
-                HitData hitData = hitCharacter.HitCharacter(this);
-                if(this is PlayerCharacter && !hitData.hitPlayer)
-                {
-                    continue;
-                }
-                if(this is EnemyCharacter && !hitData.hitEnemy)
-                {
-                    continue;
-                }
-                if(hitCharacterEntity.collider.IsTouching(hitCharacterEntity.position, collider))
-                {
-                    Hurt(hitData);
-                    if(health <= 0)
-                    {
-                        Kill();
-                        break;
-                    }
-                }
-            }
-        }
-
-        public virtual bool Hurt(HitData hitData)
+        public virtual bool Hurt(Hit hit)
         {
             if(flashTime > 0 || health <= 0)
             {
                 return false;
             }
-            int amount = Math.Max(hitData.damage - defense, 1);
+            int amount = Math.Max(hit.damage - defense, 1);
             health -= amount;
             health = MathUtilities.Clamp(health, 0, healthMax);
             flashTime = flashTimeMax;
             knockbackSpeedAcc = 0.1f;
-            if(hitData.direction != null)
+            if(hit.strength > 0f && hit.direction != null)
             {
-                knockbackSpeed += hitData.strength;
-                knockbackDirection = hitData.direction.Value;
+                knockbackSpeed += hit.strength;
+                knockbackDirection = hit.direction.Value;
             }
-            hitData.hitAction?.Invoke(this);
             Camera.Shake(2f, position);
             if(hurtSound != null)
             {
@@ -109,7 +79,7 @@
                 for(int i = 0; i < bloodParticleCount; i++)
                 {
                     Blood blood = (Blood)EntityManager.AddEntity<Blood>(position);
-                    blood.direction = hitData.direction == null ? (((MathHelper.Pi * 2f) / bloodParticleCount) * i) + bloodParticleDirectionOffset : hitData.direction.Value - MathHelper.Pi + ((MathHelper.Pi / 12f) * (i - ((bloodParticleCount - 1f) / 2f)));
+                    blood.direction = hit.direction == null ? (((MathHelper.Pi * 2f) / bloodParticleCount) * i) + bloodParticleDirectionOffset : hit.direction.Value - MathHelper.Pi + ((MathHelper.Pi / 12f) * (i - ((bloodParticleCount - 1f) / 2f)));
                     blood.blend = bloodParticleColor;
                 }
             }

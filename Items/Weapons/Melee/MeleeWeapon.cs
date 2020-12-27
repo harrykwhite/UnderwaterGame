@@ -27,7 +27,8 @@
         {
             hitEntity = (HitEntity)EntityManager.AddEntity<HitEntity>(World.player.heldItem.position);
             hitEntity.position += MathUtilities.LengthDirection(hitboxOffset + World.player.heldItem.lengthOffset, World.player.heldItem.angleBase);
-            hitEntity.SetHitData(damage, strength, hitEntity.position, World.player.heldItem.angleBase, false, true);
+            hitEntity.hit = new Hit(damage, strength, hitEntity.position, World.player.heldItem.angleBase);
+            hitEntity.hitEnemy = true;
             hitEntity.collider.shape.width = hitEntity.collider.shape.height = hitboxSize;
             hitEntity.collider.shape.Clear();
             hitEntity.depth = World.player.heldItem.depth + 0.001f;

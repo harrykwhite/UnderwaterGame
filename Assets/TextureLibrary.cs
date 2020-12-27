@@ -34,11 +34,7 @@
 
         public readonly LibraryAsset PARTICLES_SMOKE = new LibraryAsset("Textures/Particles/Smoke");
 
-        public readonly LibraryAsset PARTICLES_WOOD = new LibraryAsset("Textures/Particles/Wood");
-
         public readonly LibraryAsset PARTICLES_LIQUID = new LibraryAsset("Textures/Particles/Liquid");
-
-        public readonly LibraryAsset PARTICLES_FIRE = new LibraryAsset("Textures/Particles/Fire");
 
         public readonly LibraryAsset PROJECTILES_ARROWS_WOODENARROW = new LibraryAsset("Textures/Projectiles/Arrows/WoodenArrow");
 

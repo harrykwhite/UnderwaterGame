@@ -3,6 +3,8 @@
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;
     using System;
+    using System.Collections.Generic;
+    using UnderwaterGame.Entities.Characters.Enemies;
     using UnderwaterGame.Entities.Particles;
     using UnderwaterGame.Items;
     using UnderwaterGame.Items.Armours;
@@ -282,20 +284,15 @@
             velocity = Vector2.Zero;
         }
 
-        public override void EndUpdate()
-        {
-            CheckForDamage();
-        }
-
         public override void Destroy()
         {
             base.Destroy();
             heldItem.Destroy();
         }
 
-        public override bool Hurt(HitData hitData)
+        public override bool Hurt(Hit hit)
         {
-            bool hurt = base.Hurt(hitData);
+            bool hurt = base.Hurt(hit);
             if(hurt)
             {
                 UiManager.fadeElements[0].alpha = UiManager.fadeElements[0].alphaMax;

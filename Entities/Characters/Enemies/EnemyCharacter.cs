@@ -1,28 +1,34 @@
 ﻿using UnderwaterGame.Items;
+using UnderwaterGame.Worlds;
 
 namespace UnderwaterGame.Entities.Characters.Enemies
 {
-    public abstract class EnemyCharacter : CharacterEntity, IHitCharacter
+    public abstract class EnemyCharacter : CharacterEntity
     {
         public Hotspot hotspot;
 
         public int touchDamage;
-
-        public bool touchDamageEnemy;
-
-        public bool touchDamagePlayer;
 
         protected Item[] itemDropType;
 
         protected int[] itemDropQuantity;
 
         protected float[] itemDropChance;
-        
-        public HitData HitCharacter(Entity target)
-        {
-            return new HitData { damage = touchDamage, at = target.position, hitPlayer = touchDamagePlayer, hitEnemy = touchDamageEnemy };
-        }
 
+        public void UpdateTouchDamage()
+        {
+            if(collider.IsTouching(position, World.player.collider))
+            {
+                if(World.player.Hurt(new Hit(touchDamage, 0f, position, null)))
+                {
+                    if(World.player.health <= 0)
+                    {
+                        World.player.Kill();
+                    }
+                }
+            }
+        }
+        
         public override void Kill()
         {
             base.Kill();

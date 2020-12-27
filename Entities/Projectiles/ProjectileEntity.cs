@@ -2,11 +2,14 @@
 {
     using Microsoft.Xna.Framework;
     using System;
+    using System.Collections.Generic;
     using UnderwaterGame.Entities.Characters;
+    using UnderwaterGame.Entities.Characters.Enemies;
+    using UnderwaterGame.Entities.Particles;
     using UnderwaterGame.Utilities;
     using UnderwaterGame.Worlds;
 
-    public abstract class ProjectileEntity : Entity, IHitCharacter
+    public abstract class ProjectileEntity : Entity
     {
         public int damage;
 
@@ -28,12 +31,16 @@
 
         public bool angleRelative = true;
 
-        public bool pierce;
-
         public bool left;
 
         public bool hasGravity = true;
+        
+        protected int bloodParticleCount = 3;
 
+        protected Color bloodParticleColor = Color.White;
+        
+        protected bool pierce;
+        
         protected void UpdateProjectile()
         {
             if(directionInit == null)
@@ -46,11 +53,6 @@
             {
                 angle = direction;
             }
-            if(TileCollision(position, World.Tilemap.Solids))
-            {
-                HitTile();
-                Destroy();
-            }
             velocity = MathUtilities.LengthDirection(speed, directionInit.Value);
             if(hasGravity)
             {
@@ -58,25 +60,57 @@
                 velocity.Y += gravity;
             }
             direction = MathUtilities.PointDirection(Vector2.Zero, velocity);
-        }
-
-        public HitData HitCharacter(Entity target)
-        {
-            return new HitData { damage = damage, strength = strength, at = target.position, direction = direction, hitEnemy = hitEnemy, hitPlayer = hitPlayer, hitAction = delegate (CharacterEntity character) { HitCharacter(character); if(!pierce) { Destroy(); } } };
+            List<Entity> characterEntities = EntityManager.entities.FindAll((Entity entity) => entity is CharacterEntity);
+            for(int i = 0; i < speed; i++)
+            {
+                bool hitCharacter = false;
+                foreach(Entity characterEntity in characterEntities)
+                {
+                    CharacterEntity character = (CharacterEntity)characterEntity;
+                    if((hitEnemy && character is EnemyCharacter) || (hitPlayer && character is PlayerCharacter))
+                    {
+                        if(collider.IsTouching(position, character.collider))
+                        {
+                            if(character.Hurt(new Hit(damage, strength, position, direction)))
+                            {
+                                if(character.health <= 0)
+                                {
+                                    character.Kill();
+                                }
+                                Hit();
+                                if(!pierce)
+                                {
+                                    Destroy();
+                                }
+                                hitCharacter = true;
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(hitCharacter)
+                {
+                    break;
+                }
+                if(TileCollision(position, World.Tilemap.Solids))
+                {
+                    Hit();
+                    Destroy();
+                    break;
+                }
+                position += velocity / speed;
+            }
         }
 
         protected virtual void Hit()
         {
-        }
-
-        protected virtual void HitCharacter(CharacterEntity character)
-        {
-            Hit();
-        }
-
-        protected virtual void HitTile()
-        {
-            Hit();
+            for(int i = 0; i < bloodParticleCount; i++)
+            {
+                Blood blood = (Blood)EntityManager.AddEntity<Blood>(position);
+                blood.speed = speed / 2f;
+                blood.direction = direction - MathHelper.Pi + ((MathHelper.Pi / 12f) * (i - ((bloodParticleCount - 1f) / 2f)));
+                blood.blend = bloodParticleColor;
+            }
         }
     }
 }

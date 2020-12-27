@@ -50,6 +50,10 @@
 
         public static void DrawEntities()
         {
+            if(tempEntities == null)
+            {
+                tempEntities = entities.ToArray();
+            }
             foreach(Entity entity in tempEntities)
             {
                 entity.BeginDraw();

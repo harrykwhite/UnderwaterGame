@@ -1,7 +1,6 @@
 ﻿namespace UnderwaterGame.Entities.Projectiles.Arrows
 {
     using Microsoft.Xna.Framework;
-    using UnderwaterGame.Entities.Particles;
     using UnderwaterGame.Sprites;
 
     public class WoodenArrow : ArrowProjectile
@@ -16,26 +15,14 @@
             SetSprite(Sprite.woodenArrow, true);
             depth = 0.7125f;
             speed = 8f;
+            bloodParticleColor = new Color(117, 72, 72);
         }
 
         public override void Update()
         {
             UpdateProjectile();
-            position += velocity;
             UpdateWater();
             velocity = Vector2.Zero;
-        }
-
-        protected override void Hit()
-        {
-            base.Hit();
-            int particleCount = 3;
-            for(int i = 0; i < particleCount; i++)
-            {
-                Wood wood = (Wood)EntityManager.AddEntity<Wood>(position);
-                wood.speed = speed / 2f;
-                wood.direction = direction - MathHelper.Pi + ((MathHelper.Pi / 12f) * (i - ((particleCount - 1f) / 2f)));
-            }
         }
     }
 }
