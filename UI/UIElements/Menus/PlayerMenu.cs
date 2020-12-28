@@ -57,7 +57,7 @@
                 LoadSlotGroups();
                 slotsInit = true;
             }
-            if(Control.KeyPressed(Keys.Escape) && (UiManager.menuCurrent == null || UiManager.menuCurrent == this) && ((World.player.heldItem.useTimeCurrent >= World.player.heldItem.useTimeMax) || open))
+            if(Control.KeyPressed(Keys.Escape) && (UiManager.menuCurrent ?? this) == this)
             {
                 ToggleOpen();
                 if(!open)

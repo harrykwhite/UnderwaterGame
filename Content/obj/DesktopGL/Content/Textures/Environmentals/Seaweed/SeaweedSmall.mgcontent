@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <SourceFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Environmentals/Seaweed/Seaweed.png</SourceFile>
-  <SourceTime>2020-12-28T19:54:09.9336034+10:00</SourceTime>
-  <DestFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/bin/DesktopGL/Textures/Environmentals/Seaweed/Seaweed.xnb</DestFile>
-  <DestTime>2020-12-29T09:32:29.9763841+10:00</DestTime>
+  <SourceFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Environmentals/Seaweed/SeaweedSmall.png</SourceFile>
+  <SourceTime>2020-12-28T20:06:30.167422+10:00</SourceTime>
+  <DestFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/bin/DesktopGL/Content/Textures/Environmentals/Seaweed/SeaweedSmall.xnb</DestFile>
+  <DestTime>2020-12-29T09:31:08.1176664+10:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+10:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

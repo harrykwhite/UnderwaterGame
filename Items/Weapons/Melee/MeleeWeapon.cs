@@ -32,7 +32,6 @@
             hitEntity.collider.shape.width = hitEntity.collider.shape.height = hitboxSize;
             hitEntity.collider.shape.Clear();
             hitEntity.depth = World.player.heldItem.depth + 0.001f;
-            World.player.heldItem.SetSwingEffect(swingSprite, hitboxOffset);
             World.player.knockbackSpeed += useStrength;
             World.player.knockbackDirection = World.player.heldItem.angleBase;
             ((CursorElement)UiManager.GetElement<CursorElement>()).scale += new Vector2(0.5f);

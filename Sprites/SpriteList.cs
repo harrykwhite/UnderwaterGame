@@ -7,7 +7,7 @@
         public static List<Sprite> sprites = new List<Sprite>();
 
         public static Sprite seaweed;
-
+        
         public static Sprite spawnStatue;
 
         public static Sprite jellyfish;
@@ -24,9 +24,9 @@
 
         public static Sprite blood;
 
-        public static Sprite bubble;
-
-        public static Sprite smoke;
+        public static Sprite bubbleSmall;
+        
+        public static Sprite bubbleLarge;
 
         public static Sprite liquid;
 
@@ -75,8 +75,8 @@
             longSwing = Load(Main.textureLibrary.EFFECTS_LONGSWING);
             wideSwing = Load(Main.textureLibrary.EFFECTS_WIDESWING);
             blood = Load(Main.textureLibrary.PARTICLES_BLOOD);
-            bubble = Load(Main.textureLibrary.PARTICLES_BUBBLE);
-            smoke = Load(Main.textureLibrary.PARTICLES_SMOKE);
+            bubbleSmall = Load(Main.textureLibrary.PARTICLES_BUBBLESMALL);
+            bubbleLarge = Load(Main.textureLibrary.PARTICLES_BUBBLELARGE);
             liquid = Load(Main.textureLibrary.PARTICLES_LIQUID);
             woodenArrow = Load(Main.textureLibrary.PROJECTILES_ARROWS_WOODENARROW);
             woodenTrident = Load(Main.textureLibrary.ITEMS_WEAPONS_MELEE_TRIDENTS_WOODENTRIDENT);

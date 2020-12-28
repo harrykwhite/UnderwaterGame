@@ -12,8 +12,7 @@
             useStrength = 2f;
             damage = 2;
             strength = 4f;
-            swingSpeed = 2f;
-            swingLength = 6f;
+            swingLength = 4f;
             hitboxOffset = 34f;
             swingSprite = Sprite.longSwing;
         }

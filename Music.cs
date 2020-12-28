@@ -75,7 +75,7 @@
                         3 => Main.soundLibrary.MUSIC_LAYER0_LOOP3.asset,
                         4 => Main.soundLibrary.MUSIC_LAYER0_LOOP4.asset,
                         5 => Main.soundLibrary.MUSIC_LAYER0_LOOP5.asset,
-                        _ => Main.soundLibrary.MUSIC_LAYER0_LOOP0.asset,
+                        _ => Main.soundLibrary.MUSIC_LAYER0_LOOP0.asset
                     };
                     layerLoopInstancePrevious = layerLoopInstance;
                     layerLoopInstance = soundEffect.CreateInstance();
@@ -109,7 +109,7 @@
                             {
                                 1 => Main.soundLibrary.MUSIC_COMBAT_OUTROSTINGER1.asset,
                                 2 => Main.soundLibrary.MUSIC_COMBAT_OUTROSTINGER2.asset,
-                                _ => Main.soundLibrary.MUSIC_COMBAT_OUTROSTINGER0.asset,
+                                _ => Main.soundLibrary.MUSIC_COMBAT_OUTROSTINGER0.asset
                             };
                             combatOutroStingerInstance = soundEffect.CreateInstance();
                             combatOutroStingerInstance.Play();
@@ -190,7 +190,7 @@
                         1 => Main.soundLibrary.MUSIC_COMBAT_LOOP1.asset,
                         2 => Main.soundLibrary.MUSIC_COMBAT_LOOP2.asset,
                         3 => Main.soundLibrary.MUSIC_COMBAT_LOOP3.asset,
-                        _ => Main.soundLibrary.MUSIC_COMBAT_LOOP0.asset,
+                        _ => Main.soundLibrary.MUSIC_COMBAT_LOOP0.asset
                     };
                     combatLoopInstancePrevious = combatLoopInstance;
                     combatLoopInstance = soundEffect.CreateInstance();

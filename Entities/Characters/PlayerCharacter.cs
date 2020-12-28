@@ -37,9 +37,9 @@
             Other
         }
 
-        private float bubbleTime;
+        private float bubbleSmallTime;
 
-        private float bubbleTimeMax = 10f;
+        private float bubbleSmallTimeMax = 10f;
 
         private float swimAngleTo;
 
@@ -246,14 +246,14 @@
                 float distance = new Vector2(swimSpeedHor, swimSpeedVer).Length() * (swimSpeedWaterMult ?? 0f);
                 if(distance > 0f)
                 {
-                    if(bubbleTime < bubbleTimeMax)
+                    if(bubbleSmallTime < bubbleSmallTimeMax)
                     {
-                        bubbleTime += distance / swimSpeedMax;
+                        bubbleSmallTime += distance / swimSpeedMax;
                     }else{
-                        Bubble bubble = (Bubble)EntityManager.AddEntity<Bubble>(position);
-                        bubble.position += MathUtilities.LengthDirection(10.5f, angle + angleOffset);
-                        bubble.direction = angle + angleOffset;
-                        bubbleTime = 0f;
+                        BubbleSmall bubbleSmall = (BubbleSmall)EntityManager.AddEntity<BubbleSmall>(position);
+                        bubbleSmall.position += MathUtilities.LengthDirection(10.5f, angle + angleOffset);
+                        bubbleSmall.direction = angle + angleOffset;
+                        bubbleSmallTime = 0f;
                     }
                     animator.sprite = Sprite.playerSwim;
                     animator.speed = 0.2f;

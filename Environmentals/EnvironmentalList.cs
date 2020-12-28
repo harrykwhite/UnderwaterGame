@@ -6,9 +6,9 @@
     public abstract partial class Environmental
     {
         public static List<Environmental> environmentals = new List<Environmental>();
-
+        
         public static Seaweed.Seaweed seaweed;
-
+        
         public static SpawnStatue spawnStatue;
 
         public static void LoadAll()

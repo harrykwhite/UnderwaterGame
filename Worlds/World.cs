@@ -47,9 +47,9 @@
 
         public static float gravityMax = 8f;
 
-        public static int bubbleTime;
+        public static int bubbleSmallTime;
 
-        public static int bubbleTimeMax = 60;
+        public static int bubbleSmallTimeMax = 60;
 
         public static List<Hotspot> hotspots;
         
@@ -83,7 +83,7 @@
                 }
             }
             environmentals = new List<WorldEnvironmental>();
-            bubbleTime = 0;
+            bubbleSmallTime = 0;
             hotspots = new List<Hotspot>();
             hotspotCurrent = null;
             hotspotPrevious = null;
@@ -141,47 +141,47 @@
                     }
                 }
             }
-            if(bubbleTime < bubbleTimeMax)
+            if(bubbleSmallTime < bubbleSmallTimeMax)
             {
-                bubbleTime++;
+                bubbleSmallTime++;
             }
             else
             {
                 int trials = 100;
                 int particleCount = 3;
-                Vector2[] bubblePositions = new Vector2[particleCount];
+                Vector2[] bubbleSmallPositions = new Vector2[particleCount];
                 for(int i = 0; i < particleCount; i++)
                 {
-                    Bubble bubble = (Bubble)EntityManager.AddEntity<Bubble>(Vector2.Zero);
+                    BubbleSmall bubbleSmall = (BubbleSmall)EntityManager.AddEntity<BubbleSmall>(Vector2.Zero);
                     bool valid;
                     do
                     {
                         valid = true;
-                        bubble.position = Camera.position + new Vector2(RandomUtilities.Range(-Camera.GetWidth() / 2f, Camera.GetWidth() / 2f), RandomUtilities.Range(-Camera.GetHeight() / 2f, Camera.GetHeight() / 2f));
+                        bubbleSmall.position = Camera.position + new Vector2(RandomUtilities.Range(-Camera.GetWidth() / 2f, Camera.GetWidth() / 2f), RandomUtilities.Range(-Camera.GetHeight() / 2f, Camera.GetHeight() / 2f));
                         for(int ii = i - 1; ii >= 0; ii--)
                         {
-                            if(Vector2.Distance(bubble.position, bubblePositions[ii]) <= 128f)
+                            if(Vector2.Distance(bubbleSmall.position, bubbleSmallPositions[ii]) <= 128f)
                             {
                                 valid = false;
                                 break;
                             }
                         }
                         trials--;
-                    } while(!valid || !bubble.TileTypeCollision(bubble.position, Tile.water, Tilemap.Liquids) && trials > 0);
+                    } while(!valid || !bubbleSmall.TileTypeCollision(bubbleSmall.position, Tile.water, Tilemap.Liquids) && trials > 0);
                     if(trials > 0)
                     {
-                        bubble.direction = -MathHelper.Pi / 2f;
-                        bubble.alpha = 0f;
-                        bubble.life = -30;
-                        bubblePositions[i] = bubble.position;
+                        bubbleSmall.direction = -MathHelper.Pi / 2f;
+                        bubbleSmall.alpha = 0f;
+                        bubbleSmall.life = -30;
+                        bubbleSmallPositions[i] = bubbleSmall.position;
                     }
                     else
                     {
-                        bubble.Destroy();
+                        bubbleSmall.Destroy();
                         break;
                     }
                 }
-                bubbleTime = 0;
+                bubbleSmallTime = 0;
             }
         }
 

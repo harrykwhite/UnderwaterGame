@@ -112,10 +112,6 @@
                 {
                     UpdateAngleBase();
                 }
-                if(swingEffect)
-                {
-                    swingEffectAnimator.speed = 0.2f;
-                }
             }
             if(useTimeCurrent >= useTimeMax)
             {
@@ -158,18 +154,19 @@
             depth = World.player.depth + 0.003f;
         }
 
-        public void SetSwingEffect(Sprite sprite, float length)
+        public void SetSwingEffect(Sprite sprite, float speed, float length)
         {
             swingEffectAnimator.sprite = sprite;
+            swingEffectAnimator.speed = speed;
             swingEffect = true;
             swingEffectLength = length;
         }
 
-        public void SetAngleHoldOffset(float offset, float offsetTo, int time)
+        public void SetAngleHoldOffset(float offset, float offsetTo, float speed)
         {
             angleHoldOffset = offset;
             angleHoldOffsetTo = offsetTo;
-            angleHoldOffsetSpeed = Math.Abs(MathUtilities.AngleDifference(angleHoldOffset, angleHoldOffsetTo)) / (time / 2);
+            angleHoldOffsetSpeed = speed;
         }
 
         private void UpdateAngle()

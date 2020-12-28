@@ -588,7 +588,7 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Particles/Blood.png
 
-#begin Textures/Particles/Bubble.png
+#begin Textures/Particles/BubbleLarge.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -598,7 +598,19 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Particles/Bubble.png
+/build:Textures/Particles/BubbleLarge.png
+
+#begin Textures/Particles/BubbleSmall.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Particles/BubbleSmall.png
 
 #begin Textures/Particles/Liquid.png
 /importer:TextureImporter
@@ -611,18 +623,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/Particles/Liquid.png
-
-#begin Textures/Particles/Smoke.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Particles/Smoke.png
 
 #begin Textures/Projectiles/Arrows/WoodenArrow.png
 /importer:TextureImporter

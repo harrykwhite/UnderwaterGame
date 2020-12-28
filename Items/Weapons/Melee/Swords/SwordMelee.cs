@@ -2,6 +2,7 @@
 {
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Audio;
+    using System;
     using UnderwaterGame.Entities;
     using UnderwaterGame.Utilities;
     using UnderwaterGame.Worlds;
@@ -20,13 +21,14 @@
             HitEntity hitEntity = base.Swing();
             float from = swingAngleRange * (MathUtilities.AngleLeftHalf(World.player.heldItem.angleBaseRelative) ? 1f : -1f);
             float to = -from;
-            World.player.heldItem.SetAngleHoldOffset(from, to, useTime);
+            World.player.heldItem.SetSwingEffect(swingSprite, (float)swingSprite.textures.Length / (float)(useTime / 2f), hitboxOffset);
+            World.player.heldItem.SetAngleHoldOffset(from, to, Math.Abs(MathUtilities.AngleDifference(from, to)) / (useTime / 2f));
             SoundEffect soundEffect = (Main.random.Next(4)) switch
             {
                 1 => Main.soundLibrary.ITEMS_WEAPONS_MELEE_SWORD1.asset,
                 2 => Main.soundLibrary.ITEMS_WEAPONS_MELEE_SWORD2.asset,
                 3 => Main.soundLibrary.ITEMS_WEAPONS_MELEE_SWORD3.asset,
-                _ => Main.soundLibrary.ITEMS_WEAPONS_MELEE_SWORD0.asset,
+                _ => Main.soundLibrary.ITEMS_WEAPONS_MELEE_SWORD0.asset
             };
             SoundUtilities.PlaySound(soundEffect);
             Camera.Shake(1f, World.player.heldItem.angleBase);

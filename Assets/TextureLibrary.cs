@@ -30,9 +30,9 @@
 
         public readonly LibraryAsset PARTICLES_BLOOD = new LibraryAsset("Textures/Particles/Blood");
 
-        public readonly LibraryAsset PARTICLES_BUBBLE = new LibraryAsset("Textures/Particles/Bubble");
-
-        public readonly LibraryAsset PARTICLES_SMOKE = new LibraryAsset("Textures/Particles/Smoke");
+        public readonly LibraryAsset PARTICLES_BUBBLESMALL = new LibraryAsset("Textures/Particles/BubbleSmall");
+        
+        public readonly LibraryAsset PARTICLES_BUBBLELARGE = new LibraryAsset("Textures/Particles/BubbleLarge");
 
         public readonly LibraryAsset PARTICLES_LIQUID = new LibraryAsset("Textures/Particles/Liquid");
 

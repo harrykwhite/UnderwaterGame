@@ -5,6 +5,7 @@
     using UnderwaterGame.Entities;
     using UnderwaterGame.Entities.Characters.Enemies;
     using UnderwaterGame.Entities.Particles;
+    using UnderwaterGame.Sprites;
     using UnderwaterGame.Utilities;
     using UnderwaterGame.Worlds;
 
@@ -59,12 +60,12 @@
                         } while((enemy.TileCollision(enemy.position, World.Tilemap.Solids) || !enemy.TileCollision(enemy.position, World.Tilemap.Liquids) || Vector2.Distance(enemy.position, World.player.position) <= 128f) && trials > 0);
                         if(trials > 0)
                         {
-                            int smokeCount = 6;
-                            float smokeDirectionOffset = MathHelper.ToRadians(Main.random.Next(360));
-                            for(int i = 0; i < smokeCount; i++)
+                            int bubbleLargeParticleCount = 6;
+                            float bubbleLargeParticleDirectionOffset = MathHelper.ToRadians(Main.random.Next(360));
+                            for(int i = 0; i < bubbleLargeParticleCount; i++)
                             {
-                                Smoke smoke = (Smoke)EntityManager.AddEntity<Smoke>(enemy.position);
-                                smoke.direction = (((MathHelper.Pi * 2f) / smokeCount) * i) + smokeDirectionOffset;
+                                BubbleLarge bubbleLarge = (BubbleLarge)EntityManager.AddEntity<BubbleLarge>(enemy.position);
+                                bubbleLarge.direction = (((MathHelper.Pi * 2f) / bubbleLargeParticleCount) * i) + bubbleLargeParticleDirectionOffset;
                             }
                         }
                         else
