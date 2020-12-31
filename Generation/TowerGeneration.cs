@@ -9,13 +9,15 @@
 
     public class TowerGeneration : Generation
     {
+        public Point[] towerPositions = new Point[4];
+
+        public int width = 8;
+
         public override void Generate()
         {
-            Point[] towerPositions = new Point[4];
             int towerPositionsGap = 32;
             for(int i = 0; i < towerPositions.Length; i++)
             {
-                int levelWidth = 8;
                 int levelHeight = 16;
                 int levelCount = Main.random.Next(6, 8);
                 int levelOffset = Main.random.Next(2) - levelCount + 1;
@@ -23,7 +25,7 @@
                 int topOffsetMax = 2;
                 int topIntervalMax = 4;
                 int topInterval = topIntervalMax / 2;
-                int[] tops = new int[levelWidth + 1];
+                int[] tops = new int[width + 1];
                 for(int t = 0; t < tops.Length; t++)
                 {
                     if(topInterval > 0)
@@ -44,7 +46,7 @@
                 }
                 do
                 {
-                    towerPositions[i].X = Main.random.Next(World.width);
+                    towerPositions[i].X = Main.random.Next(width / 2, World.width - (width / 2));
                     towerPositions[i].Y = 0;
                     while(World.GetTileAt(towerPositions[i].X, towerPositions[i].Y, World.Tilemap.Solids) == null)
                     {
@@ -53,9 +55,9 @@
                 } while(!ValidTowerPosition());
                 for(int l = 0; l < levelCount; l++)
                 {
-                    int xStart = towerPositions[i].X - (levelWidth / 2);
+                    int xStart = towerPositions[i].X - (width / 2);
                     int yStart = towerPositions[i].Y - (levelHeight * (l + levelOffset + 1));
-                    int xEnd = towerPositions[i].X + (levelWidth / 2);
+                    int xEnd = towerPositions[i].X + (width / 2);
                     int yEnd = towerPositions[i].Y - (levelHeight * (l + levelOffset)) - 1;
                     int gapSize = 2;
                     int gapOffset = Main.random.Next(-1, 2);
@@ -117,7 +119,7 @@
                 bool ValidTowerPosition()
                 {
                     SpawnGeneration spawnGeneration = (SpawnGeneration)World.generations.Find((Generation generation) => generation is SpawnGeneration);
-                    if((towerPositions[i].X >= (World.width - spawnGeneration.width - levelWidth) / 2) && (towerPositions[i].X <= (World.width + spawnGeneration.width + levelWidth) / 2))
+                    if((towerPositions[i].X >= (World.width - spawnGeneration.width - width) / 2) && (towerPositions[i].X <= (World.width + spawnGeneration.width + width) / 2))
                     {
                         return false;
                     }

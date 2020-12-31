@@ -336,6 +336,30 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Effects/WideSwing.png
 
+#begin Textures/Environmentals/Rocks/RockLarge.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Environmentals/Rocks/RockLarge.png
+
+#begin Textures/Environmentals/Rocks/RockSmall.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Environmentals/Rocks/RockSmall.png
+
 #begin Textures/Environmentals/Seaweed/Seaweed.png
 /importer:TextureImporter
 /processor:TextureProcessor

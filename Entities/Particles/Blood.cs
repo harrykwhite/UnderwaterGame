@@ -12,7 +12,7 @@
 
         public override void Init()
         {
-            SetSprite(Sprite.blood, false);
+            SetSprite(Sprite.blood, true);
             depth = 0.725f;
             speed = 2f;
             direction = MathHelper.ToRadians(Main.random.Next(360));
@@ -21,7 +21,6 @@
         public override void Update()
         {
             UpdateParticle();
-            position += velocity;
             velocity = Vector2.Zero;
         }
     }

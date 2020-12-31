@@ -7,6 +7,10 @@
         public static List<Sprite> sprites = new List<Sprite>();
 
         public static Sprite seaweed;
+
+        public static Sprite rockSmall;
+
+        public static Sprite rockLarge;
         
         public static Sprite spawnStatue;
 
@@ -67,6 +71,8 @@
         public static void LoadAll()
         {
             seaweed = Load(Main.textureLibrary.ENVIRONMENTALS_SEAWEED_SEAWEED);
+            rockSmall = Load(Main.textureLibrary.ENVIRONMENTALS_ROCKS_ROCKSMALL);
+            rockLarge = Load(Main.textureLibrary.ENVIRONMENTALS_ROCKS_ROCKLARGE);
             spawnStatue = Load(Main.textureLibrary.ENVIRONMENTALS_STATUES_SPAWNSTATUE);
             jellyfish = Load(Main.textureLibrary.CHARACTERS_ENEMIES_JELLYFISH_JELLYFISH);
             tallJellyfish = Load(Main.textureLibrary.CHARACTERS_ENEMIES_JELLYFISH_TALLJELLYFISH);

@@ -33,8 +33,6 @@
 
         public bool left;
 
-        public bool hasGravity = true;
-        
         protected int bloodParticleCount = 3;
 
         protected Color bloodParticleColor = Color.White;
@@ -54,14 +52,11 @@
                 angle = direction;
             }
             velocity = MathUtilities.LengthDirection(speed, directionInit.Value);
-            if(hasGravity)
-            {
-                UpdateGravity(true);
-                velocity.Y += gravity;
-            }
+            UpdateGravity(true);
+            velocity.Y += gravity;
             direction = MathUtilities.PointDirection(Vector2.Zero, velocity);
             List<Entity> characterEntities = EntityManager.entities.FindAll((Entity entity) => entity is CharacterEntity);
-            for(int i = 0; i < speed; i++)
+            for(float i = 0f; i < velocity.Length(); i += Math.Min(1f, velocity.Length() - i))
             {
                 bool hitCharacter = false;
                 foreach(Entity characterEntity in characterEntities)
@@ -98,7 +93,7 @@
                     Destroy();
                     break;
                 }
-                position += velocity / speed;
+                position += Vector2.Normalize(velocity) * Math.Min(1f, velocity.Length() - i);
             }
         }
 

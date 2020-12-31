@@ -13,6 +13,10 @@
         public readonly LibraryAsset TILES_LIQUIDS_WATER = new LibraryAsset("Textures/Tiles/Liquids/Water");
 
         public readonly LibraryAsset ENVIRONMENTALS_SEAWEED_SEAWEED = new LibraryAsset("Textures/Environmentals/Seaweed/Seaweed");
+        
+        public readonly LibraryAsset ENVIRONMENTALS_ROCKS_ROCKSMALL = new LibraryAsset("Textures/Environmentals/Rocks/RockSmall");
+        
+        public readonly LibraryAsset ENVIRONMENTALS_ROCKS_ROCKLARGE = new LibraryAsset("Textures/Environmentals/Rocks/RockLarge");
 
         public readonly LibraryAsset ENVIRONMENTALS_STATUES_SPAWNSTATUE = new LibraryAsset("Textures/Environmentals/Statues/SpawnStatue");
 

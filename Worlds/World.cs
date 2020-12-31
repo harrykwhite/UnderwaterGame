@@ -61,8 +61,6 @@
 
         public static bool generated;
 
-        public static long life;
-
         public static void Init()
         {
             player = null;
@@ -88,11 +86,12 @@
             hotspotCurrent = null;
             hotspotPrevious = null;
             generated = false;
-            generations = new List<Generation> {
+            generations = new List<Generation>() {
                 new TerrainGeneration(),
                 new SpawnGeneration(),
                 new TowerGeneration(),
-                new EnvironmentalGeneration(),
+                new SeaweedGeneration(),
+                new RockGeneration(),
                 new HotspotGeneration()
             };
         }
@@ -167,7 +166,7 @@
                             }
                         }
                         trials--;
-                    } while(!valid || !bubbleSmall.TileTypeCollision(bubbleSmall.position, Tile.water, Tilemap.Liquids) && trials > 0);
+                    } while(!valid || !bubbleSmall.TileTypeAt(bubbleSmall.position, Tile.water, Tilemap.Liquids) && trials > 0);
                     if(trials > 0)
                     {
                         bubbleSmall.direction = -MathHelper.Pi / 2f;
@@ -224,7 +223,7 @@
             foreach(WorldEnvironmental worldEnvironmental in environmentals)
             {
                 Environmental environmental = Environmental.GetEnvironmentalById(worldEnvironmental.id);
-                Main.spriteBatch.Draw(environmental.sprite.textures[(int)((life * 0.1f) % environmental.sprite.textures.Length)], (new Vector2(worldEnvironmental.x, worldEnvironmental.y) * Tile.size) - new Vector2(0f, environmental.sprite.origin.Y - environmental.sprite.bound.Y), null, Color.White, 0f, environmental.sprite.origin, 1f, SpriteEffects.None, 0.35f);
+                Main.spriteBatch.Draw(environmental.sprite.textures[0], (new Vector2(worldEnvironmental.x, worldEnvironmental.y) * Tile.size) - new Vector2(0f, environmental.sprite.textures[0].Height), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0.35f);
             }
             foreach(Hotspot hotspot in hotspots)
             {
@@ -242,7 +241,7 @@
             {
                 return false;
             }
-            WorldTile worldTile = new WorldTile() { id = tile.id };
+            WorldTile worldTile = new WorldTile(tile.id);
             tilemaps[(byte)tilemap][x, y] = worldTile;
             return true;
         }
@@ -311,33 +310,68 @@
 
         public static bool AddEnvironmentalAt(int x, int y, Environmental environmental)
         {
-            int ew = environmental.sprite.textures[0].Width / Tile.size;
-            int eh = environmental.sprite.textures[0].Height / Tile.size;
-            if(GetEnvironmentalAt(x, y) != null)
+            if(x < 0 || y < 0 || x >= width || y >= height)
             {
                 return false;
             }
+            int ew = environmental.sprite.textures[0].Width / Tile.size;
+            int eh = environmental.sprite.textures[0].Height / Tile.size;
             for(int ey = 0; ey <= eh; ey++)
             {
                 for(int ex = -1; ex <= ew; ex++)
                 {
-                    int tx = x + ex - (int)Math.Ceiling(ew / 2f);
+                    int tx = x + ex;
                     int ty = y + ey - eh;
-                    if(!(GetTileAt(tx, ty, Tilemap.Solids) == null ^ ey == eh))
+                    if(ex >= 0 && ex < ew && ey < eh)
                     {
-                        return false;
+                        if(GetEnvironmentalAt(tx, ty) != null)
+                        {
+                            return false;
+                        }
+                    }
+                    WorldTile worldTile = GetTileAt(tx, ty, Tilemap.Solids);
+                    if(ey == eh)
+                    {
+                        if(worldTile == null)
+                        {
+                            return false;
+                        }
+                    }
+                    else
+                    {
+                        if(ex >= 0 && ex < ew)
+                        {
+                            if(worldTile != null)
+                            {
+                                return false;
+                            }
+                        }
                     }
                 }
             }
-            environmentals.Add(new WorldEnvironmental() { id = environmental.id, x = x, y = y });
+            environmentals.Add(new WorldEnvironmental(environmental.id, x, y));
             return true;
         }
 
         public static WorldEnvironmental GetEnvironmentalAt(int x, int y)
         {
+            while(x < 0)
+            {
+                x++;
+            } while(y < 0)
+            {
+                y++;
+            } while(x >= width)
+            {
+                x--;
+            } while(y >= height)
+            {
+                y--;
+            }
             foreach(WorldEnvironmental worldEnvironmental in environmentals)
             {
-                if(worldEnvironmental.x == x && worldEnvironmental.y == y)
+                Environmental environmental = Environmental.GetEnvironmentalById(worldEnvironmental.id);
+                if(worldEnvironmental.x >= x && worldEnvironmental.y >= y && worldEnvironmental.x < x + (environmental.sprite.textures[0].Width / Tile.size) && worldEnvironmental.y < y + (environmental.sprite.textures[0].Height / Tile.size))
                 {
                     return worldEnvironmental;
                 }

@@ -2,7 +2,6 @@
 {
     using Microsoft.Xna.Framework;
     using UnderwaterGame.Sprites;
-    using UnderwaterGame.Worlds;
 
     public class Liquid : ParticleEntity
     {
@@ -15,23 +14,14 @@
         {
             SetSprite(Sprite.liquid, true);
             depth = 0.725f;
-            speed = 3.5f;
+            speed = 3f;
             direction = -MathHelper.Pi / 2f;
+            water = false;
         }
 
         public override void Update()
         {
             UpdateParticle();
-            UpdateGravity();
-            velocity.Y += gravity;
-            if(velocity.Y >= 0f)
-            {
-                if(TileCollision(position + velocity, World.Tilemap.Liquids))
-                {
-                    Destroy();
-                }
-            }
-            position += velocity;
             velocity = Vector2.Zero;
         }
     }

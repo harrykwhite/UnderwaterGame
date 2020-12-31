@@ -89,14 +89,7 @@
         {
             if(texture == null)
             {
-                if(animator != null)
-                {
-                    texture = animator.sprite.textures[(int)animator.index];
-                }
-                else
-                {
-                    texture = sprite.textures[0];
-                }
+                texture = animator?.sprite.textures[(int)animator.index] ?? sprite.textures[0];
             }
             if(position == null)
             {
@@ -143,9 +136,9 @@
             return EntityManager.entities.Contains(this);
         }
 
-        public Point GetTilePosition(Vector2 offset)
+        public Point GetTilePosition(Vector2 at)
         {
-            Point tilePosition = ((position + offset) / Tile.size).ToPoint();
+            Point tilePosition = (at / Tile.size).ToPoint();
             tilePosition.X = (int)MathUtilities.Clamp(tilePosition.X, 0f, World.width - 1f);
             tilePosition.Y = (int)MathUtilities.Clamp(tilePosition.Y, 0f, World.height - 1f);
             return tilePosition;
@@ -155,7 +148,7 @@
         {
             bool fall = true;
             float acc = World.gravityAcc;
-            if(TileIn(Tile.water, World.Tilemap.Liquids))
+            if(TileCollision(position, World.Tilemap.Liquids, (WorldTileData worldTileData) => Tile.GetTileById(worldTileData.worldTile.id) == Tile.water))
             {
                 if(gravityWaterTime > 0)
                 {
@@ -194,7 +187,7 @@
         protected void UpdateWater()
         {
             inWaterPrevious = inWater;
-            inWater = TileIn(Tile.water, World.Tilemap.Liquids);
+            inWater = TileTypeAt(position, Tile.water, World.Tilemap.Liquids);
             if(life > 0)
             {
                 if(inWater ^ inWaterPrevious)
@@ -203,9 +196,12 @@
                     for(int i = 0; i < particleCount; i++)
                     {
                         Liquid liquid = (Liquid)EntityManager.AddEntity<Liquid>(position);
-                        liquid.position = position;
                         liquid.direction = (-MathHelper.Pi / 2f) + ((MathHelper.Pi / 18f) * (i - ((particleCount - 1f) / 2f)));
-                        liquid.blend = new Color(16, 103, 153);
+                        liquid.blend = new Color(18, 101, 142);
+                        while(liquid.TileTypeCollision(liquid.position, Tile.water, World.Tilemap.Liquids))
+                        {
+                            liquid.position.Y--;
+                        }
                     }
                 }
             }
@@ -222,21 +218,24 @@
             position.Y = MathUtilities.Clamp(position.Y, 0f, World.height * Tile.size);
         }
 
-        public bool TileIn(Tile tileType, World.Tilemap tilemap)
+        public bool TileTypeAt(Vector2 at, Tile tileType, World.Tilemap tilemap)
         {
-            Point tilePosition = GetTilePosition(Vector2.Zero);
+            Point tilePosition = GetTilePosition(at);
             return World.GetTileDataAt(tilePosition.X, tilePosition.Y, tilemap, (WorldTileData tileData) => Tile.GetTileById(tileData.worldTile.id) == tileType) != null;
         }
 
         public bool TileCollision(Vector2 at, World.Tilemap tilemap, Predicate<WorldTileData> predicate = null)
         {
-            Point tileAt = (at / Tile.size).ToPoint();
-            List<WorldTileData> worldTileData = World.GetTileDataRange(tileAt.X, tileAt.Y, tilemap, Tile.check, predicate);
+            Point tilePosition = GetTilePosition(at);
+            List<WorldTileData> worldTileData = World.GetTileDataRange(tilePosition.X, tilePosition.Y, tilemap, Tile.check, predicate);
             foreach(WorldTileData data in worldTileData)
             {
-                if(collider.GetRelative(at).Intersects(data.shape))
+                if(data != null)
                 {
-                    return true;
+                    if(collider.GetRelative(at).Intersects(data.shape))
+                    {
+                        return true;
+                    }
                 }
             }
             return false;
@@ -244,8 +243,8 @@
 
         public bool TileTypeCollision(Vector2 at, Tile tileType, World.Tilemap tilemap)
         {
-            Point tileAt = (at / Tile.size).ToPoint();
-            List<WorldTileData> worldTileData = World.GetTileDataRange(tileAt.X, tileAt.Y, tilemap, Tile.check, (WorldTileData tileData) => Tile.GetTileById(tileData.worldTile.id) == tileType);
+            Point tilePosition = GetTilePosition(at);
+            List<WorldTileData> worldTileData = World.GetTileDataRange(tilePosition.X, tilePosition.Y, tilemap, Tile.check, (WorldTileData tileData) => Tile.GetTileById(tileData.worldTile.id) == tileType);
             foreach(WorldTileData data in worldTileData)
             {
                 if(collider.GetRelative(at).Intersects(data.shape))
@@ -262,8 +261,8 @@
             Vector2 at = a;
             while(true)
             {
-                Point tileAt = (at / Tile.size).ToPoint();
-                List<WorldTileData> worldTileData = World.GetTileDataRange(tileAt.X, tileAt.Y, tilemap, Tile.check);
+                Point tilePosition = GetTilePosition(at);
+                List<WorldTileData> worldTileData = World.GetTileDataRange(tilePosition.X, tilePosition.Y, tilemap, Tile.check);
                 foreach(WorldTileData data in worldTileData)
                 {
                     if(collider.GetRelative(at).Intersects(data.shape))
@@ -280,39 +279,15 @@
             return false;
         }
 
-        public bool TileTypeCollisionLine(Vector2 a, Vector2 b, Tile tileType, World.Tilemap tilemap)
-        {
-            float direction = MathUtilities.PointDirection(a, b);
-            Vector2 at = a;
-            while(true)
-            {
-                Point tileAt = (at / Tile.size).ToPoint();
-                List<WorldTileData> worldTileData = World.GetTileDataRange(tileAt.X, tileAt.Y, tilemap, Tile.check, (WorldTileData tileData) => Tile.GetTileById(tileData.worldTile.id) == tileType);
-                foreach(WorldTileData data in worldTileData)
-                {
-                    if(collider.GetRelative(at).Intersects(data.shape))
-                    {
-                        return true;
-                    }
-                }
-                if(at == b)
-                {
-                    break;
-                }
-                at += MathUtilities.LengthDirection(Math.Min(1f, Vector2.Distance(at, b)), direction);
-            }
-            return false;
-        }
-
         protected void TileCollisions()
         {
-            Point tilePosition = GetTilePosition(Vector2.Zero);
+            Point tilePosition = GetTilePosition(position);
             List<WorldTileData> worldTileData = World.GetTileDataRange(tilePosition.X, tilePosition.Y, World.Tilemap.Solids, Math.Max(Tile.check, (int)velocity.Length() / Tile.size));
             foreach(WorldTileData data in worldTileData)
             {
                 if(collider.GetRelative(position + new Vector2(velocity.X, 0f)).Intersects(data.shape))
                 {
-                    TileCollisionsTowards(new Vector2(velocity.X >= 0f ? 1f : -1f, 0f), Math.Abs(velocity.X));
+                    CollisionsTowards(new Vector2(velocity.X >= 0f ? 1f : -1f, 0f), Math.Abs(velocity.X));
                     velocity.X = 0f;
                     break;
                 }
@@ -321,7 +296,7 @@
             {
                 if(collider.GetRelative(position + new Vector2(0f, velocity.Y)).Intersects(data.shape))
                 {
-                    TileCollisionsTowards(new Vector2(0f, velocity.Y >= 0f ? 1f : -1f), Math.Abs(velocity.Y));
+                    CollisionsTowards(new Vector2(0f, velocity.Y >= 0f ? 1f : -1f), Math.Abs(velocity.Y));
                     velocity.Y = 0f;
                     break;
                 }
@@ -334,32 +309,31 @@
                     break;
                 }
             }
-        }
-
-        private void TileCollisionsTowards(Vector2 normal, float distance)
-        {
-            float length = 0f;
-            float lengthAcc = 0.1f;
-            while(!TileCollision() && length < distance)
+            void CollisionsTowards(Vector2 normal, float distance)
             {
-                position += normal * lengthAcc;
-                length += lengthAcc;
-            }
-            bool TileCollision()
-            {
-                Point tilePosition = GetTilePosition(Vector2.Zero);
-                List<WorldTileData> worldTileData = World.GetTileDataRange(tilePosition.X, tilePosition.Y, World.Tilemap.Solids, Math.Max(Tile.check, (int)velocity.Length() / Tile.size));
-                foreach(WorldTileData data in worldTileData)
+                float length = 0f;
+                float lengthAcc = 0.1f;
+                while(!TileCollision() && length < distance)
                 {
-                    if(collider.GetRelative(position + (normal * lengthAcc)).Intersects(data.shape))
-                    {
-                        return true;
-                    }
+                    position += normal * lengthAcc;
+                    length += lengthAcc;
                 }
-                return false;
+                bool TileCollision()
+                {
+                    Point tilePosition = GetTilePosition(position);
+                    List<WorldTileData> worldTileData = World.GetTileDataRange(tilePosition.X, tilePosition.Y, World.Tilemap.Solids, Math.Max(Tile.check, (int)velocity.Length() / Tile.size));
+                    foreach(WorldTileData data in worldTileData)
+                    {
+                        if(collider.GetRelative(position + (normal * lengthAcc)).Intersects(data.shape))
+                        {
+                            return true;
+                        }
+                    }
+                    return false;
+                }
             }
         }
-
+        
         public SpriteEffects GetFlip()
         {
             return (flipHor ? SpriteEffects.FlipHorizontally : SpriteEffects.None) | (flipVer ? SpriteEffects.FlipVertically : SpriteEffects.None);

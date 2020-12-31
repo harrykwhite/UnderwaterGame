@@ -138,10 +138,6 @@
                 EntityManager.Update();
                 Camera.Update();
                 World.Update();
-                if(UiManager.menuCurrent == null)
-                {
-                    World.life++;
-                }
             }
             UiManager.Update();
             Music.Update();

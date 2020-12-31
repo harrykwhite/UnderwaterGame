@@ -3,8 +3,6 @@
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Input;
     using System;
-    using System.Collections.Generic;
-    using UnderwaterGame.Entities.Characters.Enemies;
     using UnderwaterGame.Entities.Particles;
     using UnderwaterGame.Items;
     using UnderwaterGame.Items.Armours;

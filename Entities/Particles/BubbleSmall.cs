@@ -21,7 +21,6 @@
         public override void Update()
         {
             UpdateParticle();
-            position += velocity;
             velocity = Vector2.Zero;
         }
     }

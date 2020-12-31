@@ -1,4 +1,9 @@
-﻿using System;
+﻿using Microsoft.Xna.Framework;
+using System;
+using UnderwaterGame.Entities;
+using UnderwaterGame.Environmentals;
+using UnderwaterGame.Items;
+using UnderwaterGame.Tiles;
 using UnderwaterGame.Worlds;
 
 namespace UnderwaterGame.Generation
@@ -26,6 +31,24 @@ namespace UnderwaterGame.Generation
                     World.RemoveTileAt(x, y, World.Tilemap.Solids);
                 }
             }
+            SpawnGeneration spawnGeneration = (SpawnGeneration)World.generations.Find((Generation generation) => generation is SpawnGeneration);
+            int spawnStatueX, spawnStatueY;
+            do
+            {
+                spawnStatueX = ((World.width - spawnGeneration.width) / 2) + Main.random.Next(spawnGeneration.width);
+                spawnStatueY = 0;
+                for(int y = 0; y < World.height; y++)
+                {
+                    if(World.GetTileAt(spawnStatueX, y, World.Tilemap.Solids) != null)
+                    {
+                        spawnStatueY = y;
+                        break;
+                    }
+                }
+            } while(!World.AddEnvironmentalAt(spawnStatueX, spawnStatueY, Environmental.spawnStatue));
+            ItemDropEntity itemDrop = (ItemDropEntity)EntityManager.AddEntity<ItemDropEntity>(new Vector2(spawnStatueX + (Environmental.spawnStatue.sprite.textures[0].Width / (Tile.size * 2f)), spawnStatueY - 8f) * Tile.size);
+            itemDrop.SetItem(Item.woodenTrident, 1);
+            World.playerSpawnPosition = new Vector2(spawnStatueX + (Environmental.spawnStatue.sprite.textures[0].Width / (Tile.size * 2f)), spawnStatueY - 1.5f) * Tile.size;
         }
     }
 }

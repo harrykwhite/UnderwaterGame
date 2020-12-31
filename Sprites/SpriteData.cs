@@ -32,7 +32,7 @@
         private static bool LoadTexture(Sprite sprite)
         {
             TextureLibrary.LibraryAsset libraryAsset = sprite.libraryAsset;
-            if(libraryAsset == Main.textureLibrary.ENVIRONMENTALS_SEAWEED_SEAWEED || libraryAsset == Main.textureLibrary.CHARACTERS_PLAYER_PLAYERIDLE || libraryAsset == Main.textureLibrary.CHARACTERS_PLAYER_PLAYERSWIM || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_HEADS_STONEHELMETWEAR || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_CHESTS_STONECHESTPLATEWEAR || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_LEGS_STONELEGGINGSWEAR || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_FEET_STONEBOOTSWEAR || libraryAsset == Main.textureLibrary.ITEMS_WEAPONS_RANGED_BOWS_WOODENBOW)
+            if(libraryAsset == Main.textureLibrary.CHARACTERS_PLAYER_PLAYERIDLE || libraryAsset == Main.textureLibrary.CHARACTERS_PLAYER_PLAYERSWIM || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_HEADS_STONEHELMETWEAR || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_CHESTS_STONECHESTPLATEWEAR || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_LEGS_STONELEGGINGSWEAR || libraryAsset == Main.textureLibrary.ITEMS_ARMOURS_FEET_STONEBOOTSWEAR || libraryAsset == Main.textureLibrary.ITEMS_WEAPONS_RANGED_BOWS_WOODENBOW)
             {
                 sprite.SetTextureSheet(libraryAsset.asset, 16);
                 return true;

@@ -49,7 +49,7 @@
 
         protected void DrawFlash()
         {
-            DrawSelf(sprite.texturesFilled[(int)animator.index], color: Color.White * ((float)(flashTime * 2f) / (float)flashTimeMax), depth: depth + 0.001f);
+            DrawSelf(animator?.sprite.texturesFilled[(int)animator.index] ?? sprite.texturesFilled[0], color: Color.White * ((float)(flashTime * 2f) / (float)flashTimeMax), depth: depth + 0.001f);
         }
 
         public virtual bool Hurt(Hit hit)
