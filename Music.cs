@@ -58,14 +58,6 @@
             if(!loading)
             {
                 int layerLoopPrevious = layerLoop;
-                layerLoop = 1;
-                if(World.player != null)
-                {
-                    if(!World.player.inWater && World.player.life > 0)
-                    {
-                        layerLoop = 0;
-                    }
-                }
                 if(layerLoopInstance == null || layerLoopPrevious != layerLoop)
                 {
                     SoundEffect soundEffect = layerLoop switch

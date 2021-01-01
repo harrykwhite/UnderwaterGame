@@ -3,7 +3,7 @@
   <SourceFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Sounds/Characters/Player/Pickup1.wav</SourceFile>
   <SourceTime>2020-08-02T20:04:29.4373277+10:00</SourceTime>
   <DestFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/bin/DesktopGL/Sounds/Characters/Player/Pickup1.xnb</DestFile>
-  <DestTime>2020-10-24T19:01:20.2017051+10:00</DestTime>
+  <DestTime>2021-01-01T11:23:34.0289229+10:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+10:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

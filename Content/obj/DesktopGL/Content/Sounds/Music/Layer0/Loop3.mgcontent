@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Sounds/Music/Layer0/Loop3.wav</SourceFile>
-  <SourceTime>2020-06-17T19:53:30+10:00</SourceTime>
+  <SourceTime>2020-06-17T20:00:42+10:00</SourceTime>
   <DestFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/bin/DesktopGL/Content/Sounds/Music/Layer0/Loop3.xnb</DestFile>
-  <DestTime>2020-11-15T15:21:10.7907568+10:00</DestTime>
+  <DestTime>2021-01-01T11:22:41.6017206+10:00</DestTime>
   <Importer>WavImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+10:00</ImporterTime>
   <Processor>SoundEffectProcessor</Processor>

@@ -3,6 +3,9 @@
     using Microsoft.Xna.Framework;
     using UnderwaterGame.Items;
     using UnderwaterGame.Sprites;
+    using UnderwaterGame.Tiles;
+    using UnderwaterGame.Utilities;
+    using UnderwaterGame.Worlds;
 
     public class TallJellyfish : JellyfishEnemy
     {
@@ -21,7 +24,6 @@
             healthOffset = 29f;
             touchDamage = 1;
             bloodParticleColor = new Color(164, 132, 183);
-            swimBreakTimeMax = 30;
             itemDropType = new Item[2] { Item.purpleJelly, Item.purpleJellyShuriken };
             itemDropQuantity = new int[2] { Main.random.Next(2) + 2, Main.random.Next(2) + 3 };
             itemDropChance = new float[2] { 0.5f, 0.1f };
@@ -31,14 +33,12 @@
         {
             JellyfishUpdate();
             UpdateStatus();
-            UpdateGravity();
-            velocity.Y += gravity;
             TileCollisions();
             position += velocity;
-            LockInWorld();
+            position.X = MathUtilities.Clamp(position.X, 0f, World.width * Tile.size);
+            position.Y = MathUtilities.Clamp(position.Y, 0f, World.height * Tile.size);
             animator.speed = 0.1f;
             animator.Update();
-            UpdateWater();
             UpdateTouchDamage();
             velocity = Vector2.Zero;
         }

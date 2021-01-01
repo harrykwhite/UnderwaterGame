@@ -5,7 +5,6 @@
     using UnderwaterGame.Entities;
     using UnderwaterGame.Entities.Characters.Enemies;
     using UnderwaterGame.Entities.Particles;
-    using UnderwaterGame.Sprites;
     using UnderwaterGame.Utilities;
     using UnderwaterGame.Worlds;
 
@@ -57,7 +56,7 @@
                         {
                             enemy.position = position + MathUtilities.LengthDirection(RandomUtilities.Range(0f, Main.textureLibrary.OTHER_HOTSPOT.asset.Width / 2f), MathHelper.ToRadians(Main.random.Next(360)));
                             trials--;
-                        } while((enemy.TileCollision(enemy.position, World.Tilemap.Solids) || !enemy.TileCollision(enemy.position, World.Tilemap.Liquids) || Vector2.Distance(enemy.position, World.player.position) <= 128f) && trials > 0);
+                        } while((enemy.TileCollision(enemy.position, World.Tilemap.Solids) || Vector2.Distance(enemy.position, World.player.position) <= 128f) && trials > 0);
                         if(trials > 0)
                         {
                             int bubbleLargeParticleCount = 6;

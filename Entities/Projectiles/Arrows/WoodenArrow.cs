@@ -21,7 +21,6 @@
         public override void Update()
         {
             UpdateProjectile();
-            UpdateWater();
             velocity = Vector2.Zero;
         }
     }

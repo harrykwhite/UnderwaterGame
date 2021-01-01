@@ -96,7 +96,7 @@
                                     World.AddTileAt(x, y, World.Tilemap.Solids, Tile.brick);
                                 }
                             }
-                            World.AddTileAt(x, y, World.Tilemap.Walls, Tile.brickWall);
+                            World.AddTileAt(x, y, World.Tilemap.Walls, Tile.brick);
                         }
                     }
                 }

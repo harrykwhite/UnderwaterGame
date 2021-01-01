@@ -10,7 +10,7 @@
     {
         protected int swimTime;
 
-        protected int swimTimeMax = 20;
+        protected int swimTimeMax = 30;
 
         protected int swimBreakTime;
 

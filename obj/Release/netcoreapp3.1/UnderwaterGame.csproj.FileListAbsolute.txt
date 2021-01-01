@@ -191,3 +191,9 @@ C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Items\Weapons\Ranged\Throwables\PurpleJellyShuriken.xnb
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Particles\BubbleLarge.xnb
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Particles\BubbleSmall.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Environmentals\Rocks\Rock.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Environmentals\Rocks\RockLarge.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Environmentals\Rocks\RockSmall.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Tiles\Brick.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Tiles\Sand.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Release\netcoreapp3.1\Content\Textures\Tiles\Stone.xnb

@@ -240,12 +240,6 @@
 /processorParam:Quality=Best
 /build:Sounds/Music/Layer0/Loop4.wav
 
-#begin Sounds/Music/Layer0/Loop5.wav
-/importer:WavImporter
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Sounds/Music/Layer0/Loop5.wav
-
 #begin Sounds/Ui/Click.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -636,18 +630,6 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Particles/BubbleSmall.png
 
-#begin Textures/Particles/Liquid.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Particles/Liquid.png
-
 #begin Textures/Projectiles/Arrows/WoodenArrow.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -660,7 +642,7 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Projectiles/Arrows/WoodenArrow.png
 
-#begin Textures/Tiles/Liquids/Water.png
+#begin Textures/Tiles/Brick.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -670,9 +652,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Tiles/Liquids/Water.png
+/build:Textures/Tiles/Brick.png
 
-#begin Textures/Tiles/Solids/Brick.png
+#begin Textures/Tiles/Sand.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -682,9 +664,9 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Tiles/Solids/Brick.png
+/build:Textures/Tiles/Sand.png
 
-#begin Textures/Tiles/Solids/Sand.png
+#begin Textures/Tiles/Stone.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -694,19 +676,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Tiles/Solids/Sand.png
-
-#begin Textures/Tiles/Solids/Stone.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Tiles/Solids/Stone.png
+/build:Textures/Tiles/Stone.png
 
 #begin Textures/Ui/Buttons/Icons/Inventory/ArmourIcon.png
 /importer:TextureImporter

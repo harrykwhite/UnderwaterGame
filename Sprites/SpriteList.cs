@@ -32,8 +32,6 @@
         
         public static Sprite bubbleLarge;
 
-        public static Sprite liquid;
-
         public static Sprite woodenArrow;
 
         public static Sprite woodenTrident;
@@ -83,7 +81,6 @@
             blood = Load(Main.textureLibrary.PARTICLES_BLOOD);
             bubbleSmall = Load(Main.textureLibrary.PARTICLES_BUBBLESMALL);
             bubbleLarge = Load(Main.textureLibrary.PARTICLES_BUBBLELARGE);
-            liquid = Load(Main.textureLibrary.PARTICLES_LIQUID);
             woodenArrow = Load(Main.textureLibrary.PROJECTILES_ARROWS_WOODENARROW);
             woodenTrident = Load(Main.textureLibrary.ITEMS_WEAPONS_MELEE_TRIDENTS_WOODENTRIDENT);
             woodenSword = Load(Main.textureLibrary.ITEMS_WEAPONS_MELEE_SWORDS_WOODENSWORD);

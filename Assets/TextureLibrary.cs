@@ -4,13 +4,11 @@
 
     public class TextureLibrary : Library<Texture2D>
     {
-        public readonly LibraryAsset TILES_SOLIDS_STONE = new LibraryAsset("Textures/Tiles/Solids/Stone");
+        public readonly LibraryAsset TILES_STONE = new LibraryAsset("Textures/Tiles/Stone");
 
-        public readonly LibraryAsset TILES_SOLIDS_SAND = new LibraryAsset("Textures/Tiles/Solids/Sand");
+        public readonly LibraryAsset TILES_SAND = new LibraryAsset("Textures/Tiles/Sand");
 
-        public readonly LibraryAsset TILES_SOLIDS_BRICK = new LibraryAsset("Textures/Tiles/Solids/Brick");
-
-        public readonly LibraryAsset TILES_LIQUIDS_WATER = new LibraryAsset("Textures/Tiles/Liquids/Water");
+        public readonly LibraryAsset TILES_BRICK = new LibraryAsset("Textures/Tiles/Brick");
 
         public readonly LibraryAsset ENVIRONMENTALS_SEAWEED_SEAWEED = new LibraryAsset("Textures/Environmentals/Seaweed/Seaweed");
         
@@ -37,8 +35,6 @@
         public readonly LibraryAsset PARTICLES_BUBBLESMALL = new LibraryAsset("Textures/Particles/BubbleSmall");
         
         public readonly LibraryAsset PARTICLES_BUBBLELARGE = new LibraryAsset("Textures/Particles/BubbleLarge");
-
-        public readonly LibraryAsset PARTICLES_LIQUID = new LibraryAsset("Textures/Particles/Liquid");
 
         public readonly LibraryAsset PROJECTILES_ARROWS_WOODENARROW = new LibraryAsset("Textures/Projectiles/Arrows/WoodenArrow");
 

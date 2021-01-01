@@ -10,7 +10,7 @@
     {
         public int flashTime;
 
-        public int flashTimeMax = 20;
+        public int flashTimeMax = 30;
 
         protected SoundEffect hurtSound;
 

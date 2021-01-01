@@ -67,11 +67,6 @@
             shake += amount * new Vector2((float)Math.Cos(direction), (float)Math.Sin(direction));
         }
 
-        public static Shape GetShape()
-        {
-            return new Shape(Shape.Fill.Rectangle, GetWidth(), GetHeight()) { position = position - (new Vector2(GetWidth(), GetHeight()) / 2f) };
-        }
-
         public static int GetWidth()
         {
             return Main.GetBufferWidth() / scale;

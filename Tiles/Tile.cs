@@ -3,8 +3,6 @@
     using Microsoft.Xna.Framework;
     using Microsoft.Xna.Framework.Graphics;
     using System;
-    using UnderwaterGame.Tiles.Liquids;
-    using UnderwaterGame.Tiles.Walls;
 
     public abstract partial class Tile
     {
@@ -16,8 +14,6 @@
 
         public Texture2D[] textures;
 
-        public float alpha = 1f;
-
         public static int size = 8;
 
         public static int check = 4;
@@ -26,34 +22,10 @@
         {
             tiles.Add(this);
             Init();
-            SetTextures();
-        }
-
-        private static T Load<T>(byte id) where T : Tile
-        {
-            T tile = Activator.CreateInstance<T>();
-            tile.id = id;
-            return tile;
-        }
-
-        public static Tile GetTileById(byte id)
-        {
-            return tiles.Find((Tile tile) => tile.id == id);
-        }
-
-        protected abstract void Init();
-
-        public virtual void SetTextures()
-        {
-            if(this is WallTile)
-            {
-                return;
-            }
-            int textureCount = this is LiquidTile ? 2 : 20;
-            textures = new Texture2D[textureCount];
+            textures = new Texture2D[20];
             Color[] textureData = new Color[texture.Width * texture.Height];
             texture.GetData(textureData);
-            for(int i = 0; i < textureCount; i++)
+            for(int i = 0; i < textures.Length; i++)
             {
                 Texture2D newTexture = new Texture2D(Main.graphicsDevice, texture.Width, texture.Height);
                 Color[] newTextureData = new Color[texture.Width * texture.Height];
@@ -65,112 +37,100 @@
                 bool topRightSlope = false;
                 bool bottomLeftSlope = false;
                 bool bottomRightSlope = false;
-                if(this is LiquidTile)
+                switch(i)
                 {
-                    switch(i)
-                    {
-                        case 1:
-                            top = true;
-                            break;
-                    }
-                }
-                else
-                {
-                    switch(i)
-                    {
-                        case 1:
-                            left = true;
-                            right = true;
-                            top = true;
-                            bottom = true;
-                            break;
+                    case 1:
+                        left = true;
+                        right = true;
+                        top = true;
+                        bottom = true;
+                        break;
 
-                        case 2:
-                            left = true;
-                            right = true;
-                            top = true;
-                            break;
+                    case 2:
+                        left = true;
+                        right = true;
+                        top = true;
+                        break;
 
-                        case 3:
-                            left = true;
-                            right = true;
-                            break;
+                    case 3:
+                        left = true;
+                        right = true;
+                        break;
 
-                        case 4:
-                            left = true;
-                            right = true;
-                            bottom = true;
-                            break;
+                    case 4:
+                        left = true;
+                        right = true;
+                        bottom = true;
+                        break;
 
-                        case 5:
-                            left = true;
-                            top = true;
-                            bottom = true;
-                            break;
+                    case 5:
+                        left = true;
+                        top = true;
+                        bottom = true;
+                        break;
 
-                        case 6:
-                            top = true;
-                            bottom = true;
-                            break;
+                    case 6:
+                        top = true;
+                        bottom = true;
+                        break;
 
-                        case 7:
-                            right = true;
-                            top = true;
-                            bottom = true;
-                            break;
+                    case 7:
+                        right = true;
+                        top = true;
+                        bottom = true;
+                        break;
 
-                        case 8:
-                            left = true;
-                            top = true;
-                            break;
+                    case 8:
+                        left = true;
+                        top = true;
+                        break;
 
-                        case 9:
-                            top = true;
-                            break;
+                    case 9:
+                        top = true;
+                        break;
 
-                        case 10:
-                            right = true;
-                            top = true;
-                            break;
+                    case 10:
+                        right = true;
+                        top = true;
+                        break;
 
-                        case 11:
-                            left = true;
-                            break;
+                    case 11:
+                        left = true;
+                        break;
 
-                        case 12:
-                            right = true;
-                            break;
+                    case 12:
+                        right = true;
+                        break;
 
-                        case 13:
-                            left = true;
-                            bottom = true;
-                            break;
+                    case 13:
+                        left = true;
+                        bottom = true;
+                        break;
 
-                        case 14:
-                            bottom = true;
-                            break;
+                    case 14:
+                        bottom = true;
+                        break;
 
-                        case 15:
-                            right = true;
-                            bottom = true;
-                            break;
+                    case 15:
+                        right = true;
+                        bottom = true;
+                        break;
 
-                        case 16:
-                            topLeftSlope = true;
-                            break;
+                    case 16:
+                        topLeftSlope = true;
+                        break;
 
-                        case 17:
-                            topRightSlope = true;
-                            break;
+                    case 17:
+                        topRightSlope = true;
+                        break;
 
-                        case 18:
-                            bottomLeftSlope = true;
-                            break;
+                    case 18:
+                        bottomLeftSlope = true;
+                        break;
 
-                        case 19:
-                            bottomRightSlope = true;
-                            break;
-                    }
+                    case 19:
+                        bottomRightSlope = true;
+                        break;
                 }
                 for(int y = 0; y < texture.Height; y++)
                 {
@@ -197,5 +157,19 @@
                 textures[i] = newTexture;
             }
         }
+
+        private static T Load<T>(byte id) where T : Tile
+        {
+            T tile = Activator.CreateInstance<T>();
+            tile.id = id;
+            return tile;
+        }
+
+        public static Tile GetTileById(byte id)
+        {
+            return tiles.Find((Tile tile) => tile.id == id);
+        }
+
+        protected abstract void Init();
     }
 }

@@ -28,12 +28,6 @@
 
         public bool flipVer;
 
-        public float gravity;
-
-        public int gravityWaterTime;
-
-        public int gravityWaterTimeMax = 5;
-
         public Vector2 position;
 
         public Vector2 velocity;
@@ -45,10 +39,6 @@
         public Animator animator;
 
         public Collider collider;
-
-        public bool inWater;
-
-        public bool inWaterPrevious;
 
         public Entity()
         {
@@ -142,80 +132,6 @@
             tilePosition.X = (int)MathUtilities.Clamp(tilePosition.X, 0f, World.width - 1f);
             tilePosition.Y = (int)MathUtilities.Clamp(tilePosition.Y, 0f, World.height - 1f);
             return tilePosition;
-        }
-
-        protected void UpdateGravity(bool endless = false)
-        {
-            bool fall = true;
-            float acc = World.gravityAcc;
-            if(TileCollision(position, World.Tilemap.Liquids, (WorldTileData worldTileData) => Tile.GetTileById(worldTileData.worldTile.id) == Tile.water))
-            {
-                if(gravityWaterTime > 0)
-                {
-                    gravityWaterTime--;
-                }
-                else
-                {
-                    fall = false;
-                    acc *= 2f;
-                }
-            }
-            else
-            {
-                gravityWaterTime = gravityWaterTimeMax;
-            }
-            if(fall)
-            {
-                gravity += acc;
-            }
-            else
-            {
-                if(!endless)
-                {
-                    if(gravity < 0f)
-                    {
-                        gravity += Math.Min(acc, -gravity);
-                    }
-                    else if(gravity > 0f)
-                    {
-                        gravity -= Math.Min(acc, gravity);
-                    }
-                }
-            }
-        }
-
-        protected void UpdateWater()
-        {
-            inWaterPrevious = inWater;
-            inWater = TileTypeAt(position, Tile.water, World.Tilemap.Liquids);
-            if(life > 0)
-            {
-                if(inWater ^ inWaterPrevious)
-                {
-                    int particleCount = 3;
-                    for(int i = 0; i < particleCount; i++)
-                    {
-                        Liquid liquid = (Liquid)EntityManager.AddEntity<Liquid>(position);
-                        liquid.direction = (-MathHelper.Pi / 2f) + ((MathHelper.Pi / 18f) * (i - ((particleCount - 1f) / 2f)));
-                        liquid.blend = new Color(18, 101, 142);
-                        while(liquid.TileTypeCollision(liquid.position, Tile.water, World.Tilemap.Liquids))
-                        {
-                            liquid.position.Y--;
-                        }
-                    }
-                }
-            }
-        }
-
-        public bool InWorld()
-        {
-            return position.X >= 0f && position.Y >= 0f && position.X <= World.width * Tile.size && position.Y <= World.height * Tile.size;
-        }
-
-        protected void LockInWorld()
-        {
-            position.X = MathUtilities.Clamp(position.X, 0f, World.width * Tile.size);
-            position.Y = MathUtilities.Clamp(position.Y, 0f, World.height * Tile.size);
         }
 
         public bool TileTypeAt(Vector2 at, Tile tileType, World.Tilemap tilemap)

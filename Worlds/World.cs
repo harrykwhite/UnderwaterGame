@@ -20,9 +20,7 @@
         {
             Solids,
 
-            Walls,
-
-            Liquids
+            Walls
         }
 
         public static PlayerCharacter player;
@@ -43,13 +41,9 @@
 
         public static int height = 300;
 
-        public static float gravityAcc = 0.1f;
-
-        public static float gravityMax = 8f;
-
         public static int bubbleSmallTime;
 
-        public static int bubbleSmallTimeMax = 60;
+        public static int bubbleSmallTimeMax = 120;
 
         public static List<Hotspot> hotspots;
         
@@ -69,7 +63,6 @@
             tilemaps = new WorldTile[Enum.GetNames(typeof(Tilemap)).Length][,];
             tilemaps[(byte)Tilemap.Solids] = new WorldTile[width, height];
             tilemaps[(byte)Tilemap.Walls] = new WorldTile[width, height];
-            tilemaps[(byte)Tilemap.Liquids] = new WorldTile[width, height];
             for(byte m = 0; m < tilemaps.Length; m++)
             {
                 for(int y = 0; y < height; y++)
@@ -166,7 +159,7 @@
                             }
                         }
                         trials--;
-                    } while(!valid || !bubbleSmall.TileTypeAt(bubbleSmall.position, Tile.water, Tilemap.Liquids) && trials > 0);
+                    } while(!valid && trials > 0);
                     if(trials > 0)
                     {
                         bubbleSmall.direction = -MathHelper.Pi / 2f;
@@ -186,11 +179,10 @@
 
         public static void Draw()
         {
-            Shape cameraShape = Camera.GetShape();
-            int xStart = (int)Math.Max(0f, cameraShape.position.X / Tile.size);
-            int yStart = (int)Math.Max(0f, cameraShape.position.Y / Tile.size);
-            int xEnd = (int)Math.Min(width - 1f, Math.Ceiling((cameraShape.position.X + Camera.GetWidth()) / Tile.size));
-            int yEnd = (int)Math.Min(height - 1f, Math.Ceiling((cameraShape.position.Y + Camera.GetHeight()) / Tile.size));
+            int xStart = (int)Math.Max(0f, (Camera.position.X - (Camera.GetWidth() / 2f)) / Tile.size);
+            int yStart = (int)Math.Max(0f, (Camera.position.Y - (Camera.GetHeight() / 2f)) / Tile.size);
+            int xEnd = (int)Math.Min(width - 1f, Math.Ceiling((Camera.position.X + (Camera.GetWidth() / 2f)) / Tile.size));
+            int yEnd = (int)Math.Min(height - 1f, Math.Ceiling((Camera.position.Y + (Camera.GetHeight() / 2f)) / Tile.size));
             for(byte m = 0; m < tilemaps.Length; m++)
             {
                 for(int y = yStart; y <= yEnd; y++)
@@ -198,25 +190,11 @@
                     for(int x = xStart; x <= xEnd; x++)
                     {
                         WorldTile worldTile = tilemaps[m][x, y];
-                        Color color = Color.White;
-                        float depth = 0.65f;
-                        Vector2 offset = Vector2.Zero;
-                        switch((Tilemap)m)
-                        {
-                            case Tilemap.Walls:
-                                color = new Color(120, 120, 120);
-                                depth = 0.25f;
-                                break;
-
-                            case Tilemap.Liquids:
-                                depth = 0.75f;
-                                break;
-                        }
                         if(worldTile == null)
                         {
                             continue;
                         }
-                        Main.spriteBatch.Draw(Tile.GetTileById(worldTile.id).textures[worldTile.texture], (new Vector2(x, y) * Tile.size) + offset, null, color * Tile.GetTileById(worldTile.id).alpha, 0f, Vector2.Zero, 1f, SpriteEffects.None, depth);
+                        Main.spriteBatch.Draw(Tile.GetTileById(worldTile.id).textures[worldTile.texture], new Vector2(x, y) * Tile.size, null, (Tilemap)m == Tilemap.Walls ? new Color(120, 120, 120) : Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, (Tilemap)m == Tilemap.Walls ? 0.25f : 0.65f);
                     }
                 }
             }
@@ -229,6 +207,7 @@
             {
                 Main.spriteBatch.Draw(Main.textureLibrary.OTHER_HOTSPOT.asset, hotspot.position, null, Color.White, 0f, new Vector2(Main.textureLibrary.OTHER_HOTSPOT.asset.Width, Main.textureLibrary.OTHER_HOTSPOT.asset.Height) / 2f, 1f, SpriteEffects.None, 0.9f);
             }
+            Main.spriteBatch.Draw(Main.textureLibrary.OTHER_PIXEL.asset, Camera.position - (new Vector2(Camera.GetWidth(), Camera.GetHeight()) / 2f), null, new Color(55, 154, 204) * 0.2f, 0f, Vector2.Zero, new Vector2(Camera.GetWidth(), Camera.GetHeight()), SpriteEffects.None, 1f);
         }
 
         public static bool AddTileAt(int x, int y, Tilemap tilemap, Tile tile)
@@ -430,93 +409,81 @@
             bool rightEmpty = GetTileAt(x + 1, y, tilemap) == null;
             bool topEmpty = GetTileAt(x, y - 1, tilemap) == null;
             bool bottomEmpty = GetTileAt(x, y + 1, tilemap) == null;
-            switch(tilemap)
+            if(!left && !right && !top && !bottom)
             {
-                case Tilemap.Liquids:
-                    if(topEmpty)
-                    {
-                        worldTile.texture = 1;
-                    }
-                    break;
-
-                default:
-                    if(!left && !right && !top && !bottom)
-                    {
-                        worldTile.texture = 1;
-                    }
-                    if(!left && !right && !top && bottom)
-                    {
-                        worldTile.texture = 2;
-                    }
-                    if(!left && !right && top && bottom)
-                    {
-                        worldTile.texture = 3;
-                    }
-                    if(!left && !right && top && !bottom)
-                    {
-                        worldTile.texture = 4;
-                    }
-                    if(!left && right && !top && !bottom)
-                    {
-                        worldTile.texture = 5;
-                    }
-                    if(left && right && !top && !bottom)
-                    {
-                        worldTile.texture = 6;
-                    }
-                    if(left && !right && !top && !bottom)
-                    {
-                        worldTile.texture = 7;
-                    }
-                    if(!left && right && !top && bottom)
-                    {
-                        worldTile.texture = 8;
-                    }
-                    if(left && right && !top && bottom)
-                    {
-                        worldTile.texture = 9;
-                    }
-                    if(left && !right && !top && bottom)
-                    {
-                        worldTile.texture = 10;
-                    }
-                    if(!left && right && top && bottom)
-                    {
-                        worldTile.texture = 11;
-                    }
-                    if(left && !right && top && bottom)
-                    {
-                        worldTile.texture = 12;
-                    }
-                    if(!left && right && top && !bottom)
-                    {
-                        worldTile.texture = 13;
-                    }
-                    if(left && right && top && !bottom)
-                    {
-                        worldTile.texture = 14;
-                    }
-                    if(left && !right && top && !bottom)
-                    {
-                        worldTile.texture = 15;
-                    }
-                    if(leftEmpty && !rightEmpty && topEmpty && !bottomEmpty)
-                    {
-                        worldTile.texture = 16;
-                    }
-                    if(!leftEmpty && rightEmpty && topEmpty && !bottomEmpty)
-                    {
-                        worldTile.texture = 17;
-                    }
-                    if(leftEmpty && !rightEmpty && !topEmpty && bottomEmpty)
-                    {
-                        worldTile.texture = 18;
-                    }
-                    if(!leftEmpty && rightEmpty && !topEmpty && bottomEmpty)
-                    {
-                        worldTile.texture = 19;
-                    }
-                    break;
+                worldTile.texture = 1;
+            }
+            if(!left && !right && !top && bottom)
+            {
+                worldTile.texture = 2;
+            }
+            if(!left && !right && top && bottom)
+            {
+                worldTile.texture = 3;
+            }
+            if(!left && !right && top && !bottom)
+            {
+                worldTile.texture = 4;
+            }
+            if(!left && right && !top && !bottom)
+            {
+                worldTile.texture = 5;
+            }
+            if(left && right && !top && !bottom)
+            {
+                worldTile.texture = 6;
+            }
+            if(left && !right && !top && !bottom)
+            {
+                worldTile.texture = 7;
+            }
+            if(!left && right && !top && bottom)
+            {
+                worldTile.texture = 8;
+            }
+            if(left && right && !top && bottom)
+            {
+                worldTile.texture = 9;
+            }
+            if(left && !right && !top && bottom)
+            {
+                worldTile.texture = 10;
+            }
+            if(!left && right && top && bottom)
+            {
+                worldTile.texture = 11;
+            }
+            if(left && !right && top && bottom)
+            {
+                worldTile.texture = 12;
+            }
+            if(!left && right && top && !bottom)
+            {
+                worldTile.texture = 13;
+            }
+            if(left && right && top && !bottom)
+            {
+                worldTile.texture = 14;
+            }
+            if(left && !right && top && !bottom)
+            {
+                worldTile.texture = 15;
+            }
+            if(leftEmpty && !rightEmpty && topEmpty && !bottomEmpty)
+            {
+                worldTile.texture = 16;
+            }
+            if(!leftEmpty && rightEmpty && topEmpty && !bottomEmpty)
+            {
+                worldTile.texture = 17;
+            }
+            if(leftEmpty && !rightEmpty && !topEmpty && bottomEmpty)
+            {
+                worldTile.texture = 18;
+            }
+            if(!leftEmpty && rightEmpty && !topEmpty && bottomEmpty)
+            {
+                worldTile.texture = 19;
             }
         }
     }

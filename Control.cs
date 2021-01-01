@@ -102,7 +102,7 @@
 
         public static Vector2 GetMousePositionWorld()
         {
-            return (GetMousePosition() / Camera.scale) + Camera.GetShape().position;
+            return (GetMousePosition() / Camera.scale) + Camera.position - (new Vector2(Camera.GetWidth(), Camera.GetHeight()) / 2f);
         }
     }
 }

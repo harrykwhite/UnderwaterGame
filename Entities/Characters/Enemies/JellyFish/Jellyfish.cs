@@ -3,6 +3,9 @@
     using Microsoft.Xna.Framework;
     using UnderwaterGame.Items;
     using UnderwaterGame.Sprites;
+    using UnderwaterGame.Tiles;
+    using UnderwaterGame.Utilities;
+    using UnderwaterGame.Worlds;
 
     public class Jellyfish : JellyfishEnemy
     {
@@ -30,14 +33,12 @@
         {
             JellyfishUpdate();
             UpdateStatus();
-            UpdateGravity();
-            velocity.Y += gravity;
             TileCollisions();
             position += velocity;
-            LockInWorld();
+            position.X = MathUtilities.Clamp(position.X, 0f, World.width * Tile.size);
+            position.Y = MathUtilities.Clamp(position.Y, 0f, World.height * Tile.size);
             animator.speed = 0.1f;
             animator.Update();
-            UpdateWater();
             UpdateTouchDamage();
             velocity = Vector2.Zero;
         }

@@ -9,11 +9,11 @@
     {
         public override void Generate()
         {
-            int[] rockPositions = new int[16];
+            int[] rockPositions = new int[32];
             int rockPositionsGap = 16;
             for(int i = 0; i < rockPositions.Length; i++)
             {
-                int width = Main.random.Next(6, 8);
+                int width = 8;
                 do
                 {
                     rockPositions[i] = Main.random.Next(width / 2, World.width - (width / 2));

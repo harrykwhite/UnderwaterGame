@@ -12,9 +12,11 @@
     using UnderwaterGame.Items.Armours.Legs;
     using UnderwaterGame.Items.Weapons;
     using UnderwaterGame.Sprites;
+    using UnderwaterGame.Tiles;
     using UnderwaterGame.Ui;
     using UnderwaterGame.Ui.UiElements.Menus;
     using UnderwaterGame.Utilities;
+    using UnderwaterGame.Worlds;
 
     public class PlayerCharacter : CharacterEntity
     {
@@ -50,10 +52,6 @@
         private float swimSpeedAcc = 0.1f;
 
         private float swimSpeedMax = 2f;
-
-        private float? swimSpeedWaterMult;
-
-        private float swimSpeedWaterMultAcc = 0.01f;
 
         public ArmourItem armourHead;
 
@@ -141,76 +139,51 @@
             {
                 swimVector.Y += -1f;
             }
-            if(life > 0)
+            if(swimVector.X == 1f)
             {
-                if(inWater)
+                if(swimSpeedHor < swimSpeedMax)
                 {
-                    if(swimVector.X == 1f)
-                    {
-                        if(swimSpeedHor < swimSpeedMax)
-                        {
-                            swimSpeedHor += Math.Min(swimSpeedAcc, swimSpeedMax - swimSpeedHor);
-                        }
-                    }
-                    else if(swimVector.X == -1f)
-                    {
-                        if(swimSpeedHor > -swimSpeedMax)
-                        {
-                            swimSpeedHor -= Math.Min(swimSpeedAcc, swimSpeedHor + swimSpeedMax);
-                        }
-                    }
-                    else if(swimVector.X == 0f)
-                    {
-                        if(swimSpeedHor != 0f)
-                        {
-                            swimSpeedHor -= Math.Sign(swimSpeedHor) * Math.Min(Math.Abs(swimSpeedHor), swimSpeedAcc);
-                        }
-                    }
-                    if(swimVector.Y == 1f)
-                    {
-                        if(swimSpeedVer < swimSpeedMax)
-                        {
-                            swimSpeedVer += Math.Min(swimSpeedAcc, swimSpeedMax - swimSpeedVer);
-                        }
-                    }
-                    else if(swimVector.Y == -1f)
-                    {
-                        if(swimSpeedVer > -swimSpeedMax)
-                        {
-                            swimSpeedVer -= Math.Min(swimSpeedAcc, swimSpeedVer + swimSpeedMax);
-                        }
-                    }
-                    else if(swimVector.Y == 0f)
-                    {
-                        if(swimSpeedVer != 0f)
-                        {
-                            swimSpeedVer -= Math.Sign(swimSpeedVer) * Math.Min(Math.Abs(swimSpeedVer), swimSpeedAcc);
-                        }
-                    }
-                    if(swimSpeedWaterMult == null)
-                    {
-                        swimSpeedWaterMult = 1f;
-                    }
-                    if(swimSpeedWaterMult < 1f)
-                    {
-                        swimSpeedWaterMult += Math.Min(swimSpeedWaterMultAcc, 1f - swimSpeedWaterMult.Value);
-                    }
-                }
-                else
-                {
-                    if(swimSpeedWaterMult == null)
-                    {
-                        swimSpeedWaterMult = 0f;
-                    }
-                    if(swimSpeedWaterMult > 0f)
-                    {
-                        swimSpeedWaterMult -= Math.Min(swimSpeedWaterMultAcc, swimSpeedWaterMult.Value);
-                    }
+                    swimSpeedHor += Math.Min(swimSpeedAcc, swimSpeedMax - swimSpeedHor);
                 }
             }
-            velocity = new Vector2(swimSpeedHor, swimSpeedVer) * (swimSpeedWaterMult ?? 0f);
+            else if(swimVector.X == -1f)
+            {
+                if(swimSpeedHor > -swimSpeedMax)
+                {
+                    swimSpeedHor -= Math.Min(swimSpeedAcc, swimSpeedHor + swimSpeedMax);
+                }
+            }
+            else if(swimVector.X == 0f)
+            {
+                if(swimSpeedHor != 0f)
+                {
+                    swimSpeedHor -= Math.Sign(swimSpeedHor) * Math.Min(Math.Abs(swimSpeedHor), swimSpeedAcc);
+                }
+            }
+            if(swimVector.Y == 1f)
+            {
+                if(swimSpeedVer < swimSpeedMax)
+                {
+                    swimSpeedVer += Math.Min(swimSpeedAcc, swimSpeedMax - swimSpeedVer);
+                }
+            }
+            else if(swimVector.Y == -1f)
+            {
+                if(swimSpeedVer > -swimSpeedMax)
+                {
+                    swimSpeedVer -= Math.Min(swimSpeedAcc, swimSpeedVer + swimSpeedMax);
+                }
+            }
+            else if(swimVector.Y == 0f)
+            {
+                if(swimSpeedVer != 0f)
+                {
+                    swimSpeedVer -= Math.Sign(swimSpeedVer) * Math.Min(Math.Abs(swimSpeedVer), swimSpeedAcc);
+                }
+            }
+            velocity = new Vector2(swimSpeedHor, swimSpeedVer);
             angleOffset = MathHelper.Pi / 2f;
-            if(new Vector2(swimSpeedHor, swimSpeedVer).Length() * (swimSpeedWaterMult ?? 0f) > 0f)
+            if(velocity.Length() > 0f)
             {
                 swimAngleTo = MathUtilities.PointDirection(Vector2.Zero, velocity);
                 swimAngleTo += angleOffset;
@@ -222,8 +195,6 @@
             float angleDifference = MathUtilities.AngleDifference(angle, swimAngleTo);
             angle += Math.Abs(angleDifference * swimAngleToMult) * Math.Sign(angleDifference);
             UpdateStatus();
-            UpdateGravity();
-            velocity.Y += gravity;
             TileCollisions();
             if(heldItem.useTimeCurrent < heldItem.useTimeMax)
             {
@@ -237,26 +208,25 @@
                 }
             }
             position += velocity;
-            LockInWorld();
+            position.X = MathUtilities.Clamp(position.X, 0f, World.width * Tile.size);
+            position.Y = MathUtilities.Clamp(position.Y, 0f, World.height * Tile.size);
             bool idle = true;
-            if(inWater && life > 0)
+            if(velocity.Length() > 0f)
             {
-                float distance = new Vector2(swimSpeedHor, swimSpeedVer).Length() * (swimSpeedWaterMult ?? 0f);
-                if(distance > 0f)
+                if(bubbleSmallTime < bubbleSmallTimeMax)
                 {
-                    if(bubbleSmallTime < bubbleSmallTimeMax)
-                    {
-                        bubbleSmallTime += distance / swimSpeedMax;
-                    }else{
-                        BubbleSmall bubbleSmall = (BubbleSmall)EntityManager.AddEntity<BubbleSmall>(position);
-                        bubbleSmall.position += MathUtilities.LengthDirection(10.5f, angle + angleOffset);
-                        bubbleSmall.direction = angle + angleOffset;
-                        bubbleSmallTime = 0f;
-                    }
-                    animator.sprite = Sprite.playerSwim;
-                    animator.speed = 0.2f;
-                    idle = false;
+                    bubbleSmallTime += velocity.Length() / swimSpeedMax;
                 }
+                else
+                {
+                    BubbleSmall bubbleSmall = (BubbleSmall)EntityManager.AddEntity<BubbleSmall>(position);
+                    bubbleSmall.position += MathUtilities.LengthDirection(10.5f, angle + angleOffset);
+                    bubbleSmall.direction = angle + angleOffset;
+                    bubbleSmallTime = 0f;
+                }
+                animator.sprite = Sprite.playerSwim;
+                animator.speed = 0.2f;
+                idle = false;
             }
             if(idle)
             {
@@ -265,7 +235,6 @@
                 animator.speed = 0f;
             }
             animator.Update();
-            UpdateWater();
             if(heldItem.useTimeCurrent >= heldItem.useTimeMax)
             {
                 if(keyWieldPressed)
