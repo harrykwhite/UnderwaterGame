@@ -15,7 +15,7 @@
 
         public override void Generate()
         {
-            int towerPositionsGap = 32;
+            int towerPositionsGap = 64;
             for(int i = 0; i < towerPositions.Length; i++)
             {
                 int levelHeight = 16;
@@ -60,7 +60,7 @@
                     int xEnd = towerPositions[i].X + (width / 2);
                     int yEnd = towerPositions[i].Y - (levelHeight * (l + levelOffset)) - 1;
                     int gapSize = 2;
-                    int gapOffset = Main.random.Next(-1, 2);
+                    int gapOffset = Main.random.Next(3) - 1;
                     for(int y = yStart; y <= yEnd; y++)
                     {
                         for(int x = xStart; x <= xEnd; x++)

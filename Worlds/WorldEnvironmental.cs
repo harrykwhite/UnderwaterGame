@@ -10,9 +10,10 @@
 
         public int y;
 
-        public WorldEnvironmental(byte id, int x, int y)
+        public WorldEnvironmental(byte id, byte texture, int x, int y)
         {
             this.id = id;
+            this.texture = texture;
             this.x = x;
             this.y = y;
         }

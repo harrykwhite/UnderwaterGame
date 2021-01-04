@@ -8,7 +8,7 @@
         public override void Generate()
         {
             int wallLevel = 128;
-            int sandLevel = wallLevel + 2;
+            int sandLevel = wallLevel + 4;
             int stoneLevel = sandLevel + 8;
             int levelOffset = 0;
             int levelOffsetMax = 4;

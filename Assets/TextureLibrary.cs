@@ -12,16 +12,16 @@
 
         public readonly LibraryAsset ENVIRONMENTALS_SEAWEED_SEAWEED = new LibraryAsset("Textures/Environmentals/Seaweed/Seaweed");
         
-        public readonly LibraryAsset ENVIRONMENTALS_ROCKS_ROCKSMALL = new LibraryAsset("Textures/Environmentals/Rocks/RockSmall");
+        public readonly LibraryAsset ENVIRONMENTALS_ROCKS_ROCK = new LibraryAsset("Textures/Environmentals/Rocks/Rock");
         
-        public readonly LibraryAsset ENVIRONMENTALS_ROCKS_ROCKLARGE = new LibraryAsset("Textures/Environmentals/Rocks/RockLarge");
-
-        public readonly LibraryAsset ENVIRONMENTALS_STATUES_SPAWNSTATUE = new LibraryAsset("Textures/Environmentals/Statues/SpawnStatue");
+        public readonly LibraryAsset ENVIRONMENTALS_STATUES_STATUE = new LibraryAsset("Textures/Environmentals/Statues/Statue");
 
         public readonly LibraryAsset CHARACTERS_ENEMIES_JELLYFISH_JELLYFISH = new LibraryAsset("Textures/Characters/Enemies/Jellyfish/Jellyfish");
 
         public readonly LibraryAsset CHARACTERS_ENEMIES_JELLYFISH_TALLJELLYFISH = new LibraryAsset("Textures/Characters/Enemies/Jellyfish/TallJellyfish");
 
+        public readonly LibraryAsset CHARACTERS_ENEMIES_SHARKS_SHARK = new LibraryAsset("Textures/Characters/Enemies/Sharks/Shark");
+        
         public readonly LibraryAsset CHARACTERS_PLAYER_PLAYERIDLE = new LibraryAsset("Textures/Characters/Player/PlayerIdle");
 
         public readonly LibraryAsset CHARACTERS_PLAYER_PLAYERSWIM = new LibraryAsset("Textures/Characters/Player/PlayerSwim");
@@ -37,7 +37,7 @@
         public readonly LibraryAsset PARTICLES_BUBBLELARGE = new LibraryAsset("Textures/Particles/BubbleLarge");
 
         public readonly LibraryAsset PROJECTILES_ARROWS_WOODENARROW = new LibraryAsset("Textures/Projectiles/Arrows/WoodenArrow");
-
+        
         public readonly LibraryAsset ITEMS_WEAPONS_MELEE_TRIDENTS_WOODENTRIDENT = new LibraryAsset("Textures/Items/Weapons/Melee/Tridents/WoodenTrident");
 
         public readonly LibraryAsset ITEMS_WEAPONS_MELEE_SWORDS_WOODENSWORD = new LibraryAsset("Textures/Items/Weapons/Melee/Swords/WoodenSword");

@@ -4,9 +4,7 @@
     using Microsoft.Xna.Framework.Graphics;
     using Microsoft.Xna.Framework.Input;
     using System;
-    using System.Collections.Generic;
     using UnderwaterGame.Entities.Characters;
-    using UnderwaterGame.Items;
     using UnderwaterGame.Ui.UiComponents;
     using UnderwaterGame.Ui.UiComponents.Buttons;
     using UnderwaterGame.Utilities;

@@ -211,11 +211,11 @@
             position.X = MathUtilities.Clamp(position.X, 0f, World.width * Tile.size);
             position.Y = MathUtilities.Clamp(position.Y, 0f, World.height * Tile.size);
             bool idle = true;
-            if(velocity.Length() > 0f)
+            if(new Vector2(swimSpeedHor, swimSpeedVer).Length() > 0f)
             {
                 if(bubbleSmallTime < bubbleSmallTimeMax)
                 {
-                    bubbleSmallTime += velocity.Length() / swimSpeedMax;
+                    bubbleSmallTime += new Vector2(swimSpeedHor, swimSpeedVer).Length() / swimSpeedMax;
                 }
                 else
                 {

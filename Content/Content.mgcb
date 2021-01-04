@@ -282,6 +282,18 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Characters/Enemies/Jellyfish/TallJellyfish.png
 
+#begin Textures/Characters/Enemies/Sharks/Shark.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Characters/Enemies/Sharks/Shark.png
+
 #begin Textures/Characters/Player/PlayerIdle.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -330,7 +342,7 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Effects/WideSwing.png
 
-#begin Textures/Environmentals/Rocks/RockLarge.png
+#begin Textures/Environmentals/Rocks/Rock.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -340,19 +352,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Environmentals/Rocks/RockLarge.png
-
-#begin Textures/Environmentals/Rocks/RockSmall.png
-/importer:TextureImporter
-/processor:TextureProcessor
-/processorParam:ColorKeyColor=255,0,255,255
-/processorParam:ColorKeyEnabled=True
-/processorParam:GenerateMipmaps=False
-/processorParam:PremultiplyAlpha=True
-/processorParam:ResizeToPowerOfTwo=False
-/processorParam:MakeSquare=False
-/processorParam:TextureFormat=Color
-/build:Textures/Environmentals/Rocks/RockSmall.png
+/build:Textures/Environmentals/Rocks/Rock.png
 
 #begin Textures/Environmentals/Seaweed/Seaweed.png
 /importer:TextureImporter
@@ -366,7 +366,7 @@
 /processorParam:TextureFormat=Color
 /build:Textures/Environmentals/Seaweed/Seaweed.png
 
-#begin Textures/Environmentals/Statues/SpawnStatue.png
+#begin Textures/Environmentals/Statues/Statue.png
 /importer:TextureImporter
 /processor:TextureProcessor
 /processorParam:ColorKeyColor=255,0,255,255
@@ -376,7 +376,7 @@
 /processorParam:ResizeToPowerOfTwo=False
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
-/build:Textures/Environmentals/Statues/SpawnStatue.png
+/build:Textures/Environmentals/Statues/Statue.png
 
 #begin Textures/Items/Armours/Chests/StoneChestplate.png
 /importer:TextureImporter
@@ -641,6 +641,18 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Textures/Projectiles/Arrows/WoodenArrow.png
+
+#begin Textures/Projectiles/Other/Puffer.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Textures/Projectiles/Other/Puffer.png
 
 #begin Textures/Tiles/Brick.png
 /importer:TextureImporter

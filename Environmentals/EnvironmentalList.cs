@@ -10,18 +10,15 @@
         
         public static Seaweed.Seaweed seaweed;
         
-        public static RockSmall rockSmall;
+        public static Rock rock;
 
-        public static RockLarge rockLarge;
-
-        public static SpawnStatue spawnStatue;
+        public static Statue statue;
 
         public static void LoadAll()
         {
             seaweed = Load<Seaweed.Seaweed>(1);
-            rockSmall = Load<RockSmall>(2);
-            rockLarge = Load<RockLarge>(3);
-            spawnStatue = Load<SpawnStatue>(4);
+            rock = Load<Rock>(2);
+            statue = Load<Statue>(3);
         }
     }
 }

@@ -201,7 +201,7 @@
             foreach(WorldEnvironmental worldEnvironmental in environmentals)
             {
                 Environmental environmental = Environmental.GetEnvironmentalById(worldEnvironmental.id);
-                Main.spriteBatch.Draw(environmental.sprite.textures[0], (new Vector2(worldEnvironmental.x, worldEnvironmental.y) * Tile.size) - new Vector2(0f, environmental.sprite.textures[0].Height), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0.35f);
+                Main.spriteBatch.Draw(environmental.sprite.textures[worldEnvironmental.texture], (new Vector2(worldEnvironmental.x, worldEnvironmental.y) * Tile.size) - new Vector2(0f, environmental.sprite.textures[worldEnvironmental.texture].Height), null, Color.White, 0f, Vector2.Zero, 1f, SpriteEffects.None, 0.35f);
             }
             foreach(Hotspot hotspot in hotspots)
             {
@@ -293,8 +293,9 @@
             {
                 return false;
             }
-            int ew = environmental.sprite.textures[0].Width / Tile.size;
-            int eh = environmental.sprite.textures[0].Height / Tile.size;
+            byte texture = (byte)Main.random.Next(Environmental.GetEnvironmentalById(environmental.id).sprite.textures.Length);
+            int ew = environmental.sprite.textures[texture].Width / Tile.size;
+            int eh = environmental.sprite.textures[texture].Height / Tile.size;
             for(int ey = 0; ey <= eh; ey++)
             {
                 for(int ex = -1; ex <= ew; ex++)
@@ -328,7 +329,7 @@
                     }
                 }
             }
-            environmentals.Add(new WorldEnvironmental(environmental.id, x, y));
+            environmentals.Add(new WorldEnvironmental(environmental.id, texture, x, y));
             return true;
         }
 
@@ -350,7 +351,7 @@
             foreach(WorldEnvironmental worldEnvironmental in environmentals)
             {
                 Environmental environmental = Environmental.GetEnvironmentalById(worldEnvironmental.id);
-                if(worldEnvironmental.x >= x && worldEnvironmental.y >= y && worldEnvironmental.x < x + (environmental.sprite.textures[0].Width / Tile.size) && worldEnvironmental.y < y + (environmental.sprite.textures[0].Height / Tile.size))
+                if(worldEnvironmental.x >= x && worldEnvironmental.y >= y && worldEnvironmental.x < x + (environmental.sprite.textures[worldEnvironmental.texture].Width / Tile.size) && worldEnvironmental.y < y + (environmental.sprite.textures[worldEnvironmental.texture].Height / Tile.size))
                 {
                     return worldEnvironmental;
                 }

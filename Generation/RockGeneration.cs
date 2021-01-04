@@ -9,8 +9,8 @@
     {
         public override void Generate()
         {
-            int[] rockPositions = new int[32];
-            int rockPositionsGap = 16;
+            int[] rockPositions = new int[24];
+            int rockPositionsGap = 32;
             for(int i = 0; i < rockPositions.Length; i++)
             {
                 int width = 8;
@@ -28,25 +28,10 @@
                         Tile tile = Tile.GetTileById(worldTile?.id ?? 0);
                         if(tile == Tile.sand)
                         {
-                            Environmental environmental = Environmental.rockSmall;
-                            if(x == (xStart + xEnd) / 2)
+                            if(World.AddEnvironmentalAt(x, y, Environmental.rock))
                             {
-                                environmental = Environmental.rockLarge;
+                                x += (Environmental.rock.sprite.textures[0].Width / Tile.size) - 1;
                             }
-                            bool valid;
-                            do
-                            {
-                                valid = true;
-                                if(World.AddEnvironmentalAt(x, y, environmental))
-                                {
-                                    x += (environmental.sprite.textures[0].Width / Tile.size) - 1;
-                                }
-                                else if(environmental != Environmental.rockSmall)
-                                {
-                                    environmental = Environmental.rockSmall;
-                                    valid = false;
-                                }
-                            } while(!valid);
                             break;
                         }
                     }

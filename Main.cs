@@ -136,11 +136,18 @@
             if(loading == null || (UiManager.fadeElements[3]?.alpha ?? 0f) < (UiManager.fadeElements[3]?.alphaMax ?? 0f))
             {
                 EntityManager.Update();
-                Camera.Update();
                 World.Update();
+                Camera.Update();
             }
             UiManager.Update();
             Music.Update();
+            if(graphicsDeviceManager.IsFullScreen == Option.windowed.GetToggle())
+            {
+                graphicsDeviceManager.IsFullScreen = !graphicsDeviceManager.IsFullScreen;
+                graphicsDeviceManager.PreferredBackBufferWidth = graphicsDeviceManager.IsFullScreen ? GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width : resolutionWidth;
+                graphicsDeviceManager.PreferredBackBufferHeight = graphicsDeviceManager.IsFullScreen ? GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height : resolutionHeight;
+                graphicsDeviceManager.ApplyChanges();
+            }
             base.Update(gameTime);
         }
 

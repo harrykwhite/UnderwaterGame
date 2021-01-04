@@ -12,7 +12,7 @@ namespace UnderwaterGame.Generation
     {
         public int width = 32;
 
-        public int height = 8;
+        public int height = 12;
 
         public override void Generate()
         {
@@ -25,30 +25,30 @@ namespace UnderwaterGame.Generation
                 {
                     yStart++;
                 }
-                int yEnd = yStart + Math.Min(Math.Min(x - xStart, xEnd - x), height);
+                int yEnd = yStart + Math.Min(Math.Min(x - xStart, xEnd - x), height) - 1;
                 for(int y = yStart; y <= yEnd; y++)
                 {
                     World.RemoveTileAt(x, y, World.Tilemap.Solids);
                 }
             }
             SpawnGeneration spawnGeneration = (SpawnGeneration)World.generations.Find((Generation generation) => generation is SpawnGeneration);
-            int spawnStatueX, spawnStatueY;
+            int statueX, statueY;
             do
             {
-                spawnStatueX = ((World.width - spawnGeneration.width) / 2) + Main.random.Next(spawnGeneration.width);
-                spawnStatueY = 0;
+                statueX = ((World.width - spawnGeneration.width) / 2) + Main.random.Next(spawnGeneration.width);
+                statueY = 0;
                 for(int y = 0; y < World.height; y++)
                 {
-                    if(World.GetTileAt(spawnStatueX, y, World.Tilemap.Solids) != null)
+                    if(World.GetTileAt(statueX, y, World.Tilemap.Solids) != null)
                     {
-                        spawnStatueY = y;
+                        statueY = y;
                         break;
                     }
                 }
-            } while(!World.AddEnvironmentalAt(spawnStatueX, spawnStatueY, Environmental.spawnStatue));
-            ItemDropEntity itemDrop = (ItemDropEntity)EntityManager.AddEntity<ItemDropEntity>(new Vector2(spawnStatueX + (Environmental.spawnStatue.sprite.textures[0].Width / (Tile.size * 2f)), spawnStatueY - 8f) * Tile.size);
+            } while(!World.AddEnvironmentalAt(statueX, statueY, Environmental.statue));
+            ItemDropEntity itemDrop = (ItemDropEntity)EntityManager.AddEntity<ItemDropEntity>(new Vector2(statueX + (Environmental.statue.sprite.textures[0].Width / (Tile.size * 2f)), statueY - 8f) * Tile.size);
             itemDrop.SetItem(Item.woodenTrident, 1);
-            World.playerSpawnPosition = new Vector2(spawnStatueX + (Environmental.spawnStatue.sprite.textures[0].Width / (Tile.size * 2f)), spawnStatueY - 1.5f) * Tile.size;
+            World.playerSpawnPosition = new Vector2(statueX + (Environmental.statue.sprite.textures[0].Width / (Tile.size * 2f)), statueY - 1.5f) * Tile.size;
         }
     }
 }

@@ -20,9 +20,9 @@
             projectile.position += MathUtilities.LengthDirection(outLength, direction);
             projectile.direction = direction;
             projectile.angle = projectile.direction;
-            projectile.hitEnemy = true;
             projectile.damage = damage;
             projectile.strength = strength;
+            projectile.hitEnemy = true;
             projectile.depth = World.player.heldItem.depth - 0.001f;
             World.player.knockbackSpeed += useStrength;
             World.player.knockbackDirection = World.player.heldItem.angleBase;

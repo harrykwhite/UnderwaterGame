@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PipelineBuildEvent xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <SourceFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Projectiles/Arrows/WoodenArrow.png</SourceFile>
-  <SourceTime>2020-10-18T12:53:57.2208678+10:00</SourceTime>
+  <SourceTime>2021-01-03T19:42:57.1497267+10:00</SourceTime>
   <DestFile>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/bin/DesktopGL/Content/Textures/Projectiles/Arrows/WoodenArrow.xnb</DestFile>
-  <DestTime>2020-10-24T19:01:29.2948484+10:00</DestTime>
+  <DestTime>2021-01-03T19:50:03.9716495+10:00</DestTime>
   <Importer>TextureImporter</Importer>
   <ImporterTime>2020-08-10T16:17:54+10:00</ImporterTime>
   <Processor>TextureProcessor</Processor>

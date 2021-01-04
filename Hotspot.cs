@@ -47,6 +47,7 @@
                                 if(Main.random.Next(100) <= (spawns[i].chance * 100f))
                                 {
                                     enemyType = Type.GetType(spawns[i].type);
+                                    break;
                                 }
                             }
                         } while(enemyType == null);

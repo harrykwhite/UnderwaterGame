@@ -8,15 +8,15 @@
 
         public static Sprite seaweed;
 
-        public static Sprite rockSmall;
+        public static Sprite rock;
 
-        public static Sprite rockLarge;
-        
-        public static Sprite spawnStatue;
+        public static Sprite statue;
 
         public static Sprite jellyfish;
 
         public static Sprite tallJellyfish;
+        
+        public static Sprite shark;
 
         public static Sprite playerIdle;
 
@@ -33,7 +33,7 @@
         public static Sprite bubbleLarge;
 
         public static Sprite woodenArrow;
-
+        
         public static Sprite woodenTrident;
 
         public static Sprite woodenSword;
@@ -69,11 +69,11 @@
         public static void LoadAll()
         {
             seaweed = Load(Main.textureLibrary.ENVIRONMENTALS_SEAWEED_SEAWEED);
-            rockSmall = Load(Main.textureLibrary.ENVIRONMENTALS_ROCKS_ROCKSMALL);
-            rockLarge = Load(Main.textureLibrary.ENVIRONMENTALS_ROCKS_ROCKLARGE);
-            spawnStatue = Load(Main.textureLibrary.ENVIRONMENTALS_STATUES_SPAWNSTATUE);
+            rock = Load(Main.textureLibrary.ENVIRONMENTALS_ROCKS_ROCK);
+            statue = Load(Main.textureLibrary.ENVIRONMENTALS_STATUES_STATUE);
             jellyfish = Load(Main.textureLibrary.CHARACTERS_ENEMIES_JELLYFISH_JELLYFISH);
             tallJellyfish = Load(Main.textureLibrary.CHARACTERS_ENEMIES_JELLYFISH_TALLJELLYFISH);
+            shark = Load(Main.textureLibrary.CHARACTERS_ENEMIES_SHARKS_SHARK);
             playerIdle = Load(Main.textureLibrary.CHARACTERS_PLAYER_PLAYERIDLE);
             playerSwim = Load(Main.textureLibrary.CHARACTERS_PLAYER_PLAYERSWIM);
             longSwing = Load(Main.textureLibrary.EFFECTS_LONGSWING);

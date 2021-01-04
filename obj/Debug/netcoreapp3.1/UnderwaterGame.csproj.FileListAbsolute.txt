@@ -197,3 +197,6 @@ C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Textures\Tiles\Brick.xnb
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Textures\Tiles\Sand.xnb
 C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Textures\Tiles\Stone.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Textures\Environmentals\Statues\Statue.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Textures\Characters\Enemies\Pufferfish\Pufferfish.xnb
+C:\Users\Harry White\Documents\GitHub\UnderwaterGameSolution\UnderwaterGame\bin\Debug\netcoreapp3.1\Content\Textures\Projectiles\Other\Puffer.xnb
