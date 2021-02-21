@@ -2,9 +2,6 @@
 {
     using Microsoft.Xna.Framework;
     using System;
-    using System.Diagnostics;
-    using UnderwaterGame.Entities;
-    using UnderwaterGame.Entities.Characters;
     using UnderwaterGame.Tiles;
     using UnderwaterGame.Ui;
     using UnderwaterGame.Utilities;

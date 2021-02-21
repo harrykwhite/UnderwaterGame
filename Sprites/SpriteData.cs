@@ -47,11 +47,6 @@
                 sprite.SetTextureSheet(libraryAsset.asset, 15);
                 return true;
             }
-            if(libraryAsset == Main.textureLibrary.CHARACTERS_ENEMIES_SHARKS_SHARK)
-            {
-                sprite.SetTextureSheet(libraryAsset.asset, 26);
-                return true;
-            }
             if(libraryAsset == Main.textureLibrary.EFFECTS_LONGSWING)
             {
                 sprite.SetTextureSheet(libraryAsset.asset, 32);

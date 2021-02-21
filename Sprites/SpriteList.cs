@@ -16,8 +16,6 @@
 
         public static Sprite tallJellyfish;
         
-        public static Sprite shark;
-
         public static Sprite playerIdle;
 
         public static Sprite playerSwim;
@@ -73,7 +71,6 @@
             statue = Load(Main.textureLibrary.ENVIRONMENTALS_STATUES_STATUE);
             jellyfish = Load(Main.textureLibrary.CHARACTERS_ENEMIES_JELLYFISH_JELLYFISH);
             tallJellyfish = Load(Main.textureLibrary.CHARACTERS_ENEMIES_JELLYFISH_TALLJELLYFISH);
-            shark = Load(Main.textureLibrary.CHARACTERS_ENEMIES_SHARKS_SHARK);
             playerIdle = Load(Main.textureLibrary.CHARACTERS_PLAYER_PLAYERIDLE);
             playerSwim = Load(Main.textureLibrary.CHARACTERS_PLAYER_PLAYERSWIM);
             longSwing = Load(Main.textureLibrary.EFFECTS_LONGSWING);

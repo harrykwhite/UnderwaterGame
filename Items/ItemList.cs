@@ -21,13 +21,13 @@
 
         public static WoodenSword woodenSword;
 
-        public static StoneHelmet steelHelmet;
+        public static StoneHelmet stoneHelmet;
 
-        public static StoneChestplate steelChestplate;
+        public static StoneChestplate stoneChestplate;
 
-        public static StoneLeggings steelLeggings;
+        public static StoneLeggings stoneLeggings;
 
-        public static StoneBoots steelBoots;
+        public static StoneBoots stoneBoots;
 
         public static PinkJellyShuriken pinkJellyShuriken;
 
@@ -44,10 +44,10 @@
             woodenTrident = Load<WoodenTrident>(1);
             woodenBow = Load<WoodenBow>(2);
             woodenSword = Load<WoodenSword>(3);
-            steelHelmet = Load<StoneHelmet>(4);
-            steelChestplate = Load<StoneChestplate>(5);
-            steelLeggings = Load<StoneLeggings>(6);
-            steelBoots = Load<StoneBoots>(7);
+            stoneHelmet = Load<StoneHelmet>(4);
+            stoneChestplate = Load<StoneChestplate>(5);
+            stoneLeggings = Load<StoneLeggings>(6);
+            stoneBoots = Load<StoneBoots>(7);
             pinkJellyShuriken = Load<PinkJellyShuriken>(8);
             purpleJellyShuriken = Load<PurpleJellyShuriken>(9);
             healthKelp = Load<HealthKelp>(10);

@@ -20,8 +20,6 @@
 
         public readonly LibraryAsset CHARACTERS_ENEMIES_JELLYFISH_TALLJELLYFISH = new LibraryAsset("Textures/Characters/Enemies/Jellyfish/TallJellyfish");
 
-        public readonly LibraryAsset CHARACTERS_ENEMIES_SHARKS_SHARK = new LibraryAsset("Textures/Characters/Enemies/Sharks/Shark");
-        
         public readonly LibraryAsset CHARACTERS_PLAYER_PLAYERIDLE = new LibraryAsset("Textures/Characters/Player/PlayerIdle");
 
         public readonly LibraryAsset CHARACTERS_PLAYER_PLAYERSWIM = new LibraryAsset("Textures/Characters/Player/PlayerSwim");

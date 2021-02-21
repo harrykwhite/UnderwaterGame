@@ -46,7 +46,6 @@
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Sounds/Ui/Scroll.wav</File>
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Characters/Enemies/Jellyfish/Jellyfish.png</File>
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Characters/Enemies/Jellyfish/TallJellyfish.png</File>
-    <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Characters/Enemies/Sharks/Shark.png</File>
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Characters/Player/PlayerIdle.png</File>
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Characters/Player/PlayerSwim.png</File>
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Effects/LongSwing.png</File>
@@ -95,7 +94,6 @@
     <File>C:/Users/Harry White/Documents/GitHub/UnderwaterGameSolution/UnderwaterGame/Content/Textures/Ui/Slider/Bar.png</File>
   </SourceFiles>
   <DestFiles>
-    <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />
     <File xsi:nil="true" />

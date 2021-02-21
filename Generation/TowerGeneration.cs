@@ -113,6 +113,17 @@
                         item = Item.woodenSword;
                         quantity = 1;
                         break;
+
+                    case 3:
+                        item = (Main.random.Next(4)) switch
+                        {
+                            1 => Item.stoneChestplate,
+                            2 => Item.stoneLeggings,
+                            3 => Item.stoneBoots,
+                            _ => Item.stoneHelmet,
+                        };
+                        quantity = 1;
+                        break;
                 }
                 ItemDropEntity itemDrop = (ItemDropEntity)EntityManager.AddEntity<ItemDropEntity>(new Vector2((towerPositions[i].X + 0.5f) * Tile.size, (towerPositions[i].Y - (levelHeight * (levelOffset + 0.5f)) + 0.5f) * Tile.size));
                 itemDrop.SetItem(item, quantity);
